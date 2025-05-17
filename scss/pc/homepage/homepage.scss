@@ -1,0 +1,424 @@
+/* HERO SECTION */
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 120px;
+  background-color: #fdf6f0;
+  min-height: 600px;
+
+  .heroText {
+    max-width: 550px;
+
+    .title {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #2f2f2f;
+      margin-bottom: 24px;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #6c6c6c;
+      margin-bottom: 32px;
+    }
+
+    .cta {
+      background-color: #ff9900;
+      color: #fff;
+      padding: 12px 32px;
+      font-size: 16px;
+      font-weight: 600;
+      text-transform: none;
+      border-radius: 8px;
+
+      &:hover {
+        background-color: #e88c00;
+      }
+    }
+  }
+
+  .heroImage {
+    flex-shrink: 0;
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}
+
+/* CATEGORIES SECTION */
+
+.categoriesSection {
+	padding: 60px 100px;
+	background-color: #ffffff;
+	text-align: center;
+
+	@media (max-width: 1024px) {
+		padding: 40px 20px;
+	}
+}
+
+.categoriesTitle {
+	font-size: 32px;
+	font-weight: 700;
+	margin-bottom: 40px;
+	color: #333;
+}
+
+.categoryGrid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 30px;
+	justify-items: center;
+
+	@media (max-width: 768px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.categoryCard {
+	background-color: #fff8e1;
+	border-radius: 12px;
+	padding: 20px;
+	width: 180px;
+	transition: transform 0.3s ease;
+	cursor: pointer;
+
+	&:hover {
+		transform: translateY(-5px);
+	}
+}
+
+.categoryImage {
+	margin-bottom: 12px;
+}
+
+.categoryName {
+	font-size: 18px;
+	font-weight: 600;
+	color: #444;
+}
+
+/* POPULAR PRODUCTS SECTION */
+
+.popularProductsSection {
+	padding: 60px 100px;
+	background-color: #fff;
+	text-align: center;
+
+	@media (max-width: 1024px) {
+		padding: 40px 20px;
+	}
+}
+
+.popularProductsTitle {
+	font-size: 32px;
+	font-weight: 700;
+	margin-bottom: 40px;
+	color: #333;
+}
+
+.productsGrid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 30px;
+	justify-items: center;
+
+	@media (max-width: 768px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.productCard {
+	max-width: 260px;
+	border-radius: 15px;
+	box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.productImage {
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	object-fit: cover;
+}
+
+.productContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 15px;
+}
+
+.productTitle {
+	font-weight: 600;
+	color: #444;
+	margin-bottom: 8px;
+}
+
+.productPrice {
+	font-weight: 700;
+	color: #ff9800;
+	margin-bottom: 15px;
+}
+
+.productButton {
+	background-color: #ff9800;
+	color: #fff;
+	text-transform: none;
+
+	&:hover {
+		background-color: #fb8c00;
+	}
+}
+
+/* TESTIMONIALS SECTION */
+
+.testimonialsSection {
+	padding: 80px 0;
+	background-color: #fff6ec;
+	text-align: center;
+}
+
+.sectionTitle {
+	font-size: 32px;
+	font-weight: 700;
+	margin-bottom: 50px;
+	color: #333;
+}
+
+.testimonialCard {
+	padding: 30px 20px;
+	border-radius: 12px;
+	background-color: #fff;
+	text-align: center;
+	transition: transform 0.3s ease;
+
+	&:hover {
+		transform: translateY(-5px);
+	}
+}
+
+.testimonialAvatar {
+	width: 80px;
+	height: 80px;
+	margin: 0 auto 20px;
+}
+
+.testimonialName {
+	font-size: 18px;
+	font-weight: 600;
+	color: #222;
+}
+
+.testimonialRole {
+	font-size: 14px;
+	color: #999;
+	margin-bottom: 15px;
+}
+
+.testimonialComment {
+	font-size: 16px;
+	color: #444;
+	font-style: italic;
+	line-height: 1.5;
+}
+
+/* BRANDS SECTION */
+
+.brandsSection {
+	padding: 80px 0;
+	background-color: #fff;
+	text-align: center;
+}
+
+.brandItem {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.brandLogo {
+	max-width: 100%;
+	max-height: 60px;
+	filter: grayscale(100%);
+	transition: filter 0.3s ease;
+
+	&:hover {
+		filter: grayscale(0%);
+	}
+}
+
+/* NEWSLETTER SECTION */
+
+.newsletterSection {
+	padding: 80px 0;
+	background-color: #fff6ec;
+	text-align: center;
+}
+
+.newsletterContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.newsletterText {
+	font-size: 16px;
+	color: #555;
+	margin-bottom: 30px;
+}
+
+.newsletterForm {
+	display: flex;
+	flex-direction: row;
+	gap: 15px;
+	justify-content: center;
+
+	@media (max-width: 600px) {
+		flex-direction: column;
+		width: 100%;
+		padding: 0 10px;
+	}
+}
+
+.newsletterInput {
+	background-color: #fff;
+	width: 300px;
+
+	@media (max-width: 600px) {
+		width: 100%;
+	}
+}
+
+.newsletterButton {
+	height: 56px;
+
+	@media (max-width: 600px) {
+		width: 100%;
+	}
+}
+
+/* PROMO BANNER SECTION */
+
+.promoBannerSection {
+	padding: 80px 0;
+	background-color: #ffefdb;
+}
+
+.promoBannerContainer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+
+	@media (max-width: 960px) {
+		flex-direction: column;
+		text-align: center;
+	}
+}
+
+.promoText {
+	flex: 1;
+	padding-right: 20px;
+
+	@media (max-width: 960px) {
+		padding: 0;
+		margin-bottom: 30px;
+	}
+}
+
+.promoTitle {
+	font-size: 32px;
+	font-weight: 700;
+	margin-bottom: 10px;
+}
+
+.promoSubtitle {
+	font-size: 16px;
+	margin-bottom: 20px;
+	color: #555;
+}
+
+.promoButton {
+	font-weight: 600;
+	padding: 10px 30px;
+}
+
+.promoImage {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+}
+
+/* SERVICE HIGHLIGHTS */
+
+.serviceHighlights {
+	padding: 60px 0;
+	background-color: #ffffff;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+}
+
+.serviceBox {
+	text-align: center;
+	padding: 20px;
+	border-radius: 8px;
+	transition: box-shadow 0.3s ease;
+	background-color: #fefefe;
+
+	&:hover {
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+	}
+}
+
+.serviceIcon {
+	color: #ff9800;
+	margin-bottom: 10px;
+}
+
+.serviceTitle {
+	font-weight: 600;
+	margin-bottom: 6px;
+}
+
+.serviceDesc {
+	color: #777;
+}
+
+/* BLOG SECTION */
+
+.blogSection {
+	padding: 80px 0;
+	background-color: #fff;
+}
+
+.blogCard {
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+	&:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+	}
+}
+
+.blogExcerpt {
+	margin: 10px 0 20px;
+	color: #666;
+}
+
+.readMoreBtn {
+	font-weight: 600;
+	text-transform: none;
+	padding: 6px 12px;
+}

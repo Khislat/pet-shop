@@ -1,0 +1,20 @@
+.mainContainer {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.backgroundSection {
+  position: relative;
+  width: 100%;
+  background: #eff9ff;
+  padding: 100px 0;
+}
+
+@media (min-width: 1920px) {
+  .mainContainer {
+    max-width: 1920px;
+  }
+}
