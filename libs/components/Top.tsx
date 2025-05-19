@@ -1,28 +1,141 @@
 "use client";
-import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
+import {
+	AppBar,
+	Toolbar,
+	Typography,
+	Box,
+	Button,
+	Stack,
+	MenuItem,
+	IconButton,
+	Badge,
+} from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import SearchIcon from "@mui/icons-material/Search";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+import { useState } from "react";
+
 export default function Top() {
+	/** Handler */
+
+	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+	const open = Boolean(anchorEl);
+
+	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+		setAnchorEl(event.currentTarget);
+	};
+
+	const handleClose = () => {
+		setAnchorEl(null);
+	};
+
+	const langChoice = (event: any) => {
+		const lang = event.currentTarget.id;
+		// Lang tanlash funksiyasi shu yerda yoziladi
+		handleClose();
+	};
+	function t(arg0: string): import("react").ReactNode {
+		throw new Error("Function not implemented.");
+	}
+
 	return (
-		<AppBar position="static" className={"header"}>
-			<Toolbar className={"toolbar"}>
-				<Link href="/">
-					<Image src="/logo.svg" alt="Bowow Logo" width={120} height={40} />
-				</Link>
-				<Box className={"nav"}>
-					<Link href="/products">Products</Link>
-					<Link href="/categories">Categories</Link>
-					<Link href="/about">About</Link>
-					<Link href="/contact">Contact</Link>
+		<Stack className="top">
+			<Stack className="container">
+				<Box className="logo">
+					<img src="/img/logo/BOWOW.svg" />
 				</Box>
-				<Box className={"actions"}>
-					<Button variant="text">Login</Button>
-					<Button variant="contained" color="primary">
-						Sign Up
-					</Button>
+				<Box className="navigation">
+					<Link href="/">Home</Link>
+					<Link href="/">New</Link>
+					<Link href="/">Shop</Link>
+					<Link href="/">About</Link>
+					<Link href="/">Pages</Link>
+					<Link href="/">Blog</Link>
+					<Link href="/">Contact</Link>
 				</Box>
-			</Toolbar>
-		</AppBar>
+				<Box className="headerActions">
+					<Stack
+					className="languageCurrency"
+						gap={0.5}
+						sx={{ color: "#1C2A67", cursor: "pointer" }}
+						onClick={handleClick}>
+						<Typography sx={{ fontSize: "16px", fontWeight: 500 }}>
+							English
+						</Typography>
+						<ExpandMoreIcon sx={{ fontSize: 22 }} />
+					</Stack>
+					<Stack
+						direction="row"
+						spacing={4}
+						alignItems="center"
+						className="headerIcons">
+						{/* Search */}
+						<IconButton>
+							<SearchIcon
+								sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
+							/>
+						</IconButton>
+
+						{/* User */}
+						<IconButton>
+							<PersonOutlineIcon
+								sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
+							/>
+						</IconButton>
+
+						{/* Wishlist with badge */}
+						<IconButton>
+							<Badge
+								badgeContent={3}
+								sx={{
+									"& .MuiBadge-badge": {
+										backgroundColor: "#FF5722",
+										color: "white",
+										fontSize: 10,
+										width: "18px",
+										height: "18px",
+										borderRadius: "50%",
+										top: 2,
+										right: 2,
+									},
+								}}
+								overlap="circular">
+								<FavoriteBorderIcon
+									sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
+								/>
+							</Badge>
+						</IconButton>
+
+						{/* Cart with badge */}
+						<IconButton>
+							<Badge
+								badgeContent={2}
+								sx={{
+									"& .MuiBadge-badge": {
+										backgroundColor: "#FF5722",
+										color: "white",
+										fontSize: 10,
+										width: "18px",
+										height: "18px",
+										borderRadius: "50%",
+										top: 2,
+										right: 2,
+									},
+								}}
+								overlap="circular">
+								<ShoppingBagOutlinedIcon
+									sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
+								/>
+							</Badge>
+						</IconButton>
+					</Stack>
+				</Box>
+			</Stack>
+		</Stack>
 	);
 }

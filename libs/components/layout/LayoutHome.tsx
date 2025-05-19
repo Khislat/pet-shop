@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import Head from "next/head";
 import { Stack } from "@mui/material";
-import Footer from "../Footer";
 import Top from "../Top";
-
+import TopBar from "../homepage/TopBar";
 
 const withLayoutMain = (Component: any) => {
 	return (props: any) => {
@@ -19,17 +18,20 @@ const withLayoutMain = (Component: any) => {
 					<meta name="viewport" content="width=device-width, initial-scale=1" />
 					<link rel="icon" href="/favicon.ico" />
 				</Head>
+				<Stack id="pc-wrap">
+					<Stack className="topBar">
+						<TopBar />
+					</Stack>
 
-				<Stack id={"top"}>
-					<Top />
-				</Stack>
-
-				<Stack id={"main"}>
-					<Component {...props} />
-				</Stack>
-
-				<Stack id={"footer"}>
-					<Footer />
+					<Stack id={"top"}>
+						<Top />
+					</Stack>
+					<Stack id={"main"}>
+						<Component {...props} />
+					</Stack>
+					{/* <Stack id={"footer"}>
+						<Footer />
+					</Stack> */}
 				</Stack>
 			</>
 		);
