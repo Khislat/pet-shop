@@ -3,6 +3,7 @@ import Head from "next/head";
 import { Stack } from "@mui/material";
 import Top from "../Top";
 import TopBar from "../homepage/TopBar";
+import Footer from "../Footer";
 
 const withLayoutMain = (Component: any) => {
 	return (props: any) => {
@@ -29,9 +30,9 @@ const withLayoutMain = (Component: any) => {
 					<Stack id={"main"}>
 						<Component {...props} />
 					</Stack>
-					{/* <Stack id={"footer"}>
+					<Stack id={"footer"}>
 						<Footer />
-					</Stack> */}
+					</Stack>
 				</Stack>
 			</>
 		);

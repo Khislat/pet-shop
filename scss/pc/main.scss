@@ -99,7 +99,7 @@
 				align-items: center;
 				flex-direction: row;
 				justify-content: space-between;
-				margin-top:10px;
+				margin-top: 10px;
 				gap: 10px;
 				.languageCurrency {
 					display: flex;
@@ -111,6 +111,438 @@
 					gap: -30px;
 				}
 			}
+		}
+	}
+
+
+	.footer {
+		padding: 80px 0 30px;
+		background-color: #ffffff;
+		.container {
+			position: relative;
+		
+			.footerTop {
+				display: grid;
+				grid-template-columns: 1.5fr 1fr 0.8fr 0.8fr 1.5fr;
+				gap: 30px;
+				position: relative;
+				margin-bottom: 60px;
+		
+			}
+			
+			.footerColumn {
+				display: flex;
+				flex-direction: column;
+			}
+			
+			.logo {
+				width: 210px;
+				height: 85px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/bb5ac461-cba8-4de8-a568-a301f7d4a07b.png) no-repeat center;
+				background-size: cover;
+				margin-bottom: 25px;
+			}
+			
+			.companyDescription {
+				color: #363636;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 14px;
+				font-weight: 400;
+				line-height: 28px;
+				margin-bottom: 20px;
+				max-width: 328px;
+			}
+			
+			.socialIcons {
+				width: 194px;
+				height: 32px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/4788eb89-ff5e-42d9-8eb0-e57748117a4d.png) no-repeat center;
+				background-size: cover;
+			}
+			
+			.columnTitle {
+				margin-top: 35px;
+				color: #3c3c3c;
+				font-family: Luckiest Guy, var(--default-font-family);
+				font-size: 25px;
+				font-weight: 400;
+				line-height: 16px;
+				margin-bottom: 40px;
+			
+			}
+			
+			.contactItem {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				margin-bottom: 15px;
+			}
+			
+			.locationIcon, .phoneIcon, .emailIcon, .webIcon {
+				width: 28px;
+				height: 26px;
+			}
+			
+			.locationIcon {
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/3a361be9-4628-4e13-a156-581aa4a8e39c.png) no-repeat center;
+				background-size: cover;
+			}
+			
+			.phoneIcon {
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/85fa59ee-d7c3-498d-94d3-79ddfc884d6a.png) no-repeat center;
+				background-size: cover;
+			}
+			
+			.emailIcon {
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/4e7cb339-a616-4e1b-8bc3-38f4d6bda8d8.png) no-repeat center;
+				background-size: cover;
+			}
+			
+			.webIcon {
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/f200883e-d1d5-4e26-bde6-e94703d97d16.png) no-repeat center;
+				background-size: cover;
+			}
+			
+			.contactText {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 16.8px;
+			}
+			
+			.footerLinks {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			
+			.footerLinks li {
+				margin-bottom: 15px;
+			}
+			
+			.footerLinks a {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 13px;
+				text-decoration: none;
+				transition: color 0.3s ease;
+			}
+			
+			.footerLinks a:hover {
+				color: #fe753b;
+			}
+			
+			.newsletterText {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 25px;
+				margin-bottom: 20px;
+				max-width: 400px;
+			}
+			
+			.newsletterForm {
+				display: flex;
+				margin-bottom: 15px;
+			}
+			
+			.emailInput {
+				width: 288px;
+				height: 50px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/e153b434-a9cc-416e-88a2-57f1b9e97b68.png) no-repeat center;
+				background-size: cover;
+				border: none;
+				padding: 0 28px;
+				color: #b0b0b0;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 12px;
+				font-weight: 400;
+			}
+			
+			.submitButton {
+				width: 161px;
+				height: 50px;
+				background: #fe753b;
+				border: none;
+				border-radius: 0 30px 30px 0;
+				color: #ffffff;
+				font-family: Luckiest Guy, var(--default-font-family);
+				font-size: 12px;
+				font-weight: 400;
+				line-height: 9px;
+				text-transform: capitalize;
+				letter-spacing: 1.2px;
+				cursor: pointer;
+			}
+			
+			.discountText {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 30px;
+				text-transform: capitalize;
+			}
+			
+		
+			
+			.divider {
+				width: 100%;
+				height: 1px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/c1B2VF86sG.png) no-repeat center;
+				background-size: cover;
+				margin-bottom: 25px;
+			}
+			
+			.footerBottom {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-direction: row;
+			}
+			
+			.copyright {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 16px;
+				font-weight: 500;
+				line-height: 19px;
+			}
+			
+			.socialIconsRow {
+				display: flex;
+				gap: 10px;
+				width: 473px;
+				height: 30px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/9a886193-b9f4-40c8-a2ca-52bc1ba20cdc.png) no-repeat center;
+				background-size: contain;
+			}
+			
+			.termsLinks {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 16px;
+				font-weight: 500;
+				line-height: 19px;
+			}
+			
+			@media (max-width: 1200px) {
+				.footerTop {
+					grid-template-columns: repeat(3, 1fr);
+				}
+				
+				.dogImage {
+					display: none;
+				}
+			}
+			
+			@media (max-width: 992px) {
+				.footerTop {
+					grid-template-columns: repeat(2, 1fr);
+				}
+			}
+			
+			@media (max-width: 768px) {
+				.footerTop {
+					grid-template-columns: 1fr;
+				}
+				
+				.newsletterForm {
+					flex-direction: column;
+				}
+				
+				.emailInput, .submitButton {
+					width: 100%;
+				}
+				
+				.submitButton {
+					border-radius: 30px;
+					margin-top: 10px;
+				}
+				
+				.footerBottom {
+					flex-direction: column;
+					gap: 20px;
+					text-align: center;
+				}
+			}
+			
+		}
+	}
+
+	// .footer {
+	// 	padding: 80px 0 30px;
+	// 	background-color: #ffffff;
+	// 	.container {
+	// 		position: relative;
+	// 		flex-direction: row;
+	// 		justify-content: space-between;
+	// 		align-items: center;
+	// 		background-color: #fff;
+	// 		padding: 4rem 2rem;
+	// 		font-family: "Poppins", sans-serif;
+
+	// 		.top {
+	// 			display: grid;
+	// 			grid-template-columns: 1.5fr 1fr 0.8fr 0.8fr 1.5fr;
+	// 			gap: 30px;
+	// 			position: relative;
+	// 			margin-bottom: 60px;
+
+	// 			.column {
+	// 				display: flex;
+	// 				flex-direction: column;
+
+	// 				h4 {
+	// 					font-weight: 700;
+	// 					font-size: 1.1rem;
+	// 					margin-bottom: 1rem;
+	// 				}
+
+	// 				p {
+	// 					font-size: 0.9rem;
+	// 					color: #333;
+	// 					line-height: 1.5;
+	// 				}
+
+	// 				ul {
+	// 					list-style: none;
+	// 					padding: 0;
+
+	// 					li {
+	// 						display: flex;
+	// 						align-items: center;
+	// 						font-size: 0.9rem;
+	// 						margin-bottom: 0.5rem;
+
+	// 						svg {
+	// 							margin-right: 0.5rem;
+	// 							font-size: 1.1rem;
+	// 						}
+	// 					}
+	// 				}
+	// 			}
+
+	// 			.logo {
+	// 				display: flex;
+	// 				align-items: center;
+	// 				gap: 0.5rem;
+
+	// 				img {
+	// 					width: 50px;
+	// 				}
+
+	// 				.logoText {
+	// 					font-size: 1.8rem;
+	// 					font-weight: bold;
+
+	// 					.accent {
+	// 						color: #00bcd4;
+	// 					}
+	// 				}
+	// 			}
+
+	// 			.socials {
+	// 				display: flex;
+	// 				gap: 0.7rem;
+	// 				margin-top: 1rem;
+
+	// 				svg {
+	// 					cursor: pointer;
+	// 				}
+	// 			}
+
+	// 			.subscribe {
+	// 				display: flex;
+	// 				margin-top: 1rem;
+
+	// 				input {
+	// 					flex: 1;
+	// 					padding: 0.6rem;
+	// 					border: 1px solid #ccc;
+	// 					border-radius: 5px 0 0 5px;
+	// 				}
+
+	// 				button {
+	// 					background-color: #ff6b2c;
+	// 					color: white;
+	// 					border: none;
+	// 					padding: 0.6rem 1rem;
+	// 					border-radius: 0 5px 5px 0;
+	// 					cursor: pointer;
+	// 				}
+	// 			}
+	// 		}
+
+	// 		.bottom {
+	// 			margin-top: 4rem;
+	// 			text-align: center;
+	// 			border-top: 1px solid #ccc;
+	// 			padding-top: 2rem;
+
+	// 			p {
+	// 				font-size: 0.9rem;
+	// 				margin: 0.5rem 0;
+	// 			}
+
+	// 			.brands {
+	// 				display: flex;
+	// 				justify-content: center;
+	// 				flex-wrap: wrap;
+	// 				gap: 1rem;
+	// 				margin: 1rem 0;
+
+	// 				img {
+	// 					height: 30px;
+	// 					object-fit: contain;
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+
+	// 	@media (max-width: 1200px) {
+	// 		.footerTop {
+	// 			grid-template-columns: repeat(3, 1fr);
+	// 		}
+
+	// 		.dogImage {
+	// 			display: none;
+	// 		}
+	// 	}
+
+	@media (max-width: 992px) {
+		.footerTop {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.footerTop {
+			grid-template-columns: 1fr;
+		}
+
+		.newsletterForm {
+			flex-direction: column;
+		}
+
+		.emailInput,
+		.submitButton {
+			width: 100%;
+		}
+
+		.submitButton {
+			border-radius: 30px;
+			margin-top: 10px;
+		}
+
+		.footerBottom {
+			flex-direction: column;
+			gap: 20px;
+			text-align: center;
 		}
 	}
 }
