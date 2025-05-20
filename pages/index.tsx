@@ -5,6 +5,7 @@ import { Stack } from "@mui/material";
 import useDeviceDetect from "../libs/hooks/useDeviceDetect";
 import HeroSection from "../libs/components/homepage/HeroSection";
 import AboutSection from "../libs/components/homepage/AboutSection";
+import CategoriesSection from "../libs/components/homepage/CategoriesSection";
 
 const Home: NextPage = () => {
 	const device = useDeviceDetect();
@@ -16,6 +17,7 @@ const Home: NextPage = () => {
 			<Stack className={"home-page"}>
 				<HeroSection />
 				<AboutSection />
+				<CategoriesSection />
 			</Stack>
 		);
 	}
