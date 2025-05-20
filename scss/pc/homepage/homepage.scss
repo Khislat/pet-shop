@@ -3,20 +3,10 @@
 $font: "Inter", sans-serif;
 
 #pc-wrap {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/YSsjQV47Mw.png)
-		no-repeat center;
-	background-size: cover;
-	z-index: 2;
 	.home-page {
 		position: relative;
 		width: 100%;
 		height: auto;
-
 		.heroSection {
 			display: flex;
 			align-items: center;
@@ -24,176 +14,458 @@ $font: "Inter", sans-serif;
 			width: 100%;
 			height: 700px;
 			overflow: hidden;
-			margin-top: 70px;
-			margin-left: 108px;
-			.heroBackground {
-				.container {
-					position: relative;
-					flex-direction: column;
-					justify-content: space-between;
-					.qualityBadge {
-						display: flex;
-						align-items: center;
-						gap: 15px;
-						margin-bottom: 35px;
-						margin-left: -30px;
-						.badgeIcon {
-							width: 70px;
-							height: 67px;
-						}
-						.badgeText {
-							color: #fe753b;
-							font-family: $font;
-							font-size: 16px;
-							font-weight: 600;
-							line-height: 16px;
-							text-transform: uppercase;
-							letter-spacing: 8px;
-						}
+
+			background-color: #eff9ff;
+			.waveWrapper {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 1900px;
+				overflow: hidden;
+				line-height: 0;
+
+				.wave {
+					display: block;
+					width: 100%;
+					height: 90px;
+				}
+			}
+
+			.container {
+				position: relative;
+				flex-direction: column;
+				justify-content: space-between;
+				margin-top: 70px;
+				margin-left: 108px;
+				.qualityBadge {
+					display: flex;
+					align-items: center;
+					gap: 15px;
+					margin-bottom: 35px;
+					margin-left: -30px;
+					.badgeIcon {
+						width: 70px;
+						height: 67px;
 					}
-					.heroContent {
-						width: 588px;
-						height: 137px;
-						.heroTitle {
-							font-family: Luckiest Guy, var(--default-font-family);
-							margin-bottom: 20px;
-							.discountPercent {
-								display: block;
-								color: #363636;
-								font-size: 80px;
-								font-weight: 800;
-								line-height: 96px;
-								text-transform: capitalize;
-							}
-							.discountDescription {
-								display: block;
-								color: #363636;
-								font-size: 60px;
-								font-weight: 800;
-								line-height: 80px;
-								text-transform: capitalize;
-							}
-						}
-						.heroDescription {
-							color: #585858;
-							font-family: Recursive, var(--default-font-family);
-							font-size: 16px;
-							font-weight: 400;
-							line-height: 30px;
-							margin-bottom: 39px;
-							max-width: 639px;
-						}
-						.heroActions {
-							display: flex;
-							align-items: center;
-							margin-bottom: 50px;
-							.shopButton {
-								display: flex;
-								align-items: center;
-								justify-content: space-between;
-								width: 190px;
-								height: 54px;
-								background: #fe753b;
-								border-radius: 50px;
-								border: none;
-								padding: 0 25px;
-								color: #ffffff;
-								font-family: $font;
-								font-size: 18px;
-								font-weight: 600;
-
-								cursor: pointer;
-								transition: background-color 0.3s ease;
-								&:hover {
-									background-color: #e56a34;
-								}
-								.buttonIcon {
-									width: 26px;
-									height: 26px;
-									background: url("/img/icons/homepage/buttonIcon.svg")
-										no-repeat center;
-									background-size: cover;
-								}
-							}
-						}
-						.reviewsContainer {
-							display: flex;
-							align-items: center;
-							.reviewContainer {
-								display: flex;
-								align-items: center;
-								gap: 10px;
-								margin-left: 32px;
-							}
-
-							.circles {
-								display: flex;
-								position: relative;
-							}
-
-							.circle {
-								width: 48px;
-								height: 48px;
-								border-radius: 50%;
-								background-color: #c278c2;
-								border: 3px solid white;
-								position: relative;
-								overflow: hidden;
-								margin-left: -15px;
-
-								&:first-child {
-									margin-left: 0;
-								}
-							}
-
-							.avatar {
-								object-fit: cover;
-								border-radius: 50%;
-							}
-
-							.highlighted {
-								background-color: #f89c1c;
-								display: flex;
-								justify-content: center;
-								align-items: center;
-
-								span {
-									color: white;
-									font-weight: 600;
-									font-size: 16px;
-								}
-							}
-							.text {
-								color: #000;
-								font-family: $font;
-								font-size: 14px;
-								font-style: normal;
-								font-weight: 500;
-								line-height: normal;
-							}
-						}
-					}
-
-					.pagination {
-						display: flex;
-						align-items: center;
-						gap: 15px;
-						width: 26px;
-						height: 22px;
-						color: var(--Color-3, #1d256b);
+					.badgeText {
+						color: #fe753b;
 						font-family: $font;
-						font-size: 15px;
-						font-style: normal;
+						font-size: 16px;
 						font-weight: 600;
-						line-height: normal;
-						align-items: center;
-						.arrowRight {
-							transform: rotate(180deg);
+						line-height: 16px;
+						text-transform: uppercase;
+						letter-spacing: 8px;
+					}
+				}
+				.heroContent {
+					width: 588px;
+					height: 137px;
+					.heroTitle {
+						font-family: Luckiest Guy, var(--default-font-family);
+						margin-bottom: 20px;
+						.discountPercent {
+							display: block;
+							color: #363636;
+							font-size: 80px;
+							font-weight: 800;
+							line-height: 96px;
+							text-transform: capitalize;
 						}
-						
+						.discountDescription {
+							display: block;
+							color: #363636;
+							font-size: 60px;
+							font-weight: 800;
+							line-height: 80px;
+							text-transform: capitalize;
+						}
+					}
+					.heroDescription {
+						color: #585858;
+						font-family: Recursive, var(--default-font-family);
+						font-size: 16px;
+						font-weight: 400;
+						line-height: 30px;
+						margin-bottom: 39px;
+						max-width: 639px;
+					}
+					.heroActions {
+						display: flex;
+						align-items: center;
+						margin-bottom: 50px;
+						.shopButton {
+							display: flex;
+							align-items: center;
+							justify-content: space-between;
+							width: 190px;
+							height: 54px;
+							background: #fe753b;
+							border-radius: 50px;
+							border: none;
+							padding: 0 25px;
+							color: #ffffff;
+							font-family: $font;
+							font-size: 18px;
+							font-weight: 600;
+
+							cursor: pointer;
+							transition: background-color 0.3s ease;
+							&:hover {
+								background-color: #e56a34;
+							}
+							.buttonIcon {
+								width: 26px;
+								height: 26px;
+								background: url("/img/icons/homepage/buttonIcon.svg") no-repeat
+									center;
+								background-size: cover;
+							}
+						}
+					}
+					.reviewsContainer {
+						display: flex;
+						align-items: center;
+						.reviewContainer {
+							display: flex;
+							align-items: center;
+							gap: 10px;
+							margin-left: 32px;
+						}
+
+						.circles {
+							display: flex;
+							position: relative;
+						}
+
+						.circle {
+							width: 48px;
+							height: 48px;
+							border-radius: 50%;
+							background-color: #c278c2;
+							border: 3px solid white;
+							position: relative;
+							overflow: hidden;
+							margin-left: -15px;
+
+							&:first-child {
+								margin-left: 0;
+							}
+						}
+
+						.avatar {
+							object-fit: cover;
+							border-radius: 50%;
+						}
+
+						.highlighted {
+							background-color: #f89c1c;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+
+							span {
+								color: white;
+								font-weight: 600;
+								font-size: 16px;
+							}
+						}
+						.text {
+							color: #000;
+							font-family: $font;
+							font-size: 14px;
+							font-style: normal;
+							font-weight: 500;
+							line-height: normal;
+						}
+					}
+				}
+
+				.pagination {
+					display: flex;
+					align-items: center;
+					gap: 15px;
+					width: 26px;
+					height: 22px;
+					color: var(--Color-3, #1d256b);
+					font-family: $font;
+					font-size: 15px;
+					font-style: normal;
+					font-weight: 600;
+					line-height: normal;
+					align-items: center;
+					.arrowRight {
+						transform: rotate(180deg);
 					}
 				}
 			}
+		}
+	}
+	.aboutSection {
+		display: flex;
+		align-items: center;
+		background: url("/img/banner/Pattern.png");
+		background-repeat: repeat;
+		background-size: auto; // yoki fixed size: 80px 80px;
+		background-position: top center;
+		padding: 0;
+
+		.container {
+			display: flex;
+			justify-content: space-between;
+			flex-direction: row;
+			height: 750px;
+			margin-top: 153px;
+			margin-bottom: 130px;
+			.imagesContainer {
+				flex: 1;
+				position: relative;
+				min-height: 750px;
+				.mainImage {
+					position: absolute;
+					width: 441px;
+					height: 433px;
+					background: #c682c0;
+					border-radius: 20px;
+				}
+				.smallImage {
+					position: absolute;
+					width: 234px;
+					height: 231px;
+					top: 16px;
+					left: 509px;
+					background: #c682c0;
+					border-radius: 20px;
+				}
+				.borderedImage {
+					position: absolute;
+					width: 441px;
+					height: 432px;
+					top: 318px;
+					left: 341px;
+					background: #c682c0;
+					border: 10px solid #ffffff;
+					border-radius: 20px;
+				}
+				.batchLogo {
+					background: url("/img/logo/Batchlogo.svg");
+					position: relative;
+					width: 181px;
+					height: 181px;
+					margin-top: 463px;
+					margin-left: 100px;
+					color: wheat;
+				}
+			}
+			.contentContainer {
+				display: flex;
+				justify-content: space-between;
+				flex-direction: column;
+				margin-top: 45px;
+				margin-left: 520px;
+				.aboutHeader {
+					display: flex;
+					gap: 10px;
+					.aboutTitle {
+						color: #fe753b;
+						font-family: Recursive, var(--default-font-family);
+						font-size: 20px;
+						font-weight: 700;
+						line-height: 24px;
+						line-height: normal;
+					}
+					.aboutIcon {
+						width: 32.641px;
+						height: 38px;
+						background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/c9ecc4a9-3c3c-4c44-8742-d24c7e59a057.png)
+							no-repeat center;
+						background-size: cover;
+					}
+				}
+				.treatsTitle {
+					color: #363636;
+					font-family: "Luckiest Guy";
+					font-size: 50px;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 75px; /* 150% */
+					margin-top: -40px;
+				}
+				.aboutDescription {
+					color: #363636;
+					font-family: Recursive, var(--default-font-family);
+					font-size: 16px;
+					font-weight: 400;
+					line-height: 28px;
+					margin-top: -40px;
+				}
+				.servicesContainer {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					gap: 40px;
+					margin-top: -40px;
+					.serviceItem {
+						display: flex;
+						justify-content: space-between;
+						flex-direction: column;
+						align-items: center;
+						width: 150px;
+
+						.serviceIcon1 {
+							background: url("/img/icons/homepage/Aboutus1.svg") no-repeat
+								center;
+							background-size: cover;
+							width: 75px;
+							height: 75px;
+						}
+						.serviceIcon2 {
+							background: url("/img/icons/homepage/Aboutus2.svg") no-repeat
+								center;
+							background-size: cover;
+							width: 75px;
+							height: 75px;
+						}
+						.serviceIcon3 {
+							background: url("/img/icons/homepage/Aboutus3.svg") no-repeat
+								center;
+							background-size: cover;
+							width: 75px;
+							height: 75px;
+						}
+						.serviceTitle {
+							margin-top: 10px;
+							color: #000000;
+							font-family: Recursive, var(--default-font-family);
+							font-size: 20px;
+							font-weight: 600;
+							line-height: 24px;
+							text-align: center;
+						}
+					}
+				}
+				.knowMoreButton {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					width: 195px;
+					height: 54px;
+					background: #fe753b;
+					border-radius: 50px;
+					border: none;
+					padding: 0 21px;
+					color: #ffffff;
+					font-family: Recursive, var(--default-font-family);
+					font-size: 18px;
+					font-weight: 600;
+					text-transform: uppercase;
+					margin-top: -40px;
+					cursor: pointer;
+					transition: background-color 0.3s ease;
+					.knowMoreButton:hover {
+						background-color: #e56a34;
+					}
+					.buttonIcon {
+						width: 26px;
+						height: 26px;
+						background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/9d842807-ad19-4012-bee3-a70a24b153ca.png)
+							no-repeat center;
+						background-size: cover;
+					}
+				}
+				.contactInfo {
+					margin-top: -40px;
+					display: flex;
+					flex-direction: row;
+					gap: 60px;
+					.contactItem {
+						display: flex;
+						align-items: center;
+						gap: 15px;
+						.contactIcon1,
+						.contactIcon2 {
+							width: 42px;
+							height: 42px;
+						}
+						.contactIcon1 {
+							background: url("/img/icons/homepage/phone.png") no-repeat center;
+							background-size: contain;
+						}
+						.contactIcon2 {
+							background: url("/img/icons/homepage/email.png") no-repeat center;
+							background-size: contain;
+						}
+						.contactLabel {
+							color: #555555;
+							font-family: Recursive, var(--default-font-family);
+							font-size: 12px;
+							font-weight: 400;
+							line-height: 14px;
+							margin-bottom: 5px;
+						}
+						.contactValue {
+							color: #000000;
+							font-family: Recursive, var(--default-font-family);
+							font-size: 14px;
+							font-weight: 700;
+							line-height: 16.8px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: 1200px) {
+		.container {
+			flex-direction: column;
+		}
+
+		.imagesContainer {
+			min-height: 600px;
+		}
+
+		.mainImage,
+		.smallImage,
+		.borderedImage {
+			transform: scale(0.8);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.imagesContainer {
+			min-height: 500px;
+		}
+
+		.mainImage,
+		.smallImage,
+		.borderedImage {
+			transform: scale(0.6);
+		}
+
+		.treatsTitle {
+			font-size: 40px;
+			line-height: 60px;
+		}
+
+		.servicesContainer {
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.imagesContainer {
+			display: none;
+		}
+
+		.treatsTitle {
+			font-size: 30px;
+			line-height: 45px;
+		}
+
+		.contactInfo {
+			flex-direction: column;
+			gap: 20px;
 		}
 	}
 }
