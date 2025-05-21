@@ -9,6 +9,7 @@ import CategoriesSection from "../libs/components/homepage/CategoriesSection";
 import ProductsSection from "../libs/components/homepage/ProductsSection";
 import FeaturesSection from "../libs/components/homepage/FeaturesSection";
 import TeamSection from "../libs/components/homepage/TeamSection";
+import TestimonialsSection from "../libs/components/homepage/TestimonialsSection";
 const Home: NextPage = () => {
 	const device = useDeviceDetect();
 
@@ -23,6 +24,7 @@ const Home: NextPage = () => {
 				<ProductsSection />
 				<FeaturesSection />
 				<TeamSection />
+				<TestimonialsSection />
 			</Stack>
 		);
 	}
