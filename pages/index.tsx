@@ -6,7 +6,9 @@ import useDeviceDetect from "../libs/hooks/useDeviceDetect";
 import HeroSection from "../libs/components/homepage/HeroSection";
 import AboutSection from "../libs/components/homepage/AboutSection";
 import CategoriesSection from "../libs/components/homepage/CategoriesSection";
-
+import ProductsSection from "../libs/components/homepage/ProductsSection";
+import FeaturesSection from "../libs/components/homepage/FeaturesSection";
+import TeamSection from "../libs/components/homepage/TeamSection";
 const Home: NextPage = () => {
 	const device = useDeviceDetect();
 
@@ -18,6 +20,9 @@ const Home: NextPage = () => {
 				<HeroSection />
 				<AboutSection />
 				<CategoriesSection />
+				<ProductsSection />
+				<FeaturesSection />
+				<TeamSection />
 			</Stack>
 		);
 	}
