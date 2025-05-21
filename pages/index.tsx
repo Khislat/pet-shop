@@ -8,8 +8,9 @@ import AboutSection from "../libs/components/homepage/AboutSection";
 import CategoriesSection from "../libs/components/homepage/CategoriesSection";
 import ProductsSection from "../libs/components/homepage/ProductsSection";
 import FeaturesSection from "../libs/components/homepage/FeaturesSection";
-import TeamSection from "../libs/components/homepage/TeamSection";
+import TeamSection from "../libs/components/homepage/CompaniesSection";
 import TestimonialsSection from "../libs/components/homepage/TestimonialsSection";
+import BlogSection from "../libs/components/homepage/BlogSection";
 const Home: NextPage = () => {
 	const device = useDeviceDetect();
 
@@ -25,6 +26,7 @@ const Home: NextPage = () => {
 				<FeaturesSection />
 				<TeamSection />
 				<TestimonialsSection />
+				<BlogSection />
 			</Stack>
 		);
 	}

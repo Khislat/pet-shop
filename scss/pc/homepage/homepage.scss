@@ -1157,7 +1157,7 @@ $font: "Inter", sans-serif;
 				font-size: 14px;
 				font-style: normal;
 				font-weight: 500;
-				line-height: 26px; 
+				line-height: 26px;
 				text-transform: capitalize;
 				margin-bottom: 20px;
 			}
@@ -1224,6 +1224,247 @@ $font: "Inter", sans-serif;
 					no-repeat center;
 				background-size: cover;
 				margin: 0 auto;
+			}
+		}
+	}
+	.blogSection {
+		padding: 80px 0;
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			margin: 0 auto;
+			padding: 0 20px;
+
+			.sectionHeader {
+				position: relative;
+				text-align: center;
+				margin-bottom: 10px;
+			}
+
+			.sectionTitle {
+				color: #3c3c3c;
+				font-family: Luckiest Guy, var(--default-font-family);
+				font-size: 45px;
+				font-weight: 800;
+				line-height: 60px;
+				text-transform: capitalize;
+				margin-bottom: 30px;
+			}
+
+			.decorationIcon {
+				position: absolute;
+				top: -20px;
+				right: -65px;
+				width: 102px;
+				height: 76px;
+				background: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/ioFdQ23zvD.png")
+					no-repeat center;
+				background-size: contain;
+			}
+
+			.sectionDescription {
+				color: #000;
+				font-family: "Recursive", var(--default-font-family);
+				font-size: 16px;
+				font-weight: 400;
+				line-height: 19px;
+				text-align: center;
+				max-width: 600px;
+				margin: 0 auto 60px;
+			}
+
+			.blogGrid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 30px;
+			}
+
+			.blogCard {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.blogImage {
+				width: 100%;
+				height: 272px;
+				background-size: cover;
+				background-position: center;
+				position: relative;
+				margin-bottom: 30px;
+				border-radius: 15px;
+			}
+
+			.dateTag {
+				position: absolute;
+				top: 21px;
+				left: 42px;
+				width: 91px;
+				height: 25px;
+				background: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/dmEo1VZ1zD.png")
+					no-repeat center;
+				background-size: cover;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				span {
+					color: #fff;
+					font-family: "Recursive", var(--default-font-family);
+					font-size: 12px;
+					font-weight: 500;
+					line-height: 14px;
+				}
+			}
+
+			.blogContent {
+				display: flex;
+				flex-direction: column;
+				position: relative;
+			}
+
+			.blogTitle {
+				color: #3D3D3D;
+
+				font-family: $font;
+				font-size: 23px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: normal;
+				margin-bottom: 20px;
+
+				&:nth-child(1) {
+					color: #3D3D3D;
+				}
+
+				&:nth-child(2),
+				&:nth-child(3) {
+					color: #3c3c3c;
+				}
+			}
+
+			.blogExcerpt {
+				color: #4e4e4e;
+				font-family: $font;
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 19px;
+				margin-bottom: 20px;
+			}
+
+			.blogFooter {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.readMore {
+				position: relative;
+				
+
+				.readMoreText,
+				.readMoreActive {
+					font-family: "Luckiest Guy", var(--default-font-family);
+					font-size: 16px;
+					font-weight: 400;
+					line-height: 11px;
+					margin-bottom: 15px;
+					display: block;
+					color: #363636;
+				}
+
+				.readMoreActive {
+					color: #fe753b;
+				}
+
+				.readMoreLine,
+				.readMoreLineActive {
+					height: 1px;
+					background-repeat: no-repeat;
+					background-position: center;
+					background-size: cover;
+				}
+
+				.readMoreLine {
+					width: 80px;
+					background-image: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/uiMKk6ZRmH.png");
+				}
+
+				.readMoreLineActive {
+					width: 101px;
+					background-image: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/ffWhtWtL7h.png");
+				}
+			}
+
+			.reviewsContainer {
+				position: absolute;
+				display: flex;
+				align-items: center;
+				gap: 30px;
+				right: 10px;
+				top: 125px;
+			}
+
+			.reviewAvatars {
+				display: flex;
+
+				.reviewAvatar1,
+				.reviewAvatar2,
+				.reviewAvatar3 {
+					width: 30px;
+					height: 30px;
+					border-radius: 50%;
+					background-repeat: no-repeat;
+					background-position: center;
+					background-size: cover;
+					margin-right: -8px;
+				}
+
+				.reviewAvatar1 {
+					background-image: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/PDNjKNvyoZ.png");
+					z-index: 3;
+				}
+
+				.reviewAvatar2 {
+					background-image: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/fDSmxEme2u.png");
+					z-index: 2;
+				}
+
+				.reviewAvatar3 {
+					background-image: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/M1eNjHO6xG.png");
+					z-index: 1;
+				}
+			}
+
+			.reviewCount {
+				margin-left: -20px;
+				color: #000;
+				font-family: $font;
+				font-size: 10px;
+				font-style: normal;
+				font-weight: 500;
+				line-height: normal;
+				align-items: center;
+			}
+
+			// Responsive
+			@media (max-width: 992px) {
+				.blogGrid {
+					grid-template-columns: repeat(2, 1fr);
+				}
+			}
+
+			@media (max-width: 768px) {
+				.blogGrid {
+					grid-template-columns: 1fr;
+				}
+
+				.decorationIcon {
+					display: none;
+				}
 			}
 		}
 	}
