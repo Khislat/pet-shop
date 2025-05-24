@@ -1326,7 +1326,7 @@ $font: "Inter", sans-serif;
 			}
 
 			.blogTitle {
-				color: #3D3D3D;
+				color: #3d3d3d;
 
 				font-family: $font;
 				font-size: 23px;
@@ -1336,7 +1336,7 @@ $font: "Inter", sans-serif;
 				margin-bottom: 20px;
 
 				&:nth-child(1) {
-					color: #3D3D3D;
+					color: #3d3d3d;
 				}
 
 				&:nth-child(2),
@@ -1363,7 +1363,6 @@ $font: "Inter", sans-serif;
 
 			.readMore {
 				position: relative;
-				
 
 				.readMoreText,
 				.readMoreActive {
@@ -1466,6 +1465,111 @@ $font: "Inter", sans-serif;
 					display: none;
 				}
 			}
+		}
+	}
+	.appPromoSection {
+		background: #d0e7ff;
+
+		padding: 80px 0;
+		.container {
+			display: flex;
+			align-items: center;
+			gap: 60px;
+			.leftContent {
+				flex: 1;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.circleOuter {
+				width: 487px;
+				height: 487px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/NeQG44UB3y.png)
+					no-repeat center;
+				background-size: cover;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.circleMiddle {
+				width: 437px;
+				height: 437px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/x8pOfVCw9u.png)
+					no-repeat center;
+				background-size: cover;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.circleInner {
+				width: 376px;
+				height: 376px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/TOnZPyadPa.png)
+					no-repeat center;
+				background-size: cover;
+				border-radius: 50%;
+			}
+
+			.rightContent {
+				flex: 1;
+				max-width: 652px;
+			}
+
+			.sectionTitle {
+				color: #3c3c3c;
+				font-family: Luckiest Guy, var(--default-font-family);
+				font-size: 40px;
+				font-weight: 400;
+				line-height: 32px;
+				text-transform: capitalize;
+				margin-bottom: 20px;
+			}
+
+			.appTitle {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 22px;
+				font-weight: 600;
+				line-height: 26px;
+				margin-bottom: 30px;
+			}
+
+			.appDescription {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 16px;
+				font-weight: 400;
+				line-height: 30px;
+				margin-bottom: 40px;
+			}
+
+			.appStoreButtons {
+				width: 347px;
+				height: 65px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/15d29f1e-1ce4-403d-8e2a-a2684e9199b6.png)
+					no-repeat center;
+				background-size: cover;
+			}
+		}
+	}
+	.logoSection {
+		padding: 80px 0;
+		position: relative;
+
+		.companyLogo {
+			padding-left: 60px;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			width: 204px;
+			height: 63px;
+			gap: 80px;
+			
 		}
 	}
 }

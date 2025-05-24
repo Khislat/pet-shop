@@ -11,6 +11,8 @@ import FeaturesSection from "../libs/components/homepage/FeaturesSection";
 import TeamSection from "../libs/components/homepage/CompaniesSection";
 import TestimonialsSection from "../libs/components/homepage/TestimonialsSection";
 import BlogSection from "../libs/components/homepage/BlogSection";
+import AppPromoSection from "../libs/components/homepage/AppPromoSection";
+import LogoSection from "../libs/components/homepage/CompaniesLogoSection";
 const Home: NextPage = () => {
 	const device = useDeviceDetect();
 
@@ -27,6 +29,8 @@ const Home: NextPage = () => {
 				<TeamSection />
 				<TestimonialsSection />
 				<BlogSection />
+				<LogoSection />
+				<AppPromoSection />
 			</Stack>
 		);
 	}
