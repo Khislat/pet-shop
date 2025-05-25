@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Head from "next/head";
 import { Stack } from "@mui/material";
-import Top from "../Top";
 import TopBar from "../homepage/TopBar";
 import Footer from "../Footer";
+import TopBasic from "../TopBasic";
 
 const withLayoutBasic = (Component: any) => {
 	return (props: any) => {
@@ -25,7 +25,7 @@ const withLayoutBasic = (Component: any) => {
 					</Stack>
 
 					<Stack id={"top"}>
-						<Top />
+						<TopBasic />
 					</Stack>
 					<Stack id={"main"}>
 						<Component {...props} />

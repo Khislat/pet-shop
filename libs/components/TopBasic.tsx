@@ -20,7 +20,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { useState } from "react";
 
-export default function Top() {
+export default function TopBasic() {
 	/** Handler */
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -44,7 +44,7 @@ export default function Top() {
 	}
 
 	return (
-		<Stack className="top">
+		<Stack className="topBasic">
 			<Stack className="container">
 				<Box className="logo">
 					<img src="/img/logo/BOWOW.svg" />
@@ -60,7 +60,7 @@ export default function Top() {
 				</Box>
 				<Box className="headerActions">
 					<Stack
-						className="languageCurrency"
+					className="languageCurrency"
 						gap={0.5}
 						sx={{ color: "#1C2A67", cursor: "pointer" }}
 						onClick={handleClick}>

@@ -1,0 +1,479 @@
+// pages/shop.tsx
+import React, { useState, useEffect } from "react";
+import {
+	Grid,
+	Typography,
+	MenuItem,
+	FormControl,
+	Select,
+	SelectChangeEvent,
+	Box,
+	Pagination,
+	Stack,
+} from "@mui/material";
+import Filter from "../../libs/components/shoppage/Filter";
+import CategoriesSection from "../../libs/components/shoppage/CategoriesSection";
+import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
+import HeroSectionBasic from "../../libs/components/shoppage/HeroSectionBasic";
+import ShopCard from "../../libs/components/shoppage/ShopCard";
+import PaginationItem from "@mui/material/PaginationItem";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+
+interface Product {
+	id: number;
+	name: string;
+	price: number;
+	originalPrice?: number;
+	image: string;
+	category: string;
+	rating: number;
+	reviews: number;
+	discount?: number;
+	isNew?: boolean;
+	isFavorite: boolean;
+	inStock: boolean;
+	brand: string;
+}
+
+interface Category {
+	id: string;
+	name: string;
+	icon: string;
+	color: string;
+	count: number;
+}
+
+const ShopPage: React.FC = () => {
+	const [products, setProducts] = useState<Product[]>([]);
+	const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+	const [searchQuery, setSearchQuery] = useState<string>("");
+	const [currentPage, setCurrentPage] = useState<number>(1);
+	const [sortBy, setSortBy] = useState<string>("default");
+	const [priceRange, setPriceRange] = useState<number[]>([0, 100]);
+	const [selectedCategory, setSelectedCategory] = useState<string>("");
+	const [selectedBrand, setSelectedBrand] = useState<string>("");
+	const [openCategories, setOpenCategories] = useState<boolean>(true);
+	const [openBrands, setOpenBrands] = useState<boolean>(true);
+	const [openPrice, setOpenPrice] = useState<boolean>(true);
+
+	const productsPerPage = 16;
+
+	// Mock data
+	const categories: Category[] = [
+		{ id: "dogs", name: "Dogs", icon: "🐕", color: "#A8DADC", count: 12 },
+		{ id: "cats", name: "Cats", icon: "🐱", color: "#F1A501", count: 8 },
+		{ id: "birds", name: "Birds", icon: "🐦", color: "#A8DADC", count: 15 },
+		{
+			id: "fun-toys",
+			name: "Fun Toys",
+			icon: "🎾",
+			color: "#A8DADC",
+			count: 20,
+		},
+		{ id: "healthy", name: "Healthy", icon: "🥗", color: "#A8DADC", count: 18 },
+		{
+			id: "collars",
+			name: "Collars & Leash",
+			icon: "🦮",
+			color: "#A8DADC",
+			count: 10,
+		},
+	];
+
+	const mockProducts: Product[] = [
+		{
+			id: 1,
+			name: "Heavy Duty Wool Bottle",
+			price: 15.0,
+			originalPrice: 20.0,
+			image: "/api/placeholder/300/300",
+			category: "toys",
+			rating: 5,
+			reviews: 24,
+			discount: 25,
+			isNew: false,
+			isFavorite: false,
+			inStock: true,
+			brand: "Majestic Metals",
+		},
+		{
+			id: 2,
+			name: "Fantastic Marble Shoes",
+			price: 15.0,
+			originalPrice: 18.0,
+			image: "/api/placeholder/300/300",
+			category: "accessories",
+			rating: 4,
+			reviews: 18,
+			discount: 17,
+			isNew: false,
+			isFavorite: false,
+			inStock: true,
+			brand: "Radiant Rings",
+		},
+		{
+			id: 3,
+			name: "Shiny Silver and Steel",
+			price: 16.0,
+			originalPrice: 19.0,
+			image: "/api/placeholder/300/300",
+			category: "accessories",
+			rating: 5,
+			reviews: 32,
+			discount: 16,
+			isNew: false,
+			isFavorite: false,
+			inStock: true,
+			brand: "Shimmer Gems",
+		},
+		{
+			id: 4,
+			name: "Butterscotch Pet Food",
+			price: 15.0,
+			originalPrice: 18.0,
+			image: "/api/placeholder/300/300",
+			category: "food",
+			rating: 4,
+			reviews: 15,
+			discount: 17,
+			isNew: false,
+			isFavorite: false,
+			inStock: true,
+			brand: "Elite Charms",
+		},
+		{
+			id: 5,
+			name: "Butterscotch Pet Food",
+			price: 15.0,
+			originalPrice: 18.0,
+			image: "/api/placeholder/300/300",
+			category: "food",
+			rating: 5,
+			reviews: 28,
+			discount: 17,
+			isNew: false,
+			isFavorite: false,
+			inStock: true,
+			brand: "Tranquil Treasures",
+		},
+		{
+			id: 6,
+			name: "Butterscotch Pet Food",
+			price: 15.0,
+			originalPrice: 18.0,
+			image: "/api/placeholder/300/300",
+			category: "food",
+			rating: 4,
+			reviews: 22,
+			discount: 17,
+			isNew: true,
+			isFavorite: false,
+			inStock: true,
+			brand: "Elegance Jewelers",
+		},
+		{
+			id: 7,
+			name: "Premium Dog Collar",
+			price: 25.0,
+			originalPrice: 30.0,
+			image: "/api/placeholder/300/300",
+			category: "collars",
+			rating: 5,
+			reviews: 45,
+			discount: 17,
+			isNew: false,
+			isFavorite: false,
+			inStock: true,
+			brand: "Majestic Metals",
+		},
+		{
+			id: 8,
+			name: "Cat Toy Bundle",
+			price: 12.0,
+			originalPrice: 15.0,
+			image: "/api/placeholder/300/300",
+			category: "toys",
+			rating: 4,
+			reviews: 28,
+			discount: 20,
+			isNew: false,
+			isFavorite: false,
+			inStock: true,
+			brand: "Ornaments",
+		},
+		{
+			id: 9,
+			name: "Bird Cage Cleaner",
+			price: 8.0,
+			originalPrice: 12.0,
+			image: "/api/placeholder/300/300",
+			category: "accessories",
+			rating: 4,
+			reviews: 12,
+			discount: 33,
+			isNew: true,
+			isFavorite: false,
+			inStock: true,
+			brand: "Radiant Rings",
+		},
+		{
+			id: 9,
+			name: "Bird Cage Cleaner",
+			price: 8.0,
+			originalPrice: 12.0,
+			image: "/api/placeholder/300/300",
+			category: "accessories",
+			rating: 4,
+			reviews: 12,
+			discount: 33,
+			isNew: true,
+			isFavorite: false,
+			inStock: true,
+			brand: "Radiant Rings",
+		},
+		{
+			id: 9,
+			name: "Bird Cage Cleaner",
+			price: 8.0,
+			originalPrice: 12.0,
+			image: "/api/placeholder/300/300",
+			category: "accessories",
+			rating: 4,
+			reviews: 12,
+			discount: 33,
+			isNew: true,
+			isFavorite: false,
+			inStock: true,
+			brand: "Radiant Rings",
+		},
+		{
+			id: 9,
+			name: "Bird Cage Cleaner",
+			price: 8.0,
+			originalPrice: 12.0,
+			image: "/api/placeholder/300/300",
+			category: "accessories",
+			rating: 4,
+			reviews: 12,
+			discount: 33,
+			isNew: true,
+			isFavorite: false,
+			inStock: true,
+			brand: "Radiant Rings",
+		},
+		{
+			id: 9,
+			name: "Bird Cage Cleaner",
+			price: 8.0,
+			originalPrice: 12.0,
+			image: "/api/placeholder/300/300",
+			category: "accessories",
+			rating: 4,
+			reviews: 12,
+			discount: 33,
+			isNew: true,
+			isFavorite: false,
+			inStock: true,
+			brand: "Radiant Rings",
+		},
+		{
+			id: 9,
+			name: "Bird Cage Cleaner",
+			price: 8.0,
+			originalPrice: 12.0,
+			image: "/api/placeholder/300/300",
+			category: "accessories",
+			rating: 4,
+			reviews: 12,
+			discount: 33,
+			isNew: true,
+			isFavorite: false,
+			inStock: true,
+			brand: "Radiant Rings",
+		},
+		{
+			id: 9,
+			name: "Bird Cage Cleaner",
+			price: 8.0,
+			originalPrice: 12.0,
+			image: "/api/placeholder/300/300",
+			category: "accessories",
+			rating: 4,
+			reviews: 12,
+			discount: 33,
+			isNew: true,
+			isFavorite: false,
+			inStock: true,
+			brand: "Radiant Rings",
+		},
+	];
+
+	useEffect(() => {
+		setProducts(mockProducts);
+		setFilteredProducts(mockProducts);
+	}, []);
+
+	useEffect(() => {
+		let filtered = products.filter((product) =>
+			product.name.toLowerCase().includes(searchQuery.toLowerCase())
+		);
+
+		if (selectedCategory) {
+			filtered = filtered.filter(
+				(product) => product.category === selectedCategory
+			);
+		}
+
+		if (selectedBrand) {
+			filtered = filtered.filter((product) => product.brand === selectedBrand);
+		}
+
+		filtered = filtered.filter(
+			(product) =>
+				product.price >= priceRange[0] && product.price <= priceRange[1]
+		);
+
+		// Sorting
+		switch (sortBy) {
+			case "price-low":
+				filtered.sort((a, b) => a.price - b.price);
+				break;
+			case "price-high":
+				filtered.sort((a, b) => b.price - a.price);
+				break;
+			case "rating":
+				filtered.sort((a, b) => b.rating - a.rating);
+				break;
+			case "name":
+				filtered.sort((a, b) => a.name.localeCompare(b.name));
+				break;
+			default:
+				break;
+		}
+
+		setFilteredProducts(filtered);
+		setCurrentPage(1);
+	}, [
+		searchQuery,
+		selectedCategory,
+		selectedBrand,
+		priceRange,
+		sortBy,
+		products,
+	]);
+
+	const handleFavoriteToggle = (productId: number) => {
+		setProducts(
+			products.map((product) =>
+				product.id === productId
+					? { ...product, isFavorite: !product.isFavorite }
+					: product
+			)
+		);
+	};
+
+	const handleAddToCart = (productId: number) => {
+		console.log("Added to cart:", productId);
+		// Add your cart logic here
+	};
+
+	const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+	const currentProducts = filteredProducts.slice(
+		(currentPage - 1) * productsPerPage,
+		currentPage * productsPerPage
+	);
+
+	return (
+		<Stack className="shop-page">
+			{/* Hero Section */}
+			<HeroSectionBasic />
+			<Stack className="category-wraper">
+				{/* Categories Section */}
+				<CategoriesSection />
+			</Stack>
+
+			{/* Main Content */}
+			<section className="main-content">
+				<div className="container">
+					<div className="content-wrapper">
+						<div className="filter">
+							<Filter />
+						</div>
+
+						{/* Main Products Area */}
+						<main className="products-area">
+							{/* Products Header */}
+							<div className="products-header">
+								<div className="results-info">
+									<span>
+										Showing 1 -{" "}
+										{Math.min(productsPerPage, filteredProducts.length)} of{" "}
+										{filteredProducts.length} Results
+									</span>
+								</div>
+								<div className="sort-controls">
+									<span>Filter</span>
+									<FormControl size="small" className="sort-select">
+										<Select
+											value={sortBy}
+											onChange={(e) => setSortBy(e.target.value)}
+											displayEmpty>
+											<MenuItem value="default">Default Sorting</MenuItem>
+											<MenuItem value="price-low">Price: Low to High</MenuItem>
+											<MenuItem value="price-high">Price: High to Low</MenuItem>
+											<MenuItem value="rating">Highest Rated</MenuItem>
+											<MenuItem value="name">Name: A to Z</MenuItem>
+										</Select>
+									</FormControl>
+								</div>
+							</div>
+
+							{/* Products Grid */}
+							<div className="products-grid">
+								{currentProducts.map((product) => (
+									<ShopCard />
+								))}
+							</div>
+
+							{/* Empty State */}
+							{filteredProducts.length === 0 && (
+								<div className="empty-state">
+									<Typography variant="h6" color="textSecondary">
+										No products found matching your criteria
+									</Typography>
+								</div>
+							)}
+
+							{/* Pagination */}
+
+							<Stack className={"pagination-section"}>
+								<Pagination
+									renderItem={(item) => (
+										<PaginationItem
+											components={{
+												previous: ArrowBackIcon,
+												next: ArrowForwardIcon,
+											}}
+											{...item}
+											sx={{
+												color: "#3c5a6c",
+												borderColor: "#3c5a6c",
+												"&.Mui-selected": {
+													backgroundColor: "#3c5a6c",
+													color: "white",
+												},
+											}}
+										/>
+									)}
+								/>
+							</Stack>
+						</main>
+					</div>
+				</div>
+			</section>
+		</Stack>
+	);
+};
+
+export default withLayoutBasic(ShopPage);
