@@ -51,16 +51,15 @@ export default function TopBasic() {
 				</Box>
 				<Box className="navigation">
 					<Link href="/">Home</Link>
-					<Link href="/">New</Link>
 					<Link href="/shop">Shop</Link>
-					<Link href="/">About</Link>
+					<Link href="/vendors">Vendors</Link>
 					<Link href="/">Pages</Link>
 					<Link href="/">Blog</Link>
 					<Link href="/">Contact</Link>
 				</Box>
 				<Box className="headerActions">
 					<Stack
-					className="languageCurrency"
+						className="languageCurrency"
 						gap={0.5}
 						sx={{ color: "#1C2A67", cursor: "pointer" }}
 						onClick={handleClick}>
@@ -82,11 +81,13 @@ export default function TopBasic() {
 						</IconButton>
 
 						{/* User */}
-						<IconButton>
-							<PersonOutlineIcon
-								sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
-							/>
-						</IconButton>
+						<Link href="/account">
+							<IconButton>
+								<PersonOutlineIcon
+									sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
+								/>
+							</IconButton>
+						</Link>
 
 						{/* Wishlist with badge */}
 						<IconButton>

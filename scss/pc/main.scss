@@ -1,5 +1,8 @@
 @import "/scss/pc/homepage/homepage";
 @import "/scss/pc/shoppage/shoppage";
+@import "/scss/pc/vendorspage/vendorspage";
+@import "/scss/pc/accountpage/accountpage";
+
 @import "/scss/variables.scss";
 @import "/scss/reset.scss";
 /* HEADER */
@@ -15,7 +18,7 @@
 			flex-direction: row;
 			justify-content: space-between;
 			align-items: center;
-			left: -200px;
+			margin-left: 100px;
 			.socialIcons {
 				display: flex;
 				justify-content: space-between;

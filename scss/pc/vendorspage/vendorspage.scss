@@ -1,0 +1,327 @@
+#pc-wrap {
+	$light-blue: #b8d4e3;
+	$light-gray: #f8f9fa;
+	// TeamSection.module.scss
+	.teamSectionWrapper {
+		min-height: auto;
+		background-color: $light-gray;
+		position: relative;
+		text-align: center;
+		.heroSectionBasic {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			width: 100%;
+			overflow: hidden;
+			background-color: $light-gray;
+			margin-bottom: 30px;
+
+			.wave {
+				background-image: url("/img/banner/wave-basic.svg");
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-position: center;
+				width: 100%;
+				height: 520px;
+			}
+
+			.heroContainer {
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-top: 170px;
+
+				.pageName {
+					color: #fff;
+					font-family: $font;
+					font-size: 45px;
+					font-style: normal;
+					font-weight: 400;
+					line-height: normal;
+					text-transform: capitalize;
+				}
+			}
+		}
+		.container {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			.sectionHeader {
+				text-align: center;
+				margin-bottom: 40px;
+				position: relative;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: center;
+			}
+			.titleBox {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: center;
+				.sectionTitle {
+					color: #3c3c3c;
+					font-family: Luckiest Guy, var(--default-font-family);
+					font-size: 40px;
+					font-weight: 800;
+					line-height: 60px;
+					text-transform: capitalize;
+					margin-bottom: 100px;
+					margin-left: 50px;
+				}
+				.decorationIcon {
+					width: 102px;
+					height: 76px;
+					background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/7arTLANpZZ.png)
+						no-repeat center;
+					background-size: contain;
+					margin: 0 auto;
+					margin-top: -120px;
+					margin-left: -33px;
+				}
+			}
+
+			.teamGrid {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 20px;
+			}
+
+			.teamCard {
+				background: #ffeaea;
+				border-radius: 121.55px 121.55px 25.5px 25.5px; // 143 * 0.85, 30 * 0.85
+				width: 301.52px; // 354.73 * 0.85
+				height: 394.4px; // 464 * 0.85
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				overflow: hidden;
+				margin-bottom: 80px;
+			}
+
+			.profileImageContainer {
+				width: 301.75px; // 355 * 0.85
+				height: 246.5px; // 290 * 0.85
+				border-radius: 425px; // 500 * 0.85
+				background: #97c7e0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-bottom: 25.5px; // 30 * 0.85
+			}
+
+			.profileImage {
+				width: 301.75px; // 355 * 0.85
+				height: 246.5px; // 290 * 0.85
+				border-radius: 50%;
+				background: #97c8e0;
+			}
+
+			.memberName {
+				color: #3c3c3c;
+				font-family: $font;
+				font-size: 25px;
+				font-weight: 600;
+				line-height: 26px;
+				text-transform: capitalize;
+				margin-bottom: 15px;
+			}
+
+			.memberRole {
+				color: #3c3c3c;
+				font-family: $font;
+				font-size: 14px;
+				font-weight: 400;
+				line-height: 10px;
+				text-transform: capitalize;
+				margin-bottom: 30px;
+			}
+
+			.socialLinks {
+				width: 134px;
+				height: 16px;
+				background-size: cover;
+				cursor: pointer;
+			}
+		}
+		.testimonialsWrapper {
+			.wrapper {
+				background-color: #ffeaea;
+				width: 1503px;
+				height: 762px;
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-top: 160px;
+				.container {
+					position: relative;
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					.ctaBanner {
+						background-color: #ff4646;
+						border-radius: 60px;
+						color: #fff;
+						max-width: 90%;
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						padding: 24px 40px;
+						margin-top: -290px;
+						margin-bottom: 160px;
+						font-family: "Fredoka", sans-serif;
+
+						.ctaText {
+							color: #fff;
+
+							font-family: $font;
+							font-size: 28px;
+							font-style: normal;
+							font-weight: 700;
+							line-height: normal;
+						}
+
+						.ctaRight {
+							display: flex;
+							align-items: center;
+							gap: 20px;
+
+							.desc {
+								color: #fff;
+
+								font-family: Recursive;
+								font-size: 30px;
+								font-style: normal;
+								font-weight: 700;
+								line-height: 40px;
+							}
+
+							.ctaButton {
+								background-color: white;
+								color: #ff4646;
+								font-weight: 600;
+								text-transform: uppercase;
+								padding: 10px 22px;
+								border-radius: 50px;
+								font-size: 14px;
+								&:hover {
+									background-color: #ffeaea;
+								}
+							}
+						}
+					}
+					.testimonialContent {
+						position: relative;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						gap: 40px;
+						max-width: 1100px;
+
+						.faQuoteLeft {
+							display: flex;
+							justify-content: center;
+							position: relative;
+							align-items: center;
+							width: 57.728px;
+							height: 53.852px;
+              margin-top: -250px;
+							color: white;
+						}
+						.faQuoteRight {
+							position: relative;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+              width: 57.728px;
+							height: 53.852px;
+              margin-top: 200px;
+							transform: rotate(-180deg);
+							color: white;
+						}
+
+						.imageBox {
+							.imgPlaceholder {
+								width: 307px;
+								height: 307px;
+								background-color: #887dc0;
+							}
+						}
+
+						.textBox {
+							max-width: 600px;
+							text-align: left;
+
+							.heading {
+								color: #232121;
+
+								font-family: $font;
+								font-size: 32px;
+								font-style: normal;
+								font-weight: 800;
+								line-height: normal;
+								margin-bottom: 30px;
+							}
+							.stars {
+								margin-bottom: 20px;
+
+								.star {
+									color: #ffa726;
+									font-size: 24px;
+								}
+							}
+
+							.description {
+								color: #272727;
+
+								font-family: $font;
+								font-size: 16px;
+								font-style: normal;
+								font-weight: 500;
+								line-height: 30px;
+								margin-bottom: 20px;
+							}
+
+							.name {
+								font-weight: 700;
+								font-size: 14px;
+								color: #000;
+							}
+
+							.role {
+								font-size: 13px;
+								color: #555;
+								margin-bottom: 10px;
+							}
+
+							.dots {
+								display: flex;
+								gap: 6px;
+								margin-top: 10px;
+
+								span {
+									width: 8px;
+									height: 8px;
+									border-radius: 50%;
+									background-color: #555;
+									opacity: 0.3;
+
+									&.activeDot {
+										background-color: #ff7e29;
+										opacity: 1;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

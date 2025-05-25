@@ -1,16 +1,5 @@
 "use client";
-import {
-	AppBar,
-	Toolbar,
-	Typography,
-	Box,
-	Button,
-	Stack,
-	MenuItem,
-	IconButton,
-	Badge,
-} from "@mui/material";
-import Image from "next/image";
+import { Typography, Box, Stack, IconButton, Badge } from "@mui/material";
 import Link from "next/link";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -51,9 +40,8 @@ export default function Top() {
 				</Box>
 				<Box className="navigation">
 					<Link href="/">Home</Link>
-					<Link href="/">New</Link>
 					<Link href="/shop">Shop</Link>
-					<Link href="/">About</Link>
+					<Link href="/vendors">Vendors</Link>
 					<Link href="/">Pages</Link>
 					<Link href="/">Blog</Link>
 					<Link href="/">Contact</Link>
@@ -82,12 +70,13 @@ export default function Top() {
 						</IconButton>
 
 						{/* User */}
-						<IconButton>
-							<PersonOutlineIcon
-								sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
-							/>
-						</IconButton>
-
+						<Link href="/account">
+							<IconButton>
+								<PersonOutlineIcon
+									sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
+								/>
+							</IconButton>
+						</Link>
 						{/* Wishlist with badge */}
 						<IconButton>
 							<Badge
