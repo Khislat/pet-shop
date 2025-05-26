@@ -101,27 +101,30 @@ export default function Top() {
 						</IconButton>
 
 						{/* Cart with badge */}
-						<IconButton>
-							<Badge
-								badgeContent={2}
-								sx={{
-									"& .MuiBadge-badge": {
-										backgroundColor: "#FF5722",
-										color: "white",
-										fontSize: 10,
-										width: "18px",
-										height: "18px",
-										borderRadius: "50%",
-										top: 2,
-										right: 2,
-									},
-								}}
-								overlap="circular">
-								<ShoppingBagOutlinedIcon
-									sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
-								/>
-							</Badge>
-						</IconButton>
+						<Link href={"/cart"}>
+							{" "}
+							<IconButton>
+								<Badge
+									badgeContent={2}
+									sx={{
+										"& .MuiBadge-badge": {
+											backgroundColor: "#FF5722",
+											color: "white",
+											fontSize: 10,
+											width: "18px",
+											height: "18px",
+											borderRadius: "50%",
+											top: 2,
+											right: 2,
+										},
+									}}
+									overlap="circular">
+									<ShoppingBagOutlinedIcon
+										sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
+									/>
+								</Badge>
+							</IconButton>
+						</Link>
 					</Stack>
 				</Box>
 			</Stack>
