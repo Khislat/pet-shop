@@ -16,7 +16,7 @@ import Link from "next/link";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import NotificationIcon from "@mui/icons-material/Notifications";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { useState } from "react";
 
@@ -80,38 +80,7 @@ export default function TopBasic() {
 							/>
 						</IconButton>
 
-						{/* User */}
-						<Link href="/account">
-							<IconButton>
-								<PersonOutlineIcon
-									sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
-								/>
-							</IconButton>
-						</Link>
-
-						{/* Wishlist with badge */}
-						<IconButton>
-							<Badge
-								badgeContent={3}
-								sx={{
-									"& .MuiBadge-badge": {
-										backgroundColor: "#FF5722",
-										color: "white",
-										fontSize: 10,
-										width: "18px",
-										height: "18px",
-										borderRadius: "50%",
-										top: 2,
-										right: 2,
-									},
-								}}
-								overlap="circular">
-								<FavoriteBorderIcon
-									sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
-								/>
-							</Badge>
-						</IconButton>
-
+						
 						{/* Cart with badge */}
 						<Link href={"/cart"}>
 							{" "}
@@ -135,6 +104,36 @@ export default function TopBasic() {
 										sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
 									/>
 								</Badge>
+							</IconButton>
+						</Link>
+						{/* Wishlist with badge */}
+						<IconButton>
+							<Badge
+								badgeContent={3}
+								sx={{
+									"& .MuiBadge-badge": {
+										backgroundColor: "#FF5722",
+										color: "white",
+										fontSize: 10,
+										width: "18px",
+										height: "18px",
+										borderRadius: "50%",
+										top: 2,
+										right: 2,
+									},
+								}}
+								overlap="circular">
+								<NotificationIcon
+									sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
+								/>
+							</Badge>
+						</IconButton>
+						{/* User */}
+						<Link href="/account">
+							<IconButton>
+								<PersonOutlineIcon
+									sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
+								/>
 							</IconButton>
 						</Link>
 					</Stack>
