@@ -53,7 +53,7 @@ export default function TopBasic() {
 					<Link href="/">Home</Link>
 					<Link href="/shop">Shop</Link>
 					<Link href="/vendors">Vendors</Link>
-					<Link href="/">Pages</Link>
+					<Link href="/mypage">My page</Link>
 					<Link href="/">Blog</Link>
 					<Link href="/">Contact</Link>
 				</Box>

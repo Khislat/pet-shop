@@ -1,0 +1,167 @@
+#pc-wrap {
+	#my-page {
+		background: #f6f6f6;
+		.container {
+			.my-page {
+				position: relative;
+				width: 100%;
+				flex-direction: row;
+				gap: 25px;
+				padding-top: 96px;
+				.back-frame {
+					position: relative;
+					width: 1300px;
+					height: auto;
+					display: flex;
+					flex-direction: row;
+					margin: 100px 0 200px 0;
+					border-radius: 12px;
+					border: 1px solid #c4c4c4;
+					background: #fff;
+					box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+					.left-config {
+						position: relative;
+						width: 286px;
+						height: 700px;
+						border-radius: 15px;
+						background: #fff;
+						border: 2px solid rgba(196, 196, 196, 0.79);
+						box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+						margin: 160px 20px 40px 20px;
+					}
+					.sidebar-tabs-container {
+						display: flex;
+						height: auto;
+					}
+
+					.sidebar {
+						width: 270px;
+						padding: 1rem;
+						display: flex;
+						flex-direction: column;
+						margin-left: 5px;
+
+						.profile {
+							display: flex;
+							align-items: center;
+							margin-bottom: 2rem;
+
+							.avatar {
+								width: 60px;
+								height: 60px;
+								margin-right: 1rem;
+							}
+
+							.info {
+								h3 {
+									margin: 0;
+									font-size: 1.1rem;
+								}
+
+								p {
+									margin: 2px 0;
+									font-size: 0.9rem;
+									color: #555;
+								}
+
+								.agent {
+									font-size: 0.85rem;
+									color: #f44336;
+									font-weight: bold;
+								}
+							}
+						}
+
+						.customTabs {
+							.tab {
+								align-items: start;
+								text-align: left;
+								justify-content: flex-start;
+								padding: 0.6rem 1rem;
+								text-transform: none;
+								color: #333;
+								border-radius: 8px;
+								transition: 0.2s;
+
+								.tabLabel {
+									display: flex;
+									align-items: center;
+									gap: 0.6rem;
+									font-size: 0.9rem;
+								}
+
+								&:hover {
+									background-color: #f0f0f0;
+								}
+
+								&.active {
+									background-color: #000;
+									color: #fff;
+									font-weight: bold;
+
+									.tabLabel {
+										color: #fff;
+									}
+								}
+							}
+						}
+					}
+
+					.tabContent {
+						flex: 2;
+						margin-top: 80px;
+
+						h2 {
+							color: rgb(24, 26, 32);
+							font-family: $font;
+							font-size: 30px;
+							font-weight: 600;
+							line-height: 45px;
+							letter-spacing: 2%;
+							text-align: left;
+							text-transform: capitalize;
+							margin-left: 25px;
+						}
+					}
+
+					.main-config {
+						position: relative;
+						width: 936px;
+						align-items: center;
+						gap: 109px;
+						margin-top: 32px;
+						.list-config {
+							display: flex;
+							width: 100%;
+							height: auto;
+							flex-direction: row;
+							flex-wrap: wrap;
+							gap: 22px;
+						}
+						.pagination-config {
+							width: 442px;
+							height: 86px;
+							align-items: center;
+							gap: 20px;
+							.pagination-box {
+								width: 100%;
+								align-items: center;
+							}
+							.total-result {
+								p {
+									color: #181a20;
+									text-align: center;
+									font-family: $font;
+									font-size: 24px;
+									font-style: normal;
+									font-weight: 275;
+									line-height: 26px;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
