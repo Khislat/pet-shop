@@ -1,72 +1,168 @@
-import { Stack } from "@mui/material";
-import React from "react";
+import { Stack, IconButton, Divider, Box } from "@mui/material";
+import React, { useState } from "react";
+import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { useRouter } from "next/router";
+import { Member } from "../../types/member/member";
+import { LIKE_TARGET_PRODUCT } from "../../../apollo/user/mutation";
+import { useMutation, useQuery } from "@apollo/client";
+import { T } from "../../types/common";
+import { Message } from "../../enums/common.enum";
+import {
+	sweetMixinErrorAlert,
+	sweetTopSmallSuccessAlert,
+} from "../../sweetAlert";
+import { VendorsInquiry } from "../../types/member/member.input";
+import { GET_VENDORS } from "../../../apollo/user/query";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination } from "swiper";
+import {
+	ArrowBackIosNew,
+	ArrowForwardIos,
+	Facebook,
+	Instagram,
+	Star,
+	Twitter,
+	YouTube,
+} from "@mui/icons-material";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import CallIcon from "@mui/icons-material/Call";
+import { relative } from "path";
+import { NEXT_PUBLIC_APP_API_URL } from "../../config";
 
-const TeamSection = () => {
-	const teamMembers = [
-		{
-			id: 1,
-			name: "Linda Himloton",
-			role: "Pets Care Trainer",
-			image:
-				"https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/pKU0J9advp.png",
+interface TopVendorsProps {
+	initialInput?: VendorsInquiry;
+}
+
+const VendorsSection = ({ initialInput = vendorsInput }: TopVendorsProps) => {
+	const device = useDeviceDetect();
+	const router = useRouter();
+	const [topVendors, setTopVendors] = useState<Member[]>([]);
+	const [likeTargetMember] = useMutation(LIKE_TARGET_PRODUCT);
+	const {
+		loading: getVendorsLoading,
+		data: getVendorsData,
+		error: getVendorsError,
+		refetch: getVendorsRefetch,
+	} = useQuery(GET_VENDORS, {
+		fetchPolicy: "network-only",
+		variables: { input: initialInput },
+		notifyOnNetworkStatusChange: true,
+		onCompleted(data: T) {
+			setTopVendors(data?.getVendors?.list ?? []);
 		},
-		{
-			id: 2,
-			name: "Andreya Kishore",
-			role: "Pets Care Trainer",
-			image:
-				"https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/WHe3fpfPmQ.png",
-		},
-		{
-			id: 3,
-			name: "Mariya Joesph",
-			role: "Pets Care Trainer",
-			image:
-				"https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/YopQS8dJTz.png",
-		},
-		{
-			id: 4,
-			name: "Amanda losya",
-			role: "Pets Care Trainer",
-			image:
-				"https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/xx8Ox8F6dB.png",
-		},
-	];
+	});
+
+	const likeMemberHandler = async (user: T, id: string) => {
+		try {
+			if (!id) return;
+			if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+
+			await likeTargetMember({ variables: { input: id } });
+			await getVendorsRefetch({ input: initialInput });
+			await sweetTopSmallSuccessAlert("success", 800);
+		} catch (err: any) {
+			console.log("ERROR, likeMemberHandler:", err.message);
+			sweetMixinErrorAlert(err.message).then();
+		}
+	};
 
 	return (
-		<Stack className={"teamSection"}>
+		<Stack className="teamSection">
 			<Stack className="background">
 				<img
 					src="/img/banner/hero-wave.svg"
 					alt="wave"
-					className={"wave2"}
+					className="wave2"
 					style={{ background: "#eff9ff" }}
 				/>
-				<Stack className={"container"}>
-					<Stack className={"sectionHeader"}>
-						<h2 className={"sectionTitle"}>Our top Brends</h2>
-						<div className={"decorationIcon"} />
+				<Stack className="container">
+					<Stack className="sectionHeader">
+						<h2 className="sectionTitle">Our Top Brands</h2>
+						<div className="decorationIcon" />
+						<Divider className="topVendorDivider" />
+						<div className={"nav"}>
+							<IconButton>
+								<ArrowBackIosNew fontSize="small" className="swiper-prev" />
+							</IconButton>
+							<IconButton>
+								<ArrowForwardIos fontSize="small" className="swiper-next" />
+							</IconButton>
+						</div>
 					</Stack>
 
-					<Stack className={"teamGrid"}>
-						{teamMembers.map((member) => (
-							<Stack key={member.id} className={"teamCard"}>
-								<div className={"profileImageContainer"}>
-									<div className={"profileImage"} />
-								</div>
-								<h3 className={"memberName"}>{member.name}</h3>
-								<p className={"memberRole"}>{member.role}</p>
-								<div
-									className={"socialLinks"}
-									style={{ backgroundImage: `url(${member.image})` }}
-								/>
-							</Stack>
-						))}
-					</Stack>
+					<Swiper
+						modules={[Navigation, Pagination]}
+						spaceBetween={26}
+						slidesPerView={"auto"}
+						navigation={{
+							nextEl: ".swiper-next",
+							prevEl: ".swiper-prev",
+						}}
+						pagination={{ clickable: true }}
+						className="teamSwiper">
+						{topVendors?.map((member) => {
+							console.log("memberImage:", member?.memberImage);
+							console.log("NEXT_APP_API_URL:", NEXT_PUBLIC_APP_API_URL);
+							console.log(
+								"Full image URL:",
+								`${NEXT_PUBLIC_APP_API_URL}/${member?.memberImage}`
+							);
+							return (
+								<SwiperSlide key={member._id} style={{ width: "300px" }}>
+									<Stack className="teamCard">
+										<div className="profileImageContainer">
+											<div className="profileImage">
+											
+												<img
+													src={`${NEXT_PUBLIC_APP_API_URL}/${member?.memberImage}`} 
+													alt={member.memberNick}
+												/>
+											</div>
+										</div>
+										<h3 className="memberName">{member.memberNick}</h3>
+										<p className="memberRole">
+											<CallIcon
+												fontSize="small"
+												sx={{
+													position: "relative",
+													top: "5px",
+													marginRight: "5px",
+													marginLeft: "-15px",
+												}}
+												color="action"
+											/>
+											{member.memberPhone}
+										</p>
+										<div className="social-icons">
+											<FacebookIcon color="action" />
+											<InstagramIcon color="action" />
+											<TwitterIcon color="action" />
+											<YouTubeIcon color="action" />
+										</div>
+									</Stack>
+								</SwiperSlide>
+							);
+						})}
+					</Swiper>
 				</Stack>
 			</Stack>
 		</Stack>
 	);
 };
 
-export default TeamSection;
+const vendorsInput: VendorsInquiry = {
+	page: 1,
+	limit: 10,
+	sort: "createdAt",
+	search: {
+		text: "",
+	},
+};
+
+export default VendorsSection;

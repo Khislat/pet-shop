@@ -42,7 +42,7 @@ const RelatedProducts = () => {
 								<SwiperSlide
 									key={index}
 									className="top-property-slide"
-									style={{ width: "300px"}}>
+									style={{ width: "300px" }}>
 									<Stack className={"card"}>
 										<div className={"discount"}>10% Off</div>
 										<div className={"imagePlaceholder"}></div>

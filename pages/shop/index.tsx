@@ -57,11 +57,7 @@ interface Category {
 	color: string;
 	count: number;
 }
-export const getStaticProps = async ({ locale }: any) => ({
-	props: {
-		...(await serverSideTranslations(locale, ["common"])),
-	},
-});
+
 
 const ShopPage: NextPage = ({ initialInput, ...props }: any) => {
 	const [products, setProducts] = useState<Product[]>([]);

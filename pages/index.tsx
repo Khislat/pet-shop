@@ -13,6 +13,10 @@ import TestimonialsSection from "../libs/components/homepage/TestimonialsSection
 import BlogSection from "../libs/components/homepage/BlogSection";
 import AppPromoSection from "../libs/components/homepage/AppPromoSection";
 import LogoSection from "../libs/components/homepage/CompaniesLogoSection";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { VendorsInquiry } from "../libs/types/member/member.input";
+
+
 const Home: NextPage = () => {
 	const device = useDeviceDetect();
 

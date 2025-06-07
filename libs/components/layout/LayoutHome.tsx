@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import Head from "next/head";
 import { Stack } from "@mui/material";
 import TopBar from "../homepage/TopBar";
@@ -7,9 +7,22 @@ import TopBasic from "../Top";
 import FooterBasic from "../Footer";
 import TopBarBasic from "../homepage/TopBar";
 import Top from "../Top";
+import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { useReactiveVar } from "@apollo/client";
+import { userVar } from "../../../apollo/store";
+import { getJwtToken, updateUserInfo } from "../../auth";
 
 const withLayoutMain = (Component: any) => {
 	return (props: any) => {
+		const device = useDeviceDetect();
+		const user = useReactiveVar(userVar);
+
+		/** LIFECYCLES **/
+		useEffect(() => {
+			const jwt = getJwtToken();
+			if (jwt) updateUserInfo(jwt);
+		}, []);
+		
 		return (
 			<>
 				{" "}
@@ -28,7 +41,7 @@ const withLayoutMain = (Component: any) => {
 					</Stack>
 
 					<Stack id={"top"}>
-						<Top/>
+						<Top />
 					</Stack>
 					<Stack id={"main"}>
 						<Component {...props} />

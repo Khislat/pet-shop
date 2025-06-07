@@ -1,12 +1,22 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import Head from "next/head";
 import { Stack } from "@mui/material";
 import TopBar from "../homepage/TopBar";
 import Footer from "../Footer";
 import TopBasic from "../TopBasic";
+import { useRouter } from "next/router";
+import { useTranslation } from "react-i18next";
+import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { useReactiveVar } from "@apollo/client";
+import { userVar } from "../../../apollo/store";
 
 const withLayoutBasic = (Component: any) => {
 	return (props: any) => {
+		const router = useRouter();
+		const { t, i18n } = useTranslation('common');
+		const device = useDeviceDetect();
+		const [authHeader, setAuthHeader] = useState<boolean>(false);
+		const user = useReactiveVar(userVar);
 		return (
 			<>
 				{" "}
