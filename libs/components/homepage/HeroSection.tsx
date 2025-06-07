@@ -44,21 +44,21 @@ const HeroSection = () => {
 								<div className={"circles"}>
 									<div className={"circle"}>
 										<img
-											src="/img/users/user1.jpg"
+											// src="/img/users/user1.jpg"
 											alt="User 1"
 											className={"avatar"}
 										/>
 									</div>
 									<div className={"circle"}>
 										<img
-											src="/img/users/user2.jpg"
+											// src="/img/users/user2.jpg"
 											alt="User 2"
 											className={"avatar"}
 										/>
 									</div>
 									<div className={"circle"}>
 										<img
-											src="/img/users/user3.jpg"
+											// src="/img/users/user3.jpg"
 											alt="User 3"
 											className={"avatar"}
 										/>

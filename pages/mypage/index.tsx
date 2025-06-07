@@ -1,147 +1,108 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { NextPage } from "next";
-import { Stack } from "@mui/material";
-import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
-
-import { Messages } from "../../libs/config";
-import MyPageTabsSection from "../../libs/components/mypage/MyPageTabs";
-
-import { Avatar, Box, Tabs, Tab } from "@mui/material";
-import {
-	FavoriteBorder,
-	AddBoxOutlined,
-	HomeWorkOutlined,
-	HistoryOutlined,
-	GroupOutlined,
-	PersonAddAlt1Outlined,
-	ArticleOutlined,
-	PostAddOutlined,
-	PersonOutline,
-	LogoutOutlined,
-} from "@mui/icons-material";
-import AddProperty from "../../libs/components/mypage/AddProduct";
-import MyProducts from "../../libs/components/mypage/MyProducts";
-const tabData = [
-	{
-		label: "Add Product",
-		icon: <AddBoxOutlined />,
-		content: <AddProperty />,
-	},
-	{
-		label: "My Products",
-		icon: <HomeWorkOutlined />,
-		content: <MyProducts />,
-	},
-	{
-		label: "My Favorites",
-		icon: <FavoriteBorder />,
-		content: "Favorite Listings",
-	},
-	{
-		label: "Recently Visited",
-		icon: <HistoryOutlined />,
-		content: "Recently Viewed Properties",
-	},
-	{
-		label: "Followers",
-		icon: <GroupOutlined />,
-		content: "People Following You",
-	},
-	{
-		label: "Followings",
-		icon: <PersonAddAlt1Outlined />,
-		content: "People You Follow",
-	},
-	{
-		label: "Article",
-		icon: <ArticleOutlined />,
-		content: "All Published Articles",
-	},
-	{
-		label: "Write Article",
-		icon: <PostAddOutlined />,
-		content: "Write a New Article",
-	},
-	{
-		label: "My Profile",
-		icon: <PersonOutline />,
-		content: "Your Profile Settings",
-	},
-	{ label: "Logout", icon: <LogoutOutlined />, content: "Logout Action" },
-];
+import { Button, Stack } from "@mui/material";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import SettingsIcon from "@mui/icons-material/Settings";
+import HomeWorkIcon from "@mui/icons-material/HomeWork";
+import StorefrontIcon from "@mui/icons-material/Storefront";
+import StoreIcon from "@mui/icons-material/Store";
+import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
+import SensorWindowIcon from "@mui/icons-material/SensorWindow";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { RippleBadge } from "../../scss/MaterialTheme/styled";
+import { useReactiveVar } from "@apollo/client";
+import { logOut } from "../../libs/auth";
+import { useTranslation } from "next-i18next";
 
 const MyPage: NextPage = () => {
-	const [activeTab, setActiveTab] = useState(2); // Default: My Favorites
+	const router = useRouter();
+	const [valueMainTab, setValueMainTab] = useState<string>("profile");
+	const [valueChildTab, setValueChildTab] = useState<string>("account");
+	const { t, i18n } = useTranslation("common");
 
-	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-		setActiveTab(newValue);
+	const handleChangeMainTab = (newValue: string) => {
+		setValueMainTab(newValue);
+		router.push({
+			pathname: "/mypage",
+			query: {
+				categoryMain: newValue,
+				childCategory: valueChildTab,
+			},
+		});
 	};
-	const device = useDeviceDetect();
 
-	if (device === "mobile") {
-		return <div>MY PAGE</div>;
-	} else {
-		return (
-			<div id="my-page" style={{ position: "relative" }}>
-				<div className="container">
-					<Stack className={"my-page"}>
-						<Stack className={"back-frame"}>
-							<Stack className={"left-config"}>
-									<Box className="sidebar">
-										<div className="profile">
-											<Avatar
-												alt="Arlene McCoy"
-												src="https://i.pravatar.cc/150?img=3"
-												className="avatar"
-											/>
-											<div className="info">
-												<h3>Arlene McCoy</h3>
-												<p>📞 010–1234–3421</p>
-												<span className="agent">AGENT</span>
-											</div>
-										</div>
+	const logOutHandler = async () => {
+		await logOut();
+		await router.push({ pathname: "/" });
+	};
 
-										<Tabs
-											orientation="vertical"
-											value={activeTab}
-											onChange={handleChange}
-											TabIndicatorProps={{ style: { display: "none" } }}
-											className="customTabs">
-											{tabData.map((tab, index) => (
-												<Tab
-													key={tab.label}
-													label={
-														<span className="tabLabel">
-															{tab.icon}
-															{tab.label}
-														</span>
-													}
-													className={`tab ${
-														activeTab === index ? "active" : ""
-													}`}
-												/>
-											))}
-										</Tabs>
-									</Box>
-								
-							</Stack>
-
-							<Stack className="main-config" mb={"76px"}>
-								<Stack className={"list-config"}>
-									<Box className="tabContent">
-										<h2>{tabData[activeTab].label}</h2>
-										<p>{tabData[activeTab].content}</p>
-									</Box>
-								</Stack>
-							</Stack>
-						</Stack>
+	return (
+		<Stack className="my-page">
+			<Stack className="my-content">
+				<Stack className="container">
+					<Stack className="select">
+						<Button
+							className="select-button"
+							onClick={() => handleChangeMainTab("profile")}
+							sx={{
+								opacity: valueMainTab === "profile" ? 1 : 0.5,
+							}}>
+							<HomeWorkIcon />
+							{t("Account")}
+						</Button>
+						<Button
+							onClick={() => handleChangeMainTab("item")}
+							sx={{
+								opacity: valueMainTab === "item" ? 1 : 0.5,
+							}}
+							className="select-button">
+							<StorefrontIcon />
+							{t("Products")}
+						</Button>
+						<Button
+							onClick={() => handleChangeMainTab("live")}
+							sx={{
+								opacity: valueMainTab === "live" ? 1 : 0.5,
+							}}
+							className="select-button">
+							<SwapHorizontalCircleIcon />
+							{t("Chats")}
+						</Button>
+						<Button
+							onClick={() => handleChangeMainTab("recently")}
+							sx={{
+								opacity: valueMainTab === "recently" ? 1 : 0.5,
+							}}
+							className="select-button">
+							<ReceiptIcon />
+							{t("Recently")}
+						</Button>
+						<Button
+							onClick={() => handleChangeMainTab("notification")}
+							sx={{
+								opacity: valueMainTab === "notification" ? 1 : 0.5,
+							}}
+							className="select-button">
+							<NotificationsIcon />
+							{t("Notifications")}
+						</Button>
+						<Button
+							onlick={() => logOutHandler()}
+							sx={{
+								opacity: valueMainTab === "logout" ? 1 : 0.5,
+							}}
+							className="select-button">
+							<SensorWindowIcon />
+							{t("Logout")}
+						</Button>
 					</Stack>
-				</div>
-			</div>
-		);
-	}
+				</Stack>
+			</Stack>
+		</Stack>
+	);
 };
 
 export default withLayoutBasic(MyPage);

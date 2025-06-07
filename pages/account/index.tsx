@@ -1,4 +1,3 @@
-
 import Head from "next/head";
 import {
 	Box,
@@ -10,7 +9,6 @@ import {
 	IconButton,
 	InputAdornment,
 	Link,
-	Paper,
 	Stack,
 	TextField,
 	Typography,
@@ -29,6 +27,7 @@ import { useRouter } from "next/router";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
 import HeroSectionBasic from "../../libs/components/account/HeroSectionBasic";
 import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
+import { sweetMixinErrorAlert } from "../../libs/sweetAlert";
 import { logIn, signUp } from "../../libs/auth";
 
 const AccountPage = () => {
@@ -42,6 +41,8 @@ const AccountPage = () => {
 		type: "USER",
 	});
 	const [loginView, setLoginView] = useState<boolean>(true);
+
+	/** Handlers */
 
 	const viewChangeHandler = (state: boolean) => {
 		setLoginView(state);
@@ -68,15 +69,20 @@ const AccountPage = () => {
 		try {
 			await logIn(input.nick, input.password);
 			await router.push(`${router.query.referrer ?? "/"}`);
-		} catch (err: any) {}
+		} catch (err: any) {
+			await sweetMixinErrorAlert(err.message);
+		}
 	}, [input]);
+	console.log(doLogin);
 
 	const doSignUp = useCallback(async () => {
 		console.warn(input);
 		try {
 			await signUp(input.nick, input.password, input.phone, input.type);
 			await router.push(`${router.query.referrer ?? "/"}`);
-		} catch (err: any) {}
+		} catch (err: any) {
+			await sweetMixinErrorAlert(err.message);
+		}
 	}, [input]);
 
 	return (
@@ -102,6 +108,10 @@ const AccountPage = () => {
 						type="email"
 						variant="outlined"
 						value={input.nick}
+						onKeyDown={(event) => {
+							if (event.key == "Enter" && loginView) doLogin();
+							if (event.key == "Enter" && !loginView) doSignUp();
+						}}
 						onChange={(e) => handleInput("nick", e.target.value)}
 						sx={{
 							width: "571.2px",
@@ -130,6 +140,10 @@ const AccountPage = () => {
 							type="phone"
 							variant="outlined"
 							value={input.phone}
+							onKeyDown={(event) => {
+								if (event.key == "Enter" && loginView) doLogin();
+								if (event.key == "Enter" && !loginView) doSignUp();
+							}}
 							onChange={(e) => handleInput("phone", e.target.value)}
 							sx={{
 								width: "571.2px",
@@ -158,6 +172,10 @@ const AccountPage = () => {
 						variant="outlined"
 						margin="normal"
 						value={input.password}
+						onKeyDown={(event) => {
+							if (event.key == "Enter" && loginView) doLogin();
+							if (event.key == "Enter" && !loginView) doSignUp();
+						}}
 						onChange={(e) => handleInput("password", e.target.value)}
 						sx={{
 							width: "571.2px",
@@ -211,12 +229,12 @@ const AccountPage = () => {
 											control={
 												<Checkbox
 													size="small"
-													name={"AGENT"}
+													name={"VENDOR"}
 													onChange={checkUserTypeHandler}
-													checked={input?.type == "AGENT"}
+													checked={input?.type == "VENDOR"}
 												/>
 											}
-											label="Agent"
+											label="Vendor"
 										/>
 									</FormGroup>
 								</div>
@@ -236,6 +254,7 @@ const AccountPage = () => {
 					<Button
 						variant="contained"
 						className={"loginBtn"}
+						disabled={input.nick == "" || input.password == ""}
 						onClick={loginView ? doLogin : doSignUp}>
 						{loginView ? "Login" : "Sign Up"}
 					</Button>

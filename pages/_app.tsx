@@ -3,19 +3,23 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import { light } from "../scss/MaterialTheme";
 import { useState } from "react";
+import { ApolloProvider } from "@apollo/client";
+import { useApollo } from "../apollo/client";
 import "../scss/pc/main.scss";
 import "../scss/app.scss";
 import "../scss/pc/homepage/homepage.scss";
 
-
 export default function App({ Component, pageProps }: AppProps) {
 	// @ts-ignore
 	const [theme, setTheme] = useState(createTheme(light));
-
+	const client = useApollo(pageProps.initialApolloState);
 	return (
-		<ThemeProvider theme={theme}>
-			<CssBaseline />
-			<Component {...pageProps} />
-		</ThemeProvider>
+		<ApolloProvider client={client}>
+			{" "}
+			<ThemeProvider theme={theme}>
+				<CssBaseline />
+				<Component {...pageProps} />
+			</ThemeProvider>
+		</ApolloProvider>
 	);
 }

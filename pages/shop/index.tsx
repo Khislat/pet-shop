@@ -1,5 +1,5 @@
 // pages/shop.tsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent, MouseEvent } from "react";
 import {
 	Grid,
 	Typography,
@@ -19,6 +19,20 @@ import ShopCard from "../../libs/components/shoppage/ShopCard";
 import PaginationItem from "@mui/material/PaginationItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
+import { useRouter } from "next/router";
+import { ProductsInquiry } from "../../libs/types/product/product.input";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { NextPage } from "next";
+import { useMutation, useQuery } from "@apollo/client";
+import { LIKE_TARGET_PRODUCT } from "../../apollo/user/mutation";
+import { GET_PRODUCTS } from "../../apollo/user/query";
+import { T } from "../../libs/types/common";
+import { Direction, Message } from "../../libs/enums/common.enum";
+import {
+	sweetMixinErrorAlert,
+	sweetTopSmallSuccessAlert,
+} from "../../libs/sweetAlert";
 
 interface Product {
 	id: number;
@@ -43,8 +57,13 @@ interface Category {
 	color: string;
 	count: number;
 }
+export const getStaticProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ["common"])),
+	},
+});
 
-const ShopPage: React.FC = () => {
+const ShopPage: NextPage = ({ initialInput, ...props }: any) => {
 	const [products, setProducts] = useState<Product[]>([]);
 	const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 	const [searchQuery, setSearchQuery] = useState<string>("");
@@ -56,6 +75,126 @@ const ShopPage: React.FC = () => {
 	const [openCategories, setOpenCategories] = useState<boolean>(true);
 	const [openBrands, setOpenBrands] = useState<boolean>(true);
 	const [openPrice, setOpenPrice] = useState<boolean>(true);
+
+	const device = useDeviceDetect();
+	const router = useRouter();
+	const [searchFilter, setSearchFilter] = useState<ProductsInquiry>(
+		router?.query?.input
+			? JSON.parse(router?.query?.input as string)
+			: initialInput
+	);
+	const [properties, setProperties] = useState<Product[]>([]);
+	const [total, setTotal] = useState<number>(0);
+	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+	const [sortingOpen, setSortingOpen] = useState(false);
+	const [filterSortName, setFilterSortName] = useState("New");
+
+		/** APOLLO REQUESTS **/
+		const [likeTargetProperty] = useMutation(LIKE_TARGET_PRODUCT);
+
+		const {
+			loading: getPropertiesLoading,
+			data: getPropertiesData,
+			error: getPropertiesError,
+			refetch: getPropertiesRefetch,
+		} = useQuery(GET_PRODUCTS, {
+			fetchPolicy: "network-only",
+			variables: { input: searchFilter },
+			notifyOnNetworkStatusChange: true,
+			onCompleted: (data: T) => {
+				console.log("data", data);
+				setProperties(data?.getProperties?.list);
+				setTotal(data?.getProperties?.metaCounter[0]?.total);
+			},
+		});
+	
+		/** LIFECYCLES **/
+		useEffect(() => {
+			if (router.query.input) {
+				const inputObj = JSON.parse(router?.query?.input as string);
+				setSearchFilter(inputObj);
+			}
+	
+			setCurrentPage(searchFilter.page === undefined ? 1 : searchFilter.page);
+		}, [router]);
+	
+		useEffect(() => {
+			console.log("searchFilter", searchFilter);
+			getPropertiesRefetch({ input: searchFilter }).then();
+		}, [searchFilter]);
+	
+		/** HANDLERS **/
+		const likePropertyHandler = async (user: T, id: string) => {
+			try {
+				if (!id) return;
+				if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+	
+				await likeTargetProperty({ variables: { input: id } });
+	
+				await getPropertiesRefetch({ input: initialInput });
+	
+				await sweetTopSmallSuccessAlert("succes", 800);
+			} catch (err: any) {
+				console.log("ERROR, likePropertyHandler:", err.message);
+				sweetMixinErrorAlert(err.message).then();
+			}
+		};
+	
+		const handlePaginationChange = async (
+			event: ChangeEvent<unknown>,
+			value: number
+		) => {
+			searchFilter.page = value;
+			await router.push(
+				`/property?input=${JSON.stringify(searchFilter)}`,
+				`/property?input=${JSON.stringify(searchFilter)}`,
+				{
+					scroll: false,
+				}
+			);
+			setCurrentPage(value);
+		};
+	
+		const sortingClickHandler = (e: MouseEvent<HTMLElement>) => {
+			setAnchorEl(e.currentTarget);
+			setSortingOpen(true);
+		};
+	
+		const sortingCloseHandler = () => {
+			setSortingOpen(false);
+			setAnchorEl(null);
+		};
+	
+		const sortingHandler = (e: React.MouseEvent<HTMLLIElement>) => {
+			switch (e.currentTarget.id) {
+				case "new":
+					setSearchFilter({
+						...searchFilter,
+						sort: "createdAt",
+						direction: Direction.ASC,
+					});
+					setFilterSortName("New");
+					break;
+				case "lowest":
+					setSearchFilter({
+						...searchFilter,
+						sort: "propertyPrice",
+						direction: Direction.ASC,
+					});
+					setFilterSortName("Lowest Price");
+					break;
+				case "highest":
+					setSearchFilter({
+						...searchFilter,
+						sort: "propertyPrice",
+						direction: Direction.DESC,
+					});
+					setFilterSortName("Highest Price");
+			}
+			setSortingOpen(false);
+			setAnchorEl(null);
+		};
+	
 
 	const productsPerPage = 16;
 
@@ -419,11 +558,15 @@ const ShopPage: React.FC = () => {
 											value={sortBy}
 											onChange={(e) => setSortBy(e.target.value)}
 											displayEmpty>
-											<MenuItem value="default">Default Sorting</MenuItem>
-											<MenuItem value="price-low">Price: Low to High</MenuItem>
-											<MenuItem value="price-high">Price: High to Low</MenuItem>
-											<MenuItem value="rating">Highest Rated</MenuItem>
-											<MenuItem value="name">Name: A to Z</MenuItem>
+											<MenuItem value="default" onClick={sortingHandler}>
+												New
+											</MenuItem>
+											<MenuItem value="price-low" onClick={sortingHandler}>
+												Lowest Price
+											</MenuItem>
+											<MenuItem value="price-high" onClick={sortingHandler}>
+												Highest Price
+											</MenuItem>
 										</Select>
 									</FormControl>
 								</div>
@@ -474,6 +617,16 @@ const ShopPage: React.FC = () => {
 			</section>
 		</Stack>
 	);
+};
+
+ShopPage.defaultProps = {
+	initialInput: {
+		page: 1,
+		limit: 5,
+		sort: "createdAt",
+		direction: "DESC",
+		search: {},
+	},
 };
 
 export default withLayoutBasic(ShopPage);

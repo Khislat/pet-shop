@@ -517,12 +517,12 @@ $font: "Inter", sans-serif;
 					background-size: 60%;
 				}
 
-				.dogImage {
-					background-image: url("/icons/dog.svg");
-				}
+				// .dogImage {
+				// 	// background-image: url("/img/icons/dog.svg");
+				// }
 
 				.catImage {
-					background-image: url("/icons/cat.svg");
+					// background-image: url("/img/icons/cat.svg");
 					background-color: #ffa726;
 					border-radius: 50%;
 					position: relative;
@@ -534,27 +534,27 @@ $font: "Inter", sans-serif;
 						right: -10px;
 						width: 20px;
 						height: 20px;
-						background-image: url("/icons/pop.svg"); // Example icon for the pop effect
+						// background-image: url("/img/icons/pop.svg"); // Example icon for the pop effect
 						background-size: contain;
 						background-repeat: no-repeat;
 					}
 				}
 
-				.birdImage {
-					background-image: url("/icons/bird.svg");
-				}
+				// .birdImage {
+				// 	background-image: url("/img/icons/bird.svg");
+				// }
 
-				.toyImage {
-					background-image: url("/icons/toy.svg");
-				}
+				// .toyImage {
+				// 	background-image: url("/img/icons/toy.svg");
+				// }
 
-				.healthyImage {
-					background-image: url("/icons/healthy.svg");
-				}
+				// .healthyImage {
+				// 	background-image: url("/img/icons/healthy.svg");
+				// }
 
-				.collarImage {
-					background-image: url("/icons/collar.svg");
-				}
+				// .collarImage {
+				// 	background-image: url("/img/icons/collar.svg");
+				// }
 			}
 		}
 
