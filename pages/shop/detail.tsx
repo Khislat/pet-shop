@@ -26,7 +26,11 @@ import { LIKE_TARGET_PRODUCT } from "../../apollo/user/mutation";
 import { GET_PRODUCT, GET_PRODUCTS } from "../../apollo/user/query";
 import { T } from "../../libs/types/common";
 import { Direction, Message } from "../../libs/enums/common.enum";
-import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from "../../libs/sweetAlert";
+import {
+	sweetMixinErrorAlert,
+	sweetTopSmallSuccessAlert,
+} from "../../libs/sweetAlert";
+import { text } from "stream/consumers";
 
 const ProductDetailPage = () => {
 	const [activeTab, setActiveTab] = React.useState(0);
@@ -97,7 +101,7 @@ const ProductDetailPage = () => {
 			console.log("GET_PRODUCT error:", getProductError.message);
 		}
 	}, [getProductError]);
-	
+
 	useEffect(() => {
 		if (getProductsError) {
 			console.log("GET_PRODUCTS error:", getProductsError.message);
@@ -118,17 +122,17 @@ const ProductDetailPage = () => {
 				variables: { input: id },
 			});
 			await getProductRefetch({ input: id });
-			// await getPropertiesRefetch({
-			// 	input: {
-			// 		page: 1,
-			// 		limit: 4,
-			// 		sort: "createdAt",
-			// 		direction: Direction.DESC,
-			// 		search: {
-			// 			locationList: [property?.propertyLocation],
-			// 		},
-			// 	},
-			// });
+			await getProductRefetch({
+				input: {
+					page: 1,
+					limit: 4,
+					sort: "createdAt",
+					direction: Direction.DESC,
+					search: {
+						text: "",
+					},
+				},
+			});
 
 			await sweetTopSmallSuccessAlert("success", 800);
 		} catch (err: any) {
@@ -215,12 +219,12 @@ const ProductDetailPage = () => {
 							<Typography className={"originalPrice"}>$69.00</Typography>
 						</Stack>
 
-						<Typography className={"desc"}>
-							{product?.productDesc}
-						</Typography>
+						<Typography className={"desc"}>{product?.productDesc}</Typography>
 
 						<Box mt={3}>
-							<Typography className={"label"}>Weight : {product?.productWeight}KG</Typography>
+							<Typography className={"label"}>
+								Weight : {product?.productWeight}KG
+							</Typography>
 							<Stack direction="row" spacing={2} mt={1}>
 								{["500gm", "1Kg", "2Kg", "5Kg", "7Kg"].map((size, i) => (
 									<Button

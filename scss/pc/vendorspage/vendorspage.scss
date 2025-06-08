@@ -93,62 +93,148 @@
 			}
 
 			.teamCard {
-				background: #ffeaea;
-				border-radius: 121.55px 121.55px 25.5px 25.5px; // 143 * 0.85, 30 * 0.85
-				width: 301.52px; // 354.73 * 0.85
-				height: 394.4px; // 464 * 0.85
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				overflow: hidden;
-				margin-bottom: 80px;
+				text-align: center;
+				background: white;
+				padding: 30px;
+				border-radius: 20px;
+				box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+				transition: transform 0.3s ease, box-shadow 0.3s ease;
 			}
-
 			.profileImageContainer {
-				width: 301.75px; // 355 * 0.85
-				height: 246.5px; // 290 * 0.85
-				border-radius: 425px; // 500 * 0.85
-				background: #97c7e0;
+				width: 200px;
+				height: 200px;
+				border-radius: 50%;
+				background: linear-gradient(135deg, #667eea 0%, #97c8e0 100%);
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				margin-bottom: 25.5px; // 30 * 0.85
+				margin: 0 auto 20px auto;
+				padding: 4px;
+				box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+				transition: all 0.3s ease;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.profileImageContainer:hover {
+				transform: scale(1.05);
+				box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+			}
+
+			.profileImageContainer::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(
+					45deg,
+					rgba(255, 255, 255, 0.1) 0%,
+					transparent 50%,
+					rgba(255, 255, 255, 0.1) 100%
+				);
+				border-radius: 50%;
+				pointer-events: none;
 			}
 
 			.profileImage {
-				width: 301.75px; // 355 * 0.85
-				height: 246.5px; // 290 * 0.85
+				width: calc(100% - 8px);
+				height: calc(100% - 8px);
 				border-radius: 50%;
-				background: #97c8e0;
+				overflow: hidden;
+				position: relative;
+				background: #f0f0f0;
+				border: 2px solid white;
+			}
+
+			.profileImage img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: 50%;
+				display: block;
+				transition: transform 0.3s ease;
+			}
+
+			.profileImage img:hover {
+				transform: scale(1.1);
 			}
 
 			.memberName {
-				color: #3c3c3c;
-				font-family: $font;
-				font-size: 25px;
+				font-size: 24px;
 				font-weight: 600;
-				line-height: 26px;
-				text-transform: capitalize;
-				margin-bottom: 15px;
+				color: #333;
+				margin-bottom: 10px;
 			}
 
 			.memberRole {
-				color: #3c3c3c;
-				font-family: $font;
-				font-size: 14px;
-				font-weight: 400;
-				line-height: 10px;
-				text-transform: capitalize;
-				margin-bottom: 30px;
+				color: #666;
+				font-size: 16px;
+				margin-bottom: 15px;
 			}
-
-			.socialLinks {
-				width: 134px;
-				height: 16px;
-				background-size: cover;
+			.social-icons {
+				display: flex;
+				justify-content: center;
+				gap: 15px;
 				cursor: pointer;
 			}
+			.social-link {
+				width: 40px;
+				height: 40px;
+				background: #f0f0f0;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #666;
+				text-decoration: none;
+				transition: all 0.3s ease;
+			}
+
+			.social-link:hover {
+				background: #667eea;
+				color: white;
+				transform: translateY(-2px);
+			}
 		}
+		.viewAllContainer {
+			display: flex;
+			justify-content: center;
+			margin-top: 80px;
+		}
+
+		.viewAllButton {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 220px;
+			height: 54px;
+			background: #667eea;
+			border-radius: 50px;
+			border: none;
+			padding: 0 38px;
+			color: #ffffff;
+			font-family: Recursive, var(--default-font-family);
+			font-size: 18px;
+			font-weight: 600;
+			line-height: 19px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+		}
+
+		.viewAllButton:hover {
+			background-color: #667eea;
+		}
+
+		.buttonIcon {
+			width: 26px;
+			height: 26px;
+			background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/bbdf1d3a-4cfa-4c56-ad77-150630b2e46f.png)
+				no-repeat center;
+			background-size: cover;
+		}
+
 		.testimonialsWrapper {
 			.wrapper {
 				background-color: #ffeaea;
@@ -231,7 +317,7 @@
 							align-items: center;
 							width: 57.728px;
 							height: 53.852px;
-              margin-top: -250px;
+							margin-top: -250px;
 							color: white;
 						}
 						.faQuoteRight {
@@ -239,9 +325,9 @@
 							display: flex;
 							justify-content: center;
 							align-items: center;
-              width: 57.728px;
+							width: 57.728px;
 							height: 53.852px;
-              margin-top: 200px;
+							margin-top: 200px;
 							transform: rotate(-180deg);
 							color: white;
 						}

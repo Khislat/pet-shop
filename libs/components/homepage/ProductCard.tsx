@@ -1,44 +1,51 @@
 import React from "react";
 import Image from "next/image";
 import { Stack } from "@mui/material";
+import { Product, Products } from "../../types/product/product";
 
-interface ProductProps {
-	product: {
-		id: number;
-		name: string;
-		price: number;
-		oldPrice: number;
-		rating: number;
-		image: string;
-		discount: number | null;
-	};
+interface ProductCardProps {
+	product: Product;
 }
 
-const ProductCard: React.FC<ProductProps> = ({ product }) => {
+const ProductCard = (props: ProductCardProps) => {
+	const { product } = props;
 	return (
 		<Stack className={"productCard"}>
-			{product.discount && (
+			{product.productPrice && (
 				<div className={"discountBadge"}>
-					<span>{product.discount}% Off</span>
+					<span>{product.productPrice}% Off</span>
 				</div>
 			)}
 
 			<div
 				className={"wishlistIcon"}
-				style={{ backgroundImage: `url(${product.image})` }}
+				style={{
+					backgroundImage: product.productImages?.length
+						? `url(${product.productImages[0]})`
+						: "none",
+				}}
 			/>
+			{product.productImages?.length > 0 && (
+				<Image
+					src={product.productImages[0]}
+					alt={product.productTitle}
+					width={200}
+					height={200}
+					className="productImage"
+				/>
+			)}
 
 			<div className={"productRating"}>
 				<div className={"stars"} />
 			</div>
 
-			<h3 className={"productName"}>{product.name}</h3>
+			<h3 className={"productName"}>{product.productTitle}</h3>
 
 			<div className={"productPrice"}>
 				<span className={"currentPrice"}>
-					${product.price.toFixed(2)}{" "}
+					${product.productPrice.toFixed(2)}{" "}
 				</span>
-				<span className={"oldPrice"}>${product.oldPrice.toFixed(2)}</span>
+				<span className={"oldPrice"}>${product.productPrice.toFixed(2)}</span>
 			</div>
 
 			<button className={"addToCartButton"}>

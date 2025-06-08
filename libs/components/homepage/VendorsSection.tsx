@@ -39,7 +39,7 @@ interface TopVendorsProps {
 	initialInput?: VendorsInquiry;
 }
 
-const VendorsSection = ({ initialInput = vendorsInput }: TopVendorsProps) => {
+const TopVendorsSection = ({ initialInput = vendorsInput }: TopVendorsProps) => {
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const [topVendors, setTopVendors] = useState<Member[]>([]);
@@ -107,20 +107,13 @@ const VendorsSection = ({ initialInput = vendorsInput }: TopVendorsProps) => {
 						pagination={{ clickable: true }}
 						className="teamSwiper">
 						{topVendors?.map((member) => {
-							console.log("memberImage:", member?.memberImage);
-							console.log("NEXT_APP_API_URL:", NEXT_PUBLIC_APP_API_URL);
-							console.log(
-								"Full image URL:",
-								`${NEXT_PUBLIC_APP_API_URL}/${member?.memberImage}`
-							);
 							return (
 								<SwiperSlide key={member._id} style={{ width: "300px" }}>
 									<Stack className="teamCard">
 										<div className="profileImageContainer">
 											<div className="profileImage">
-											
 												<img
-													src={`${NEXT_PUBLIC_APP_API_URL}/${member?.memberImage}`} 
+													src={`${NEXT_PUBLIC_APP_API_URL}/${member?.memberImage}`}
 													alt={member.memberNick}
 												/>
 											</div>
@@ -158,11 +151,11 @@ const VendorsSection = ({ initialInput = vendorsInput }: TopVendorsProps) => {
 
 const vendorsInput: VendorsInquiry = {
 	page: 1,
-	limit: 10,
+	limit: 5,
 	sort: "createdAt",
 	search: {
 		text: "",
 	},
 };
 
-export default VendorsSection;
+export default TopVendorsSection;
