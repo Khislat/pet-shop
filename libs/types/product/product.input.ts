@@ -1,10 +1,15 @@
-import { ProductCategory, ProductStatus, ProductWeight } from '../../enums/property.enum';
-import { Direction } from '../../enums/common.enum';
+import {
+	ProductCategory,
+	ProductStatus,
+	ProductWeight,
+} from "../../enums/product.enum";
+import { Direction } from "../../enums/common.enum";
 
 export interface ProductInput {
 	productCategory: ProductCategory;
 	productWeight: ProductWeight;
 	productTitle: string;
+	brandName: string;
 	productPrice: number;
 	productImages: string[];
 	productDesc?: string;
@@ -16,6 +21,7 @@ interface PISearch {
 	memberId?: string;
 	typeList?: ProductCategory[];
 	pricesRange?: Range;
+	brandName?: Range;
 	periodsRange?: PeriodsRange;
 	text?: string;
 }

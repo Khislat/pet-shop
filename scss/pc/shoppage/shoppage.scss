@@ -82,9 +82,7 @@
 
 			.container {
 				width: 100%;
-				display: flex;
-				align-items: center;
-				justify-content: center;
+				max-width: 1200px;
 			}
 
 			.sectionHeader {
@@ -95,7 +93,6 @@
 				align-items: center;
 				justify-content: center;
 				flex-direction: row;
-				margin-left: 50px;
 
 				.sectionTitle {
 					color: #3c3c3c;
@@ -108,10 +105,11 @@
 
 				.decorationIcon {
 					position: relative;
-					width: 74.034px;
-					height: 72.531px;
+					width: 54.034px;
+					height: 52.531px;
 					background: url("/img/icons/homepage/petFoot.svg") no-repeat center;
 					background-size: contain;
+					margin-top: -15px;
 				}
 			}
 
@@ -122,6 +120,7 @@
 				align-items: flex-start;
 				gap: 40px;
 				flex-wrap: wrap;
+				margin-bottom: 30px;
 			}
 
 			.categoryItem {
@@ -136,69 +135,31 @@
 				}
 
 				.categoryImage {
-					width: 120px;
-					height: 120px;
-					position: relative;
+					width: 100px;
+					height: 100px;
+					border-radius: 50%;
+					background-color: #a1cee3;
+					box-shadow: 0 0 0 3px #41c0f0 inset;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					overflow: hidden;
 
 					.imageCircle {
-						width: 100%;
-						height: 100%;
+						width: 100px;
+						height: 100px;
 						background-color: #a1cee3;
 						border-radius: 50%;
-						position: relative;
 						box-shadow: 0 0 0 3px #41c0f0 inset;
+						overflow: hidden;
+						display: flex;
+						align-items: center;
+						justify-content: center;
 
-						// Individual image icons
-						.dogImage,
-						.catImage,
-						.birdImage,
-						.toyImage,
-						.healthyImage,
-						.collarImage {
+						img {
 							width: 100%;
 							height: 100%;
-							background-repeat: no-repeat;
-							background-position: center;
-							background-size: 60%;
-						}
-
-						.dogImage {
-							background-image: url("/icons/dog.svg");
-						}
-
-						.catImage {
-							background-image: url("/icons/cat.svg");
-							background-color: #ffa726;
-							border-radius: 50%;
-							position: relative;
-
-							&::after {
-								content: "";
-								position: absolute;
-								top: -10px;
-								right: -10px;
-								width: 20px;
-								height: 20px;
-								background-image: url("/icons/pop.svg"); // Example icon for the pop effect
-								background-size: contain;
-								background-repeat: no-repeat;
-							}
-						}
-
-						.birdImage {
-							background-image: url("/icons/bird.svg");
-						}
-
-						.toyImage {
-							background-image: url("/icons/toy.svg");
-						}
-
-						.healthyImage {
-							background-image: url("/icons/healthy.svg");
-						}
-
-						.collarImage {
-							background-image: url("/icons/collar.svg");
+							object-fit: cover;
 						}
 					}
 				}
@@ -653,7 +614,19 @@
 							}
 						}
 					}
-
+					.wishlistIcon {
+						position: absolute;
+						right: 12px;
+						background: #ffffff;
+						box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+						border-radius: 50%;
+						padding: 4px;
+						transition: background-color 0.3s ease;
+		
+						&:hover {
+							background-color: #ffecec;
+						}
+					}
 					.products-grid {
 						display: grid;
 						grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -668,6 +641,10 @@
 							text-align: center;
 							box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 							font-family: "Inter", sans-serif;
+							&:hover {
+								transform: translateY(-6px);
+								box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+							}
 
 							.discountBadge {
 								position: absolute;
@@ -711,6 +688,7 @@
 								border-radius: 30px;
 								font-weight: 600;
 								margin-bottom: 20px;
+								margin-top: 15px;
 							}
 
 							.stars {

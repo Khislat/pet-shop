@@ -1,5 +1,5 @@
 // pages/shop.tsx
-import React, { useState, useEffect, ChangeEvent, MouseEvent } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	Grid,
 	Typography,
@@ -19,473 +19,342 @@ import ShopCard from "../../libs/components/shoppage/ShopCard";
 import PaginationItem from "@mui/material/PaginationItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
-import { useRouter } from "next/router";
 import { ProductsInquiry } from "../../libs/types/product/product.input";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { NextPage } from "next";
+import { Product } from "../../libs/types/product/product";
 import { useMutation, useQuery } from "@apollo/client";
 import { LIKE_TARGET_PRODUCT } from "../../apollo/user/mutation";
 import { GET_PRODUCTS } from "../../apollo/user/query";
 import { T } from "../../libs/types/common";
-import { Direction, Message } from "../../libs/enums/common.enum";
-import {
-	sweetMixinErrorAlert,
-	sweetTopSmallSuccessAlert,
-} from "../../libs/sweetAlert";
+import { useRouter } from "next/router";
 
-interface Product {
-	id: number;
-	name: string;
-	price: number;
-	originalPrice?: number;
-	image: string;
-	category: string;
-	rating: number;
-	reviews: number;
-	discount?: number;
-	isNew?: boolean;
-	isFavorite: boolean;
-	inStock: boolean;
-	brand: string;
+interface ShopProps {
+	initialInput: ProductsInquiry;
 }
 
-interface Category {
-	id: string;
-	name: string;
-	icon: string;
-	color: string;
-	count: number;
-}
-export const getStaticProps = async ({ locale }: any) => ({
-	props: {
-		...(await serverSideTranslations(locale, ["common"])),
-	},
-});
-
-const ShopPage: NextPage = ({ initialInput, ...props }: any) => {
-	const [products, setProducts] = useState<Product[]>([]);
+const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
+	const router = useRouter();
+	const [shopProducts, setShopProducts] = useState<Product[]>([]);
 	const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 	const [searchQuery, setSearchQuery] = useState<string>("");
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [sortBy, setSortBy] = useState<string>("default");
 	const [priceRange, setPriceRange] = useState<number[]>([0, 100]);
-	const [selectedCategory, setSelectedCategory] = useState<string>("");
 	const [selectedBrand, setSelectedBrand] = useState<string>("");
 	const [openCategories, setOpenCategories] = useState<boolean>(true);
 	const [openBrands, setOpenBrands] = useState<boolean>(true);
 	const [openPrice, setOpenPrice] = useState<boolean>(true);
 
-	const device = useDeviceDetect();
-	const router = useRouter();
+	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
 	const [searchFilter, setSearchFilter] = useState<ProductsInquiry>(
 		router?.query?.input
 			? JSON.parse(router?.query?.input as string)
 			: initialInput
 	);
-	const [properties, setProperties] = useState<Product[]>([]);
-	const [total, setTotal] = useState<number>(0);
-	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-	const [sortingOpen, setSortingOpen] = useState(false);
-	const [filterSortName, setFilterSortName] = useState("New");
 
-		/** APOLLO REQUESTS **/
-		const [likeTargetProperty] = useMutation(LIKE_TARGET_PRODUCT);
-
-		const {
-			loading: getPropertiesLoading,
-			data: getPropertiesData,
-			error: getPropertiesError,
-			refetch: getPropertiesRefetch,
-		} = useQuery(GET_PRODUCTS, {
-			fetchPolicy: "network-only",
-			variables: { input: searchFilter },
-			notifyOnNetworkStatusChange: true,
-			onCompleted: (data: T) => {
-				console.log("data", data);
-				setProperties(data?.getProperties?.list);
-				setTotal(data?.getProperties?.metaCounter[0]?.total);
-			},
-		});
-	
-		/** LIFECYCLES **/
-		useEffect(() => {
-			if (router.query.input) {
-				const inputObj = JSON.parse(router?.query?.input as string);
-				setSearchFilter(inputObj);
-			}
-	
-			setCurrentPage(searchFilter.page === undefined ? 1 : searchFilter.page);
-		}, [router]);
-	
-		useEffect(() => {
-			console.log("searchFilter", searchFilter);
-			getPropertiesRefetch({ input: searchFilter }).then();
-		}, [searchFilter]);
-	
-		/** HANDLERS **/
-		const likePropertyHandler = async (user: T, id: string) => {
-			try {
-				if (!id) return;
-				if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
-	
-				await likeTargetProperty({ variables: { input: id } });
-	
-				await getPropertiesRefetch({ input: initialInput });
-	
-				await sweetTopSmallSuccessAlert("succes", 800);
-			} catch (err: any) {
-				console.log("ERROR, likePropertyHandler:", err.message);
-				sweetMixinErrorAlert(err.message).then();
-			}
-		};
-	
-		const handlePaginationChange = async (
-			event: ChangeEvent<unknown>,
-			value: number
-		) => {
-			searchFilter.page = value;
-			await router.push(
-				`/property?input=${JSON.stringify(searchFilter)}`,
-				`/property?input=${JSON.stringify(searchFilter)}`,
-				{
-					scroll: false,
-				}
-			);
-			setCurrentPage(value);
-		};
-	
-		const sortingClickHandler = (e: MouseEvent<HTMLElement>) => {
-			setAnchorEl(e.currentTarget);
-			setSortingOpen(true);
-		};
-	
-		const sortingCloseHandler = () => {
-			setSortingOpen(false);
-			setAnchorEl(null);
-		};
-	
-		const sortingHandler = (e: React.MouseEvent<HTMLLIElement>) => {
-			switch (e.currentTarget.id) {
-				case "new":
-					setSearchFilter({
-						...searchFilter,
-						sort: "createdAt",
-						direction: Direction.ASC,
-					});
-					setFilterSortName("New");
-					break;
-				case "lowest":
-					setSearchFilter({
-						...searchFilter,
-						sort: "propertyPrice",
-						direction: Direction.ASC,
-					});
-					setFilterSortName("Lowest Price");
-					break;
-				case "highest":
-					setSearchFilter({
-						...searchFilter,
-						sort: "propertyPrice",
-						direction: Direction.DESC,
-					});
-					setFilterSortName("Highest Price");
-			}
-			setSortingOpen(false);
-			setAnchorEl(null);
-		};
-	
+	const [likeTargetProperty] = useMutation(LIKE_TARGET_PRODUCT);
+	const {
+		loading: getShopProductsLoading,
+		data: getShopProductsData,
+		error: getShopProductsError,
+		refetch: getShopProductsRefetch,
+	} = useQuery(GET_PRODUCTS, {
+		fetchPolicy: "cache-and-network",
+		variables: { input: initialInput },
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setShopProducts(data?.getProducts?.list);
+		},
+	});
 
 	const productsPerPage = 16;
 
 	// Mock data
-	const categories: Category[] = [
-		{ id: "dogs", name: "Dogs", icon: "🐕", color: "#A8DADC", count: 12 },
-		{ id: "cats", name: "Cats", icon: "🐱", color: "#F1A501", count: 8 },
-		{ id: "birds", name: "Birds", icon: "🐦", color: "#A8DADC", count: 15 },
-		{
-			id: "fun-toys",
-			name: "Fun Toys",
-			icon: "🎾",
-			color: "#A8DADC",
-			count: 20,
-		},
-		{ id: "healthy", name: "Healthy", icon: "🥗", color: "#A8DADC", count: 18 },
-		{
-			id: "collars",
-			name: "Collars & Leash",
-			icon: "🦮",
-			color: "#A8DADC",
-			count: 10,
-		},
-	];
+	// const categories: Category[] = [
+	// 	{ id: "dogs", name: "Dogs", icon: "🐕", color: "#A8DADC", count: 12 },
+	// 	{ id: "cats", name: "Cats", icon: "🐱", color: "#F1A501", count: 8 },
+	// 	{ id: "birds", name: "Birds", icon: "🐦", color: "#A8DADC", count: 15 },
+	// 	{
+	// 		id: "fun-toys",
+	// 		name: "Fun Toys",
+	// 		icon: "🎾",
+	// 		color: "#A8DADC",
+	// 		count: 20,
+	// 	},
+	// 	{ id: "healthy", name: "Healthy", icon: "🥗", color: "#A8DADC", count: 18 },
+	// 	{
+	// 		id: "collars",
+	// 		name: "Collars & Leash",
+	// 		icon: "🦮",
+	// 		color: "#A8DADC",
+	// 		count: 10,
+	// 	},
+	// ];
 
-	const mockProducts: Product[] = [
-		{
-			id: 1,
-			name: "Heavy Duty Wool Bottle",
-			price: 15.0,
-			originalPrice: 20.0,
-			image: "/api/placeholder/300/300",
-			category: "toys",
-			rating: 5,
-			reviews: 24,
-			discount: 25,
-			isNew: false,
-			isFavorite: false,
-			inStock: true,
-			brand: "Majestic Metals",
-		},
-		{
-			id: 2,
-			name: "Fantastic Marble Shoes",
-			price: 15.0,
-			originalPrice: 18.0,
-			image: "/api/placeholder/300/300",
-			category: "accessories",
-			rating: 4,
-			reviews: 18,
-			discount: 17,
-			isNew: false,
-			isFavorite: false,
-			inStock: true,
-			brand: "Radiant Rings",
-		},
-		{
-			id: 3,
-			name: "Shiny Silver and Steel",
-			price: 16.0,
-			originalPrice: 19.0,
-			image: "/api/placeholder/300/300",
-			category: "accessories",
-			rating: 5,
-			reviews: 32,
-			discount: 16,
-			isNew: false,
-			isFavorite: false,
-			inStock: true,
-			brand: "Shimmer Gems",
-		},
-		{
-			id: 4,
-			name: "Butterscotch Pet Food",
-			price: 15.0,
-			originalPrice: 18.0,
-			image: "/api/placeholder/300/300",
-			category: "food",
-			rating: 4,
-			reviews: 15,
-			discount: 17,
-			isNew: false,
-			isFavorite: false,
-			inStock: true,
-			brand: "Elite Charms",
-		},
-		{
-			id: 5,
-			name: "Butterscotch Pet Food",
-			price: 15.0,
-			originalPrice: 18.0,
-			image: "/api/placeholder/300/300",
-			category: "food",
-			rating: 5,
-			reviews: 28,
-			discount: 17,
-			isNew: false,
-			isFavorite: false,
-			inStock: true,
-			brand: "Tranquil Treasures",
-		},
-		{
-			id: 6,
-			name: "Butterscotch Pet Food",
-			price: 15.0,
-			originalPrice: 18.0,
-			image: "/api/placeholder/300/300",
-			category: "food",
-			rating: 4,
-			reviews: 22,
-			discount: 17,
-			isNew: true,
-			isFavorite: false,
-			inStock: true,
-			brand: "Elegance Jewelers",
-		},
-		{
-			id: 7,
-			name: "Premium Dog Collar",
-			price: 25.0,
-			originalPrice: 30.0,
-			image: "/api/placeholder/300/300",
-			category: "collars",
-			rating: 5,
-			reviews: 45,
-			discount: 17,
-			isNew: false,
-			isFavorite: false,
-			inStock: true,
-			brand: "Majestic Metals",
-		},
-		{
-			id: 8,
-			name: "Cat Toy Bundle",
-			price: 12.0,
-			originalPrice: 15.0,
-			image: "/api/placeholder/300/300",
-			category: "toys",
-			rating: 4,
-			reviews: 28,
-			discount: 20,
-			isNew: false,
-			isFavorite: false,
-			inStock: true,
-			brand: "Ornaments",
-		},
-		{
-			id: 9,
-			name: "Bird Cage Cleaner",
-			price: 8.0,
-			originalPrice: 12.0,
-			image: "/api/placeholder/300/300",
-			category: "accessories",
-			rating: 4,
-			reviews: 12,
-			discount: 33,
-			isNew: true,
-			isFavorite: false,
-			inStock: true,
-			brand: "Radiant Rings",
-		},
-		{
-			id: 9,
-			name: "Bird Cage Cleaner",
-			price: 8.0,
-			originalPrice: 12.0,
-			image: "/api/placeholder/300/300",
-			category: "accessories",
-			rating: 4,
-			reviews: 12,
-			discount: 33,
-			isNew: true,
-			isFavorite: false,
-			inStock: true,
-			brand: "Radiant Rings",
-		},
-		{
-			id: 9,
-			name: "Bird Cage Cleaner",
-			price: 8.0,
-			originalPrice: 12.0,
-			image: "/api/placeholder/300/300",
-			category: "accessories",
-			rating: 4,
-			reviews: 12,
-			discount: 33,
-			isNew: true,
-			isFavorite: false,
-			inStock: true,
-			brand: "Radiant Rings",
-		},
-		{
-			id: 9,
-			name: "Bird Cage Cleaner",
-			price: 8.0,
-			originalPrice: 12.0,
-			image: "/api/placeholder/300/300",
-			category: "accessories",
-			rating: 4,
-			reviews: 12,
-			discount: 33,
-			isNew: true,
-			isFavorite: false,
-			inStock: true,
-			brand: "Radiant Rings",
-		},
-		{
-			id: 9,
-			name: "Bird Cage Cleaner",
-			price: 8.0,
-			originalPrice: 12.0,
-			image: "/api/placeholder/300/300",
-			category: "accessories",
-			rating: 4,
-			reviews: 12,
-			discount: 33,
-			isNew: true,
-			isFavorite: false,
-			inStock: true,
-			brand: "Radiant Rings",
-		},
-		{
-			id: 9,
-			name: "Bird Cage Cleaner",
-			price: 8.0,
-			originalPrice: 12.0,
-			image: "/api/placeholder/300/300",
-			category: "accessories",
-			rating: 4,
-			reviews: 12,
-			discount: 33,
-			isNew: true,
-			isFavorite: false,
-			inStock: true,
-			brand: "Radiant Rings",
-		},
-		{
-			id: 9,
-			name: "Bird Cage Cleaner",
-			price: 8.0,
-			originalPrice: 12.0,
-			image: "/api/placeholder/300/300",
-			category: "accessories",
-			rating: 4,
-			reviews: 12,
-			discount: 33,
-			isNew: true,
-			isFavorite: false,
-			inStock: true,
-			brand: "Radiant Rings",
-		},
-	];
-
-	useEffect(() => {
-		setProducts(mockProducts);
-		setFilteredProducts(mockProducts);
-	}, []);
+	// const mockProducts: Product[] = [
+	// 	{
+	// 		id: 1,
+	// 		name: "Heavy Duty Wool Bottle",
+	// 		price: 15.0,
+	// 		originalPrice: 20.0,
+	// 		image: "/api/placeholder/300/300",
+	// 		category: "toys",
+	// 		rating: 5,
+	// 		reviews: 24,
+	// 		discount: 25,
+	// 		isNew: false,
+	// 		isFavorite: false,
+	// 		inStock: true,
+	// 		brand: "Majestic Metals",
+	// 	},
+	// 	{
+	// 		id: 2,
+	// 		name: "Fantastic Marble Shoes",
+	// 		price: 15.0,
+	// 		originalPrice: 18.0,
+	// 		image: "/api/placeholder/300/300",
+	// 		category: "accessories",
+	// 		rating: 4,
+	// 		reviews: 18,
+	// 		discount: 17,
+	// 		isNew: false,
+	// 		isFavorite: false,
+	// 		inStock: true,
+	// 		brand: "Radiant Rings",
+	// 	},
+	// 	{
+	// 		id: 3,
+	// 		name: "Shiny Silver and Steel",
+	// 		price: 16.0,
+	// 		originalPrice: 19.0,
+	// 		image: "/api/placeholder/300/300",
+	// 		category: "accessories",
+	// 		rating: 5,
+	// 		reviews: 32,
+	// 		discount: 16,
+	// 		isNew: false,
+	// 		isFavorite: false,
+	// 		inStock: true,
+	// 		brand: "Shimmer Gems",
+	// 	},
+	// 	{
+	// 		id: 4,
+	// 		name: "Butterscotch Pet Food",
+	// 		price: 15.0,
+	// 		originalPrice: 18.0,
+	// 		image: "/api/placeholder/300/300",
+	// 		category: "food",
+	// 		rating: 4,
+	// 		reviews: 15,
+	// 		discount: 17,
+	// 		isNew: false,
+	// 		isFavorite: false,
+	// 		inStock: true,
+	// 		brand: "Elite Charms",
+	// 	},
+	// 	{
+	// 		id: 5,
+	// 		name: "Butterscotch Pet Food",
+	// 		price: 15.0,
+	// 		originalPrice: 18.0,
+	// 		image: "/api/placeholder/300/300",
+	// 		category: "food",
+	// 		rating: 5,
+	// 		reviews: 28,
+	// 		discount: 17,
+	// 		isNew: false,
+	// 		isFavorite: false,
+	// 		inStock: true,
+	// 		brand: "Tranquil Treasures",
+	// 	},
+	// 	{
+	// 		id: 6,
+	// 		name: "Butterscotch Pet Food",
+	// 		price: 15.0,
+	// 		originalPrice: 18.0,
+	// 		image: "/api/placeholder/300/300",
+	// 		category: "food",
+	// 		rating: 4,
+	// 		reviews: 22,
+	// 		discount: 17,
+	// 		isNew: true,
+	// 		isFavorite: false,
+	// 		inStock: true,
+	// 		brand: "Elegance Jewelers",
+	// 	},
+	// 	{
+	// 		id: 7,
+	// 		name: "Premium Dog Collar",
+	// 		price: 25.0,
+	// 		originalPrice: 30.0,
+	// 		image: "/api/placeholder/300/300",
+	// 		category: "collars",
+	// 		rating: 5,
+	// 		reviews: 45,
+	// 		discount: 17,
+	// 		isNew: false,
+	// 		isFavorite: false,
+	// 		inStock: true,
+	// 		brand: "Majestic Metals",
+	// 	},
+	// 	{
+	// 		id: 8,
+	// 		name: "Cat Toy Bundle",
+	// 		price: 12.0,
+	// 		originalPrice: 15.0,
+	// 		image: "/api/placeholder/300/300",
+	// 		category: "toys",
+	// 		rating: 4,
+	// 		reviews: 28,
+	// 		discount: 20,
+	// 		isNew: false,
+	// 		isFavorite: false,
+	// 		inStock: true,
+	// 		brand: "Ornaments",
+	// 	},
+	// 	{
+	// 		id: 9,
+	// 		name: "Bird Cage Cleaner",
+	// 		price: 8.0,
+	// 		originalPrice: 12.0,
+	// 		image: "/api/placeholder/300/300",
+	// 		category: "accessories",
+	// 		rating: 4,
+	// 		reviews: 12,
+	// 		discount: 33,
+	// 		isNew: true,
+	// 		isFavorite: false,
+	// 		inStock: true,
+	// 		brand: "Radiant Rings",
+	// 	},
+	// 	{
+	// 		id: 9,
+	// 		name: "Bird Cage Cleaner",
+	// 		price: 8.0,
+	// 		originalPrice: 12.0,
+	// 		image: "/api/placeholder/300/300",
+	// 		category: "accessories",
+	// 		rating: 4,
+	// 		reviews: 12,
+	// 		discount: 33,
+	// 		isNew: true,
+	// 		isFavorite: false,
+	// 		inStock: true,
+	// 		brand: "Radiant Rings",
+	// 	},
+	// 	{
+	// 		id: 9,
+	// 		name: "Bird Cage Cleaner",
+	// 		price: 8.0,
+	// 		originalPrice: 12.0,
+	// 		image: "/api/placeholder/300/300",
+	// 		category: "accessories",
+	// 		rating: 4,
+	// 		reviews: 12,
+	// 		discount: 33,
+	// 		isNew: true,
+	// 		isFavorite: false,
+	// 		inStock: true,
+	// 		brand: "Radiant Rings",
+	// 	},
+	// 	{
+	// 		id: 9,
+	// 		name: "Bird Cage Cleaner",
+	// 		price: 8.0,
+	// 		originalPrice: 12.0,
+	// 		image: "/api/placeholder/300/300",
+	// 		category: "accessories",
+	// 		rating: 4,
+	// 		reviews: 12,
+	// 		discount: 33,
+	// 		isNew: true,
+	// 		isFavorite: false,
+	// 		inStock: true,
+	// 		brand: "Radiant Rings",
+	// 	},
+	// 	{
+	// 		id: 9,
+	// 		name: "Bird Cage Cleaner",
+	// 		price: 8.0,
+	// 		originalPrice: 12.0,
+	// 		image: "/api/placeholder/300/300",
+	// 		category: "accessories",
+	// 		rating: 4,
+	// 		reviews: 12,
+	// 		discount: 33,
+	// 		isNew: true,
+	// 		isFavorite: false,
+	// 		inStock: true,
+	// 		brand: "Radiant Rings",
+	// 	},
+	// 	{
+	// 		id: 9,
+	// 		name: "Bird Cage Cleaner",
+	// 		price: 8.0,
+	// 		originalPrice: 12.0,
+	// 		image: "/api/placeholder/300/300",
+	// 		category: "accessories",
+	// 		rating: 4,
+	// 		reviews: 12,
+	// 		discount: 33,
+	// 		isNew: true,
+	// 		isFavorite: false,
+	// 		inStock: true,
+	// 		brand: "Radiant Rings",
+	// 	},
+	// 	{
+	// 		id: 9,
+	// 		name: "Bird Cage Cleaner",
+	// 		price: 8.0,
+	// 		originalPrice: 12.0,
+	// 		image: "/api/placeholder/300/300",
+	// 		category: "accessories",
+	// 		rating: 4,
+	// 		reviews: 12,
+	// 		discount: 33,
+	// 		isNew: true,
+	// 		isFavorite: false,
+	// 		inStock: true,
+	// 		brand: "Radiant Rings",
+	// 	},
+	// ];
 
 	useEffect(() => {
-		let filtered = products.filter((product) =>
-			product.name.toLowerCase().includes(searchQuery.toLowerCase())
+		let filtered = shopProducts.filter((product) =>
+			product.productTitle.toLowerCase().includes(searchQuery.toLowerCase())
 		);
 
 		if (selectedCategory) {
 			filtered = filtered.filter(
-				(product) => product.category === selectedCategory
+				(product) => product.productCategory === selectedCategory
 			);
 		}
 
 		if (selectedBrand) {
-			filtered = filtered.filter((product) => product.brand === selectedBrand);
+			filtered = filtered.filter(
+				(product) => product.productCategory === selectedBrand
+			);
 		}
 
 		filtered = filtered.filter(
 			(product) =>
-				product.price >= priceRange[0] && product.price <= priceRange[1]
+				product.productPrice >= priceRange[0] &&
+				product.productPrice <= priceRange[1]
 		);
 
 		// Sorting
 		switch (sortBy) {
 			case "price-low":
-				filtered.sort((a, b) => a.price - b.price);
+				filtered.sort((a, b) => a.productPrice - b.productPrice);
 				break;
 			case "price-high":
-				filtered.sort((a, b) => b.price - a.price);
+				filtered.sort((a, b) => b.productPrice - a.productPrice);
 				break;
 			case "rating":
-				filtered.sort((a, b) => b.rating - a.rating);
+				filtered.sort((a, b) => b.productRank - a.productRank);
 				break;
 			case "name":
-				filtered.sort((a, b) => a.name.localeCompare(b.name));
+				filtered.sort((a, b) => a.productTitle.localeCompare(b.productTitle));
 				break;
 			default:
 				break;
@@ -499,18 +368,8 @@ const ShopPage: NextPage = ({ initialInput, ...props }: any) => {
 		selectedBrand,
 		priceRange,
 		sortBy,
-		products,
+		shopProducts,
 	]);
-
-	const handleFavoriteToggle = (productId: number) => {
-		setProducts(
-			products.map((product) =>
-				product.id === productId
-					? { ...product, isFavorite: !product.isFavorite }
-					: product
-			)
-		);
-	};
 
 	const handleAddToCart = (productId: number) => {
 		console.log("Added to cart:", productId);
@@ -529,7 +388,10 @@ const ShopPage: NextPage = ({ initialInput, ...props }: any) => {
 			<HeroSectionBasic />
 			<Stack className="category-wraper">
 				{/* Categories Section */}
-				<CategoriesSection />
+				<CategoriesSection
+					products={shopProducts}
+					onCategorySelect={(category) => setSelectedCategory(category)}
+				/>
 			</Stack>
 
 			{/* Main Content */}
@@ -537,7 +399,13 @@ const ShopPage: NextPage = ({ initialInput, ...props }: any) => {
 				<div className="container">
 					<div className="content-wrapper">
 						<div className="filter">
-							<Filter />
+							<Filter
+								products={shopProducts}
+								onCategorySelect={(category) => setSelectedCategory(category)}
+								searchFilter={searchFilter}
+								setSearchFilter={setSearchFilter}
+								onFilteredProductsChange={setFilteredProducts}
+							/>
 						</div>
 
 						{/* Main Products Area */}
@@ -558,15 +426,11 @@ const ShopPage: NextPage = ({ initialInput, ...props }: any) => {
 											value={sortBy}
 											onChange={(e) => setSortBy(e.target.value)}
 											displayEmpty>
-											<MenuItem value="default" onClick={sortingHandler}>
-												New
-											</MenuItem>
-											<MenuItem value="price-low" onClick={sortingHandler}>
-												Lowest Price
-											</MenuItem>
-											<MenuItem value="price-high" onClick={sortingHandler}>
-												Highest Price
-											</MenuItem>
+											<MenuItem value="default">Default Sorting</MenuItem>
+											<MenuItem value="price-low">Price: Low to High</MenuItem>
+											<MenuItem value="price-high">Price: High to Low</MenuItem>
+											<MenuItem value="rating">Highest Rated</MenuItem>
+											<MenuItem value="name">Name: A to Z</MenuItem>
 										</Select>
 									</FormControl>
 								</div>
@@ -574,8 +438,8 @@ const ShopPage: NextPage = ({ initialInput, ...props }: any) => {
 
 							{/* Products Grid */}
 							<div className="products-grid">
-								{currentProducts.map((product) => (
-									<ShopCard />
+								{filteredProducts.map((product) => (
+									<ShopCard key={product._id} product={product} />
 								))}
 							</div>
 
@@ -619,14 +483,11 @@ const ShopPage: NextPage = ({ initialInput, ...props }: any) => {
 	);
 };
 
-ShopPage.defaultProps = {
-	initialInput: {
-		page: 1,
-		limit: 5,
-		sort: "createdAt",
-		direction: "DESC",
-		search: {},
-	},
+const shopInput: ProductsInquiry = {
+	page: 1,
+	limit: 8,
+	sort: "createdAt",
+	search: {},
 };
 
 export default withLayoutBasic(ShopPage);

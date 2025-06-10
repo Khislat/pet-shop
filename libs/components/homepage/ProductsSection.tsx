@@ -1,167 +1,42 @@
 import React, { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
-import { Box, Stack } from "@mui/material";
+import { Box, Button, Grid, Stack } from "@mui/material";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { Product } from "../../types/product/product";
-import { LIKE_TARGET_PRODUCT } from "../../../apollo/user/mutation";
-import { useMutation, useQuery } from "@apollo/client";
-import { GET_PRODUCTS } from "../../../apollo/user/query";
-import { T } from "../../types/common";
-import { Message } from "../../enums/common.enum";
-import {
-	sweetMixinErrorAlert,
-	sweetTopSmallSuccessAlert,
-} from "../../sweetAlert";
-import { ProductsInquiry } from "../../types/product/product.input";
 
-interface ProductsProps {
-	initialInput?: ProductsInquiry;
-}
+type ProductsSectionProps = {
+	products: Product[];
+};
 
-const ProductsSection = ({ initialInput = productsInput }: ProductsProps) => {
+const categoryNames = [
+	{ name: "All Products", key: "ALL" },
+	{ name: "Accessories", key: "ACCESSORIES" },
+	{ name: "Pet Toys", key: "FUN_TOYS" },
+	{ name: "Soaps & Shampoos", key: "SOAPS_SHAMPOOS" },
+];
+
+const ProductsSection = ({ products }: ProductsSectionProps) => {
 	const device = useDeviceDetect();
-	const [products, setProducts] = useState<Product[]>([]);
+	const initialItemsToShow = 4;
+	const [itemsToShow, setItemsToShow] = useState(initialItemsToShow);
+	const [activeCategory, setActiveCategory] = useState<string>("ALL");
+	const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 
-	/** APOLLO REQUESTS **/
-	const [likeTargetProperty] = useMutation(LIKE_TARGET_PRODUCT);
-	const {
-		loading: getProductsLoading,
-		data: getProductsData,
-		error: getProductsError,
-		refetch: getProductsRefetch,
-	} = useQuery(GET_PRODUCTS, {
-		fetchPolicy: "cache-and-network",
-		variables: { input: initialInput },
-		notifyOnNetworkStatusChange: true,
-		onCompleted: (data: T) => {
-			setProducts(data?.getProducts?.list);
-		},
-	});
-
-	/** HANDLERS **/
-	const likePropertyHandler = async (user: T, id: string) => {
-		try {
-			if (!id) return;
-			if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
-			// execute likeTargetProperty Mutation
-			await likeTargetProperty({ variables: { input: id } });
-			// execute getPropertiesRefetch
-			await getProductsRefetch({ input: initialInput });
-
-			await sweetTopSmallSuccessAlert("succes", 800);
-		} catch (err: any) {
-			console.log("ERROR, likePropertyHandler:", err.message);
-			sweetMixinErrorAlert(err.message).then();
+	useEffect(() => {
+		if (activeCategory === "ALL") {
+			setFilteredProducts(products);
+		} else {
+			setFilteredProducts(
+				products.filter((p) => p.productCategory === activeCategory)
+			);
 		}
-	};
+		setItemsToShow(initialItemsToShow); // category o‘zgarganda ko‘rsatiladigan productlar soni qayta 4 ga tushsin
+	}, [activeCategory, products]);
 
-	
-	// Sample product data
-	// const products = [
-	// 	{
-	// 		id: 1,
-	// 		name: "Butterscotch Pet Food",
-	// 		price: 15.0,
-	// 		oldPrice: 25.0,
-	// 		rating: 4,
-	// 		image:
-	// 			"https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/QNLVLsxpVX.png",
-	// 		discount: null,
-	// 	},
-	// 	{
-	// 		id: 2,
-	// 		name: "Butterscotch Pet Food",
-	// 		price: 15.0,
-	// 		oldPrice: 25.0,
-	// 		rating: 4,
-	// 		image:
-	// 			"https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/kLzCW12DDK.png",
-	// 		discount: 10,
-	// 	},
-	// 	{
-	// 		id: 3,
-	// 		name: "Butterscotch Pet Food",
-	// 		price: 15.0,
-	// 		oldPrice: 25.0,
-	// 		rating: 4,
-	// 		image:
-	// 			"https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/GLfuM4Q4FG.png",
-	// 		discount: null,
-	// 	},
-	// 	{
-	// 		id: 4,
-	// 		name: "Butterscotch Pet Food",
-	// 		price: 15.0,
-	// 		oldPrice: 25.0,
-	// 		rating: 4,
-	// 		image:
-	// 			"https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/aVjY4hLmBW.png",
-	// 		discount: null,
-	// 	},
-	// 	{
-	// 		id: 5,
-	// 		name: "Shiny Silver Metal Bowl",
-	// 		price: 15.0,
-	// 		oldPrice: 25.0,
-	// 		rating: 4,
-	// 		image:
-	// 			"https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/aVjY4hLmBW.png",
-	// 		discount: null,
-	// 	},
-	// ];
+	const handleShowMore = () => setItemsToShow(filteredProducts.length);
+	const handleShowLess = () => setItemsToShow(initialItemsToShow);
 
-	// const secondRowProducts = [
-	// 	{
-	// 		id: 6,
-	// 		name: "Butterscotch Pet Food",
-	// 		price: 15.0,
-	// 		oldPrice: 25.0,
-	// 		rating: 4,
-	// 		image:
-	// 			"https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/DnXqa2oS9v.png",
-	// 		discount: null,
-	// 	},
-	// 	{
-	// 		id: 7,
-	// 		name: "Butterscotch Pet Food",
-	// 		price: 15.0,
-	// 		oldPrice: 25.0,
-	// 		rating: 4,
-	// 		image:
-	// 			"https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/PBSdQ7DEyg.png",
-	// 		discount: null,
-	// 	},
-	// 	{
-	// 		id: 8,
-	// 		name: "Butterscotch Pet Food",
-	// 		price: 15.0,
-	// 		oldPrice: 25.0,
-	// 		rating: 4,
-	// 		image:
-	// 			"https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/PtCdGUnCs8.png",
-	// 		discount: 10,
-	// 	},
-	// 	{
-	// 		id: 9,
-	// 		name: "Butterscotch Pet Food",
-	// 		price: 15.0,
-	// 		oldPrice: 25.0,
-	// 		rating: 4,
-	// 		image:
-	// 			"https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/h5CvgpRJqq.png",
-	// 		discount: null,
-	// 	},
-	// 	{
-	// 		id: 10,
-	// 		name: "Butterscotch Pet Food",
-	// 		price: 15.0,
-	// 		oldPrice: 25.0,
-	// 		rating: 4,
-	// 		image:
-	// 			"https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/q52qoywpap.png",
-	// 		discount: null,
-	// 	},
-	// ];
+	const displayedProducts = filteredProducts.slice(0, itemsToShow);
 
 	return (
 		<Stack className={"productsSection"}>
@@ -170,38 +45,43 @@ const ProductsSection = ({ initialInput = productsInput }: ProductsProps) => {
 					<h2 className={"sectionTitle"}>Shop By Categories</h2>
 					<div className={"categoryIcon"} />
 
-					<Box className={"categoryFilters"}>
+					{/* <Box className={"categoryFilters"}>
 						<button className={"filterButtonActive"}>All Products</button>
 						<button className={"filterButton"}>Pet Toys</button>
 						<button className={"filterButton"}>Accessories</button>
 						<button className={"filterButton"}>Soaps & Shampoos</button>
-					</Box>
+					</Box> */}
 				</Stack>
+				{/* ... Category Buttons ... */}
 
 				<Box className={"productsGrid"}>
-					{products?.map((product) => {
-						console.log("product:", products);
-						return <ProductCard key={product._id} product={product} />;
-					})}
+					{displayedProducts.length > 0 ? (
+						displayedProducts.map((product) => (
+							<ProductCard key={product._id} product={product} />
+						))
+					) : (
+						<p>No products found in this category.</p>
+					)}
 				</Box>
 
-				<Box className={"viewAllContainer"}>
-					<button className={"viewAllButton"}>
-						VIEW ALL PRODUCTS
-						<span className={"buttonIcon"} />
-					</button>
+				<Box
+					className={"viewAllContainer"}
+					sx={{ textAlign: "center", mt: 10 }}>
+					{itemsToShow < filteredProducts.length ? (
+						<Button onClick={handleShowMore} className={"viewAllButton"}>
+							VIEW ALL PRODUCTS
+							<span className={"buttonIcon"} />
+						</Button>
+					) : (
+						<Button onClick={handleShowLess} className={"viewAllButton"}>
+							HIDE ALL PRODUCTS
+							<span className={"buttonIcon"} />
+						</Button>
+					)}
 				</Box>
 			</Stack>
 		</Stack>
 	);
-};
-const productsInput: ProductsInquiry = {
-	page: 1,
-	limit: 8,
-	sort: "createdAt",
-	search: {
-		text: "Dog",
-	},
 };
 
 export default ProductsSection;

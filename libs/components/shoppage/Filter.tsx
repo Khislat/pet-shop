@@ -1,5 +1,5 @@
 // components/Filter.tsx
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
 	Box,
 	Typography,
@@ -16,49 +16,24 @@ import {
 import PetsIcon from "@mui/icons-material/Pets";
 import ProductItem from "./ProductItem";
 import SearchIcon from "@mui/icons-material/Search";
+import { Product } from "../../types/product/product";
+import { ProductsInquiry } from "../../types/product/product.input";
+import { useRouter } from "next/router";
 
 const categories = [
-	{ name: "Bowls", count: 10 },
-	{ name: "Clothings", count: 15 },
-	{ name: "Crates", count: 35 },
-	{ name: "Flea & Tick", count: 26 },
-	{ name: "Food", count: 78 },
-	{ name: "Furniture", count: 30 },
-	{ name: "Pharmacy", count: 48 },
-	{ name: "Toys", count: 23 },
-	{ name: "Treats", count: 75 },
-	{ name: "Uncategorized", count: 96 },
+	{ name: "Bowls", key: "BOWLS" },
+	{ name: "Clothings", key: "CLOTHINGS" },
+	{ name: "Crates", key: "CREATES" },
+	{ name: "Flea & Tick", key: "FLEA_AND_TICK" },
+	{ name: "Food", key: "FOODS" },
+	{ name: "Furniture", key: "FURNITURES" },
+	{ name: "Pharmacy", key: "HEALTHY" },
+	{ name: "Toys", key: "FUN_TOYS" },
+	{ name: "Treats", key: "TREATS" },
+	{ name: "Uncategorized", key: "ALL" },
 ];
 
-const products = [
-	{
-		id: 1,
-		title: "Practical Bronze Bench",
-		price: "$18.00 – $32.00",
-		rating: 4.5,
-	},
-	{
-		id: 2,
-		title: "Purina Pro Plan Complete",
-		price: "$18.00 – $32.00",
-		rating: 4.5,
-	},
-	{
-		id: 3,
-		title: "High Protein Probiotics",
-		price: "$18.00 – $32.00",
-		rating: 4.5,
-	},
-];
-const brands = [
-	{ name: "Majestic Metals", count: 2 },
-	{ name: "Radiant Rings", count: 7 },
-	{ name: "Glamour Gems", count: 3 },
-	{ name: "Chic Charms", count: 1 },
-	{ name: "Tranquil Treasures", count: 5 },
-	{ name: "Elegance Jewelers", count: 2 },
-	{ name: "Ornaments", count: 5 },
-];
+
 
 const tags = [
 	"Collections",
@@ -68,11 +43,59 @@ const tags = [
 	"Puppy",
 	"Treat",
 ];
+type FilterProps = {
+	products: Product[];
+	onCategorySelect: (categoryKey: string | null) => void;
+	searchFilter: ProductsInquiry;
+	setSearchFilter: any;
+	onFilteredProductsChange?: (products: Product[]) => void;
+};
 
-const Filter = () => {
+const Filter = ({
+	products,
+	onCategorySelect,
+	searchFilter,
+	setSearchFilter,
+	onFilteredProductsChange,
+}: FilterProps) => {
+	const router = useRouter();
 	const [priceRange, setPriceRange] = React.useState<number[]>([20, 700]);
+	const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+	const [searchText, setSearchText] = useState<string>("");
 
-	const handleSliderChange = (event: Event, newValue: number | number[]) => {
+	useEffect(() => {
+		const filtered = products.filter((product) => {
+			const textMatch = product.productTitle
+				.toLowerCase()
+				.includes(searchFilter.search?.text?.toLowerCase() || "");
+
+			const priceStr = product.productPrice
+				?.toString()
+				.replace(/[^0-9.–]/g, "");
+			const [minStr, maxStr] = priceStr.split("–");
+			const minPrice = parseFloat(minStr);
+			const maxPrice = maxStr ? parseFloat(maxStr) : minPrice;
+
+			const priceMatch =
+				(!searchFilter.search?.pricesRange?.start ||
+					maxPrice >= searchFilter.search.pricesRange.start) &&
+				(!searchFilter.search?.pricesRange?.end ||
+					minPrice <= searchFilter.search.pricesRange.end);
+		});
+
+		setFilteredProducts(filtered);
+		onFilteredProductsChange?.(filtered);
+	}, [
+		searchFilter.search?.text,
+		searchFilter.search?.pricesRange?.start,
+		searchFilter.search?.pricesRange?.end,
+
+		products,
+	]);
+
+	/** HANDLERS */
+
+	const handleSliderChange = (_event: Event, newValue: number | number[]) => {
 		setPriceRange(newValue as number[]);
 	};
 
@@ -80,31 +103,59 @@ const Filter = () => {
 		<Stack className={"filterWrapper"}>
 			{/* Search Filter */}
 			<div className={"searchBar"}>
-      <input
-        type="text"
-        placeholder="Search Products"
-        className={"input"}
-      />
-      <button className={"button"}>
-        <SearchIcon />
-      </button>
-    </div>
+				<input
+					type="text"
+					placeholder="Search Products"
+					className={"input"}
+					value={searchText}
+					onChange={(e: any) => setSearchText(e.target.value)}
+					onKeyDown={(event: any) => {
+						if (event.key == "Enter") {
+							setSearchFilter({
+								...searchFilter,
+								search: { ...searchFilter.search, text: searchText },
+							});
+						}
+					}}
+				/>
+				<button
+					className={"button"}
+					onClick={() => {
+						setSearchText("");
+						setSearchFilter({
+							...searchFilter,
+							search: { ...searchFilter.search, text: "" },
+						});
+					}}>
+					<SearchIcon />
+				</button>
+			</div>
 			{/* Categories */}
 			<Box className={"categoryContainer"}>
 				<Typography className={"header"}>SHOP BY CATEGORIES</Typography>
 				<ul className={"list"}>
-					{categories.map((item, index) => (
-						<li key={index} className={"listItem"}>
-							<Box className={"left"}>
-								<PetsIcon fontSize="small" className={"icon"} />
-								<span>{item.name}</span>
-							</Box>
-							<span className={"count"}>{item.count}</span>
-						</li>
-					))}
+					{categories.map((item, index) => {
+						const filterProductsByCategory = products.filter(
+							(product) => product.productCategory === item.key
+						);
+
+						return (
+							<li
+								key={item.key}
+								className={"listItem"}
+								onClick={() => onCategorySelect(item.key)}>
+								<Box className={"left"}>
+									<PetsIcon fontSize="small" className={"icon"} />
+									<span>{item.name}</span>
+								</Box>
+								<span className={"count"}>
+									{filterProductsByCategory.length}
+								</span>
+							</li>
+						);
+					})}
 				</ul>
 			</Box>
-
 			{/* Filter by Price */}
 			<Box className={"priceFilterContainer"}>
 				<Typography className={"header"}>FILTER BY PRICE</Typography>
@@ -113,10 +164,15 @@ const Filter = () => {
 					<Box className={"inputGroup"}>
 						<Typography>Min Price</Typography>
 						<TextField
-							value={`$${priceRange[0].toFixed(2)}`}
+							value={priceRange[0]}
+							onChange={(e: any) => {
+								const value = parseInt(e.target.value);
+								if (value >= 0) {
+									setPriceRange([value, priceRange[1]]);
+								}
+							}}
 							variant="outlined"
 							size="small"
-							InputProps={{ readOnly: true }}
 							className="textField"
 						/>
 					</Box>
@@ -124,10 +180,15 @@ const Filter = () => {
 					<Box className={"inputGroup"}>
 						<Typography>Max Price</Typography>
 						<TextField
-							value={`$999.00`}
+							value={priceRange[1]}
+							onChange={(e: any) => {
+								const value = parseInt(e.target.value);
+								if (value >= 0) {
+									setPriceRange([priceRange[0], value]);
+								}
+							}}
 							variant="outlined"
 							size="small"
-							InputProps={{ readOnly: true }}
 							className="textField"
 						/>
 					</Box>
@@ -136,7 +197,7 @@ const Filter = () => {
 				<Slider
 					value={priceRange}
 					onChange={handleSliderChange}
-					min={20}
+					min={0}
 					max={999}
 					step={1}
 					className={"slider"}
@@ -146,42 +207,36 @@ const Filter = () => {
 					<Typography className={"priceText"}>
 						Price : ${priceRange[0].toFixed(2)} - ${priceRange[1].toFixed(2)}
 					</Typography>
-					<Button className={"filterButton"}>FILTER</Button>
+					<Button
+						className={"filterButton"}
+						onClick={() => {
+							setSearchFilter({
+								...searchFilter,
+								search: {
+									...searchFilter.search,
+									pricesRange: {
+										start: priceRange[0],
+										end: priceRange[1],
+									},
+								},
+							});
+						}}>
+						FILTER
+					</Button>
 				</Box>
 			</Box>
-
 			{/* Products (simplified preview) */}
+			/**
 			<Box className={"productsContainer"}>
 				<Typography className={"header"}>PRODUCTS</Typography>
-				{products.map((product, index) => (
-					<React.Fragment key={product.id}>
-						<ProductItem {...product} />
-						{index < products.length - 1 && <hr className={"divider"} />}
-					</React.Fragment>
-				))}
-			</Box>
 
+				<React.Fragment>
+					<ProductItem />
+					<hr className={"divider"} />
+				</React.Fragment>
+			</Box>{" "}
+			**/
 			{/* Product Brands */}
-			<Box className={"productBrandsContainer"}>
-				<div className={"header"}>PRODUCT BRANDS</div>
-				<ul className={"list"}>
-					{brands.map((brand, index) => (
-						<li key={index} className={"item"}>
-							<FormControlLabel
-								control={<Checkbox sx={{ padding: 0, marginRight: "12px" }} />}
-								label={
-									<div className={"label"}>
-										<span>{brand.name}</span>
-										<span>{brand.count}</span>
-									</div>
-								}
-								className={"checkboxLabel"}
-							/>
-						</li>
-					))}
-				</ul>
-			</Box>
-
 			{/* Filter by Tags */}
 			<Box className={"filterContainer"}>
 				<div className={"header"}>FILTER BY TAGS</div>
