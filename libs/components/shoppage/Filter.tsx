@@ -19,6 +19,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Product } from "../../types/product/product";
 import { ProductsInquiry } from "../../types/product/product.input";
 import { useRouter } from "next/router";
+import { cursorTo } from "readline";
 
 const categories = [
 	{ name: "Bowls", key: "BOWLS" },
@@ -33,15 +34,12 @@ const categories = [
 	{ name: "Uncategorized", key: "ALL" },
 ];
 
-
-
 const tags = [
-	"Collections",
-	"Food Pet",
-	"Kitten Food",
-	"Pet Essentials",
-	"Puppy",
-	"Treat",
+	{ name: "Food", key: "FOODS" },
+	{ name: "Kitten Bowls", key: "BOWLS" },
+	{ name: "Treats", key: "TREATS" },
+	{ name: "Pet Essentials", key: "FLEA_AND_TICK" },
+	{ name: "Puppy toys", key: "FUN_TOYS" },
 ];
 type FilterProps = {
 	products: Product[];
@@ -241,14 +239,21 @@ const Filter = ({
 			<Box className={"filterContainer"}>
 				<div className={"header"}>FILTER BY TAGS</div>
 				<div className={"tags"}>
-					{tags.map((tag, index) => (
-						<Chip
-							key={index}
-							label={tag}
-							className={"chip"}
-							variant="outlined"
-						/>
-					))}
+					{tags.map((tag, index) => {
+						const filterProductsByCategory = products.filter(
+							(product) => product.productCategory === tag.key
+						);
+						return (
+							<Chip
+								key={index}
+								label={tag.name}
+								className={"chip"}
+								variant="outlined"
+								style={{ cursor: "pointer" }}
+								onClick={() => onCategorySelect(tag.key)}
+							/>
+						);
+					})}
 				</div>
 			</Box>
 		</Stack>

@@ -14,16 +14,77 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import ReplayIcon from "@mui/icons-material/Replay";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductTabs from "../../libs/components/shoppage/ProductTabsSection";
-
+import { Product } from "../../libs/types/product/product";
+import { useQuery } from "@apollo/client";
+import { GET_PRODUCT, GET_PRODUCTS } from "../../apollo/user/query";
+import { T } from "../../libs/types/common";
+import { Direction } from "../../libs/enums/common.enum";
+import { useRouter } from "next/router";
 
 const ProductDetailPage = () => {
+	const router = useRouter();
 	const [activeTab, setActiveTab] = React.useState(0);
+	const [productId, setProductId] = useState<string | null>(null);
 
+	const [product, setProduct] = useState<Product | any>(null);
+	const [slideImage, setSlideImage] = useState<string>("");
 	const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
 		setActiveTab(newValue);
 	};
+	const [destinationProperties, setDestinationProperties] = useState<Product[]>(
+		[]
+	);
+	const { id } = router.query;
+	/** APOLLO REQUESTS **/
+	const {
+		loading: getProductLoading,
+		data: getProductData,
+		error: getProductError,
+		refetch: getProductRefetch,
+	} = useQuery(GET_PRODUCT, {
+		fetchPolicy: "network-only",
+		variables: { input: id },
+		skip: !id,
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			if (data?.getProduct) setProduct(data?.getProduct);
+			if (data?.getProduct?.propertyImages?.[0]) {
+				setSlideImage(data?.getProduct?.propertyImages[0]);
+			}
+		},
+	});
+	const {
+		loading: getProductsLoading,
+		data: getProductsData,
+		error: getProductsError,
+		refetch: getProductsRefetch,
+	} = useQuery(GET_PRODUCTS, {
+		fetchPolicy: "cache-and-network",
+		variables: {
+			input: {
+				page: 1,
+				limit: 4,
+				sort: "createdAt",
+				direction: Direction.DESC,
+				search: {},
+			},
+		},
+		skip: !productId && !product,
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			if (data?.getProducts?.list)
+				setDestinationProperties(data?.getProducts?.list);
+		},
+	});
+	console.log("productId", productId)
+	useEffect(() => {
+		if (id && typeof id === "string") {
+			setProductId(id);
+		}
+	}, [id]);
+
 	return (
 		<Stack className={"productDetailSection"}>
 			<Stack className="container">
@@ -40,9 +101,7 @@ const ProductDetailPage = () => {
 
 					<Box className={"infoSection"}>
 						<Typography className={"discountTag"}>Save 38%</Typography>
-						<Typography className={"title"}>
-							Purina Pro Plan Complete Essentials Adult
-						</Typography>
+						<Typography className={"title"}>{product?.productTitle}</Typography>
 						<Box className="reviews">
 							<div className={"stars"}>
 								{"★★★★★".split("").map((star, idx) => (
@@ -60,15 +119,13 @@ const ProductDetailPage = () => {
 						</Box>
 
 						<Stack direction="row" spacing={2} alignItems="center">
-							<Typography className={"price"}>$39.00</Typography>
+							<Typography className={"price"}>
+								{product?.productPrice}
+							</Typography>
 							<Typography className={"originalPrice"}>$69.00</Typography>
 						</Stack>
 
-						<Typography className={"desc"}>
-							Vestibulum dapibus ultrices arcu, id varius mauris viverra ac.
-							Aliquam erat volutpat. Pellentesque commodo ut elit at gravida.
-							Nunc ac molestie turpis, san, fermentum condimentum ligula.
-						</Typography>
+						<Typography className={"desc"}>{product?.productDesc}</Typography>
 
 						<Box mt={3}>
 							<Typography className={"label"}>Size : 2KG</Typography>

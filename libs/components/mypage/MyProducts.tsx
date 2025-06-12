@@ -1,75 +1,190 @@
+import React, { useState } from "react";
+import { NextPage } from "next";
+import { Pagination, Stack, Typography } from "@mui/material";
+import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { useMutation, useQuery, useReactiveVar } from "@apollo/client";
+import { T } from "../../types/common";
+import { userVar } from "../../../apollo/store";
+import { useRouter } from "next/router";
+import { sweetConfirmAlert, sweetErrorHandling } from "../../sweetAlert";
+import { Product } from "../../types/product/product";
+import { VendorProductsInquiry } from "../../types/product/product.input";
+import { GET_VEDOR_PRODUCTS } from "../../../apollo/user/query";
+import { UPDATE_PRODUCT } from "../../../apollo/user/mutation";
+import { ProductStatus } from "../../enums/product.enum";
+import { ProductCard } from "./ProductCard";
 
+const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
+	const device = useDeviceDetect();
+	const [searchFilter, setSearchFilter] =
+		useState<VendorProductsInquiry>(initialInput);
+	const [vendorProducts, setVendorProducts] = useState<Product[]>([]);
+	const [total, setTotal] = useState<number>(0);
+	const user = useReactiveVar(userVar);
+	const router = useRouter();
 
-import React, { useState } from 'react';
-import { Box, Tabs, Tab, Button } from '@mui/material';
-import Image from 'next/image';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+	/** APOLLO REQUESTS **/
+	const [updateProduct] = useMutation(UPDATE_PRODUCT);
 
-const MyProduct = () => {
-  const [activeTab, setActiveTab] = useState(0);
+	const {
+		loading: getVendorProductsLoading,
+		data: getVendorProductsData,
+		error: getVendorProductsError,
+		refetch: getVendorProductsRefetch,
+	} = useQuery(GET_VEDOR_PRODUCTS, {
+		fetchPolicy: "network-only",
+		variables: { input: searchFilter },
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setVendorProducts(data?.getVendorProducts?.list);
+			setTotal(data?.getVendorProducts?.metaCounter[0]?.total ?? 0);
+		},
+	});
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setActiveTab(newValue);
-  };
+	/** HANDLERS **/
+	const paginationHandler = (e: T, value: number) => {
+		setSearchFilter({ ...searchFilter, page: value });
+	};
 
-  const properties = [
-    {
-      image: '/property.jpg',
-      title: 'Dream Villa',
-      location: 'Seoul Trading Center',
-      price: '$150,000',
-      date: '18 May, 2024',
-      status: 'ACTIVE',
-      view: 2,
-    },
-  ];
+	const changeStatusHandler = (value: ProductStatus) => {
+		setSearchFilter({ ...searchFilter, search: { productStatus: value } });
+	};
 
-  return (
-    <div className={"tabsContainer"}>
-      <Tabs value={activeTab} onChange={handleChange} className={"tabHeader"}>
-        <Tab className={`${"tab"} ${activeTab === 0 ? "active" : ''}`} label="On Sale" />
-        <Tab className={`${"tab"} ${activeTab === 1 ? "active" : ''}`} label="On Sold" />
-      </Tabs>
+	const deleteProductHandler = async (id: string) => {
+		try {
+			if (await sweetConfirmAlert("Are you sure to delete this product?")) {
+				await updateProduct({
+					variables: {
+						input: {
+							_id: id,
+							productStatus: "DELETE",
+						},
+					},
+				});
+				await getVendorProductsRefetch({ input: searchFilter });
+			}
+		} catch (err: any) {
+			await sweetErrorHandling(err);
+		}
+	};
 
-      <Box className={"propertyTable"}>
-        <div className={"header"}>
-          <div>Listing title</div>
-          <div>Date Published</div>
-          <div>Status</div>
-          <div>View</div>
-          <div>Action</div>
-        </div>
+	const updateProductHandler = async (status: string, id: string) => {
+		try {
+			if (await sweetConfirmAlert(`Are you sure change to ${status}?`)) {
+				await updateProduct({
+					variables: {
+						input: {
+							_id: id,
+							productStatus: status,
+						},
+					},
+				});
+				await getVendorProductsRefetch({ input: searchFilter });
+			}
+		} catch (err: any) {
+			await sweetErrorHandling(err);
+		}
+	};
 
-        {activeTab === 0 && properties.map((item, index) => (
-          <div className={"item"} key={index}>
-            <div className={"image"}>
-              <Image src={item.image} alt={item.title} width={70} height={70} />
-            </div>
-            <div className={"titleSection"}>
-              <div>{item.title}</div>
-              <div className={"subtitle"}>{item.location}</div>
-              <div className={"price"}>{item.price}</div>
-            </div>
-            <div className={"date"}>{item.date}</div>
-            <div className={"status"}>{item.status}</div>
-            <div className={"view"}>{item.view}</div>
-            <div className={"actions"}>
-              <Button><EditIcon /></Button>
-              <Button><DeleteIcon /></Button>
-            </div>
-          </div>
-        ))}
+	if (user?.memberType !== "VENDOR") {
+		router.back();
+	}
 
-        {/* Pagination */}
-        <div className={"pagination"}>
-          <span className={"arrow"}>&lt;</span>
-          <span className={"page"}>0 property available</span>
-          <span className={"arrow"}>&gt;</span>
-        </div>
-      </Box>
-    </div>
-  );
+	if (device === "mobile") {
+		return <div>PETSHOP PRODUCTS MOBILE</div>;
+	} else {
+		return (
+			<div id="my-property-page">
+				<Stack className="main-title-box">
+					<Stack className="right-box">
+						<Typography className="main-title">My Products</Typography>
+						<Typography className="sub-title">
+							We are glad to see you again!
+						</Typography>
+					</Stack>
+				</Stack>
+				<Stack className="property-list-box">
+					<Stack className="tab-name-box">
+						<Typography
+							onClick={() => changeStatusHandler(ProductStatus.ACTIVE)}
+							className={
+								searchFilter.search.productStatus === "ACTIVE"
+									? "active-tab-name"
+									: "tab-name"
+							}>
+							On Sale
+						</Typography>
+						<Typography
+							onClick={() => changeStatusHandler(ProductStatus.SOLD)}
+							className={
+								searchFilter.search.productStatus === "SOLD"
+									? "active-tab-name"
+									: "tab-name"
+							}>
+							On Sold
+						</Typography>
+					</Stack>
+					<Stack className="list-box">
+						<Stack className="listing-title-box">
+							<Typography className="title-text">Listing title</Typography>
+							<Typography className="title-text">Date Published</Typography>
+							<Typography className="title-text">Status</Typography>
+							<Typography className="title-text">View</Typography>
+							{searchFilter.search.productStatus === "ACTIVE" && (
+								<Typography className="title-text">Action</Typography>
+							)}
+						</Stack>
+
+						{vendorProducts?.length === 0 ? (
+							<div className={"no-data"}>
+								<img src="/img/icons/icoAlert.svg" alt="" />
+								<p>No Product found!</p>
+							</div>
+						) : (
+							vendorProducts.map((product: Product) => {
+								return (
+									<ProductCard
+										product={product}
+										deleteProductHandler={deleteProductHandler}
+										updateProductHandler={updateProductHandler}
+										
+									/>
+								);
+							})
+						)}
+
+						{vendorProducts.length !== 0 && (
+							<Stack className="pagination-config">
+								<Stack className="pagination-box">
+									<Pagination
+										count={Math.ceil(total / searchFilter.limit)}
+										page={searchFilter.page}
+										shape="circular"
+										color="primary"
+										onChange={paginationHandler}
+									/>
+								</Stack>
+								<Stack className="total-result">
+									<Typography>{total} product available</Typography>
+								</Stack>
+							</Stack>
+						)}
+					</Stack>
+				</Stack>
+			</div>
+		);
+	}
 };
 
-export default MyProduct;
+MyProducts.defaultProps = {
+	initialInput: {
+		page: 1,
+		limit: 5,
+		sort: "createdAt",
+		search: {
+			propertyStatus: "ACTIVE",
+		},
+	},
+};
+
+export default MyProducts;

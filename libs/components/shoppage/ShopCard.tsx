@@ -1,6 +1,7 @@
 // libs/components/shoppage/ShopCard.tsx
 import React, { useState } from "react";
 import { Button, IconButton } from "@mui/material";
+import Link from 'next/link';
 import SearchIcon from "@mui/icons-material/Search";
 import CachedIcon from "@mui/icons-material/Cached";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -14,7 +15,6 @@ type ProductCardProps = {
 
 const ShopCard = ({ product }: ProductCardProps) => {
 	const [isWished, setIsWished] = useState(false);
-
 
 	const toggleWishlist = () => {
 		setIsWished((prev) => !prev);
@@ -39,15 +39,21 @@ const ShopCard = ({ product }: ProductCardProps) => {
 			{/* <div className="imagePlaceholder">
         <img src={product.image} alt={product.productTitle} />
       </div> */}
-			{product.productImages?.length > 0 && (
-				<img
-					src={`${NEXT_PUBLIC_APP_API_URL}/${product.productImages[0]}`}
-					alt={product.productTitle}
-					width={180}
-					height={180}
-					className="productImage"
-				/>
-			)}
+			<Link
+				href={{
+					pathname: "/shop/detail",
+					query: { id: product?._id },
+				}}>
+				{product.productImages?.length > 0 && (
+					<img
+						src={`${NEXT_PUBLIC_APP_API_URL}/${product.productImages[0]}`}
+						alt={product.productTitle}
+						width={180}
+						height={180}
+						className="productImage"
+					/>
+				)}
+			</Link>
 
 			<Button className="cartBtn" variant="contained">
 				ADD TO CART

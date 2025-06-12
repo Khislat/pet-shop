@@ -4,9 +4,16 @@
 @import "/scss/pc/vendorspage/vendorspage";
 @import "/scss/pc/accountpage/accountpage";
 @import "/scss/pc/cart/cart";
-@import "/scss/pc/mypage/mypage";
-@import "/scss/pc/mypage/addProductpage.scss";
-@import "/scss/pc/mypage/myProducts.scss";
+
+
+@import "/scss/pc/mypage/mypage.scss";
+@import "/scss/pc/mypage/addNewProperty.scss";
+@import "/scss/pc/mypage/myProperties.scss";
+@import "/scss/pc/mypage/myFavorites.scss";
+@import "/scss/pc/mypage/mySaved.scss";
+@import "/scss/pc/mypage/myProfile.scss";
+@import "/scss/pc/mypage/myArticles.scss";
+@import "/scss/pc/mypage/writeArticle.scss";
 
 @import "/scss/variables.scss";
 @import "/scss/reset.scss";
