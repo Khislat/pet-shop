@@ -12,7 +12,7 @@ import { VendorProductsInquiry } from "../../types/product/product.input";
 import { GET_VEDOR_PRODUCTS } from "../../../apollo/user/query";
 import { UPDATE_PRODUCT } from "../../../apollo/user/mutation";
 import { ProductStatus } from "../../enums/product.enum";
-import { ProductCard } from "./ProductCard";
+import ProductCards from "./ProductCards";
 
 const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 	const device = useDeviceDetect();
@@ -143,11 +143,10 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 						) : (
 							vendorProducts.map((product: Product) => {
 								return (
-									<ProductCard
+									<ProductCards
 										product={product}
 										deleteProductHandler={deleteProductHandler}
 										updateProductHandler={updateProductHandler}
-										
 									/>
 								);
 							})

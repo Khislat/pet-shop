@@ -542,3 +542,50 @@ export const GET_MEMBER_FOLLOWINGS = gql`
 		}
 	}
 `;
+
+/**************************
+ *         COMMENT        *
+ *************************/
+
+export const GET_COMMENTS = gql`
+	query GetComments($input: CommentsInquiry!) {
+		getComments(input: $input) {
+			list {
+				_id
+				commentStatus
+				commentGroup
+				commentContent
+				commentRefId
+				memberId
+				createdAt
+				updatedAt
+				memberData {
+					_id
+					memberType
+					memberStatus
+					memberAuthType
+					memberPhone
+					memberNick
+					memberFullName
+					memberImage
+					memberAddress
+					memberDesc
+					memberWarnings
+					memberBlocks
+					memberProducts
+					memberRank
+					memberPoints
+					memberLikes
+					memberViews
+					deletedAt
+					createdAt
+					updatedAt
+					accessToken
+				}
+			}
+			metaCounter {
+				total
+			}
+		}
+	}
+`;

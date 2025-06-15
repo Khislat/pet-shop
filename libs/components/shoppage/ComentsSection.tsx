@@ -1,4 +1,3 @@
-// components/ProductTabs/ClientReviews.tsx
 import {
 	Box,
 	Button,
@@ -9,129 +8,104 @@ import {
 	TextField,
 } from "@mui/material";
 import React from "react";
+import {
+	CommentInput,
+	CommentsInquiry,
+} from "../../types/comment/comment.input";
+import { Comment } from "../../types/comment/comment";
+import { userVar } from "../../../apollo/store";
+import { useReactiveVar } from "@apollo/client";
+import { NEXT_PUBLIC_APP_API_URL } from "../../config";
 
-const reviews = [
-	{
-		id: 1,
-		name: "Joel Barbara",
-		date: "March 2024",
-		text: `Aenean auctor cursus tincidunt. Maecenas congue velit turpis, ut lacinia tellus hendrerit eget. Sed fringilla sapien sed quam blandit, eu pellentesque risus maximus.`,
-	},
-	{
-		id: 2,
-		name: "Kimberly Leo",
-		date: "March 2024",
-		text: `Vestibulum tincidunt maximus ipsum eu bibendum. Suspendisse urna erat, tincidunt nec dui faucibus, congue condimentum nulla.`,
-	},
-	{
-		id: 3,
-		name: "Amanda Melissa",
-		date: "March 2024",
-		text: `Suspendisse sollicitudin, lorem ac placerat finibus, quam sem pellentesque leo, at hendrerit neque arcu in metus. Fusce non commodo mauris.`,
-	},
-];
+type CommentsProps = {
+	comments: Comment[];
+	commentTotal: number;
+	insertCommentData: CommentInput;
+	setInsertCommentData: React.Dispatch<React.SetStateAction<CommentInput>>;
+	createCommentHandler: () => void;
+	commentInquiry: CommentsInquiry;
+	commentPaginationChangeHandler: (event: any, value: number) => void;
+};
 
-const Comments = () => {
+const Comments = ({
+	comments,
+	commentTotal,
+	insertCommentData,
+	setInsertCommentData,
+	createCommentHandler,
+	commentInquiry,
+	commentPaginationChangeHandler,
+}: CommentsProps) => {
+	const user = useReactiveVar(userVar);
 	return (
 		<Stack className={"commentWrapper"}>
-			{" "}
 			<h2 className={"heading"}>Comments</h2>
-			{reviews.map((review) => (
-				<div key={review.id} className={"review"}>
-					<div className={"avatar"} />
+
+			{comments.map((comment) => (
+				<div key={comment._id} className={"review"}>
+					<div className={"avatar"}>
+						<img
+							src={
+								comment.memberData?.memberImage
+									? `${NEXT_PUBLIC_APP_API_URL}/${comment.memberData.memberImage}`
+									: "/img/profile/defaultUser.svg"
+							}
+							alt={"member-photo"}
+						/>
+					</div>
 					<div className={"content"}>
-						<p className={"date"}>{review.date}</p>
-						<p className={"name"}>{review.name}</p>
-						<p className={"text"}>{review.text}</p>
+						<p className={"date"}>
+							{new Date(comment.createdAt).toLocaleDateString()}
+						</p>
+						<p className={"name"}>
+							{comment.memberData?.memberNick ||
+								comment.memberData?.memberFullName ||
+								"Anonymous"}
+						</p>
+						<p className={"text"}>{comment.commentContent}</p>
 						<p className={"reply"}>REPLY</p>
 						<Divider className="comentDivider" />
 					</div>
 				</div>
 			))}
+
 			<Divider className="longDivider" />
+
 			<div className={"comentBox"}>
 				<h2 className={"title"}>Leave A Reply</h2>
 				<p className={"note"}>
 					Your email address will not be published. Required fields are marked *
 				</p>
 
-				<form className={"form"}>
-					<div className={"row"}>
-						<TextField
-							label="Enter Your Name"
-							variant="standard"
-							fullWidth
-							sx={{
-								"& .MuiInputLabel-root": {
-									marginBottom: "8px",
-								},
-								"& .MuiInputBase-root": {
-									paddingTop: "8px", //
-								},
-							}}
-						/>
-						<TextField
-							label="Your Email Id"
-							variant="standard"
-							fullWidth
-							sx={{
-								"& .MuiInputLabel-root": {
-									marginBottom: "8px",
-								},
-								"& .MuiInputBase-root": {
-									paddingTop: "8px", //
-								},
-							}}
-						/>
-					</div>
+				<form
+					className={"form"}
+					onSubmit={(e) => {
+						e.preventDefault();
+						createCommentHandler();
+					}}>
+					{/* Formdagi boshqa inputlar majburiy emas, shunchaki UI uchun. Asl comment input pastda */}
 
 					<div className={"row"}>
 						<TextField
-							label="Pet"
+							label="Your Comment"
 							variant="standard"
 							fullWidth
-							sx={{
-								"& .MuiInputLabel-root": {
-									marginBottom: "8px",
-								},
-								"& .MuiInputBase-root": {
-									paddingTop: "8px", //
-								},
-							}}
-						/>
-						<TextField
-							label="Service"
-							variant="standard"
-							fullWidth
-							sx={{
-								"& .MuiInputLabel-root": {
-									marginBottom: "8px",
-								},
-								"& .MuiInputBase-root": {
-									paddingTop: "8px", //
-								},
-							}}
+							multiline
+							rows={4}
+							value={insertCommentData.commentContent}
+							onChange={(e) =>
+								setInsertCommentData({
+									...insertCommentData,
+									commentContent: e.target.value,
+								})
+							}
 						/>
 					</div>
-
-					<TextField
-						label="Message Here"
-						multiline
-						rows={5}
-						variant="standard"
-						fullWidth
-						className={"messageBox"}
-					/>
 
 					<div className={"actions"}>
-						<Button variant="contained" className={"submitBtn"}>
+						<Button variant="contained" className={"submitBtn"} type="submit">
 							Send Message
 						</Button>
-
-						<FormControlLabel
-							control={<Checkbox />}
-							label="Save my name, email, and website in this browser for the next time I comment."
-						/>
 					</div>
 				</form>
 			</div>

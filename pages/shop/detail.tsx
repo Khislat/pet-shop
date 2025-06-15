@@ -14,18 +14,40 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import ReplayIcon from "@mui/icons-material/Replay";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import ProductTabs from "../../libs/components/shoppage/ProductTabsSection";
 import { Product } from "../../libs/types/product/product";
-import { useQuery } from "@apollo/client";
-import { GET_PRODUCT, GET_PRODUCTS } from "../../apollo/user/query";
+import { useMutation, useQuery, useReactiveVar } from "@apollo/client";
+import {
+	GET_COMMENTS,
+	GET_PRODUCT,
+	GET_PRODUCTS,
+} from "../../apollo/user/query";
 import { T } from "../../libs/types/common";
-import { Direction } from "../../libs/enums/common.enum";
+import { Direction, Message } from "../../libs/enums/common.enum";
 import { useRouter } from "next/router";
 import { useCart } from "../../libs/context/CartContext";
-import { sweetErrorAlert, sweetTopSmallSuccessAlert } from "../../libs/sweetAlert";
+import {
+	sweetErrorAlert,
+	sweetErrorHandling,
+	sweetTopSmallSuccessAlert,
+} from "../../libs/sweetAlert";
+import {
+	CommentInput,
+	CommentsInquiry,
+} from "../../libs/types/comment/comment.input";
+import { CommentGroup } from "../../libs/enums/comment.enum";
+import { userVar } from "../../apollo/store";
+import { CREATE_COMMENT } from "../../apollo/user/mutation";
+import { Comment } from "../../libs/types/comment/comment";
 
-const ProductDetailPage = () => {
+interface DetailProps {
+	initialInput: CommentsInquiry;
+}
+
+const ProductDetailPage = ({
+	initialInput = productDetailPage,
+}: DetailProps) => {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = React.useState(0);
 	const [productId, setProductId] = useState<string | null>(null);
@@ -39,10 +61,22 @@ const ProductDetailPage = () => {
 		[]
 	);
 	const { addToCart, cartItems } = useCart();
-  const [isAdding, setIsAdding] = useState(false);
+	const [isAdding, setIsAdding] = useState(false);
 	const [isWished, setIsWished] = useState(false);
 	const { id } = router.query;
+	const [commentInquiry, setCommentInquiry] =
+		useState<CommentsInquiry>(initialInput);
+	const [productComments, setProductComments] = useState<Comment[]>([]);
+	const [commentTotal, setCommentTotal] = useState<number>(0);
+	const [insertCommentData, setInsertCommentData] = useState<CommentInput>({
+		commentGroup: CommentGroup.PRODUCT,
+		commentContent: "",
+		commentRefId: "",
+	});
+	const user = useReactiveVar(userVar);
 	/** APOLLO REQUESTS **/
+	const [createComment] = useMutation(CREATE_COMMENT);
+
 	const {
 		loading: getProductLoading,
 		data: getProductData,
@@ -83,7 +117,72 @@ const ProductDetailPage = () => {
 				setDestinationProperties(data?.getProducts?.list);
 		},
 	});
-	console.log("productId", productId)
+
+	const {
+		loading: getComentsLoading,
+		data: getComentsData,
+		error: getComentsError,
+		refetch: getComentsRefetch,
+	} = useQuery(GET_COMMENTS, {
+		fetchPolicy: "cache-and-network",
+		variables: {
+			input: initialInput,
+		},
+		skip: !commentInquiry.search.commentRefId,
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			if (data?.getComments?.list) setProductComments(data?.getComments?.list);
+			setCommentTotal(data?.getComments?.metaCounter[0]?.total ?? 0);
+		},
+	});
+
+	/** LIFECYCLES **/
+
+	useEffect(() => {
+		if (router.query.id) {
+			setProductId(router.query.id as string);
+			setCommentInquiry({
+				...commentInquiry,
+				search: {
+					commentRefId: router.query.id as string,
+				},
+			});
+			setInsertCommentData({
+				...insertCommentData,
+				commentRefId: router.query.id as string,
+			});
+		}
+	}, [router]);
+
+	useEffect(() => {
+		if (commentInquiry.search.commentRefId) {
+			getComentsRefetch({ input: commentInquiry });
+		}
+	}, [commentInquiry]);
+
+	/** HANDLERS */
+	const commentPaginationChangeHandler = async (
+		event: ChangeEvent<unknown>,
+		value: number
+	) => {
+		commentInquiry.page = value;
+		setCommentInquiry({ ...commentInquiry });
+	};
+
+	const createCommentHandler = async () => {
+		try {
+			if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+			await createComment({ variables: { input: insertCommentData } });
+
+			setInsertCommentData({ ...insertCommentData, commentContent: "" });
+
+			await getComentsRefetch({ input: commentInquiry });
+		} catch (err) {
+			await sweetErrorHandling(err);
+		}
+	};
+
+	console.log("productId", productId);
 	useEffect(() => {
 		if (id && typeof id === "string") {
 			setProductId(id);
@@ -91,22 +190,22 @@ const ProductDetailPage = () => {
 	}, [id]);
 
 	const handleAddToCart = async () => {
-    setIsAdding(true);
-    
-    try {
-      addToCart(product);
-      
-      // Success feedback (optional)
-      // toast.success('Product added to cart!');
-      sweetTopSmallSuccessAlert('Product added to cart!')
-    } catch (error) {
-      console.error('Error adding to cart:', error);
-      // toast.error('Failed to add product to cart');
-			sweetErrorAlert('Failed to add product to cart')
-    } finally {
-      setIsAdding(false);
-    }
-  };
+		setIsAdding(true);
+
+		try {
+			addToCart(product);
+
+			// Success feedback (optional)
+			// toast.success('Product added to cart!');
+			sweetTopSmallSuccessAlert("Product added to cart!");
+		} catch (error) {
+			console.error("Error adding to cart:", error);
+			// toast.error('Failed to add product to cart');
+			sweetErrorAlert("Failed to add product to cart");
+		} finally {
+			setIsAdding(false);
+		}
+	};
 
 	return (
 		<Stack className={"productDetailSection"}>
@@ -179,7 +278,9 @@ const ProductDetailPage = () => {
 									<AddIcon />
 								</Button>
 							</Box>
-							<Button className={"addToCart"} onClick={handleAddToCart}>Add to Cart</Button>
+							<Button className={"addToCart"} onClick={handleAddToCart}>
+								Add to Cart
+							</Button>
 							<IconButton className={"iconBtn"}>
 								<FullscreenIcon />
 							</IconButton>
@@ -193,11 +294,28 @@ const ProductDetailPage = () => {
 				</Stack>
 
 				<Box className="productTabsWrapper">
-					<ProductTabs />
+					<ProductTabs
+						comments={productComments}
+						commentTotal={commentTotal}
+						insertCommentData={insertCommentData}
+						setInsertCommentData={setInsertCommentData}
+						createCommentHandler={createCommentHandler}
+						commentInquiry={commentInquiry}
+						commentPaginationChangeHandler={commentPaginationChangeHandler}
+					/>
 				</Box>
 			</Stack>
 		</Stack>
 	);
+};
+
+const productDetailPage: CommentsInquiry = {
+	page: 1,
+	limit: 5,
+	sort: "createdAt",
+	search: {
+		commentRefId: "",
+	},
 };
 
 export default withLayoutBasic(ProductDetailPage);

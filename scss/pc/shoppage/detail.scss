@@ -351,10 +351,18 @@
 				}
 
 				.avatar {
-					width: 185px;
-					height: 179px;
-					background-color: #8a75aa;
+					width: 80px;
+					height: 80px;
+					border-radius: 50%;
+					overflow: hidden;
 					flex-shrink: 0;
+				
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						display: block;
+					}
 				}
 
 				.content {

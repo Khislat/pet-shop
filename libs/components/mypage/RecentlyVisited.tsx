@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { NextPage } from 'next';
-import useDeviceDetect from '../../hooks/useDeviceDetect';
-import { Pagination, Stack, Typography } from '@mui/material';
-import { T } from '../../types/common';
-import { useQuery } from '@apollo/client';
-import { GET_VISITED } from '../../../apollo/user/query';
-import { Product } from '../../types/product/product';
-import { ProductCard } from './ProductCard';
+import React, { useState } from "react";
+import { NextPage } from "next";
+import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { Pagination, Stack, Typography } from "@mui/material";
+import { T } from "../../types/common";
+import { useQuery } from "@apollo/client";
+import { GET_VISITED } from "../../../apollo/user/query";
+import { Product } from "../../types/product/product";
+import ProductCard from "./ProductCards";
 
 const RecentlyVisited: NextPage = () => {
 	const device = useDeviceDetect();
@@ -35,7 +35,7 @@ const RecentlyVisited: NextPage = () => {
 		setSearchVisited({ ...searchVisited, page: value });
 	};
 
-	if (device === 'mobile') {
+	if (device === "mobile") {
 		return <div>PETSHOP MY FAVORITES MOBILE</div>;
 	} else {
 		return (
@@ -43,16 +43,25 @@ const RecentlyVisited: NextPage = () => {
 				<Stack className="main-title-box">
 					<Stack className="right-box">
 						<Typography className="main-title">Recently Visited</Typography>
-						<Typography className="sub-title">We are glad to see you again!</Typography>
+						<Typography className="sub-title">
+							We are glad to see you again!
+						</Typography>
 					</Stack>
 				</Stack>
 				<Stack className="favorites-list-box">
 					{recentlyVisited?.length ? (
 						recentlyVisited?.map((product: Product) => {
-							return <ProductCard product={product} recentlyVisited={true} myFavorites={false} likeProductHandler={undefined} />;
+							return (
+								<ProductCard
+									product={product}
+									recentlyVisited={true}
+									myFavorites={false}
+									likeProductHandler={undefined}
+								/>
+							);
 						})
 					) : (
-						<div className={'no-data'}>
+						<div className={"no-data"}>
 							<img src="/img/icons/icoAlert.svg" alt="" />
 							<p>No Recently Visited Products found!</p>
 						</div>
@@ -71,7 +80,7 @@ const RecentlyVisited: NextPage = () => {
 						</Stack>
 						<Stack className="total-result">
 							<Typography>
-								Total {total} recently visited product{total > 1 ? 'ies' : 'y'}
+								Total {total} recently visited product{total > 1 ? "ies" : "y"}
 							</Typography>
 						</Stack>
 					</Stack>

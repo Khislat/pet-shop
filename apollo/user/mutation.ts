@@ -75,7 +75,7 @@ export const LIKE_TARGET_MEMBER = gql`
 			memberDesc
 			memberWarnings
 			memberBlocks
-			memberProperties
+			memberProducts
 			memberRank
 			memberPoints
 			memberLikes
@@ -275,6 +275,40 @@ export const UNSUBSCRIBE = gql`
 			_id
 			followingId
 			followerId
+			createdAt
+			updatedAt
+		}
+	}
+`;
+
+/**************************
+ *         COMMENT        *
+ *************************/
+
+export const CREATE_COMMENT = gql`
+	mutation CreateComment($input: CommentInput!) {
+		createComment(input: $input) {
+			_id
+			commentStatus
+			commentGroup
+			commentContent
+			commentRefId
+			memberId
+			createdAt
+			updatedAt
+		}
+	}
+`;
+
+export const UPDATE_COMMENT = gql`
+	mutation UpdateComment($input: CommentUpdate!) {
+		updateComment(input: $input) {
+			_id
+			commentStatus
+			commentGroup
+			commentContent
+			commentRefId
+			memberId
 			createdAt
 			updatedAt
 		}

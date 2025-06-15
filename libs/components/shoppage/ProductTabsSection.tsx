@@ -2,9 +2,31 @@ import React from "react";
 import { Tabs, Tab, Box, Typography, Stack, Divider } from "@mui/material";
 import Comments from "./ComentsSection";
 import RelatedProducts from "./RelatedProducts";
+import { CommentInput, CommentsInquiry } from "../../types/comment/comment.input";
+import { Comment } from "../../libs/types/comment/comment";
+
 // import RelatedProducts from "./RelatedProducts";
 
-const ProductTabs = () => {
+type Props = {
+  comments: Comment[];
+  commentTotal: number;
+  insertCommentData: CommentInput;
+  setInsertCommentData: React.Dispatch<React.SetStateAction<CommentInput>>;
+  createCommentHandler: () => void;
+  commentInquiry: CommentsInquiry;
+  commentPaginationChangeHandler: (event: any, value: number) => void;
+};
+
+
+const ProductTabs = ({
+  comments,
+  commentTotal,
+  insertCommentData,
+  setInsertCommentData,
+  createCommentHandler,
+  commentInquiry,
+  commentPaginationChangeHandler,
+}: Props) => {
 	const [activeTab, setActiveTab] = React.useState(0);
 
 	const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
@@ -98,7 +120,14 @@ const ProductTabs = () => {
 				)}
 				{activeTab === 2 && (
 					<Stack className="commentWrap">
-						<Comments />
+						<Comments 
+						 comments={comments}
+						 commentTotal={commentTotal}
+						 insertCommentData={insertCommentData}
+						 setInsertCommentData={setInsertCommentData}
+						 createCommentHandler={createCommentHandler}
+						 commentInquiry={commentInquiry}
+						 commentPaginationChangeHandler={commentPaginationChangeHandler}/>
 					</Stack>
 				)}
 			</Box>

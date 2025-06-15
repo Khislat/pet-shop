@@ -26,6 +26,8 @@ import { LIKE_TARGET_PRODUCT } from "../../apollo/user/mutation";
 import { GET_PRODUCTS } from "../../apollo/user/query";
 import { T } from "../../libs/types/common";
 import { useRouter } from "next/router";
+import { Message } from "../../libs/enums/common.enum";
+import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from "../../libs/sweetAlert";
 
 interface ShopProps {
 	initialInput: ProductsInquiry;
@@ -56,7 +58,7 @@ const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 
 	const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-	const [likeTargetProperty] = useMutation(LIKE_TARGET_PRODUCT);
+	const [likeTargetProduct] = useMutation(LIKE_TARGET_PRODUCT);
 	const {
 		loading: getShopProductsLoading,
 		data: getShopProductsData,
@@ -73,6 +75,22 @@ const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 
 	const productsPerPage = 16;
 
+		/** HANDLERS **/
+		const likeProductHandler = async (user: T, id: string) => {
+			try {
+				if (!id) return;
+				if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+	
+				await likeTargetProduct({ variables: { input: id } });
+	
+				await getShopProductsRefetch({ input: initialInput });
+	
+				await sweetTopSmallSuccessAlert("succes", 800);
+			} catch (err: any) {
+				console.log("ERROR, likeProductHandler:", err.message);
+				sweetMixinErrorAlert(err.message).then();
+			}
+		};
 	// Mock data
 	// const categories: Category[] = [
 	// 	{ id: "dogs", name: "Dogs", icon: "🐕", color: "#A8DADC", count: 12 },
@@ -443,6 +461,7 @@ const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 									<ShopCard
 										key={product._id}
 										product={product}
+										likeProductHandler={likeProductHandler}
 									/>
 								))}
 							</div>

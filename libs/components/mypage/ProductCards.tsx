@@ -19,13 +19,17 @@ type ProductCardProps = {
 	likeProductHandler?: any;
 	recentlyVisited?: boolean;
 	myFavorites?: boolean;
+	deleteProductHandler?: any;
+	updateProductHandler?: any;
 };
 
-const ShopCard = ({
+const ProductCards = ({
 	product,
 	likeProductHandler,
 	recentlyVisited,
 	myFavorites,
+	deleteProductHandler,
+	updateProductHandler,
 }: ProductCardProps) => {
 	const { addToCart, cartItems } = useCart();
 	const [isAdding, setIsAdding] = useState(false);
@@ -57,7 +61,6 @@ const ShopCard = ({
 			setIsAdding(false);
 		}
 	};
-
 
 	return (
 		<div className="card">
@@ -128,4 +131,4 @@ const ShopCard = ({
 	);
 };
 
-export default ShopCard;
+export default ProductCards;

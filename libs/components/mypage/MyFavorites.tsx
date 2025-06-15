@@ -12,7 +12,7 @@ import {
 	sweetTopSmallSuccessAlert,
 } from "../../sweetAlert";
 import { Product } from "../../types/product/product";
-import { ProductCard } from "./ProductCard";
+import ProductCards from "./ProductCards";
 
 const MyFavorites: NextPage = () => {
 	const device = useDeviceDetect();
@@ -77,7 +77,7 @@ const MyFavorites: NextPage = () => {
 					{myFavorites?.length ? (
 						myFavorites?.map((product: Product) => {
 							return (
-								<ProductCard
+								<ProductCards
 									product={product}
 									myFavorites={true}
 									likeProductHandler={likeProductHandler}

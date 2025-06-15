@@ -6,7 +6,6 @@ import Link from "next/link";
 import { Member } from "../../types/member/member";
 import { REACT_APP_API_URL } from "../../config";
 import { useQuery } from "@apollo/client";
-import { GET_MEMBER } from "../../../apollo/user/query";
 import { T } from "../../types/common";
 
 interface MemberMenuProps {
@@ -98,7 +97,7 @@ const MemberMenu = (props: MemberMenuProps) => {
 							Details
 						</Typography>
 						<List className={"sub-section"}>
-							{member?.memberType === "AGENT" && (
+							{member?.memberType === "VENDOR" && (
 								<ListItem className={category === "properties" ? "focus" : ""}>
 									<Link
 										href={{
@@ -128,7 +127,7 @@ const MemberMenu = (props: MemberMenuProps) => {
 												Properties
 											</Typography>
 											<Typography className="count-title" variant="subtitle1">
-												{member?.memberProperties}
+												{member?.memberProducts}
 											</Typography>
 										</div>
 									</Link>
