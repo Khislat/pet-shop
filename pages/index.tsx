@@ -10,7 +10,7 @@ import ProductsSection from "../libs/components/homepage/ProductsSection";
 import FeaturesSection from "../libs/components/homepage/FeaturesSection";
 import TeamSection from "../libs/components/homepage/VendorsSection";
 import TestimonialsSection from "../libs/components/homepage/TestimonialsSection";
-import BlogSection from "../libs/components/homepage/BlogSection";
+import BlogSection from "../libs/components/homepage/CommunityBoards";
 import AppPromoSection from "../libs/components/homepage/AppPromoSection";
 import LogoSection from "../libs/components/homepage/CompaniesLogoSection";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -24,6 +24,7 @@ import { GET_PRODUCTS } from "../apollo/user/query";
 import { T } from "../libs/types/common";
 import { ProductsInquiry } from "../libs/types/product/product.input";
 import { CartItem } from "../libs/context/CartContext";
+import CommunityBoards from "../libs/components/homepage/CommunityBoards";
 
 interface ProductsProps {
 	initialInput: ProductsInquiry;
@@ -75,7 +76,7 @@ const Home = ({ initialInput = productsInput }: ProductsProps) => {
 				<FeaturesSection />
 				<TopVendorsSection />
 				<TestimonialsSection />
-				<BlogSection />
+				<CommunityBoards />
 				<LogoSection />
 				<AppPromoSection />
 			</Stack>

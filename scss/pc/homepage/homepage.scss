@@ -1324,6 +1324,7 @@ $font: "Inter", sans-serif;
 		.blogCard {
 			display: flex;
 			flex-direction: column;
+			width: 400px;
 		}
 
 		.blogImage {
@@ -1443,11 +1444,13 @@ $font: "Inter", sans-serif;
 			align-items: center;
 			gap: 30px;
 			right: 10px;
-			top: 125px;
+			top: 90px;
+			
 		}
 
 		.reviewAvatars {
 			display: flex;
+		
 
 			.reviewAvatar1,
 			.reviewAvatar2,
