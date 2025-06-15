@@ -8,6 +8,7 @@ import { useApollo } from "../apollo/client";
 import "../scss/pc/main.scss";
 import "../scss/app.scss";
 import "../scss/pc/homepage/homepage.scss";
+import { CartProvider } from "../libs/context/CartContext";
 
 export default function App({ Component, pageProps }: AppProps) {
 	// @ts-ignore
@@ -17,8 +18,10 @@ export default function App({ Component, pageProps }: AppProps) {
 		<ApolloProvider client={client}>
 			{" "}
 			<ThemeProvider theme={theme}>
-				<CssBaseline />
-				<Component {...pageProps} />
+				<CartProvider>
+					<CssBaseline />
+					<Component {...pageProps} />
+				</CartProvider>
 			</ThemeProvider>
 		</ApolloProvider>
 	);

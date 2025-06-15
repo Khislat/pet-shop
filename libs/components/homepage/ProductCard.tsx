@@ -5,6 +5,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Product } from "../../types/product/product";
 import { NEXT_PUBLIC_APP_API_URL } from "../../config";
+import { useCart } from "../../context/CartContext";
+import { sweetErrorAlert, sweetTopSmallSuccessAlert } from "../../sweetAlert";
 
 interface ProductCardProps {
 	product: Product;
@@ -12,6 +14,26 @@ interface ProductCardProps {
 
 const ProductCard = ({ product }: ProductCardProps) => {
 	const [isWished, setIsWished] = useState(false);
+	const { addToCart, cartItems } = useCart();
+	const [isAdding, setIsAdding] = useState(false);
+
+	const handleAddToCart = async () => {
+		setIsAdding(true);
+
+		try {
+			addToCart(product);
+
+			// Success feedback (optional)
+			// toast.success('Product added to cart!');
+			sweetTopSmallSuccessAlert('Product added to cart!')
+		} catch (error) {
+			console.error("Error adding to cart:", error);
+			// toast.error('Failed to add product to cart');
+			sweetErrorAlert('Failed to add product to cart')
+		} finally {
+			setIsAdding(false);
+		}
+	};
 
 	const toggleWishlist = () => {
 		setIsWished((prev) => !prev);
@@ -55,13 +77,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
 					${product.productPrice.toFixed(2)}
 				</span>
 				{product.productPrice && (
-					<span className={"oldPrice"}>
-						${product.productPrice.toFixed(2)}
-					</span>
+					<span className={"oldPrice"}>${product.productPrice.toFixed(2)}</span>
 				)}
 			</div>
 
-			<button className={"addToCartButton"}>
+			<button className={"addToCartButton"} onClick={handleAddToCart}>
 				<span>ADD TO CART</span>
 			</button>
 		</Stack>

@@ -18,7 +18,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import NotificationIcon from "@mui/icons-material/Notifications";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCart } from "../context/CartContext";
 
 export default function TopBasic() {
 	/** Handler */
@@ -42,6 +43,17 @@ export default function TopBasic() {
 	function t(arg0: string): import("react").ReactNode {
 		throw new Error("Function not implemented.");
 	}
+
+	const { addToCart, cartItems } = useCart();
+	const [cartCount, setCartCount] = useState(0);
+
+	useEffect(() => {
+		const totalCount = cartItems.reduce(
+			(acc, item) => acc + (item.quantity || 1),
+			0
+		);
+		setCartCount(totalCount);
+	}, [cartItems]);
 
 	return (
 		<Stack className="topBasic">
@@ -80,13 +92,12 @@ export default function TopBasic() {
 							/>
 						</IconButton>
 
-						
 						{/* Cart with badge */}
 						<Link href={"/cart"}>
 							{" "}
 							<IconButton>
 								<Badge
-									badgeContent={2}
+									badgeContent={cartCount}
 									sx={{
 										"& .MuiBadge-badge": {
 											backgroundColor: "#FF5722",

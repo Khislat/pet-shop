@@ -31,6 +31,8 @@ interface ShopProps {
 	initialInput: ProductsInquiry;
 }
 
+type CartItem = Product & { quantity: number };
+
 const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 	const router = useRouter();
 	const [shopProducts, setShopProducts] = useState<Product[]>([]);
@@ -51,6 +53,8 @@ const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 			? JSON.parse(router?.query?.input as string)
 			: initialInput
 	);
+
+	const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
 	const [likeTargetProperty] = useMutation(LIKE_TARGET_PRODUCT);
 	const {
@@ -371,11 +375,8 @@ const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 		shopProducts,
 	]);
 
-	const handleAddToCart = (productId: number) => {
-		console.log("Added to cart:", productId);
-		// Add your cart logic here
-	};
 
+	
 	const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 	const currentProducts = filteredProducts.slice(
 		(currentPage - 1) * productsPerPage,
@@ -439,7 +440,10 @@ const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 							{/* Products Grid */}
 							<div className="products-grid">
 								{filteredProducts.map((product) => (
-									<ShopCard key={product._id} product={product} />
+									<ShopCard
+										key={product._id}
+										product={product}
+									/>
 								))}
 							</div>
 

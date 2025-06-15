@@ -22,6 +22,8 @@ import { GET_PRODUCT, GET_PRODUCTS } from "../../apollo/user/query";
 import { T } from "../../libs/types/common";
 import { Direction } from "../../libs/enums/common.enum";
 import { useRouter } from "next/router";
+import { useCart } from "../../libs/context/CartContext";
+import { sweetErrorAlert, sweetTopSmallSuccessAlert } from "../../libs/sweetAlert";
 
 const ProductDetailPage = () => {
 	const router = useRouter();
@@ -36,6 +38,9 @@ const ProductDetailPage = () => {
 	const [destinationProperties, setDestinationProperties] = useState<Product[]>(
 		[]
 	);
+	const { addToCart, cartItems } = useCart();
+  const [isAdding, setIsAdding] = useState(false);
+	const [isWished, setIsWished] = useState(false);
 	const { id } = router.query;
 	/** APOLLO REQUESTS **/
 	const {
@@ -84,6 +89,24 @@ const ProductDetailPage = () => {
 			setProductId(id);
 		}
 	}, [id]);
+
+	const handleAddToCart = async () => {
+    setIsAdding(true);
+    
+    try {
+      addToCart(product);
+      
+      // Success feedback (optional)
+      // toast.success('Product added to cart!');
+      sweetTopSmallSuccessAlert('Product added to cart!')
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      // toast.error('Failed to add product to cart');
+			sweetErrorAlert('Failed to add product to cart')
+    } finally {
+      setIsAdding(false);
+    }
+  };
 
 	return (
 		<Stack className={"productDetailSection"}>
@@ -156,7 +179,7 @@ const ProductDetailPage = () => {
 									<AddIcon />
 								</Button>
 							</Box>
-							<Button className={"addToCart"}>Add to Cart</Button>
+							<Button className={"addToCart"} onClick={handleAddToCart}>Add to Cart</Button>
 							<IconButton className={"iconBtn"}>
 								<FullscreenIcon />
 							</IconButton>

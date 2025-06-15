@@ -8,18 +8,44 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { Product } from "../../types/product/product";
 import { NEXT_PUBLIC_APP_API_URL } from "../../config";
+import { useCart } from "../../context/CartContext";
+import { sweetErrorAlert, sweetTopSmallSuccessAlert } from "../../sweetAlert";
 
 type ProductCardProps = {
 	product: Product;
 };
 
-const ShopCard = ({ product }: ProductCardProps) => {
+const ShopCard = ({ product,}: ProductCardProps) => {
+	const { addToCart, cartItems } = useCart();
+  const [isAdding, setIsAdding] = useState(false);
 	const [isWished, setIsWished] = useState(false);
 
+	
 	const toggleWishlist = () => {
 		setIsWished((prev) => !prev);
 		// Istasangiz bu yerda like mutation yuborishingiz mumkin
 	};
+
+	// const isInCart = cartItems.some(item => item._id === product._id);
+  // const cartQuantity = cartItems.find(item => item._id === product._id)?.quantity || 0;
+
+  const handleAddToCart = async () => {
+    setIsAdding(true);
+    
+    try {
+      addToCart(product);
+      
+      // Success feedback (optional)
+      // toast.success('Product added to cart!');
+      sweetTopSmallSuccessAlert('Product added to cart!')
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      // toast.error('Failed to add product to cart');
+			sweetErrorAlert('Failed to add product to cart')
+    } finally {
+      setIsAdding(false);
+    }
+  };
 	return (
 		<div className="card">
 			{product.productPrice && (
@@ -55,7 +81,7 @@ const ShopCard = ({ product }: ProductCardProps) => {
 				)}
 			</Link>
 
-			<Button className="cartBtn" variant="contained">
+			<Button className="cartBtn" variant="contained" onClick={handleAddToCart}>
 				ADD TO CART
 			</Button>
 

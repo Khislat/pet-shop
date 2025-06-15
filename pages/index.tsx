@@ -23,6 +23,7 @@ import { LIKE_TARGET_PRODUCT } from "../apollo/user/mutation";
 import { GET_PRODUCTS } from "../apollo/user/query";
 import { T } from "../libs/types/common";
 import { ProductsInquiry } from "../libs/types/product/product.input";
+import { CartItem } from "../libs/context/CartContext";
 
 interface ProductsProps {
 	initialInput: ProductsInquiry;
@@ -32,6 +33,7 @@ const Home = ({ initialInput = productsInput }: ProductsProps) => {
 	const device = useDeviceDetect();
 	const [products, setProducts] = useState<Product[]>([]);
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+	const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
 	/** APOLLO REQUESTS **/
 	const [likeTargetProperty] = useMutation(LIKE_TARGET_PRODUCT);
@@ -60,13 +62,16 @@ const Home = ({ initialInput = productsInput }: ProductsProps) => {
 					products={products}
 					onCategorySelect={(category) => setSelectedCategory(category)}
 				/>
-				<ProductsSection
-					products={
-						selectedCategory
-							? products.filter((p) => p.productCategory === selectedCategory)
-							: products
-					}
-				/>
+		
+					<ProductsSection
+						products={
+							selectedCategory
+								? products.filter((p) => p.productCategory === selectedCategory)
+								: products
+						}
+					
+					/>
+
 				<FeaturesSection />
 				<TopVendorsSection />
 				<TestimonialsSection />
