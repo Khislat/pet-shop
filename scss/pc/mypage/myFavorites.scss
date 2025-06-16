@@ -34,122 +34,113 @@
 				}
 			}
 			.favorites-list-box {
-				width: 100%;
 				display: flex;
-				flex-direction: column;
 				width: 100%;
 				height: auto;
-
+				flex-wrap: wrap;
+				flex-direction: row;
 				gap: 22px;
-				.products-grid {
-					display: grid;
-					grid-template-columns: repeat(3, 1fr);
-					gap: 32px;;
-					.card {
-						position: relative; // 🔑 bu iconGroup va discountBadge uchun kerak
+				.card {
+					width: 290px;
+					background-color: #fff;
+					border-radius: 16px;
+					padding: 20px;
+					position: relative;
+					text-align: center;
+					box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+					font-family: "Inter", sans-serif;
+					&:hover {
+						transform: translateY(-6px);
+						box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+					}
+					.buttons {
+						flex-direction: row;
+						width: auto;
+						justify-content: center;
+						align-items: center;
+						margin-top: 310px;
+
+						svg {
+							width: 18px;
+							height: 18px;
+							cursor: pointer;
+						}
+						.view-cnt {
+							font-size: 13px;
+						}
+					}
+
+					.discountBadge {
+						position: absolute;
+						top: 16px;
+						left: 16px;
+						background-color: #ffa726;
+						color: white;
+						padding: 4px 10px;
+						border-radius: 16px;
+						font-size: 12px;
+						font-weight: bold;
+					}
+
+					.iconGroup {
+						position: absolute;
+						top: 16px;
+						right: 16px;
 						display: flex;
 						flex-direction: column;
-						align-items: center;
-						width: 100%; // har bir card o'z ustuniga mos bo'ladi
-						background-color: #fff;
-						border-radius: 16px;
-						padding: 20px;
-						text-align: center;
-						box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-						transition: all 0.3s ease;
-						&:hover {
-							transform: translateY(-6px);
-							box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-						}
-						.buttons {
-							flex-direction: row;
-							width: auto;
-							justify-content: center;
-							align-items: center;
-							margin-top: 310px;
+						gap: 10px;
 
-							svg {
-								width: 18px;
-								height: 18px;
-								cursor: pointer;
-							}
-							.view-cnt {
-								font-size: 13px;
-							}
-						}
-
-						.discountBadge {
-							position: absolute;
-							top: 16px;
-							left: 16px;
-							background-color: #ffa726;
-							color: white;
-							padding: 4px 10px;
-							border-radius: 16px;
-							font-size: 12px;
-							font-weight: bold;
-						}
-
-						.iconGroup {
-							position: absolute;
-							top: 16px;
-							right: 16px;
-							display: flex;
-							flex-direction: column;
-							gap: 10px;
-
-							.iconBtn {
-								background-color: black !important;
-								color: white !important;
-								width: 40px;
-								height: 40px;
-							}
-						}
-
-						.imagePlaceholder {
-							height: 200px;
-							background-color: #f5f5f5;
-							border-radius: 12px;
-							margin-bottom: 20px;
-						}
-
-						.cartBtn {
-							background-color: #3c5a6c !important;
+						.iconBtn {
+							background-color: black !important;
 							color: white !important;
-							padding: 8px 24px;
-							border-radius: 30px;
-							font-weight: 600;
-							margin-bottom: 20px;
-							margin-top: 15px;
+							width: 40px;
+							height: 40px;
+						}
+					}
+
+					.imagePlaceholder {
+						height: 200px;
+						background-color: #f5f5f5;
+						border-radius: 12px;
+						margin-bottom: 20px;
+					}
+
+					.cartBtn {
+						background-color: #3c5a6c !important;
+						color: white !important;
+						padding: 8px 24px;
+						border-radius: 30px;
+						font-weight: 600;
+						margin-bottom: 20px;
+						margin-top: 15px;
+					}
+
+					.stars {
+						margin-bottom: 8px;
+
+						.star {
+							color: #ffa726;
+							font-size: 20px;
+						}
+					}
+
+					.title {
+						font-size: 18px;
+						font-weight: 600;
+						margin-bottom: 8px;
+					}
+
+					.price {
+						font-size: 16px;
+
+						.newPrice {
+							font-weight: 700;
+							margin-right: 8px;
 						}
 
-						.stars {
-							margin-bottom: 8px;
-
-							.star {
-								color: #ffa726;
-								font-size: 20px;
-							}
-						}
-
-						.title {
-							font-size: 18px;
-							font-weight: 600;
-							margin-bottom: 8px;
-						}
-
-						.price {
-							font-size: 16px;
-
-							.newPrice {
-								font-weight: 700;
-								margin-right: 8px;
-							}
-
-							.oldPrice {
-								text-decoration: line-through;
-								color: #999;
-							}
+						.oldPrice {
+							text-decoration: line-through;
+							color: #999;
 						}
 					}
 				}

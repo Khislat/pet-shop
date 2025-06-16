@@ -1,7 +1,6 @@
 "use client";
-import { Typography, Box, Stack, IconButton, Badge } from "@mui/material";
+import { Typography, Box, Stack, IconButton, Badge, Menu, MenuItem } from "@mui/material";
 import Link from "next/link";
-
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
@@ -11,10 +10,10 @@ import { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
 
 export default function Top() {
-	/** Handler */
-
+	/** Language menu state */
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
+	const [language, setLanguage] = useState("English");
 
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -25,32 +24,29 @@ export default function Top() {
 	};
 
 	const langChoice = (event: any) => {
-		const lang = event.currentTarget.id;
-		// Lang tanlash funksiyasi shu yerda yoziladi
+		const lang = event.currentTarget.innerText;
+		setLanguage(lang);
 		handleClose();
 	};
-	function t(arg0: string): import("react").ReactNode {
-		throw new Error("Function not implemented.");
-	}
-	
+
+	/** Cart state */
 	const { addToCart, cartItems } = useCart();
 	const [cartCount, setCartCount] = useState(0);
 
 	useEffect(() => {
-		const totalCount = cartItems.reduce(
-			(acc, item) => acc + (item.quantity || 1),
-			0
-		);
+		const totalCount = cartItems.reduce((acc, item) => acc + (item.quantity || 1), 0);
 		setCartCount(totalCount);
 	}, [cartItems]);
-
 
 	return (
 		<Stack className="top">
 			<Stack className="container">
+				{/* Logo */}
 				<Box className="logo">
 					<img src="/img/logo/BOWOW.svg" />
 				</Box>
+
+				{/* Navigation */}
 				<Box className="navigation">
 					<Link href="/">Home</Link>
 					<Link href="/shop">Shop</Link>
@@ -59,33 +55,45 @@ export default function Top() {
 					<Link href="/">Blog</Link>
 					<Link href="/">Contact</Link>
 				</Box>
+
+				{/* Header actions */}
 				<Box className="headerActions">
+					{/* Language selector */}
 					<Stack
 						className="languageCurrency"
 						gap={0.5}
 						sx={{ color: "#1C2A67", cursor: "pointer" }}
-						onClick={handleClick}>
+						onClick={handleClick}
+					>
 						<Typography sx={{ fontSize: "16px", fontWeight: 500 }}>
-							English
+							{language}
 						</Typography>
 						<ExpandMoreIcon sx={{ fontSize: 22 }} />
 					</Stack>
-					<Stack
-						direction="row"
-						spacing={4}
-						alignItems="center"
-						className="headerIcons">
+
+					{/* Language menu */}
+					<Menu
+						anchorEl={anchorEl}
+						open={open}
+						onClose={handleClose}
+						MenuListProps={{
+							"aria-labelledby": "language-button",
+						}}
+					>
+						<MenuItem onClick={langChoice}>English</MenuItem>
+						<MenuItem onClick={langChoice}>Russian</MenuItem>
+						<MenuItem onClick={langChoice}>Korean</MenuItem>
+					</Menu>
+
+					{/* Icons */}
+					<Stack direction="row" spacing={4} alignItems="center" className="headerIcons">
 						{/* Search */}
 						<IconButton>
-							<SearchIcon
-								sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
-							/>
+							<SearchIcon sx={{ width: "28px", height: "28px", color: "#1C2A67" }} />
 						</IconButton>
 
-						
 						{/* Cart with badge */}
-						<Link href={"/cart"}>
-							{" "}
+						<Link href="/cart">
 							<IconButton>
 								<Badge
 									badgeContent={cartCount}
@@ -101,14 +109,14 @@ export default function Top() {
 											right: 2,
 										},
 									}}
-									overlap="circular">
-									<ShoppingBagOutlinedIcon
-										sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
-									/>
+									overlap="circular"
+								>
+									<ShoppingBagOutlinedIcon sx={{ width: "28px", height: "28px", color: "#1C2A67" }} />
 								</Badge>
 							</IconButton>
 						</Link>
-						{/* Wishlist with badge */}
+
+						{/* Wishlist / Notifications */}
 						<IconButton>
 							<Badge
 								badgeContent={3}
@@ -124,18 +132,16 @@ export default function Top() {
 										right: 2,
 									},
 								}}
-								overlap="circular">
-								<NotificationIcon
-									sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
-								/>
+								overlap="circular"
+							>
+								<NotificationIcon sx={{ width: "28px", height: "28px", color: "#1C2A67" }} />
 							</Badge>
 						</IconButton>
-						{/* User */}
+
+						{/* User account */}
 						<Link href="/account">
 							<IconButton>
-								<PersonOutlineIcon
-									sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
-								/>
+								<PersonOutlineIcon sx={{ width: "28px", height: "28px", color: "#1C2A67" }} />
 							</IconButton>
 						</Link>
 					</Stack>

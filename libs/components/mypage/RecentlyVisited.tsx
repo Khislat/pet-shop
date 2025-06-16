@@ -6,7 +6,8 @@ import { T } from "../../types/common";
 import { useQuery } from "@apollo/client";
 import { GET_VISITED } from "../../../apollo/user/query";
 import { Product } from "../../types/product/product";
-import ProductCard from "./ProductCards";
+import ProductCards from "./ProductCards";
+import ShopCard from "../shoppage/ShopCard";
 
 const RecentlyVisited: NextPage = () => {
 	const device = useDeviceDetect();
@@ -49,25 +50,23 @@ const RecentlyVisited: NextPage = () => {
 					</Stack>
 				</Stack>
 				<Stack className="favorites-list-box">
-					{recentlyVisited?.length ? (
-						recentlyVisited?.map((product: Product) => {
-							return (
-								<ProductCard
-									product={product}
-									recentlyVisited={true}
-									myFavorites={false}
-									likeProductHandler={undefined}
-								/>
-							);
-						})
-					) : (
+					{recentlyVisited.length === 0 ? (
 						<div className={"no-data"}>
 							<img src="/img/icons/icoAlert.svg" alt="" />
-							<p>No Recently Visited Products found!</p>
+							<p>No Product found!</p>
 						</div>
+					) : (
+						recentlyVisited.map((product: Product) => (
+							<ProductCards
+								product={product}
+								recentlyVisited={true}
+								myFavorites={false}
+								likeProductHandler={undefined}
+							/>
+						))
 					)}
 				</Stack>
-				{recentlyVisited?.length ? (
+				{recentlyVisited.length !== 0 && (
 					<Stack className="pagination-config">
 						<Stack className="pagination-box">
 							<Pagination
@@ -80,11 +79,12 @@ const RecentlyVisited: NextPage = () => {
 						</Stack>
 						<Stack className="total-result">
 							<Typography>
-								Total {total} recently visited product{total > 1 ? "ies" : "y"}
+								Total {recentlyVisited.length} recently visited product
+								{recentlyVisited.length > 1 ? "ies" : "y"}
 							</Typography>
 						</Stack>
 					</Stack>
-				) : null}
+				)}
 			</div>
 		);
 	}

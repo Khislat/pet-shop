@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { Pagination, Stack, Typography } from "@mui/material";
@@ -13,7 +13,9 @@ import {
 } from "../../sweetAlert";
 import ProductCards from "./ProductCards";
 import { Product } from "../../types/product/product";
-const MyFavorites: NextPage = () => {
+import { ProductsInquiry } from "../../types/product/product.input";
+
+const MyFavorites = () => {
 	const device = useDeviceDetect();
 	const [myFavorites, setMyFavorites] = useState<Product[]>([]);
 	const [total, setTotal] = useState<number>(0);
@@ -39,6 +41,9 @@ const MyFavorites: NextPage = () => {
 			setTotal(data?.getFavorites?.metaCounter[0]?.total ?? 0);
 		},
 	});
+
+
+	console.log("GET_FAVORITES DATA:", getFavoritesData);
 
 	/** HANDLERS **/
 	const paginationHandler = (e: T, value: number) => {
@@ -103,7 +108,7 @@ const MyFavorites: NextPage = () => {
 						</Stack>
 						<Stack className="total-result">
 							<Typography>
-								Total {total} favorite product{total > 1 ? "ies" : "y"}
+								Total {myFavorites.length} favorite product{total > 1 ? "ies" : "y"}
 							</Typography>
 						</Stack>
 					</Stack>
