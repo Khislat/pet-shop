@@ -10,7 +10,6 @@ export interface PropertyUpdate {
 	productStatus: ProductStatus;
 	productWeight: ProductWeight;
 	productTitle: string;
-	brandName: string;
 	productPrice: number;
 	productViews: number;
 	productLikes: number;

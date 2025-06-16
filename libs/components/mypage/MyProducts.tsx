@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { Pagination, Stack, Typography } from "@mui/material";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
@@ -13,8 +13,13 @@ import { GET_VEDOR_PRODUCTS } from "../../../apollo/user/query";
 import { UPDATE_PRODUCT } from "../../../apollo/user/mutation";
 import { ProductStatus } from "../../enums/product.enum";
 import ProductCards from "./ProductCards";
+import { MyProductsCard } from "./MyProductsCard";
 
-const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
+interface MyProducProps {
+	initialInput: VendorProductsInquiry;
+}
+
+const MyProducts = ({ initialInput = myProducts }: MyProducProps) => {
 	const device = useDeviceDetect();
 	const [searchFilter, setSearchFilter] =
 		useState<VendorProductsInquiry>(initialInput);
@@ -40,7 +45,10 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 			setTotal(data?.getVendorProducts?.metaCounter[0]?.total ?? 0);
 		},
 	});
-
+	console.log("Vendor products: ", vendorProducts);
+	useEffect(() => {
+		getVendorProductsRefetch({ input: searchFilter });
+	}, [searchFilter]);
 	/** HANDLERS **/
 	const paginationHandler = (e: T, value: number) => {
 		setSearchFilter({ ...searchFilter, page: value });
@@ -108,7 +116,7 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 						<Typography
 							onClick={() => changeStatusHandler(ProductStatus.ACTIVE)}
 							className={
-								searchFilter.search.productStatus === "ACTIVE"
+								searchFilter?.search?.productStatus === "ACTIVE"
 									? "active-tab-name"
 									: "tab-name"
 							}>
@@ -117,7 +125,7 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 						<Typography
 							onClick={() => changeStatusHandler(ProductStatus.SOLD)}
 							className={
-								searchFilter.search.productStatus === "SOLD"
+								searchFilter?.search?.productStatus === "SOLD"
 									? "active-tab-name"
 									: "tab-name"
 							}>
@@ -135,55 +143,54 @@ const MyProducts: NextPage = ({ initialInput, ...props }: any) => {
 							)}
 						</Stack>
 
-						{vendorProducts?.length === 0 ? (
-							<div className={"no-data"}>
-								<img src="/img/icons/icoAlert.svg" alt="" />
-								<p>No Product found!</p>
-							</div>
-						) : (
-							vendorProducts.map((product: Product) => {
-								return (
-									<ProductCards
+						<div className="products-grid">
+							{vendorProducts.length === 0 ? (
+								<div className={"no-data"}>
+									<img src="/img/icons/icoAlert.svg" alt="" />
+									<p>No Product found!</p>
+								</div>
+							) : (
+								vendorProducts.map((product: Product) => (
+									<MyProductsCard
+										key={product._id}
 										product={product}
 										deleteProductHandler={deleteProductHandler}
 										updateProductHandler={updateProductHandler}
 									/>
-								);
-							})
-						)}
-
-						{vendorProducts.length !== 0 && (
-							<Stack className="pagination-config">
-								<Stack className="pagination-box">
-									<Pagination
-										count={Math.ceil(total / searchFilter.limit)}
-										page={searchFilter.page}
-										shape="circular"
-										color="primary"
-										onChange={paginationHandler}
-									/>
-								</Stack>
-								<Stack className="total-result">
-									<Typography>{total} product available</Typography>
-								</Stack>
-							</Stack>
-						)}
+								))
+							)}
+						</div>
 					</Stack>
+
+					{vendorProducts.length !== 0 && (
+						<Stack className="pagination-config">
+							<Stack className="pagination-box">
+								<Pagination
+									count={Math.ceil(total / searchFilter.limit)}
+									page={searchFilter.page}
+									shape="circular"
+									color="primary"
+									onChange={paginationHandler}
+								/>
+							</Stack>
+							<Stack className="total-result">
+								<Typography>
+									{vendorProducts.length} product available
+								</Typography>
+							</Stack>
+						</Stack>
+					)}
 				</Stack>
 			</div>
 		);
 	}
 };
 
-MyProducts.defaultProps = {
-	initialInput: {
-		page: 1,
-		limit: 5,
-		sort: "createdAt",
-		search: {
-			propertyStatus: "ACTIVE",
-		},
-	},
+const myProducts: VendorProductsInquiry = {
+	page: 1,
+	limit: 5,
+	sort: "createdAt",
+	search: {},
 };
 
 export default MyProducts;

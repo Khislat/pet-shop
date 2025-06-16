@@ -4,10 +4,8 @@ import { NextPage } from "next";
 import { Stack } from "@mui/material";
 import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
-import MyProperties from "../../libs/components/mypage/MyProducts";
 import MyFavorites from "../../libs/components/mypage/MyFavorites";
 import RecentlyVisited from "../../libs/components/mypage/RecentlyVisited";
-import AddProperty from "../../libs/components/mypage/AddNewProperty";
 import MyProfile from "../../libs/components/mypage/MyProfile";
 import MyArticles from "../../libs/components/mypage/MyArticles";
 import { useMutation, useReactiveVar } from "@apollo/client";
@@ -28,8 +26,8 @@ import {
 	UNSUBSCRIBE,
 } from "../../apollo/user/mutation";
 import { Messages } from "../../libs/config";
+import AddProduct from "../../libs/components/mypage/AddProduct";
 import MyProducts from "../../libs/components/mypage/MyProducts";
-import AddProduct from "../../libs/components/mypage/AddNewProperty";
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -131,7 +129,7 @@ const MyPage: NextPage = () => {
 							<Stack className="main-config" mb={"76px"}>
 								<Stack className={"list-config"}>
 									{category === "addProduct" && <AddProduct />}
-									{category === "myProducts" && <MyProducts/>}
+									{category === "myProducts" && <MyProducts  />}
 									{category === "myFavorites" && <MyFavorites />}
 									{category === "recentlyVisited" && <RecentlyVisited />}
 									{category === "myArticles" && <MyArticles />}

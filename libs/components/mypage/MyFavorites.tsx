@@ -11,9 +11,8 @@ import {
 	sweetMixinErrorAlert,
 	sweetTopSmallSuccessAlert,
 } from "../../sweetAlert";
-import { Product } from "../../types/product/product";
 import ProductCards from "./ProductCards";
-
+import { Product } from "../../types/product/product";
 const MyFavorites: NextPage = () => {
 	const device = useDeviceDetect();
 	const [myFavorites, setMyFavorites] = useState<Product[]>([]);

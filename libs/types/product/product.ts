@@ -21,7 +21,6 @@ export interface Product {
 	productStatus: ProductStatus;
 	productWeight: ProductWeight;
 	productTitle: string;
-	brandName: string;
 	productPrice: number;
 	productViews: number;
 	productLikes: number;

@@ -104,7 +104,7 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 			}
 
 			const response = await axios.post(
-				`${process.env.REACT_APP_API_GRAPHQL_URL}`,
+				`${process.env.NEXT_PUBLIC_API_GRAPHQL_URL}`,
 				formData,
 				{
 					headers: {
@@ -130,11 +130,11 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 
 	const doDisabledCheck = () => {
 		if (
-			insertProductData.productTitle === "" ||
-			insertProductData.productPrice === 0 || // @ts-ignore
-			insertProductData.productCategory === "" || // @ts-ignore
-			insertProductData.productDesc === "" ||
-			insertProductData.productImages.length === 0
+			insertProductData?.productTitle === "" ||
+			insertProductData?.productPrice === 0 || // @ts-ignore
+			insertProductData?.productCategory === "" || // @ts-ignore
+			insertProductData?.productDesc === "" ||
+			insertProductData?.productImages.length === 0
 		) {
 			return true;
 		}
@@ -184,7 +184,7 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 		}
 	}, [insertProductData]);
 
-	if (user?.memberType !== "VENDORS") {
+	if (user?.memberType !== "VENDOR") {
 		router.back();
 	}
 
@@ -211,7 +211,7 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 									type="text"
 									className="description-input"
 									placeholder={"Title"}
-									value={insertProductData.productTitle}
+									value={insertProductData?.productTitle}
 									onChange={({ target: { value } }) =>
 										setInsertProductData({
 											...insertProductData,
@@ -228,7 +228,7 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 										type="text"
 										className="description-input"
 										placeholder={"Price"}
-										value={insertProductData.productPrice}
+										value={insertProductData?.productPrice}
 										onChange={({ target: { value } }) =>
 											setInsertProductData({
 												...insertProductData,
@@ -242,14 +242,14 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 									<select
 										className={"select-description"}
 										defaultValue={
-											insertProductData.productCategory || "select"
+											insertProductData?.productCategory || "select"
 										}
-										value={insertProductData.productCategory || "select"}
+										value={insertProductData?.productCategory || "select"}
 										onChange={({ target: { value } }) =>
 											// @ts-ignore
-											setInsertPropertyData({
+											setInsertProductData({
 												...insertProductData,
-												productCategory: value,
+												productCategory: value as ProductCategory
 											})
 										}>
 										<>
@@ -277,7 +277,7 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 									name=""
 									id=""
 									className="description-text"
-									value={insertProductData.productDesc}
+									value={insertProductData?.productDesc}
 									onChange={({ target: { value } }) =>
 										setInsertProductData({
 											...insertProductData,

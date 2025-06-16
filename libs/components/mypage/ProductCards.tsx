@@ -1,5 +1,5 @@
 // libs/components/shoppage/ShopCard.tsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, IconButton, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import SearchIcon from "@mui/icons-material/Search";
@@ -61,6 +61,8 @@ const ProductCards = ({
 			setIsAdding(false);
 		}
 	};
+
+
 
 	return (
 		<div className="card">

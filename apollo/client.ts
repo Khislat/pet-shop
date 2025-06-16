@@ -11,10 +11,10 @@ import createUploadLink from "apollo-upload-client/public/createUploadLink.js";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 import { onError } from "@apollo/client/link/error";
+import { getJwtToken } from "../libs/auth";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 import { sweetErrorAlert } from "../libs/sweetAlert";
 import { socketVar } from "./store";
-import { getJwtToken } from "../libs/auth";
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
@@ -43,7 +43,8 @@ class LoggingWebSocket {
 
 	constructor(url: string) {
 		this.socket = new WebSocket(`${url}?token=${getJwtToken()}`);
-		socketVar(this.socket)
+		socketVar(this.socket);
+		
 
 		this.socket.onopen = () => {
 			console.log("WebSocket connection");
@@ -86,11 +87,10 @@ function createIsomorphicLink() {
 		const link = new createUploadLink({
 			uri: process.env.NEXT_PUBLIC_API_GRAPHQL_URL,
 		});
-		
 
 		/* WEBSOCKET SUBSCRIPTION LINK */
 		const wsLink = new WebSocketLink({
-			uri: process.env.NEXT_PUBLIC_API_WS ?? "ws://127.0.0.1:3007/graphql",
+			uri: process.env.REACT_APP_API_WS ?? "ws://127.0.0.1:3007/graphql",
 			options: {
 				reconnect: false,
 				timeout: 30000,
@@ -102,8 +102,6 @@ function createIsomorphicLink() {
 			// webSocketImpl:
 			webSocketImpl: LoggingWebSocket,
 		});
-		console.log("GRAPHQL URL:", process.env.NEXT_PUBLIC_API_GRAPHQL_URL);
-
 
 		const errorLink = onError(({ graphQLErrors, networkError, response }) => {
 			if (graphQLErrors) {

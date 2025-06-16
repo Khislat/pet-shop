@@ -543,7 +543,6 @@ export const GET_MEMBER_FOLLOWINGS = gql`
 	}
 `;
 
-
 /**************************
  *         COMMENT        *
  *************************/

@@ -129,7 +129,6 @@ export const CREATE_PRODUCT = gql`
 			productStatus
 			productWeight
 			productTitle
-			brandName
 			productPrice
 			productViews
 			productLikes
