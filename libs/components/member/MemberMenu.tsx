@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Stack, Typography, Box, List, ListItem, Button,} from "@mui/material";
+import { Stack, Typography, Box, List, ListItem, Button } from "@mui/material";
 
 import Link from "next/link";
 import { Member } from "../../types/member/member";
@@ -10,15 +10,15 @@ import { useQuery } from "@apollo/client";
 import { T } from "../../types/common";
 import { NEXT_PUBLIC_APP_API_URL } from "../../config";
 
-
 interface MemberMenuProps {
 	subscribeHandler: any;
 	unsubscribeHandler: any;
-
 }
 
-const MemberMenu = (props: MemberMenuProps) => {
-	const { subscribeHandler, unsubscribeHandler } = props;
+const MemberMenu = ({
+	subscribeHandler,
+	unsubscribeHandler,
+}: MemberMenuProps) => {
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const category: any = router.query?.category;
@@ -33,13 +33,28 @@ const MemberMenu = (props: MemberMenuProps) => {
 		refetch: getMemberRefetch,
 	} = useQuery(GET_MEMBER, {
 		fetchPolicy: "network-only",
-		variables: { input: memberId },
+	  variables: memberId ? { input: memberId } : undefined,
 		skip: !memberId,
 		notifyOnNetworkStatusChange: true,
 		onCompleted: (data: T) => {
 			setMember(data?.getMember);
 		},
 	});
+
+	useEffect(() => {
+		if (memberId && typeof getMemberRefetch === "function") {
+			getMemberRefetch({ input: memberId });
+		}
+	}, [router.query.category]);
+
+	useEffect(() => {
+	console.log("refetch mavjudmi:", typeof getMemberRefetch === "function");
+}, [getMemberRefetch]);
+
+	const handleUnsubscribe = async () => {
+		await unsubscribeHandler(member?._id, null, memberId);
+		await getMemberRefetch(); // Bu bilan yangilanish bo‘ladi
+	};
 
 	if (device === "mobile") {
 		return <div>MEMBER MENU MOBILE</div>;
@@ -78,7 +93,10 @@ const MemberMenu = (props: MemberMenuProps) => {
 							<Button
 								variant="outlined"
 								sx={{ background: "#b9b9b9" }}
-								onClick={() => unsubscribeHandler(member?._id, null, memberId)}>
+								onClick={() => {
+									unsubscribeHandler(member?._id, null, memberId);
+									getMemberRefetch();
+								}} >
 								Unfollow
 							</Button>
 							<Typography>Following</Typography>
@@ -90,7 +108,10 @@ const MemberMenu = (props: MemberMenuProps) => {
 								background: "#ff5d18",
 								":hover": { background: "#ff5d18" },
 							}}
-							onClick={() => subscribeHandler(member?._id, null, memberId)}>
+							onClick={() => {
+								subscribeHandler(member?._id, null, memberId);
+								getMemberRefetch();
+							}}>
 							Follow
 						</Button>
 					)}
@@ -128,7 +149,7 @@ const MemberMenu = (props: MemberMenuProps) => {
 												className={"sub-title"}
 												variant={"subtitle1"}
 												component={"p"}>
-												Products
+												Properties
 											</Typography>
 											<Typography className="count-title" variant="subtitle1">
 												{member?.memberProducts}

@@ -30,7 +30,7 @@ const MemberFollowers = ({
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const [total, setTotal] = useState<number>(0);
-	const category: any = router.query?.category ?? "properties";
+	const category: any = router.query?.category ?? "products";
 	const [followInquiry, setFollowInquiry] = useState<FollowInquiry>(
 		initialInput ?? {
 			page: 1,
@@ -52,7 +52,7 @@ const MemberFollowers = ({
 		variables: { input: followInquiry },
 		skip: !followInquiry?.search?.followingId,
 		notifyOnNetworkStatusChange: true,
-		onCompleted: (data: T) => {
+		onCompleted: (data) => {
 			setMemberFollowers(data?.getMemberFollowers?.list);
 			setTotal(data?.getMemberFollowers?.metaCounter[0]?.total);
 		},
@@ -75,6 +75,8 @@ const MemberFollowers = ({
 		getMemberFollowersRefetch({ input: followInquiry }).then();
 	}, [followInquiry]);
 
+
+
 	/** HANDLERS **/
 	const paginationHandler = async (
 		event: ChangeEvent<unknown>,
@@ -83,6 +85,7 @@ const MemberFollowers = ({
 		followInquiry.page = value;
 		setFollowInquiry({ ...followInquiry });
 	};
+
 
 	if (device === "mobile") {
 		return <div>NESTAR FOLLOWS MOBILE</div>;
@@ -229,12 +232,5 @@ const MemberFollowers = ({
 	}
 };
 
-const MemberFollowersInput: FollowInquiry = {
-	page: 1,
-	limit: 5,
-	search: {
-		followingId: "",
-	},
-};
 
 export default MemberFollowers;

@@ -57,39 +57,26 @@ const MemberPage: NextPage = () => {
 	}, [category, router]);
 
 	/** HANDLERS **/
-	const subscribeHandler = async (id: string, refetch: any, query: any) => {
-		try {
-			if (!id) throw new Error(Messages.error1);
-			if (!user._id) throw new Error(Messages.error2);
+	const subscribeHandler = async (id: string, refetch?: any, query?: any) => {
+		if (!id || !user._id) throw new Error(Messages.error2);
+		await subscribe({ variables: { input: id } });
+		await sweetTopSmallSuccessAlert("Subscribed!", 800);
 	
-			await subscribe({
-				variables: {
-					input: id, // faqat following user id
-				},
-			});
-			await sweetTopSmallSuccessAlert("Subscribed!", 800);
+		if (typeof refetch === "function" && query) {
 			await refetch({ input: query });
-		} catch (err: any) {
-			sweetErrorHandling(err).then();
 		}
 	};
-
-	const unsubscribeHandler = async (id: string, refetch: any, query: any) => {
-		try {
-			if (!id) throw new Error(Messages.error1);
-			if (!user._id) throw new Error(Messages.error2);
-
-			await unsubscribe({
-				variables: {
-					input: id,
-				},
-			});
-			await sweetTopSmallSuccessAlert("Unsubscribed!", 800);
+	
+	const unsubscribeHandler = async (id: string, refetch?: any, query?: any) => {
+		if (!id || !user._id) throw new Error(Messages.error2);
+		await unsubscribe({ variables: { input: id } });
+		await sweetTopSmallSuccessAlert("Unsubscribed!", 800);
+	
+		if (typeof refetch === "function" && query) {
 			await refetch({ input: query });
-		} catch (err: any) {
-			sweetErrorHandling(err).then();
 		}
 	};
+	
 
 	const likeMemberHandler = async (id: string, refetch: any, query: any) => {
 		try {
@@ -131,6 +118,7 @@ const MemberPage: NextPage = () => {
 								<MemberMenu
 									subscribeHandler={subscribeHandler}
 									unsubscribeHandler={unsubscribeHandler}
+								
 								/>
 							</Stack>
 							<Stack className="main-config" mb={"76px"}>
