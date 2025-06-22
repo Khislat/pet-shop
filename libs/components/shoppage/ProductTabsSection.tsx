@@ -3,7 +3,7 @@ import { Tabs, Tab, Box, Typography, Stack, Divider } from "@mui/material";
 import Comments from "./ComentsSection";
 import RelatedProducts from "./RelatedProducts";
 import { CommentInput, CommentsInquiry } from "../../types/comment/comment.input";
-import { Comment } from "../../libs/types/comment/comment";
+
 
 // import RelatedProducts from "./RelatedProducts";
 

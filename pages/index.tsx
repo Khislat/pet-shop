@@ -25,6 +25,8 @@ import { T } from "../libs/types/common";
 import { ProductsInquiry } from "../libs/types/product/product.input";
 import { CartItem } from "../libs/context/CartContext";
 import CommunityBoards from "../libs/components/homepage/CommunityBoards";
+import { Message } from "../libs/enums/common.enum";
+import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from "../libs/sweetAlert";
 
 interface ProductsProps {
 	initialInput: ProductsInquiry;
@@ -35,6 +37,7 @@ const Home = ({ initialInput = productsInput }: ProductsProps) => {
 	const [products, setProducts] = useState<Product[]>([]);
 	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 	const [cartItems, setCartItems] = useState<CartItem[]>([]);
+	const [likeTargetProduct] = useMutation(LIKE_TARGET_PRODUCT);
 
 	/** APOLLO REQUESTS **/
 	const [likeTargetProperty] = useMutation(LIKE_TARGET_PRODUCT);
@@ -51,6 +54,23 @@ const Home = ({ initialInput = productsInput }: ProductsProps) => {
 			setProducts(data?.getProducts?.list);
 		},
 	});
+
+	/** HANDLERS **/
+	const likeProductHandler = async (user: T, id: string) => {
+		try {
+			if (!id) return;
+			if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+
+			await likeTargetProduct({ variables: { input: id } });
+
+			await getProductsRefetch({ input: initialInput });
+
+			await sweetTopSmallSuccessAlert("succes", 800);
+		} catch (err: any) {
+			console.log("ERROR, likeProductHandler:", err.message);
+			sweetMixinErrorAlert(err.message).then();
+		}
+	};
 
 	if (device === "mobile") {
 		return <Stack className={"home-page"}>joijjopijoipjpojpojopij</Stack>;
@@ -70,6 +90,7 @@ const Home = ({ initialInput = productsInput }: ProductsProps) => {
 								? products.filter((p) => p.productCategory === selectedCategory)
 								: products
 						}
+						likeProductHandler={likeProductHandler}
 					
 					/>
 

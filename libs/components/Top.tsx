@@ -1,5 +1,13 @@
 "use client";
-import { Typography, Box, Stack, IconButton, Badge, Menu, MenuItem } from "@mui/material";
+import {
+	Typography,
+	Box,
+	Stack,
+	IconButton,
+	Badge,
+	Menu,
+	MenuItem,
+} from "@mui/material";
 import Link from "next/link";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SearchIcon from "@mui/icons-material/Search";
@@ -8,12 +16,17 @@ import NotificationIcon from "@mui/icons-material/Notifications";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
+import { useReactiveVar } from "@apollo/client";
+import { userVar } from "../../apollo/store";
+import { useTranslation } from "next-i18next";
 
 export default function Top() {
 	/** Language menu state */
+	const user = useReactiveVar(userVar);
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 	const [language, setLanguage] = useState("English");
+	const { t } = useTranslation();
 
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -28,13 +41,19 @@ export default function Top() {
 		setLanguage(lang);
 		handleClose();
 	};
+	// function t(arg0: string): import("react").ReactNode {
+	// 	throw new Error("Function not implemented.");
+	// }
 
 	/** Cart state */
 	const { addToCart, cartItems } = useCart();
 	const [cartCount, setCartCount] = useState(0);
 
 	useEffect(() => {
-		const totalCount = cartItems.reduce((acc, item) => acc + (item.quantity || 1), 0);
+		const totalCount = cartItems.reduce(
+			(acc, item) => acc + (item.quantity || 1),
+			0
+		);
 		setCartCount(totalCount);
 	}, [cartItems]);
 
@@ -51,7 +70,11 @@ export default function Top() {
 					<Link href="/">Home</Link>
 					<Link href="/shop">Shop</Link>
 					<Link href="/vendors">Vendors</Link>
-					<Link href="/mypage">My page</Link>
+					{user?._id && (
+						<Link href={"/mypage"}>
+							<div> {("My Page")} </div>
+						</Link>
+					)}
 					<Link href="/">Blog</Link>
 					<Link href="/">Contact</Link>
 				</Box>
@@ -63,8 +86,7 @@ export default function Top() {
 						className="languageCurrency"
 						gap={0.5}
 						sx={{ color: "#1C2A67", cursor: "pointer" }}
-						onClick={handleClick}
-					>
+						onClick={handleClick}>
 						<Typography sx={{ fontSize: "16px", fontWeight: 500 }}>
 							{language}
 						</Typography>
@@ -78,18 +100,23 @@ export default function Top() {
 						onClose={handleClose}
 						MenuListProps={{
 							"aria-labelledby": "language-button",
-						}}
-					>
+						}}>
 						<MenuItem onClick={langChoice}>English</MenuItem>
 						<MenuItem onClick={langChoice}>Russian</MenuItem>
 						<MenuItem onClick={langChoice}>Korean</MenuItem>
 					</Menu>
 
 					{/* Icons */}
-					<Stack direction="row" spacing={4} alignItems="center" className="headerIcons">
+					<Stack
+						direction="row"
+						spacing={4}
+						alignItems="center"
+						className="headerIcons">
 						{/* Search */}
 						<IconButton>
-							<SearchIcon sx={{ width: "28px", height: "28px", color: "#1C2A67" }} />
+							<SearchIcon
+								sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
+							/>
 						</IconButton>
 
 						{/* Cart with badge */}
@@ -109,9 +136,10 @@ export default function Top() {
 											right: 2,
 										},
 									}}
-									overlap="circular"
-								>
-									<ShoppingBagOutlinedIcon sx={{ width: "28px", height: "28px", color: "#1C2A67" }} />
+									overlap="circular">
+									<ShoppingBagOutlinedIcon
+										sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
+									/>
 								</Badge>
 							</IconButton>
 						</Link>
@@ -132,16 +160,19 @@ export default function Top() {
 										right: 2,
 									},
 								}}
-								overlap="circular"
-							>
-								<NotificationIcon sx={{ width: "28px", height: "28px", color: "#1C2A67" }} />
+								overlap="circular">
+								<NotificationIcon
+									sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
+								/>
 							</Badge>
 						</IconButton>
 
 						{/* User account */}
 						<Link href="/account">
 							<IconButton>
-								<PersonOutlineIcon sx={{ width: "28px", height: "28px", color: "#1C2A67" }} />
+								<PersonOutlineIcon
+									sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
+								/>
 							</IconButton>
 						</Link>
 					</Stack>

@@ -75,13 +75,17 @@ const ShopCard = ({
 							{product?.productViews}
 						</Typography>
 
-						<IconButton color="default" onClick={toggleWishlist}>
-							{isWished ? (
-								<FavoriteIcon sx={{ color: "#ff4d4f" }} />
-							) : (
-								<FavoriteBorderIcon sx={{ color: "#888" }} />
-							)}
-						</IconButton>
+						<IconButton
+									color={"default"}
+									onClick={() => likeProductHandler(user, product?._id)}>
+									{myFavorites ? (
+										<FavoriteIcon color="primary" />
+									) : product?.meLiked && product?.meLiked[0]?.myFavorite ? (
+										<FavoriteIcon color="primary" />
+									) : (
+										<FavoriteBorderIcon />
+									)}
+								</IconButton>
 
 						<Typography className="view-cnt">
 							{product?.productLikes}

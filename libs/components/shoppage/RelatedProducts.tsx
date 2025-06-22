@@ -1,4 +1,3 @@
-// components/ProductTabs/RelatedProducts.tsx
 import React, { useState } from "react";
 import { Button, Divider, IconButton, Stack } from "@mui/material";
 import { ArrowBackIosNew, ArrowForwardIos, Star } from "@mui/icons-material";

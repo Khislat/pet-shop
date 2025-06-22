@@ -508,7 +508,7 @@ const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 
 const shopInput: ProductsInquiry = {
 	page: 1,
-	limit: 8,
+	limit: 100,
 	sort: "createdAt",
 	search: {},
 };

@@ -34,6 +34,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import CallIcon from "@mui/icons-material/Call";
 import { relative } from "path";
 import { NEXT_PUBLIC_APP_API_URL } from "../../config";
+import Link from "next/link";
 
 interface TopVendorsProps {
 	initialInput?: VendorsInquiry;
@@ -112,10 +113,17 @@ const TopVendorsSection = ({ initialInput = vendorsInput }: TopVendorsProps) => 
 									<Stack className="teamCard">
 										<div className="profileImageContainer">
 											<div className="profileImage">
+											<Link
+												href={{
+													pathname: "/member",
+													query: { memberId: member._id },
+												}}>
 												<img
 													src={`${NEXT_PUBLIC_APP_API_URL}/${member?.memberImage}`}
 													alt={member.memberNick}
+													className="clickableImage"
 												/>
+											</Link>
 											</div>
 										</div>
 										<h3 className="memberName">{member.memberNick}</h3>

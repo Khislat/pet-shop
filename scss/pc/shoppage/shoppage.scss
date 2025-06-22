@@ -436,9 +436,18 @@
 						gap: 16px;
 
 						.image {
-							width: 89px;
-							height: 108px;
-							background-color: #90c4df;
+							display: flex;
+							width: 80px; // oldingi 40px juda kichik edi
+							height: 105px;
+							background-color: #f0f0f0;
+							border-radius: 6px;
+							overflow: hidden;
+
+							img {
+								width: 100%;
+								height: 100%;
+								object-fit: cover; // 👈 tasvirni proporsiya bilan sig‘diradi
+							}
 						}
 
 						.content {
@@ -456,6 +465,11 @@
 								letter-spacing: 0%;
 								text-align: left;
 								text-transform: capitalize;
+							}
+							.prices {
+								display: flex;
+								flex-direction: row;
+								gap: 10px;
 							}
 
 							.price {
@@ -661,7 +675,6 @@
 									font-size: 13px;
 								}
 							}
-							
 
 							.discountBadge {
 								position: absolute;

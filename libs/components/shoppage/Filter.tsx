@@ -79,6 +79,8 @@ const Filter = ({
 					maxPrice >= searchFilter.search.pricesRange.start) &&
 				(!searchFilter.search?.pricesRange?.end ||
 					minPrice <= searchFilter.search.pricesRange.end);
+
+			return textMatch && priceMatch; // 👈 BU QATOR MUHIM!
 		});
 
 		setFilteredProducts(filtered);
@@ -87,7 +89,6 @@ const Filter = ({
 		searchFilter.search?.text,
 		searchFilter.search?.pricesRange?.start,
 		searchFilter.search?.pricesRange?.end,
-
 		products,
 	]);
 
@@ -224,16 +225,16 @@ const Filter = ({
 				</Box>
 			</Box>
 			{/* Products (simplified preview) */}
-			/**
 			<Box className={"productsContainer"}>
 				<Typography className={"header"}>PRODUCTS</Typography>
 
-				<React.Fragment>
-					<ProductItem />
-					<hr className={"divider"} />
-				</React.Fragment>
-			</Box>{" "}
-			**/
+				{filteredProducts.slice(0, 3).map((product, index, array) => (
+					<React.Fragment key={product._id}>
+						<ProductItem product={product} />
+						{index < array.length - 1 && <hr className={"divider"} />}
+					</React.Fragment>
+				))}
+			</Box>
 			{/* Product Brands */}
 			{/* Filter by Tags */}
 			<Box className={"filterContainer"}>

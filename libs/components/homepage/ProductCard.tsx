@@ -7,16 +7,30 @@ import { Product } from "../../types/product/product";
 import { NEXT_PUBLIC_APP_API_URL } from "../../config";
 import { useCart } from "../../context/CartContext";
 import { sweetErrorAlert, sweetTopSmallSuccessAlert } from "../../sweetAlert";
+import Link from "next/link";
+import { userVar } from "../../../apollo/store";
+import { useReactiveVar } from "@apollo/client";
 
 interface ProductCardProps {
 	product: Product;
 	memberPage: boolean;
+	likeProductHandler?: any;
+	myFavorites?: boolean;
 }
 
-const ProductCard = ({ product, memberPage }: ProductCardProps) => {
-	const [isWished, setIsWished] = useState(false);
+const ProductCard = ({
+	product,
+	memberPage,
+	likeProductHandler,
+	myFavorites,
+}: ProductCardProps) => {
+	const [isWished, setIsWished] = useState(
+		myFavorites || (product?.meLiked && product?.meLiked[0]?.myFavorite)
+	);
+	const [likes, setLikes] = useState<number>(product?.productLikes || 0);
 	const { addToCart, cartItems } = useCart();
 	const [isAdding, setIsAdding] = useState(false);
+	const user = useReactiveVar(userVar);
 
 	const handleAddToCart = async () => {
 		setIsAdding(true);
@@ -26,19 +40,31 @@ const ProductCard = ({ product, memberPage }: ProductCardProps) => {
 
 			// Success feedback (optional)
 			// toast.success('Product added to cart!');
-			sweetTopSmallSuccessAlert('Product added to cart!')
+			sweetTopSmallSuccessAlert("Product added to cart!");
 		} catch (error) {
 			console.error("Error adding to cart:", error);
 			// toast.error('Failed to add product to cart');
-			sweetErrorAlert('Failed to add product to cart')
+			sweetErrorAlert("Failed to add product to cart");
 		} finally {
 			setIsAdding(false);
 		}
 	};
 
 	const toggleWishlist = () => {
+		likeProductHandler(user, product._id);
 		setIsWished((prev) => !prev);
-		// Istasangiz bu yerda like mutation yuborishingiz mumkin
+		setLikes((prev) => (isWished ? prev - 1 : prev + 1));
+	};
+	const handleLikeClick = async () => {
+		if (!user?._id) {
+			sweetErrorAlert("You are not Authenticate pleace login first!");
+			return;
+		}
+
+		if (likeProductHandler) {
+			await likeProductHandler(user, product._id);
+			setIsWished((prev) => !prev);
+		}
 	};
 
 	return (
@@ -49,23 +75,29 @@ const ProductCard = ({ product, memberPage }: ProductCardProps) => {
 				</div>
 			)}
 
-			<IconButton className="wishlistIcon" onClick={toggleWishlist}>
-				{isWished ? (
+			<IconButton className="wishlistIcon" onClick={handleLikeClick}>
+				{user?._id && isWished ? (
 					<FavoriteIcon sx={{ color: "#ff4d4f" }} />
 				) : (
 					<FavoriteBorderIcon sx={{ color: "#888" }} />
 				)}
 			</IconButton>
 
-			{product.productImages?.length > 0 && (
-				<Image
-					src={`${NEXT_PUBLIC_APP_API_URL}/${product.productImages[0]}`}
-					alt={product.productTitle}
-					width={180}
-					height={180}
-					className="productImage"
-				/>
-			)}
+			<Link
+				href={{
+					pathname: "/shop/detail",
+					query: { id: product?._id },
+				}}>
+				{product.productImages?.length > 0 && (
+					<img
+						src={`${NEXT_PUBLIC_APP_API_URL}/${product.productImages[0]}`}
+						alt={product.productTitle}
+						width={180}
+						height={180}
+						className="productImage"
+					/>
+				)}
+			</Link>
 
 			<div className={"productRating"}>
 				<div className={"stars"} />

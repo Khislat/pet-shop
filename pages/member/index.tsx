@@ -58,23 +58,33 @@ const MemberPage: NextPage = () => {
 
 	/** HANDLERS **/
 	const subscribeHandler = async (id: string, refetch?: any, query?: any) => {
-		if (!id || !user._id) throw new Error(Messages.error2);
+		try {
+			if (!id || !user._id) throw new Error(Messages.error2);
 		await subscribe({ variables: { input: id } });
 		await sweetTopSmallSuccessAlert("Subscribed!", 800);
 	
 		if (typeof refetch === "function" && query) {
 			await refetch({ input: query });
 		}
+		} catch (err: any) {
+			sweetErrorHandling(err).then();
+		}
+		
 	};
 	
 	const unsubscribeHandler = async (id: string, refetch?: any, query?: any) => {
-		if (!id || !user._id) throw new Error(Messages.error2);
+		try {
+			if (!id || !user._id) throw new Error(Messages.error2);
 		await unsubscribe({ variables: { input: id } });
 		await sweetTopSmallSuccessAlert("Unsubscribed!", 800);
 	
 		if (typeof refetch === "function" && query) {
 			await refetch({ input: query });
 		}
+		} catch (err: any) {
+			sweetErrorHandling(err).then();
+		}
+		
 	};
 	
 

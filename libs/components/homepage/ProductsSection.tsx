@@ -6,6 +6,8 @@ import { Product } from "../../types/product/product";
 
 type ProductsSectionProps = {
 	products: Product[];
+	myFavorites?: boolean;
+	likeProductHandler?: any;
 };
 
 const categoryNames = [
@@ -15,7 +17,7 @@ const categoryNames = [
 	{ name: "Soaps & Shampoos", key: "SOAPS_SHAMPOOS" },
 ];
 
-const ProductsSection = ({ products }: ProductsSectionProps) => {
+const ProductsSection = ({ products, 	likeProductHandler, 	myFavorites,}: ProductsSectionProps) => {
 	const device = useDeviceDetect();
 	const initialItemsToShow = 4;
 	const [itemsToShow, setItemsToShow] = useState(initialItemsToShow);
@@ -57,7 +59,7 @@ const ProductsSection = ({ products }: ProductsSectionProps) => {
 				<Box className={"productsGrid"}>
 					{displayedProducts.length > 0 ? (
 						displayedProducts.map((product) => (
-							<ProductCard key={product._id} product={product} 	memberPage={true}/>
+							<ProductCard key={product._id} product={product} 	memberPage={true} 	likeProductHandler={likeProductHandler}/>
 						))
 					) : (
 						<p>No products found in this category.</p>

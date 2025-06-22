@@ -20,8 +20,11 @@ import NotificationIcon from "@mui/icons-material/Notifications";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
+import { useReactiveVar } from "@apollo/client";
+import { userVar } from "../../apollo/store";
 
 export default function TopBasic() {
+	const user = useReactiveVar(userVar);
 	/** Handler */
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -65,7 +68,11 @@ export default function TopBasic() {
 					<Link href="/">Home</Link>
 					<Link href="/shop">Shop</Link>
 					<Link href="/vendors">Vendors</Link>
-					<Link href="/mypage">My page</Link>
+					{user?._id && (
+								<Link href={'/mypage'}>
+									<div> {('My Page')} </div>
+								</Link>
+							)}
 					<Link href="/">Blog</Link>
 					<Link href="/">Contact</Link>
 				</Box>
