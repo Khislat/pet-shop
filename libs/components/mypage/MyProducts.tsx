@@ -16,7 +16,7 @@ import ProductCards from "./ProductCards";
 import { MyProductsCard } from "./MyProductsCard";
 
 interface MyProducProps {
-	initialInput: VendorProductsInquiry;
+	initialInput?: VendorProductsInquiry;
 }
 
 const MyProducts = ({ initialInput = myProducts }: MyProducProps) => {

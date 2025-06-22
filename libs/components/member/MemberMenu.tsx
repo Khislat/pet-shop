@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { Stack, Typography, Box, List, ListItem, Button } from "@mui/material";
-import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { Stack, Typography, Box, List, ListItem, Button,} from "@mui/material";
+
 import Link from "next/link";
 import { Member } from "../../types/member/member";
-import { NEXT_PUBLIC_APP_API_URL } from "../../config";
+import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { GET_MEMBER } from "../../../apollo/user/query";
 import { useQuery } from "@apollo/client";
 import { T } from "../../types/common";
-import { GET_MEMBER } from "../../../apollo/user/query";
+import { NEXT_PUBLIC_APP_API_URL } from "../../config";
+
 
 interface MemberMenuProps {
 	subscribeHandler: any;
 	unsubscribeHandler: any;
+
 }
 
 const MemberMenu = (props: MemberMenuProps) => {
@@ -99,16 +102,16 @@ const MemberMenu = (props: MemberMenuProps) => {
 						</Typography>
 						<List className={"sub-section"}>
 							{member?.memberType === "VENDOR" && (
-								<ListItem className={category === "properties" ? "focus" : ""}>
+								<ListItem className={category === "products" ? "focus" : ""}>
 									<Link
 										href={{
 											pathname: "/member",
-											query: { ...router.query, category: "properties" },
+											query: { ...router.query, category: "products" },
 										}}
 										scroll={false}
 										style={{ width: "100%" }}>
 										<div className={"flex-box"}>
-											{category === "properties" ? (
+											{category === "products" ? (
 												<img
 													className={"com-icon"}
 													src={"/img/icons/homeWhite.svg"}
@@ -125,7 +128,7 @@ const MemberMenu = (props: MemberMenuProps) => {
 												className={"sub-title"}
 												variant={"subtitle1"}
 												component={"p"}>
-												Properties
+												Products
 											</Typography>
 											<Typography className="count-title" variant="subtitle1">
 												{member?.memberProducts}

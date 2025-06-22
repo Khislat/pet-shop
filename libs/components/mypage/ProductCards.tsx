@@ -21,6 +21,7 @@ type ProductCardProps = {
 	myFavorites?: boolean;
 	deleteProductHandler?: any;
 	updateProductHandler?: any;
+	memberPage?: boolean;
 };
 
 const ProductCards = ({
@@ -62,8 +63,6 @@ const ProductCards = ({
 		}
 	};
 
-
-
 	return (
 		<div className="card">
 			{product.productPrice && (
@@ -98,21 +97,16 @@ const ProductCards = ({
 			{/* <div className="imagePlaceholder">
         <img src={product.image} alt={product.productTitle} />
       </div> */}
-			<Link
-				href={{
-					pathname: "/shop/detail",
-					query: { id: product?._id },
-				}}>
-				{product.productImages?.length > 0 && (
-					<img
-						src={`${NEXT_PUBLIC_APP_API_URL}/${product.productImages[0]}`}
-						alt={product.productTitle}
-						width={180}
-						height={180}
-						className="productImage"
-					/>
-				)}
-			</Link>
+
+			{product.productImages?.length > 0 && (
+				<img
+					src={`${NEXT_PUBLIC_APP_API_URL}/${product.productImages[0]}`}
+					alt={product.productTitle}
+					width={180}
+					height={180}
+					className="productImage"
+				/>
+			)}
 
 			<Button className="cartBtn" variant="contained" onClick={handleAddToCart}>
 				ADD TO CART

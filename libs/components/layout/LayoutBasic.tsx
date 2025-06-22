@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Head from "next/head";
 import { Stack } from "@mui/material";
 import TopBar from "../homepage/TopBar";
@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { useReactiveVar } from "@apollo/client";
 import { userVar } from "../../../apollo/store";
+import { getJwtToken, updateUserInfo } from "../../auth";
 
 const withLayoutBasic = (Component: any) => {
 	return (props: any) => {
@@ -17,6 +18,11 @@ const withLayoutBasic = (Component: any) => {
 		const device = useDeviceDetect();
 		const [authHeader, setAuthHeader] = useState<boolean>(false);
 		const user = useReactiveVar(userVar);
+
+		useEffect(() => {
+			const jwt = getJwtToken();
+			if (jwt) updateUserInfo(jwt);
+		}, []);
 		return (
 			<>
 				{" "}

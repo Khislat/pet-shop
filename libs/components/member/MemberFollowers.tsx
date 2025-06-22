@@ -13,27 +13,31 @@ import { GET_MEMBER_FOLLOWERS } from "../../../apollo/user/query";
 import { NEXT_PUBLIC_APP_API_URL } from "../../config";
 
 interface MemberFollowsProps {
-	initialInput: FollowInquiry;
+	initialInput?: FollowInquiry;
 	subscribeHandler: any;
 	unsubscribeHandler: any;
 	likeMemberHandler: any;
 	redirectToMemberPageHandler: any;
 }
 
-const MemberFollowers = (props: MemberFollowsProps) => {
-	const {
-		initialInput,
-		subscribeHandler,
-		unsubscribeHandler,
-		redirectToMemberPageHandler,
-		likeMemberHandler,
-	} = props;
+const MemberFollowers = ({
+	initialInput,
+	subscribeHandler,
+	unsubscribeHandler,
+	redirectToMemberPageHandler,
+	likeMemberHandler,
+}: MemberFollowsProps) => {
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const [total, setTotal] = useState<number>(0);
 	const category: any = router.query?.category ?? "properties";
-	const [followInquiry, setFollowInquiry] =
-		useState<FollowInquiry>(initialInput);
+	const [followInquiry, setFollowInquiry] = useState<FollowInquiry>(
+		initialInput ?? {
+			page: 1,
+			limit: 5,
+			search: { followingId: "" },
+		}
+	);
 	const [memberFollowers, setMemberFollowers] = useState<Follower[]>([]);
 	const user = useReactiveVar(userVar);
 
@@ -55,17 +59,17 @@ const MemberFollowers = (props: MemberFollowsProps) => {
 	});
 	/** LIFECYCLES **/
 	useEffect(() => {
-		if (router.query.memberId)
+		const newFollowingId = router.query.memberId
+			? (router.query.memberId as string)
+			: user?._id;
+
+		if (followInquiry.search.followingId !== newFollowingId) {
 			setFollowInquiry({
 				...followInquiry,
-				search: { followingId: router.query.memberId as string },
+				search: { followingId: newFollowingId },
 			});
-		else
-			setFollowInquiry({
-				...followInquiry,
-				search: { followingId: user?._id },
-			});
-	}, [router]);
+		}
+	}, [router.query.memberId, user?._id]);
 
 	useEffect(() => {
 		getMemberFollowersRefetch({ input: followInquiry }).then();
@@ -147,11 +151,13 @@ const MemberFollowers = (props: MemberFollowsProps) => {
 											/>
 										) : (
 											<FavoriteBorderIcon
-												onClick={likeMemberHandler(
-													follower?.followerData?._id,
-													getMemberFollowersRefetch,
-													followInquiry
-												)}
+												onClick={() =>
+													likeMemberHandler(
+														follower?.followerData?._id,
+														getMemberFollowersRefetch,
+														followInquiry
+													)
+												}
 											/>
 										)}
 										<span>({follower?.followerData?.memberLikes})</span>
@@ -223,13 +229,11 @@ const MemberFollowers = (props: MemberFollowsProps) => {
 	}
 };
 
-MemberFollowers.defaultProps = {
-	initialInput: {
-		page: 1,
-		limit: 5,
-		search: {
-			followingId: "",
-		},
+const MemberFollowersInput: FollowInquiry = {
+	page: 1,
+	limit: 5,
+	search: {
+		followingId: "",
 	},
 };
 

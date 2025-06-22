@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 import { Box, Grid, Typography, Stack, Button, Container } from "@mui/material";
+import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
 import HeroSectionBasic from "../../libs/components/vendorspage/HeroSectionBasic";
@@ -28,34 +29,18 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import CallIcon from "@mui/icons-material/Call";
 import { NEXT_PUBLIC_APP_API_URL } from "../../libs/config";
+import member from "../member";
 
 interface VendorsPageProps {
 	initialInput?: VendorsInquiry;
 	showMoreBtn: boolean;
+	memberId: string;
 }
-
-const teamMembers = [
-	{
-		name: "Linda Himloton",
-		role: "Pets Care Trainer",
-	},
-	{
-		name: "Andreya Kishore",
-		role: "Pets Care Trainer",
-	},
-	{
-		name: "Mariya Joesph",
-		role: "Pets Care Trainer",
-	},
-	{
-		name: "Amanda Losya",
-		role: "Pets Care Trainer",
-	},
-];
 
 const VendorsSectionPage = ({
 	initialInput = vendorsInput,
 	showMoreBtn,
+	memberId,
 }: VendorsPageProps) => {
 	const device = useDeviceDetect();
 	const router = useRouter();
@@ -90,6 +75,10 @@ const VendorsSectionPage = ({
 			console.log("ERROR, likeMemberHandler:", err.message);
 			sweetMixinErrorAlert(err.message).then();
 		}
+	};
+	const handleClick = (id: string) => {
+		// router.push(`/member/${id}/detail`);
+		console.log("memberId:", id);
 	};
 
 	useEffect(() => {
@@ -129,10 +118,17 @@ const VendorsSectionPage = ({
 								<Stack className="teamCard">
 									<div className="profileImageContainer">
 										<div className="profileImage">
-											<img
-												src={`${NEXT_PUBLIC_APP_API_URL}/${member?.memberImage}`}
-												alt={member.memberNick}
-											/>
+											<Link
+												href={{
+													pathname: "/member",
+													query: { memberId: member._id },
+												}}>
+												<img
+													src={`${NEXT_PUBLIC_APP_API_URL}/${member?.memberImage}`}
+													alt={member.memberNick}
+													className="clickableImage"
+												/>
+											</Link>
 										</div>
 									</div>
 									<h3 className="memberName">{member.memberNick}</h3>

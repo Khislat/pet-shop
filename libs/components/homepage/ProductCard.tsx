@@ -10,9 +10,10 @@ import { sweetErrorAlert, sweetTopSmallSuccessAlert } from "../../sweetAlert";
 
 interface ProductCardProps {
 	product: Product;
+	memberPage: boolean;
 }
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product, memberPage }: ProductCardProps) => {
 	const [isWished, setIsWished] = useState(false);
 	const { addToCart, cartItems } = useCart();
 	const [isAdding, setIsAdding] = useState(false);

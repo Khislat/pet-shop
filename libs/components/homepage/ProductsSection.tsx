@@ -3,7 +3,6 @@ import ProductCard from "./ProductCard";
 import { Box, Button, Grid, Stack } from "@mui/material";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { Product } from "../../types/product/product";
-import { useCart } from "../../context/CartContext";
 
 type ProductsSectionProps = {
 	products: Product[];
@@ -22,7 +21,6 @@ const ProductsSection = ({ products }: ProductsSectionProps) => {
 	const [itemsToShow, setItemsToShow] = useState(initialItemsToShow);
 	const [activeCategory, setActiveCategory] = useState<string>("ALL");
 	const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-	const { addToCart, cartItems } = useCart();
 
 	useEffect(() => {
 		if (activeCategory === "ALL") {
@@ -59,7 +57,7 @@ const ProductsSection = ({ products }: ProductsSectionProps) => {
 				<Box className={"productsGrid"}>
 					{displayedProducts.length > 0 ? (
 						displayedProducts.map((product) => (
-							<ProductCard key={product._id} product={product} />
+							<ProductCard key={product._id} product={product} 	memberPage={true}/>
 						))
 					) : (
 						<p>No products found in this category.</p>

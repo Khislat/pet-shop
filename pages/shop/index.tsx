@@ -48,7 +48,7 @@ const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 	const [openBrands, setOpenBrands] = useState<boolean>(true);
 	const [openPrice, setOpenPrice] = useState<boolean>(true);
 
-	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+	const [selectedCategory,  setSelectedCategory] = useState<string | null>(null);
 
 	const [searchFilter, setSearchFilter] = useState<ProductsInquiry>(
 		router?.query?.input

@@ -13,27 +13,31 @@ import { T } from "../../types/common";
 import { NEXT_PUBLIC_APP_API_URL } from "../../config";
 
 interface MemberFollowingsProps {
-	initialInput: FollowInquiry;
+	initialInput?: FollowInquiry;
 	subscribeHandler: any;
 	unsubscribeHandler: any;
 	likeMemberHandler: any;
 	redirectToMemberPageHandler: any;
 }
 
-const MemberFollowings = (props: MemberFollowingsProps) => {
-	const {
-		initialInput,
-		subscribeHandler,
-		unsubscribeHandler,
-		redirectToMemberPageHandler,
-		likeMemberHandler,
-	} = props;
+const MemberFollowings = ({
+	initialInput,
+	subscribeHandler,
+	unsubscribeHandler,
+	redirectToMemberPageHandler,
+	likeMemberHandler,
+}: MemberFollowingsProps) => {
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const [total, setTotal] = useState<number>(0);
-	const category: any = router.query?.category ?? "properties";
-	const [followInquiry, setFollowInquiry] =
-		useState<FollowInquiry>(initialInput);
+	const category: any = router.query?.category ?? "products";
+	const [followInquiry, setFollowInquiry] = useState<FollowInquiry>(
+		initialInput ?? {
+			page: 1,
+			limit: 5,
+			search: { followerId: "" },
+		}
+	);
 	const [memberFollowings, setMemberFollowings] = useState<Following[]>([]);
 	const user = useReactiveVar(userVar);
 
@@ -79,7 +83,7 @@ const MemberFollowings = (props: MemberFollowingsProps) => {
 	};
 
 	if (device === "mobile") {
-		return <div>NESTAR FOLLOWS MOBILE</div>;
+		return <div>PETSHOP FOLLOWS MOBILE</div>;
 	} else {
 		return (
 			<div id="member-follows-page">
@@ -223,13 +227,11 @@ const MemberFollowings = (props: MemberFollowingsProps) => {
 	}
 };
 
-MemberFollowings.defaultProps = {
-	initialInput: {
-		page: 1,
-		limit: 5,
-		search: {
-			followerId: "",
-		},
+const MemberFollowingsInput: FollowInquiry = {
+	page: 1,
+	limit: 5,
+	search: {
+		followerId: "",
 	},
 };
 
