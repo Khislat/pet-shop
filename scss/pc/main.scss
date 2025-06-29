@@ -5,7 +5,6 @@
 @import "/scss/pc/accountpage/accountpage";
 @import "/scss/pc/cart/cart";
 
-
 @import "/scss/pc/mypage/mypage.scss";
 @import "/scss/pc/mypage/addNewProperty.scss";
 @import "/scss/pc/mypage/myProperties.scss";
@@ -20,6 +19,7 @@
 @import "/scss/pc/member/memberArticles.scss";
 @import "/scss/pc/member/memberProducts.scss";
 
+@import "/scss/pc/admin/admin.scss";
 
 @import "/scss/variables.scss";
 @import "/scss/reset.scss";
@@ -130,6 +130,44 @@
 				}
 				.headerIcons {
 					gap: -30px;
+				}
+			}
+			.lan-box {
+				margin-left: 28px;
+				display: flex;
+				align-items: center;
+				.notification-icon {
+					color: white;
+				}
+				.btn-lang {
+					border-radius: 4px;
+					img {
+						width: 24px;
+						height: 17px;
+						border-radius: 2px;
+					}
+				}
+				.img-flag {
+					width: 24px;
+					height: 17px;
+					border-radius: 2px;
+					margin-right: 8px;
+				}
+			}
+			.btn-lang-text {
+				background: transparent;
+				color: black; // yoki siz istagan rang
+				font-size: 16px;
+				font-weight: 500;
+				text-transform: none;
+				display: flex;
+				align-items: center;
+				gap: 4px;
+				padding: 0;
+				min-width: unset;
+
+				&:hover {
+					background-color: transparent;
 				}
 			}
 		}

@@ -4,7 +4,7 @@ import {
 	ProductWeight,
 } from "../../enums/product.enum";
 
-export interface PropertyUpdate {
+export interface ProductUpdate {
 	_id: string;
 	productCategory: ProductCategory;
 	productStatus: ProductStatus;

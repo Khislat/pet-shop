@@ -82,7 +82,7 @@ const MyProducts: NextPage = ({ initialInput = myProducts }: MyProducProps) => {
 	};
 
 	if (device === "mobile") {
-		return <div>NESTAR PRODUCTS MOBILE</div>;
+		return <div>PETSHOP PRODUCTS MOBILE</div>;
 	} else {
 		return (
 			<div id="member-properties-page">

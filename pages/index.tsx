@@ -26,7 +26,10 @@ import { ProductsInquiry } from "../libs/types/product/product.input";
 import { CartItem } from "../libs/context/CartContext";
 import CommunityBoards from "../libs/components/homepage/CommunityBoards";
 import { Message } from "../libs/enums/common.enum";
-import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from "../libs/sweetAlert";
+import {
+	sweetMixinErrorAlert,
+	sweetTopSmallSuccessAlert,
+} from "../libs/sweetAlert";
 
 interface ProductsProps {
 	initialInput: ProductsInquiry;
@@ -73,7 +76,32 @@ const Home = ({ initialInput = productsInput }: ProductsProps) => {
 	};
 
 	if (device === "mobile") {
-		return <Stack className={"home-page"}>joijjopijoipjpojpojopij</Stack>;
+		return (
+			<Stack className={"home-page"}>
+				<HeroSection />
+				<AboutSection />
+				<CategoriesSection
+					products={products}
+					onCategorySelect={(category) => setSelectedCategory(category)}
+				/>
+
+				<ProductsSection
+					products={
+						selectedCategory
+							? products.filter((p) => p.productCategory === selectedCategory)
+							: products
+					}
+					likeProductHandler={likeProductHandler}
+				/>
+
+				<FeaturesSection />
+				<TopVendorsSection />
+				<TestimonialsSection />
+				<CommunityBoards />
+				<LogoSection />
+				<AppPromoSection />
+			</Stack>
+		);
 	} else {
 		return (
 			<Stack className={"home-page"}>
@@ -83,16 +111,15 @@ const Home = ({ initialInput = productsInput }: ProductsProps) => {
 					products={products}
 					onCategorySelect={(category) => setSelectedCategory(category)}
 				/>
-		
-					<ProductsSection
-						products={
-							selectedCategory
-								? products.filter((p) => p.productCategory === selectedCategory)
-								: products
-						}
-						likeProductHandler={likeProductHandler}
-					
-					/>
+
+				<ProductsSection
+					products={
+						selectedCategory
+							? products.filter((p) => p.productCategory === selectedCategory)
+							: products
+					}
+					likeProductHandler={likeProductHandler}
+				/>
 
 				<FeaturesSection />
 				<TopVendorsSection />
