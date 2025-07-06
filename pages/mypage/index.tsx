@@ -28,6 +28,7 @@ import {
 import { Messages } from "../../libs/config";
 import AddProduct from "../../libs/components/mypage/AddProduct";
 import MyProducts from "../../libs/components/mypage/MyProducts";
+import HeroSectionBasic from "../../libs/components/mypage/HeroSectionBasic";
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -120,6 +121,7 @@ const MyPage: NextPage = () => {
 	} else {
 		return (
 			<div id="my-page" style={{ position: "relative" }}>
+				<HeroSectionBasic />
 				<div className="container">
 					<Stack className={"my-page"}>
 						<Stack className={"back-frame"}>
@@ -129,7 +131,7 @@ const MyPage: NextPage = () => {
 							<Stack className="main-config" mb={"76px"}>
 								<Stack className={"list-config"}>
 									{category === "addProduct" && <AddProduct />}
-									{category === "myProducts" && <MyProducts  />}
+									{category === "myProducts" && <MyProducts />}
 									{category === "myFavorites" && <MyFavorites />}
 									{category === "recentlyVisited" && <RecentlyVisited />}
 									{category === "myArticles" && <MyArticles />}

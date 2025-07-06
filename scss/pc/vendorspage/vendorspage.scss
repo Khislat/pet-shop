@@ -7,40 +7,48 @@
 		background-color: $light-gray;
 		position: relative;
 		text-align: center;
-		.heroSectionBasic {
+		.heroSectionVendors {
+			width: 100%;
+			height: 660px;
+			position: relative;
+			background-image: url("/img/homepage/heroBasic.jpeg");
+			background-size: cover;
+			background-position: center;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			position: relative;
-			width: 100%;
-			overflow: hidden;
-			background-color: $light-gray;
-			margin-bottom: 30px;
+			text-align: center;
+			margin-bottom: 120px;
 
-			.wave {
-				background-image: url("/img/banner/wave-basic.svg");
-				background-repeat: no-repeat;
-				background-size: cover;
-				background-position: center;
-				width: 100%;
-				height: 520px;
+			.heroContent {
+				z-index: 2;
+				color: white;
+				text-align: center;
+
+				.title {
+					font-size: 42px;
+					font-weight: 700;
+					text-transform: uppercase;
+					font-family: "Poppins", sans-serif;
+				}
+
+				.breadcrumb {
+					font-size: 16px;
+					margin-top: 10px;
+					font-weight: 300;
+				}
 			}
 
-			.heroContainer {
-				position: relative;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				margin-top: 170px;
+			.wave {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				height: 300px;
+				z-index: 1;
 
-				.pageName {
-					color: #fff;
-					font-family: $font;
-					font-size: 45px;
-					font-style: normal;
-					font-weight: 400;
-					line-height: normal;
-					text-transform: capitalize;
+				svg {
+					width: 100%;
+					display: block;
 				}
 			}
 		}
@@ -58,6 +66,7 @@
 				flex-direction: row;
 				align-items: center;
 				justify-content: center;
+				margin-top: 500px;
 			}
 			.titleBox {
 				display: flex;
@@ -237,7 +246,7 @@
 
 		.testimonialsWrapper {
 			.wrapper {
-				background-color: #ffeaea;
+				background-color: #fde5e4;
 				width: 1503px;
 				height: 762px;
 				position: relative;
@@ -310,33 +319,28 @@
 						gap: 40px;
 						max-width: 1100px;
 
-						.faQuoteLeft {
-							display: flex;
-							justify-content: center;
-							position: relative;
-							align-items: center;
-							width: 57.728px;
-							height: 53.852px;
-							margin-top: -250px;
-							color: white;
-						}
 						.faQuoteRight {
-							position: relative;
+							position: absolute;
 							display: flex;
-							justify-content: center;
-							align-items: center;
-							width: 57.728px;
-							height: 53.852px;
-							margin-top: 200px;
-							transform: rotate(-180deg);
-							color: white;
+
+							margin-top: 280px;
+							margin-left: 1000px;
+							.faQuote {
+								width: 137px;
+								height: 107px;
+							}
 						}
 
 						.imageBox {
 							.imgPlaceholder {
-								width: 307px;
-								height: 307px;
 								background-color: #887dc0;
+								position: relative;
+
+								.client {
+									width: 387px;
+									height: 357px;
+									z-index: 2;
+								}
 							}
 						}
 

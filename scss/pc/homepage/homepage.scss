@@ -10,20 +10,19 @@ $font: "Inter", sans-serif;
 		width: 100%;
 		height: 700px;
 		overflow: hidden;
+		margin-top: 140px;
 
 		background-color: #eff9ff;
-		.waveWrapper {
+		.wave {
 			position: absolute;
 			bottom: 0;
-			left: 0;
-			width: 1900px;
-			overflow: hidden;
-			line-height: 0;
+			width: 100%;
+			height: 260px;
+			z-index: 1;
 
-			.wave {
-				display: block;
+			svg {
 				width: 100%;
-				height: 90px;
+				display: block;
 			}
 		}
 
@@ -103,8 +102,7 @@ $font: "Inter", sans-serif;
 						font-family: $font;
 						font-size: 18px;
 						font-weight: 600;
-
-						cursor: pointer;
+						cursor: pointer !important;
 						transition: background-color 0.3s ease;
 						&:hover {
 							background-color: #e56a34;
@@ -115,12 +113,14 @@ $font: "Inter", sans-serif;
 							background: url("/img/icons/homepage/buttonIcon.svg") no-repeat
 								center;
 							background-size: cover;
+							cursor: pointer;
 						}
 					}
 				}
 				.reviewsContainer {
 					display: flex;
 					align-items: center;
+
 					.reviewContainer {
 						display: flex;
 						align-items: center;
@@ -149,8 +149,11 @@ $font: "Inter", sans-serif;
 					}
 
 					.avatar {
+						width: 100%;
+						height: 100%;
 						object-fit: cover;
 						border-radius: 50%;
+						display: block;
 					}
 
 					.highlighted {
@@ -165,14 +168,232 @@ $font: "Inter", sans-serif;
 							font-size: 16px;
 						}
 					}
+
 					.text {
 						color: #000;
-						font-family: $font;
 						font-size: 14px;
-						font-style: normal;
 						font-weight: 500;
-						line-height: normal;
 					}
+				}
+			}
+			.hero-dog {
+				position: relative;
+				width: 100%;
+				height: 250px;
+				left: 100px;
+				.main-dog {
+					position: absolute;
+					right: 10%;
+					bottom: 0;
+					height: 500px;
+					width: 550px;
+					z-index: 2;
+				}
+			}
+
+			.pagination {
+				display: flex;
+				align-items: center;
+				gap: 15px;
+				width: 26px;
+				height: 22px;
+				color: var(--Color-3, #1d256b);
+				font-family: $font;
+				font-size: 15px;
+				font-style: normal;
+				font-weight: 600;
+				line-height: normal;
+				align-items: center;
+				.arrowRight {
+					transform: rotate(180deg);
+				}
+			}
+		}
+	}
+	.heroSection {
+		display: flex;
+		align-items: center;
+		position: relative;
+		width: 100%;
+		height: 700px;
+		overflow: hidden;
+
+		background-color: #eff9ff;
+		.wave {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			height: 260px;
+			z-index: 1;
+
+			svg {
+				width: 100%;
+				display: block;
+			}
+		}
+
+		.container {
+			position: relative;
+			flex-direction: column;
+			justify-content: space-between;
+			margin-top: 70px;
+			margin-left: 108px;
+			.qualityBadge {
+				display: flex;
+				align-items: center;
+				gap: 15px;
+				margin-bottom: 35px;
+				margin-left: -30px;
+				.badgeIcon {
+					width: 70px;
+					height: 67px;
+				}
+				.badgeText {
+					color: #fe753b;
+					font-family: $font;
+					font-size: 16px;
+					font-weight: 600;
+					line-height: 16px;
+					text-transform: uppercase;
+					letter-spacing: 8px;
+				}
+			}
+			.heroContent {
+				width: 588px;
+				height: 137px;
+				.heroTitle {
+					font-family: Luckiest Guy, var(--default-font-family);
+					margin-bottom: 20px;
+					.discountPercent {
+						display: block;
+						color: #363636;
+						font-size: 80px;
+						font-weight: 800;
+						line-height: 96px;
+						text-transform: capitalize;
+					}
+					.discountDescription {
+						display: block;
+						color: #363636;
+						font-size: 60px;
+						font-weight: 800;
+						line-height: 80px;
+						text-transform: capitalize;
+					}
+				}
+				.heroDescription {
+					color: #585858;
+					font-family: Recursive, var(--default-font-family);
+					font-size: 16px;
+					font-weight: 400;
+					line-height: 30px;
+					margin-bottom: 39px;
+					max-width: 639px;
+				}
+				.heroActions {
+					display: flex;
+					align-items: center;
+					margin-bottom: 50px;
+					.shopButton {
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						width: 190px;
+						height: 54px;
+						background: #fe753b;
+						border-radius: 50px;
+						border: none;
+						padding: 0 25px;
+						color: #ffffff;
+						font-family: $font;
+						font-size: 18px;
+						font-weight: 600;
+						cursor: pointer !important;
+						transition: background-color 0.3s ease;
+						&:hover {
+							background-color: #e56a34;
+						}
+						.buttonIcon {
+							width: 26px;
+							height: 26px;
+							background: url("/img/icons/homepage/buttonIcon.svg") no-repeat
+								center;
+							background-size: cover;
+							cursor: pointer;
+						}
+					}
+				}
+				.reviewsContainer {
+					display: flex;
+					align-items: center;
+
+					.reviewContainer {
+						display: flex;
+						align-items: center;
+						gap: 10px;
+						margin-left: 32px;
+					}
+
+					.circles {
+						display: flex;
+						position: relative;
+					}
+
+					.circle {
+						width: 48px;
+						height: 48px;
+						border-radius: 50%;
+						background-color: #c278c2;
+						border: 3px solid white;
+						position: relative;
+						overflow: hidden;
+						margin-left: -15px;
+
+						&:first-child {
+							margin-left: 0;
+						}
+					}
+
+					.avatar {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						border-radius: 50%;
+						display: block;
+					}
+
+					.highlighted {
+						background-color: #f89c1c;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+
+						span {
+							color: white;
+							font-weight: 600;
+							font-size: 16px;
+						}
+					}
+
+					.text {
+						color: #000;
+						font-size: 14px;
+						font-weight: 500;
+					}
+				}
+			}
+			.hero-dog {
+				position: relative;
+				width: 100%;
+				height: 250px;
+				left: 100px;
+				.main-dog {
+					position: absolute;
+					right: 10%;
+					bottom: 0;
+					height: 500px;
+					width: 550px;
+					z-index: 2;
 				}
 			}
 
@@ -223,7 +444,20 @@ $font: "Inter", sans-serif;
 				height: 433px;
 				background: #c682c0;
 				border-radius: 20px;
+				overflow: hidden; // rasmni chetdan chiqmasligi uchun
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				.main-dog {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+					filter: brightness(0.9);
+				}
 			}
+
 			.smallImage {
 				position: absolute;
 				width: 234px;
@@ -231,7 +465,15 @@ $font: "Inter", sans-serif;
 				top: 16px;
 				left: 509px;
 				background: #c682c0;
+				overflow: hidden;
 				border-radius: 20px;
+				.girl {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+					filter: brightness(0.9);
+				}
 			}
 			.borderedImage {
 				position: absolute;
@@ -241,7 +483,16 @@ $font: "Inter", sans-serif;
 				left: 341px;
 				background: #c682c0;
 				border: 10px solid #ffffff;
-				border-radius: 20px;
+				overflow: hidden;
+				border-radius: 30px;
+				.catDog {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+					filter: brightness(0.9);
+					object-position: 65% center;
+				}
 			}
 			.batchLogo {
 				background: url("/img/logo/Batchlogo.svg");
@@ -461,11 +712,21 @@ $font: "Inter", sans-serif;
 
 		.decorationIcon {
 			position: relative;
-			width: 54.034px;
-			height: 52.531px;
+			width: 102.621px;
+			height: 76.016px;
 			background: url("/img/icons/homepage/petFoot.svg") no-repeat center;
 			background-size: contain;
-			margin-top: -15px;
+			margin-top: -20px;
+			left: -35px;
+
+			// position: absolute;
+			// width: 102.621px;
+			// height: 76.016px;
+			// top: -37px;
+			// left: 340px;
+			// background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/qbY2BQCON6.png)
+			// 	no-repeat center;
+			// background-size: contain;
 		}
 	}
 
@@ -491,8 +752,8 @@ $font: "Inter", sans-serif;
 		}
 
 		.categoryImage {
-			width: 100px;
-			height: 100px;
+			width: 140px;
+			height: 140px;
 			border-radius: 50%;
 			background-color: #a1cee3;
 			box-shadow: 0 0 0 3px #41c0f0 inset;
@@ -501,22 +762,34 @@ $font: "Inter", sans-serif;
 			justify-content: center;
 			overflow: hidden;
 
-			.imageCircle {
-				width: 100px;
-				height: 100px;
-				background-color: #a1cee3;
-				border-radius: 50%;
-				box-shadow: 0 0 0 3px #41c0f0 inset;
-				overflow: hidden;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-			
-				img {
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
-				}
+			// Ichidagi rasm to‘g‘ridan-to‘g‘ri bu class ichida bo‘lmasa kerak
+			// SCSS ichida img stylingni tashqariga chiqaring
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center;
+				filter: brightness(0.9);
+			}
+		}
+
+		.imageCircle {
+			width: 140px;
+			height: 140px;
+			background-color: #a1cee3;
+			border-radius: 50%;
+			box-shadow: 0 0 0 3px #41c0f0 inset;
+			overflow: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				object-position: center;
+				filter: brightness(0.9);
 			}
 		}
 
@@ -532,15 +805,6 @@ $font: "Inter", sans-serif;
 				color: #ffa726;
 			}
 		}
-	}
-
-	.divider {
-		width: 644px;
-		height: 3px;
-		background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/5f34jBdsuD.png)
-			no-repeat center;
-		background-size: cover;
-		margin: 80px auto 0;
 	}
 }
 .productsSection {
@@ -770,7 +1034,7 @@ $font: "Inter", sans-serif;
 				text-align: center;
 
 				&:hover {
-					background: #555;
+					background: #fe9d6d;
 				}
 			}
 		}
@@ -1024,7 +1288,7 @@ $font: "Inter", sans-serif;
 			width: 200px;
 			height: 200px;
 			border-radius: 50%;
-			background: linear-gradient(135deg, #667eea 0%, #97c8e0 100%);
+			background: linear-gradient(135deg, #1a1e2e 0%, #97c8e0 100%);
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -1167,6 +1431,13 @@ $font: "Inter", sans-serif;
 				no-repeat center;
 			background-size: cover;
 			position: relative;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				opacity: 0.9;
+			}
 		}
 
 		.quoteIcon {
@@ -1235,6 +1506,13 @@ $font: "Inter", sans-serif;
 			background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/1a01bc8a-a8a3-4c1c-8432-511a425566b1.png)
 				no-repeat center;
 			background-size: cover;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				opacity: 0.9;
+			}
 		}
 
 		.moreImages {
@@ -1246,6 +1524,13 @@ $font: "Inter", sans-serif;
 			display: flex;
 			align-items: center;
 			justify-content: center;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				opacity: 0.9;
+			}
 		}
 
 		.moreCount {
@@ -1267,7 +1552,7 @@ $font: "Inter", sans-serif;
 	}
 }
 .blogSection {
-	padding: 80px 0;
+	padding: 40px 0;
 
 	.container {
 		display: flex;
@@ -1445,12 +1730,10 @@ $font: "Inter", sans-serif;
 			gap: 30px;
 			right: 10px;
 			top: 90px;
-			
 		}
 
 		.reviewAvatars {
 			display: flex;
-		
 
 			.reviewAvatar1,
 			.reviewAvatar2,
@@ -1478,6 +1761,40 @@ $font: "Inter", sans-serif;
 				background-image: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/M1eNjHO6xG.png");
 				z-index: 1;
 			}
+		}
+		.reviewContainer {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			margin-left: 32px;
+		}
+
+		.circles {
+			display: flex;
+			position: relative;
+		}
+
+		.circle {
+			width: 38px;
+			height: 38px;
+			border-radius: 50%;
+			background-color: #c278c2;
+			border: 3px solid white;
+			position: relative;
+			overflow: hidden;
+			margin-left: -15px;
+
+			&:first-child {
+				margin-left: 0;
+			}
+		}
+
+		.avatar {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			border-radius: 50%;
+			display: block;
 		}
 
 		.reviewCount {

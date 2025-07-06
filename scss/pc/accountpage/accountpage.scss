@@ -2,40 +2,47 @@
 	$light-gray: #f8f9fa;
 	.loginSection {
 		background-color: $light-gray;
-		.heroSectionBasic {
+		.heroSection {
+			width: 100%;
+			height: 660px;
+			position: relative;
+			background-image: url("/img/homepage/heroBasic.jpeg");
+			background-size: cover;
+			background-position: center;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			position: relative;
-			width: 100%;
-			overflow: hidden;
-			background-color: $light-gray;
-			margin-bottom: 30px;
+			text-align: center;
 
-			.wave {
-				background-image: url("/img/banner/wave-basic.svg");
-				background-repeat: no-repeat;
-				background-size: cover;
-				background-position: center;
-				width: 100%;
-				height: 520px;
+			.heroContent {
+				z-index: 2;
+				color: white;
+				text-align: center;
+
+				.title {
+					font-size: 42px;
+					font-weight: 700;
+					text-transform: uppercase;
+					font-family: "Poppins", sans-serif;
+				}
+
+				.breadcrumb {
+					font-size: 16px;
+					margin-top: 10px;
+					font-weight: 300;
+				}
 			}
 
-			.heroContainer {
-				position: relative;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				margin-top: 170px;
+			.wave {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				height: 300px;
+				z-index: 1;
 
-				.pageName {
-					color: #fff;
-					font-family: $font;
-					font-size: 45px;
-					font-style: normal;
-					font-weight: 400;
-					line-height: normal;
-					text-transform: capitalize;
+				svg {
+					width: 100%;
+					display: block;
 				}
 			}
 		}
@@ -44,13 +51,13 @@
 			position: relative;
 			display: flex;
 			flex-direction: row;
-      gap: 20px;
+			gap: 20px;
 			.rightBox {
 				display: flex;
 				flex-direction: column;
 				align-items: center;
 				justify-content: center;
-        margin-left: 60px;
+				margin-left: 60px;
 				width: 692.8px; // 866 * 0.8
 				height: 861.6px; // 1077 * 0.8
 

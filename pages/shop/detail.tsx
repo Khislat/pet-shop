@@ -39,7 +39,7 @@ import {
 import { CommentGroup } from "../../libs/enums/comment.enum";
 import { userVar } from "../../apollo/store";
 import { CREATE_COMMENT } from "../../apollo/user/mutation";
-import { Comment } from "../../libs/types/comment/comment";
+import HeroSectionBasicDetail from "../../libs/components/shoppage/HeroSectionBasicDetail";
 
 interface DetailProps {
 	initialInput: CommentsInquiry;
@@ -209,16 +209,54 @@ const ProductDetailPage = ({
 
 	return (
 		<Stack className={"productDetailSection"}>
+			<HeroSectionBasicDetail />
 			<Stack className="container">
 				<Stack className="productDetailWrapper">
 					<Box className={"gallerySection"}>
-						<Stack className={"thumbnailStack"}>
-							<Box className={"thumb"} style={{ backgroundColor: "#DFE9F0" }} />
-							<Box className={"thumb"} style={{ backgroundColor: "#97C8E0" }} />
-							<Box className={"thumb"} style={{ backgroundColor: "#E8F1E5" }} />
-							<Box className={"thumb"} style={{ backgroundColor: "#FAE6A2" }} />
+						<Stack className="thumbnailStack">
+							{product?.productImages?.map((img: string, idx: number) => (
+								<Box
+									key={idx}
+									className="thumb"
+									onClick={() => setSlideImage(img)}>
+									<img
+										src={`${process.env.NEXT_PUBLIC_APP_API_URL}/${img}`}
+										alt={`thumb-${idx}`}
+										width={120}
+										height={120}
+										style={{
+											objectFit: "cover",
+											border:
+												`${process.env.NEXT_PUBLIC_APP_API_URL}/${img}` ===
+												`${process.env.NEXT_PUBLIC_APP_API_URL}/${slideImage}`
+													? "2px solid #000"
+													: "1px solid #ccc",
+											borderRadius: "8px",
+											cursor: "pointer",
+										}}
+									/>
+								</Box>
+							))}
 						</Stack>
-						<Box className={"mainImage"} />
+
+						<Box className="mainImage">
+							{product?.productImages?.length > 0 && (
+								<img
+									src={`${process.env.NEXT_PUBLIC_APP_API_URL}/${
+										slideImage || product.productImages[0]
+									}`}
+									alt={product?.productTitle}
+									width={400}
+									height={400}
+									style={{
+										objectFit: "cover",
+										width: "100%",
+										height: "100%",
+										borderRadius: "20px",
+									}}
+								/>
+							)}
+						</Box>
 					</Box>
 
 					<Box className={"infoSection"}>

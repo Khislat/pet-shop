@@ -29,10 +29,7 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import { CaretDown } from "phosphor-react";
 import { useRouter } from "next/router";
 
-
-
 export default function Top() {
-	/** Language menu state */
 	const device = useDeviceDetect();
 	const user = useReactiveVar(userVar);
 	const router = useRouter();
@@ -43,7 +40,6 @@ export default function Top() {
 	const { t, i18n } = useTranslation("common");
 	const [lang, setLang] = useState<string | null>("en");
 	const drop = Boolean(anchorEl2);
-	
 
 	useEffect(() => {
 		if (localStorage.getItem("locale") === null) {
@@ -187,14 +183,16 @@ export default function Top() {
 								</div>
 							</Link>
 						)}
-						<Link href="/">Blog</Link>
-						<Link href="/">Contact</Link>
+						<Link href={"/cs"}>
+							<div> {t("CS")} </div>
+						</Link>
 					</Box>
 
 					{/* Header actions */}
 					<Box className="headerActions">
 						{/* Language selector */}
 						<Button
+						sx={{	marginRight:"15px"}}
 							disableRipple
 							className="btn-lang-text"
 							onClick={langClick}
@@ -202,6 +200,7 @@ export default function Top() {
 							{lang === "en" && t("English")}
 							{lang === "kr" && t("Korean")}
 							{lang === "ru" && t("Russian")}
+							
 						</Button>
 						<StyledMenu anchorEl={anchorEl2} open={drop} onClose={langClose}>
 							<MenuItem onClick={langChoice} id="en">
@@ -222,11 +221,7 @@ export default function Top() {
 							alignItems="center"
 							className="headerIcons">
 							{/* Search */}
-							<IconButton>
-								<SearchIcon
-									sx={{ width: "28px", height: "28px", color: "#1C2A67" }}
-								/>
-							</IconButton>
+							
 
 							{/* Cart with badge */}
 							<Link href="/cart">
@@ -243,6 +238,7 @@ export default function Top() {
 												borderRadius: "50%",
 												top: 2,
 												right: 2,
+											
 											},
 										}}
 										overlap="circular">

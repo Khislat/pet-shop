@@ -36,9 +36,9 @@ const withLayoutBasic = (Component: any) => {
 					<link rel="icon" href="/favicon.ico" />
 				</Head>
 				<Stack id="pc-wrap">
-					<Stack className="topBar">
+					{/* <Stack className="topBar">
 						<TopBar />
-					</Stack>
+					</Stack> */}
 
 					<Stack id={"top"}>
 						<TopBasic />

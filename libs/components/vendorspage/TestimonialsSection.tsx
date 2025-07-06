@@ -18,11 +18,14 @@ const TestimonialsSection = () => {
 
 				{/* Testimonial Content */}
 				<Container className={"testimonialContent"}>
-					<div className="faQuoteLeft">
-            <img src="/img/vaectors/FaQuoteLeft.svg" alt="faquote"/>
-          </div>
 					<Box className={"imageBox"}>
-						<div className={"imgPlaceholder"}></div>
+						<div className={"imgPlaceholder"}>
+							<img
+								src="/img/vendors/ourClients.png"
+								alt="client"
+								className="client"
+							/>
+						</div>
 					</Box>
 
 					<Box className={"textBox"}>
@@ -53,9 +56,9 @@ const TestimonialsSection = () => {
 							<span></span>
 						</Box>
 					</Box>
-          <div className="faQuoteRight">
-            <img src="/img/vaectors/FaQuoteLeft.svg" alt="faquote"/>
-          </div>
+					<div className="faQuoteRight">
+						<img src="/img/vectors/FaQuoteRight.png" alt="faquote" className="faQuote" />
+					</div>
 				</Container>
 			</Stack>
 			{/* CTA Block */}

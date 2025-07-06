@@ -21,16 +21,26 @@
 
 @import "/scss/pc/admin/admin.scss";
 
+@import "/scss/pc/cs/cs.scss";
+
 @import "/scss/variables.scss";
 @import "/scss/reset.scss";
 /* HEADER */
 #pc-wrap {
 	.topBar {
+		position: fixed;
+		z-index: 99;
+		top: 0;
+		width: 100%;
+		backdrop-filter: blur(6px); // 👈 orqa fonni blur qilish uchun
+		padding: 2px 0;
+		background-color: #5d5e6146;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		height: 50px;
 		background-color: #5b7c8d;
+
 		.container {
 			position: relative;
 			flex-direction: row;
@@ -88,10 +98,15 @@
 		}
 	}
 	.top {
-		display: flex;
-		justify-content: space-between;
-		flex-direction: row;
-		background-color: #eff9ff;
+		position: fixed;
+		z-index: 99;
+		top: 50px;
+		width: 100%;
+
+		padding: 2px 0;
+		background-color: #EFF9FE;
+
+
 		.container {
 			position: relative;
 			flex-direction: row;
@@ -173,15 +188,20 @@
 		}
 	}
 	.topBasic {
-		display: flex;
-		justify-content: space-between;
-		flex-direction: row;
-		background-color: #97c8e0;
+		position: fixed;
+		z-index: 99;
+		top: 0;
+		width: 100%;
+		backdrop-filter: blur(6px); // 👈 orqa fonni blur qilish uchun
+		padding: 10px 0;
+		background-color: #5d5e6146;
+
 		.container {
 			position: relative;
 			flex-direction: row;
 			justify-content: space-between;
 			align-items: center;
+
 			.logo {
 				margin-top: 10px;
 				width: 210px;
@@ -192,13 +212,16 @@
 				position: relative;
 				display: flex;
 				justify-content: space-between;
-				color: var(--Color-3, #1d256b);
+				color: red;
 				font-family: $font;
 				font-size: 16px;
 				font-style: normal;
 				font-weight: 600;
 				line-height: 30px; /* 187.5% */
 				gap: 40px;
+				.collor {
+					color: white;
+				}
 			}
 			.headerActions {
 				display: flex;

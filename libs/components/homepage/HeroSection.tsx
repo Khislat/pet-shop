@@ -3,9 +3,16 @@ import React from "react";
 import TrendingFlatIcon from "@mui/icons-material/TrendingFlat";
 import { red } from "@mui/material/colors";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const HeroSection = () => {
 	const device = useDeviceDetect();
+	const router = useRouter();
+
+	const handleClick = () => {
+		router.push("/shop");
+	};
 
 	if (device === "mobile") {
 		return (
@@ -38,7 +45,7 @@ const HeroSection = () => {
 							Quisque nec nisi ut velit.
 						</p>
 						<Box className="heroActions">
-							<Button className="shopButton">
+						<Button className="shopButton" sx={{cursor: 'pointer'}}>
 								SHOP NOW
 								<span className="buttonIcon"></span>
 							</Button>
@@ -48,21 +55,21 @@ const HeroSection = () => {
 									<div className={"circles"}>
 										<div className={"circle"}>
 											<img
-												// src="/img/users/user1.jpg"
+												src="/img/homepage/user1.webp"
 												alt="User 1"
 												className={"avatar"}
 											/>
 										</div>
 										<div className={"circle"}>
 											<img
-												// src="/img/users/user2.jpg"
+												src="/img/homepage/user2.jpg"
 												alt="User 2"
 												className={"avatar"}
 											/>
 										</div>
 										<div className={"circle"}>
 											<img
-												// src="/img/users/user3.jpg"
+												src="/img/homepage/user3.jpg"
 												alt="User 3"
 												className={"avatar"}
 											/>
@@ -87,13 +94,13 @@ const HeroSection = () => {
 	} else {
 		return (
 			<Stack className="heroSection">
-				<div className={"waveWrapper"}>
-					<img
-						src="/img/banner/hero-wave.svg"
-						alt="wave"
-						className={"wave"}
-						style={{ background: "EFF9FF" }}
-					/>
+				<div className="wave">
+					<svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+						<path
+							fill="#FFFFFF"
+							fillOpacity="1"
+							d="M0,224L60,213.3C120,203,240,181,360,181.3C480,181,600,203,720,213.3C840,224,960,224,1080,208C1200,192,1320,160,1380,144L1440,128L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+					</svg>
 				</div>
 				<Stack className="container">
 					<Box className="qualityBadge">
@@ -115,31 +122,33 @@ const HeroSection = () => {
 							Quisque nec nisi ut velit.
 						</p>
 						<Box className="heroActions">
-							<Button className="shopButton">
-								SHOP NOW
-								<span className="buttonIcon"></span>
-							</Button>
+							<Link href="/shop" passHref>
+								<Button component="div" className="shopButton" sx={{cursor: 'pointer'}}>
+									SHOP NOW
+									<span className="buttonIcon" />
+								</Button>
+							</Link>
 
 							<Box className="reviewsContainer">
 								<div className={"reviewContainer"}>
 									<div className={"circles"}>
 										<div className={"circle"}>
 											<img
-												// src="/img/users/user1.jpg"
+												src="/img/homepage/user1.webp"
 												alt="User 1"
 												className={"avatar"}
 											/>
 										</div>
 										<div className={"circle"}>
 											<img
-												// src="/img/users/user2.jpg"
+												src="/img/homepage/user2.jpg"
 												alt="User 2"
 												className={"avatar"}
 											/>
 										</div>
 										<div className={"circle"}>
 											<img
-												// src="/img/users/user3.jpg"
+												src="/img/homepage/user3.jpeg"
 												alt="User 3"
 												className={"avatar"}
 											/>
@@ -158,6 +167,10 @@ const HeroSection = () => {
 							<TrendingFlatIcon className="arrowLeft" />
 						</Box>
 					</Box>
+					<div className="hero-dog">
+						<img src="/img/homepage/Dog.png" alt="dog" className="main-dog" />
+						<div className="bg-shapes"></div>
+					</div>
 				</Stack>
 			</Stack>
 		);

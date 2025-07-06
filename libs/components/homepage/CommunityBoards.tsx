@@ -51,10 +51,11 @@ const CommunityBoards = () => {
 							<div
 								className={"blogImage"}
 								style={{
-									backgroundImage: `url(${article.articleImage?.startsWith("http")
-										? article.articleImage
-										: `${NEXT_PUBLIC_APP_API_URL}/${article.articleImage}`
-										})`,
+									backgroundImage: `url(${
+										article.articleImage?.startsWith("http")
+											? article.articleImage
+											: `${NEXT_PUBLIC_APP_API_URL}/${article.articleImage}`
+									})`,
 								}}>
 								<div className={"dateTag"}>
 									<span>
@@ -74,10 +75,30 @@ const CommunityBoards = () => {
 									</div>
 
 									<div className={"reviewsContainer"}>
-										<div className={"reviewAvatars"}>
-											<div className={"reviewAvatar1"} />
-											<div className={"reviewAvatar2"} />
-											<div className={"reviewAvatar3"} />
+										<div className={"reviewContainer"}>
+											<div className={"circles"}>
+												<div className={"circle"}>
+													<img
+														src="/img/homepage/user1.webp"
+														alt="User 1"
+														className={"avatar"}
+													/>
+												</div>
+												<div className={"circle"}>
+													<img
+														src="/img/homepage/user2.jpg"
+														alt="User 2"
+														className={"avatar"}
+													/>
+												</div>
+												<div className={"circle"}>
+													<img
+														src="/img/homepage/user3.jpeg"
+														alt="User 3"
+														className={"avatar"}
+													/>
+												</div>
+											</div>
 										</div>
 
 										<span className={"reviewCount"}>+4 Review</span>

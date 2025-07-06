@@ -92,8 +92,6 @@ const ProductCard = ({
 					<img
 						src={`${NEXT_PUBLIC_APP_API_URL}/${product.productImages[0]}`}
 						alt={product.productTitle}
-						width={180}
-						height={180}
 						className="productImage"
 					/>
 				)}
