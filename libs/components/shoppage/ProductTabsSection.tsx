@@ -2,30 +2,31 @@ import React from "react";
 import { Tabs, Tab, Box, Typography, Stack, Divider } from "@mui/material";
 import Comments from "./ComentsSection";
 import RelatedProducts from "./RelatedProducts";
-import { CommentInput, CommentsInquiry } from "../../types/comment/comment.input";
-
+import {
+	CommentInput,
+	CommentsInquiry,
+} from "../../types/comment/comment.input";
 
 // import RelatedProducts from "./RelatedProducts";
 
 type Props = {
-  comments: Comment[];
-  commentTotal: number;
-  insertCommentData: CommentInput;
-  setInsertCommentData: React.Dispatch<React.SetStateAction<CommentInput>>;
-  createCommentHandler: () => void;
-  commentInquiry: CommentsInquiry;
-  commentPaginationChangeHandler: (event: any, value: number) => void;
+	comments: Comment[];
+	commentTotal: number;
+	insertCommentData: CommentInput;
+	setInsertCommentData: React.Dispatch<React.SetStateAction<CommentInput>>;
+	createCommentHandler: () => void;
+	commentInquiry: CommentsInquiry;
+	commentPaginationChangeHandler: (event: any, value: number) => void;
 };
 
-
 const ProductTabs = ({
-  comments,
-  commentTotal,
-  insertCommentData,
-  setInsertCommentData,
-  createCommentHandler,
-  commentInquiry,
-  commentPaginationChangeHandler,
+	comments,
+	commentTotal,
+	insertCommentData,
+	setInsertCommentData,
+	createCommentHandler,
+	commentInquiry,
+	commentPaginationChangeHandler,
 }: Props) => {
 	const [activeTab, setActiveTab] = React.useState(0);
 
@@ -109,8 +110,19 @@ const ProductTabs = ({
 							</ul>
 
 							<Box className={"imagesWrapper"}>
-								<Box className={"imagePlaceholder"} />
-								<Box className={"imagePlaceholder"} />
+								<Box className={"imagePlaceholder"}>
+									{" "}
+									<img
+										src="/img/detailpage/detailPage.png"
+										alt="bird"
+										className="detailPage"
+									/>
+									<img
+										src="/img/detailpage/detailPage1.png"
+										alt="bird"
+										className="detailPage"
+									/>
+								</Box>
 							</Box>
 						</Box>
 					</Box>
@@ -120,14 +132,15 @@ const ProductTabs = ({
 				)}
 				{activeTab === 2 && (
 					<Stack className="commentWrap">
-						<Comments 
-						 comments={comments}
-						 commentTotal={commentTotal}
-						 insertCommentData={insertCommentData}
-						 setInsertCommentData={setInsertCommentData}
-						 createCommentHandler={createCommentHandler}
-						 commentInquiry={commentInquiry}
-						 commentPaginationChangeHandler={commentPaginationChangeHandler}/>
+						<Comments
+							comments={comments}
+							commentTotal={commentTotal}
+							insertCommentData={insertCommentData}
+							setInsertCommentData={setInsertCommentData}
+							createCommentHandler={createCommentHandler}
+							commentInquiry={commentInquiry}
+							commentPaginationChangeHandler={commentPaginationChangeHandler}
+						/>
 					</Stack>
 				)}
 			</Box>

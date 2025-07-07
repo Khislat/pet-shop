@@ -170,8 +170,8 @@ const MemberFollowings = ({
 												<Button
 													variant="outlined"
 													sx={{
-														background: "#f78181",
-														":hover": { background: "#f06363" },
+														background: "#fddcc4",
+														":hover": { background: "#fddcc4" },
 													}}
 													onClick={() =>
 														unsubscribeHandler(
@@ -187,8 +187,8 @@ const MemberFollowings = ({
 											<Button
 												variant="contained"
 												sx={{
-													background: "#60eb60d4",
-													":hover": { background: "#60eb60d4" },
+													background: "#fddcc4",
+													":hover": { background: "#fddcc4" },
 												}}
 												onClick={() =>
 													subscribeHandler(

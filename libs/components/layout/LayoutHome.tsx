@@ -11,6 +11,7 @@ import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { useReactiveVar } from "@apollo/client";
 import { userVar } from "../../../apollo/store";
 import { getJwtToken, updateUserInfo } from "../../auth";
+import Chat from "../Chat";
 
 const withLayoutMain = (Component: any) => {
 	return (props: any) => {
@@ -82,6 +83,9 @@ const withLayoutMain = (Component: any) => {
 						<Stack id={"main"}>
 							<Component {...props} />
 						</Stack>
+
+						<Chat />
+						
 						<Stack id={"footer"}>
 							<Footer />
 						</Stack>

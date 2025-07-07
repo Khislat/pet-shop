@@ -268,7 +268,7 @@
 						justify-content: space-between;
 						align-items: center;
 						padding: 24px 40px;
-						margin-top: -290px;
+						margin-top: -250px;
 						margin-bottom: 160px;
 						font-family: "Fredoka", sans-serif;
 
@@ -322,12 +322,17 @@
 						.faQuoteRight {
 							position: absolute;
 							display: flex;
+							justify-content: space-between;
 
 							margin-top: 280px;
-							margin-left: 1000px;
+							margin-left: 850px;
 							.faQuote {
-								width: 137px;
+								width: 127px;
 								height: 107px;
+							}
+							.bird {
+								width: 167px;
+								height: 137px;
 							}
 						}
 

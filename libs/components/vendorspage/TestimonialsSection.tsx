@@ -57,7 +57,12 @@ const TestimonialsSection = () => {
 						</Box>
 					</Box>
 					<div className="faQuoteRight">
-						<img src="/img/vectors/FaQuoteRight.png" alt="faquote" className="faQuote" />
+						<img src="/img/vendors/bird.png" alt="bird" className="bird" />
+						<img
+							src="/img/vectors/FaQuoteRight.png"
+							alt="faquote"
+							className="faQuote"
+						/>
 					</div>
 				</Container>
 			</Stack>

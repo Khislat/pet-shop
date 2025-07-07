@@ -370,9 +370,15 @@
 				}
 
 				.imagePlaceholder {
-					width: 368px;
-					height: 250px;
-					background-color: lightblue;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				gap: 20px;
+					.detailPage {
+						width: 368px;
+						height: 250px;
+						object-fit: cover;
+					}
 				}
 			}
 
