@@ -1,6 +1,7 @@
 #pc-wrap {
 	#my-page {
 		background: #f6f6f6;
+
 		.heroSectionMyPage {
 			width: 100%;
 			height: 660px;
@@ -51,7 +52,7 @@
 				width: 100%;
 				flex-direction: row;
 				gap: 25px;
-				padding-top: 96px;
+
 				.back-frame {
 					width: 1260px;
 					height: auto;
@@ -59,25 +60,27 @@
 					flex-direction: row;
 					margin: 100px 0 200px 0;
 					border-radius: 12px;
-					border: 1px solid #ffeccb;
-					background: #FFF0E5;
-					box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+					// border: 1px solid #f6f6f6;
+					background:#f6f6f6;
+					// box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+
 					.left-config {
 						position: relative;
 						padding: 0 0 0 0;
 						width: 266px;
 						height: 700px;
 						border-radius: 12px;
-						background: #fedcc4;
-						border: 1px solid #eff9fe;
-						box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+						background: #f6f6f6;
+						// border: 1px solid #f6f6f6;
+						// box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
 						margin: 180px 20px 40px 20px;
-						
+
 						.profile {
 							margin-top: 5px;
 							position: relative;
 							display: flex;
 							flex-direction: row;
+
 							.profile-img {
 								img {
 									width: 79px;
@@ -187,6 +190,7 @@
 						margin-top: 52px;
 						align-items: center;
 						gap: 109px;
+
 						.list-config {
 							display: flex;
 							width: 100%;
@@ -194,6 +198,7 @@
 							flex-direction: row;
 							flex-wrap: wrap;
 							gap: 22px;
+
 							.card-config {
 								width: 296px;
 								height: 413px;
@@ -201,10 +206,12 @@
 								border-radius: 12px;
 								background: #fff;
 								box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+
 								.top {
 									position: relative;
 									width: 100%;
 									height: 240px;
+
 									img {
 										width: 100%;
 										height: 100%;

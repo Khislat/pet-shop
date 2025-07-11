@@ -175,7 +175,7 @@ const MemberFollowers = ({
 												<Button
 													variant="outlined"
 													sx={{
-														background: "#ed5858",
+														background: "#f7847e",
 														":hover": { background: "#ee7171" },
 													}}
 													onClick={() =>
@@ -192,7 +192,7 @@ const MemberFollowers = ({
 											<Button
 												variant="contained"
 												sx={{
-													background: "#60eb60d4",
+													background: "#FDDCC4",
 													":hover": { background: "#60eb60d4" },
 												}}
 												onClick={() =>

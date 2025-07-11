@@ -28,12 +28,21 @@ import { T } from "../../libs/types/common";
 import { useRouter } from "next/router";
 import { Message } from "../../libs/enums/common.enum";
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from "../../libs/sweetAlert";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+export const getStaticProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
 
 interface ShopProps {
 	initialInput: ProductsInquiry;
 }
 
 type CartItem = Product & { quantity: number };
+
+
 
 const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 	const router = useRouter();

@@ -22,12 +22,12 @@ import { useCallback, useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
 import { useReactiveVar } from "@apollo/client";
 import { userVar } from "../../apollo/store";
-import { useTranslation } from "next-i18next";
 import useDeviceDetect from "../hooks/useDeviceDetect";
 import MobileMenu from "./mobile/MobileMenu";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import { CaretDown } from "phosphor-react";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 export default function Top() {
 	const device = useDeviceDetect();
@@ -37,9 +37,9 @@ export default function Top() {
 	const [anchorEl2, setAnchorEl2] = useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 	const [language, setLanguage] = useState("English");
-	const { t, i18n } = useTranslation("common");
 	const [lang, setLang] = useState<string | null>("en");
 	const drop = Boolean(anchorEl2);
+	const { t, i18n } = useTranslation();
 
 	useEffect(() => {
 		if (localStorage.getItem("locale") === null) {
@@ -57,16 +57,15 @@ export default function Top() {
 	const langClose = () => {
 		setAnchorEl2(null);
 	};
-
 	const langChoice = useCallback(
 		async (e: any) => {
-			const selectedLang = e.currentTarget.id;
-			setLang(selectedLang);
-			localStorage.setItem("locale", selectedLang);
-			await i18n.changeLanguage(selectedLang); // <-- ENG MUHIM QADAM
+			const selected = e.currentTarget.getAttribute("id") || "en";
+			setLang(selected);
+			localStorage.setItem("locale", selected);
 			setAnchorEl2(null);
+			await router.push(router.asPath, router.asPath, { locale: selected });
 		},
-		[i18n]
+		[router]
 	);
 
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -76,15 +75,13 @@ export default function Top() {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
-
-	// const langChoice = (event: any) => {
-	// 	const lang = event.currentTarget.innerText;
-	// 	setLanguage(lang);
-	// 	handleClose();
-	// };
-	// function t(arg0: string): import("react").ReactNode {
-	// 	throw new Error("Function not implemented.");
-	// }
+	const handleHover = (event: any) => {
+		if (anchorEl !== event.currentTarget) {
+			setAnchorEl(event.currentTarget);
+		} else {
+			setAnchorEl(null);
+		}
+	};
 
 	const StyledMenu = styled((props: MenuProps) => (
 		<Menu
@@ -163,7 +160,7 @@ export default function Top() {
 
 					{/* Navigation */}
 					<Box className="navigation">
-						<Link href="/">
+						<Link href="/" locale="kr">
 							{" "}
 							<div>{t("Home")}</div>
 						</Link>
@@ -192,25 +189,24 @@ export default function Top() {
 					<Box className="headerActions">
 						{/* Language selector */}
 						<Button
-						sx={{	marginRight:"15px"}}
+							sx={{ marginRight: "15px" }}
 							disableRipple
 							className="btn-lang-text"
 							onClick={langClick}
 							endIcon={<CaretDown size={14} color="black" weight="bold" />}>
 							{lang === "en" && t("English")}
-							{lang === "kr" && t("Korean")}
-							{lang === "ru" && t("Russian")}
-							
+							{lang === "kr" && t("한국어")}
+							{lang === "ru" && t("Русский")}
 						</Button>
 						<StyledMenu anchorEl={anchorEl2} open={drop} onClose={langClose}>
-							<MenuItem onClick={langChoice} id="en">
+							<MenuItem onClick={langChoice} data-lang="en">
 								English
 							</MenuItem>
-							<MenuItem onClick={langChoice} id="kr">
-								Korean
+							<MenuItem onClick={langChoice} data-lang="kr">
+								한국어
 							</MenuItem>
-							<MenuItem onClick={langChoice} id="ru">
-								Russian
+							<MenuItem onClick={langChoice} data-lang="ru">
+							Русский
 							</MenuItem>
 						</StyledMenu>
 
@@ -221,7 +217,6 @@ export default function Top() {
 							alignItems="center"
 							className="headerIcons">
 							{/* Search */}
-							
 
 							{/* Cart with badge */}
 							<Link href="/cart">
@@ -238,7 +233,6 @@ export default function Top() {
 												borderRadius: "50%",
 												top: 2,
 												right: 2,
-											
 											},
 										}}
 										overlap="circular">
@@ -280,86 +274,36 @@ export default function Top() {
 									/>
 								</IconButton>
 							</Link>
-							{/* <div className={"lan-box"}>
-								<Button
-									disableRipple
-									className="btn-lang"
-									onClick={langClick}
-									endIcon={
-										<CaretDown size={14} color="#616161" weight="fill" />
-									}>
-									<Box component={"div"} className={"flag"}>
-										{lang !== null ? (
-											<img src={`/img/flag/lang${lang}.png`} alt={"usaFlag"} />
-										) : (
-											<img src={`/img/flag/langen.png`} alt={"usaFlag"} />
-										)}
-									</Box>
-								</Button>
-
+							<div className={"lan-box"}>
 								<StyledMenu
 									anchorEl={anchorEl2}
 									open={drop}
-									onClose={langClose}
-									sx={{ position: "absolute" }}>
-									<MenuItem disableRipple onClick={langChoice} id="en">
-										<Box display="flex" alignItems="center" gap="5px">
-											{" "}
-											<img
-												className="img-flag"
-												src={"/img/flag/langen.png"}
-												onClick={langChoice}
-												id="en"
-												alt={"usaFlag"}
-												style={{
-													width: "24px",
-													height: "24px",
-													objectFit: "contain",
-													display: "inline-block",
-												}}
-											/>
-											{t("English")}
-										</Box>
-									</MenuItem>
-									<MenuItem disableRipple onClick={langChoice} id="kr">
-										<Box display="flex" alignItems="center" gap="5px">
-											{" "}
-											<img
-												className="img-flag"
-												src={"/img/flag/langkr.png"}
-												onClick={langChoice}
-												alt={"koreanFlag"}
-												style={{
-													width: "24px",
-													height: "24px",
-													objectFit: "contain",
-													display: "inline-block",
-												}}
-											/>
-											{t("Korean")}
-										</Box>
-									</MenuItem>
-									<MenuItem disableRipple onClick={langChoice} id="ru">
-										<Box display="flex" alignItems="center" gap="5px">
-											{" "}
-											<img
-												className="img-flag"
-												src={"/img/flag/langru.png"}
-												onClick={langChoice}
-												id="ru"
-												alt={"russiaFlag"}
-												style={{
-													width: "24px",
-													height: "24px",
-													objectFit: "contain",
-													display: "inline-block",
-												}}
-											/>
-											{t("Russian")}
-										</Box>
-									</MenuItem>
+									onClose={langClose}>
+									{["en", "kr", "ru"].map((code) => (
+										<MenuItem key={code} onClick={langChoice} id={code}>
+											<Box display="flex" alignItems="center" gap="5px">
+												<img
+													src={`/img/flag/lang${code}.png`}
+													alt={`${code}Flag`}
+													style={{
+														width: "24px",
+														height: "24px",
+														objectFit: "contain",
+														display: "inline-block",
+													}}
+												/>
+												{t(
+													code === "en"
+														? "English"
+														: code === "kr"
+														? "한국어"
+														: "Русский"
+												)}
+											</Box>
+										</MenuItem>
+									))}
 								</StyledMenu>
-							</div> */}
+							</div>
 						</Stack>
 					</Box>
 				</Stack>

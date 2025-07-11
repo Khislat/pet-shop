@@ -3,9 +3,9 @@ import React from "react";
 
 const HeroSection = () => {
 	return (
-		<Stack className="heroSectionMyPage">
+		<Stack className="heroSectionFaqPage">
 			<Box className="heroContent">
-				<Typography className="title">MY PAGE</Typography>
+				<Typography className="title">FAQ PAGE</Typography>
 			</Box>
 			<div className="wave">
 				<svg viewBox="0 0 1440 320" preserveAspectRatio="none">

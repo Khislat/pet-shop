@@ -5,7 +5,7 @@ const HeroSection = () => {
 	return (
 		<Stack className="heroSectionMyPage">
 			<Box className="heroContent">
-				<Typography className="title">MY PAGE</Typography>
+				<Typography className="title">MEMBER PAGE</Typography>
 			</Box>
 			<div className="wave">
 				<svg viewBox="0 0 1440 320" preserveAspectRatio="none">

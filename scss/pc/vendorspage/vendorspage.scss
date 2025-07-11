@@ -219,7 +219,7 @@
 			justify-content: space-between;
 			width: 220px;
 			height: 54px;
-			background: #667eea;
+			background: #fe753b;
 			border-radius: 50px;
 			border: none;
 			padding: 0 38px;
@@ -230,11 +230,12 @@
 			line-height: 19px;
 			cursor: pointer;
 			transition: background-color 0.3s ease;
+			.viewAllButton:hover {
+				background-color: #e56a34;
+			}
 		}
 
-		.viewAllButton:hover {
-			background-color: #667eea;
-		}
+		
 
 		.buttonIcon {
 			width: 26px;

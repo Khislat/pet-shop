@@ -1,6 +1,8 @@
 import { makeVar } from "@apollo/client";
 
 import { CustomJwtPayload } from "../libs/types/customJwtPayload";
+import { MessagePayload } from "../libs/types/chat";
+export const messagesVar = makeVar<MessagePayload[]>([]);
 export const themeVar = makeVar({});
 
 export const userVar = makeVar<CustomJwtPayload>({

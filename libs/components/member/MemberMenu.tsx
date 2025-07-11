@@ -92,7 +92,7 @@ const MemberMenu = ({
 						<>
 							<Button
 								variant="outlined"
-								sx={{ background: "#b9b9b9" }}
+								sx={{ background: "#ED7171" }}
 								onClick={() => {
 									unsubscribeHandler(member?._id, null, memberId);
 									getMemberRefetch();
@@ -149,7 +149,7 @@ const MemberMenu = ({
 												className={"sub-title"}
 												variant={"subtitle1"}
 												component={"p"}>
-												Properties
+												Products
 											</Typography>
 											<Typography className="count-title" variant="subtitle1">
 												{member?.memberProducts}

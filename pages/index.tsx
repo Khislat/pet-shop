@@ -30,10 +30,21 @@ import {
 	sweetMixinErrorAlert,
 	sweetTopSmallSuccessAlert,
 } from "../libs/sweetAlert";
+import { GetStaticProps } from "next";
+import Homepage from "../libs/components/homepage/AboutSection";
 
 interface ProductsProps {
 	initialInput: ProductsInquiry;
 }
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+	return {
+		props: {
+			...(await serverSideTranslations(locale ?? "en", ["common"])),
+		},
+	};
+};
+
 
 const Home = ({ initialInput = productsInput }: ProductsProps) => {
 	const device = useDeviceDetect();

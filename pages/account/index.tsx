@@ -30,6 +30,14 @@ import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 import { sweetMixinErrorAlert } from "../../libs/sweetAlert";
 import { logIn, signUp } from "../../libs/auth";
 
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+export const getStaticProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
+
 const AccountPage = () => {
 	const router = useRouter();
 	const device = useDeviceDetect();
@@ -279,7 +287,7 @@ const AccountPage = () => {
 				</Stack>
 
 				<Stack className="leftBox">
-					<img src="/img/vectors/rectangle.svg" />
+					<img src="/img/account/account1.jpg" className="leftImg"/>
 				</Stack>
 			</Stack>
 		</Stack>

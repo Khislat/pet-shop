@@ -10,14 +10,15 @@ import "../scss/mobile/main.scss";
 import "../scss/app.scss";
 import "../scss/pc/homepage/homepage.scss";
 import { CartProvider } from "../libs/context/CartContext";
+import { appWithTranslation } from "next-i18next";
 
-export default function App({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
 	// @ts-ignore
 	const [theme, setTheme] = useState(createTheme(light));
 	const client = useApollo(pageProps.initialApolloState);
+	
 	return (
 		<ApolloProvider client={client}>
-			{" "}
 			<ThemeProvider theme={theme}>
 				<CartProvider>
 					<CssBaseline />
@@ -27,3 +28,5 @@ export default function App({ Component, pageProps }: AppProps) {
 		</ApolloProvider>
 	);
 }
+
+export default appWithTranslation(App);

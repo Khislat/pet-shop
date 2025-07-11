@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Box, Stack } from "@mui/material";
 import { Product } from "../../types/product/product";
+import { useTranslation } from "next-i18next";
+import { t } from "i18next";
 
 type Props = {
 	products: Product[];
@@ -25,6 +27,7 @@ const CategoriesSection = ({ products, onCategorySelect }: Props) => {
 	const [activeIndex, setActiveIndex] = useState<number>(0);
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+	const { t } = useTranslation("common");
 
 	useEffect(() => {
 		if (containerRef.current) {
@@ -68,7 +71,7 @@ const CategoriesSection = ({ products, onCategorySelect }: Props) => {
 									</div>
 
 									<h3 className="categoryName">{category.name}</h3>
-									<p style={{ fontSize: "14px", color: "#666" }}>
+									<p style={{ fontSize: "16px", color: "#666" }}>
 										{categoryProducts.length} products
 									</p>
 								</Stack>

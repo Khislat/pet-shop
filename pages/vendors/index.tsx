@@ -30,6 +30,13 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import CallIcon from "@mui/icons-material/Call";
 import { NEXT_PUBLIC_APP_API_URL } from "../../libs/config";
 import member from "../member";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+export const getStaticProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
 
 interface VendorsPageProps {
 	initialInput?: VendorsInquiry;
@@ -98,7 +105,7 @@ const VendorsSectionPage = ({
 	// };
 
 	if (device === "mobile") {
-		return <h1>PROPERTIES MOBILE</h1>;
+		return <h1>PRODUCTS MOBILE</h1>;
 	} else {
 		return (
 			<Stack className={"teamSectionWrapper"}>

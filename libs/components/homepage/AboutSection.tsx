@@ -1,8 +1,12 @@
 import { Box, Button, Stack } from "@mui/material";
 import React from "react";
 import useDeviceDetect from "../../hooks/useDeviceDetect";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
+
 const AboutSection = () => {
 	const device = useDeviceDetect();
+	const { t } = useTranslation("common");
 
 	if (device === "mobile") {
 		return (

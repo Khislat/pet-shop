@@ -32,6 +32,14 @@ import { ProductStatus } from "../../../libs/enums/product.enum";
 import { ProductPanelList } from "../../../libs/components/admin/products/ProductList";
 import { ProductUpdate } from "../../../libs/types/product/product.update";
 
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+export const getStaticProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
+
 interface AdminProductsProps {
 	initialInquiry?: ProductsInquiry;
 }

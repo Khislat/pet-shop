@@ -12,6 +12,7 @@ import { socketVar, userVar } from "../../apollo/store";
 import { Member } from "../types/member/member";
 import { Messages, NEXT_PUBLIC_APP_API_URL } from "../config";
 import { sweetErrorAlert } from "../sweetAlert";
+import { messagesVar } from "../../apollo/store";
 
 const NewMessage = (type: any) => {
 	if (type === "right") {
@@ -138,7 +139,7 @@ const Chat = () => {
 		<Stack className="chatting">
 			{openButton ? (
 				<button className="chat-button" onClick={handleOpenChat}>
-					{open ? <CloseFullscreenIcon /> : <MarkChatUnreadIcon />}
+					{open ? <CloseFullscreenIcon /> : <img src="/img/homepage/live-chat.png" className="liveChatimg" />}
 				</button>
 			) : null}
 			<Stack className={`chat-frame ${open ? "open" : ""}`}>
@@ -185,7 +186,7 @@ const Chat = () => {
 										style={{ display: "flex" }}
 										sx={{ m: "10px 0px" }}
 										component={"div"}>
-										<Avatar alt={"jonik"} src={memberImage} />
+										<Avatar alt={"roy"} src={memberImage} />
 										<div className={"msg-left"}>{text}</div>
 									</Box>
 								);

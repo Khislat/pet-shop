@@ -6,10 +6,12 @@ import useDeviceDetect from "../../hooks/useDeviceDetect";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
+import { useTranslation } from "next-i18next";
+
 const HeroSection = () => {
 	const device = useDeviceDetect();
 	const router = useRouter();
-
+	const { t } = useTranslation("common");
 	const handleClick = () => {
 		router.push("/shop");
 	};
@@ -45,7 +47,7 @@ const HeroSection = () => {
 							Quisque nec nisi ut velit.
 						</p>
 						<Box className="heroActions">
-						<Button className="shopButton" sx={{cursor: 'pointer'}}>
+							<Button className="shopButton" sx={{ cursor: "pointer" }}>
 								SHOP NOW
 								<span className="buttonIcon"></span>
 							</Button>
@@ -123,7 +125,10 @@ const HeroSection = () => {
 						</p>
 						<Box className="heroActions">
 							<Link href="/shop" passHref>
-								<Button component="div" className="shopButton" sx={{cursor: 'pointer'}}>
+								<Button
+									component="div"
+									className="shopButton"
+									sx={{ cursor: "pointer" }}>
 									SHOP NOW
 									<span className="buttonIcon" />
 								</Button>

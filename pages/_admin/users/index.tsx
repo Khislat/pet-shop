@@ -22,6 +22,14 @@ import { GET_ALL_MEMBERS_BY_ADMIN } from "../../../apollo/admin/query";
 import { T } from "../../../libs/types/common";
 import withAdminLayout from "../../../libs/components/layout/LayoutAdmin";
 
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+
+export const getStaticProps = async ({ locale }: any) => ({
+	props: {
+		...(await serverSideTranslations(locale, ['common'])),
+	},
+});
+
 interface AdminUsersProdps {
 	initialInquiry?: MembersInquiry;
 }

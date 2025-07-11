@@ -1,128 +1,82 @@
-import React, { useState } from 'react';
-import type { NextPage } from 'next';
+import React, { useState } from "react";
+import { Box, Container, IconButton, Stack, Typography } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import withLayoutBasic from "../../../libs/components/layout/LayoutBasic";
+const faqData = [
+  {
+    question: "Quality Services Provided At Affordable Rates ?",
+    answer:
+      "Mauris iaculis malesuada suscipit. Maecenas bibendum euismod neque vitae tincidunt. Nulla pharetra dui non placerat suscipit...",
+  },
+  {
+    question: "Minimum Prices For The Maximum Output Advertise Anything ?",
+    answer: "",
+  },
+  {
+    question: "Advertising That Makes All The Difference  Leaping Over Boundaries?",
+    answer:
+      "Mauris iaculis malesuada suscipit. Maecenas bibendum euismod neque vitae tincidunt. Nulla pharetra dui non placerat suscipit. Vivamus egestas sodales urna at aliquet. Fusce molestie sapien ac lacus scelerisque, a commodo ligula aliquam. Quisque vel magna a dui aliquam iaculis non vel eros. Donec elementum odio eros.",
+  },
+  {
+    question: "Get Ready To Laugh And Sparkle At The Same Time",
+    answer: "",
+  },
+  {
+    question: "Make Your Style Shine With Our Hilariously Unique Jewelry?",
+    answer: "",
+  },
+  {
+    question: "Chuckles And Charms: That's What Our Jewelry Offers ?",
+    answer: "",
+  },
+  {
+    question: "Accessorize With Wit And Our Funny Jewelry ?",
+    answer: "",
+  },
+  {
+    question: "Whimsical Jewelry For The Extraordinarily Cute?",
+    answer: "",
+  },
+  {
+    question: "Sweetness And Sparkles For Your Everyday Happiness ?",
+    answer: "",
+  },
+];
 
-import { Box, Button, InputAdornment, Stack } from '@mui/material';
-import { List, ListItem } from '@mui/material';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import { TabContext } from '@mui/lab';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import TablePagination from '@mui/material/TablePagination';
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
-import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
-import { FaqArticlesPanelList } from '../../../libs/components/admin/cs/FaqList';
-import withAdminLayout from '../../../libs/components/layout/LayoutAdmin';
+const FaqPage = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(2); // Only 3rd is open by default
 
-const FaqArticles: NextPage = (props: any) => {
-	const [anchorEl, setAnchorEl] = useState<[] | HTMLElement[]>([]);
+  const handleToggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
-	/** APOLLO REQUESTS **/
-	/** LIFECYCLES **/
-	/** HANDLERS **/
+  return (
+    <Box className={"faqPage"}>
+      <Container maxWidth="md">
+        <Typography className={"subtitle"}>FREQUENTLY ASKED QUESTIONS</Typography>
+        <Typography className={"title"}>HAVE ANY QUESTION? FIND ANSWER HERE</Typography>
 
-	return (
-		// @ts-ignore
-		<Box component={'div'} className={'content'}>
-			<Box component={'div'} className={'title flex_space'}>
-				<Typography variant={'h2'}>FAQ Management</Typography>
-				<Button
-					className="btn_add"
-					variant={'contained'}
-					size={'medium'}
-					// onClick={() => router.push(`/_admin/cs/faq_create`)}
-				>
-					<AddRoundedIcon sx={{ mr: '8px' }} />
-					ADD
-				</Button>
-			</Box>
-			<Box component={'div'} className={'table-wrap'}>
-				<Box component={'div'} sx={{ width: '100%', typography: 'body1' }}>
-					<TabContext value={'value'}>
-						<Box component={'div'}>
-							<List className={'tab-menu'}>
-								<ListItem
-									// onClick={(e) => handleTabChange(e, 'all')}
-									value="all"
-									className={'all' === 'all' ? 'li on' : 'li'}
-								>
-									All (0)
-								</ListItem>
-								<ListItem
-									// onClick={(e) => handleTabChange(e, 'active')}
-									value="active"
-									className={'all' === 'all' ? 'li on' : 'li'}
-								>
-									Active (0)
-								</ListItem>
-								<ListItem
-									// onClick={(e) => handleTabChange(e, 'blocked')}
-									value="blocked"
-									className={'all' === 'all' ? 'li on' : 'li'}
-								>
-									Blocked (0)
-								</ListItem>
-								<ListItem
-									// onClick={(e) => handleTabChange(e, 'deleted')}
-									value="deleted"
-									className={'all' === 'all' ? 'li on' : 'li'}
-								>
-									Deleted (0)
-								</ListItem>
-							</List>
-							<Divider />
-							<Stack className={'search-area'} sx={{ m: '24px' }}>
-								<Select sx={{ width: '160px', mr: '20px' }} value={'searchCategory'}>
-									<MenuItem value={'mb_nick'}>mb_nick</MenuItem>
-									<MenuItem value={'mb_id'}>mb_id</MenuItem>
-								</Select>
+        <Typography className={"sectionTitle"}>SHOPPING INFORMATION</Typography>
 
-								<OutlinedInput
-									value={'searchInput'}
-									// onChange={(e) => handleInput(e.target.value)}
-									sx={{ width: '100%' }}
-									className={'search'}
-									placeholder="Search user name"
-									onKeyDown={(event) => {
-										// if (event.key == 'Enter') searchTargetHandler().then();
-									}}
-									endAdornment={
-										<>
-											{true && <CancelRoundedIcon onClick={() => {}} />}
-											<InputAdornment position="end" onClick={() => {}}>
-												<img src="/img/icons/search_icon.png" alt={'searchIcon'} />
-											</InputAdornment>
-										</>
-									}
-								/>
-							</Stack>
-							<Divider />
-						</Box>
-						<FaqArticlesPanelList
-							// dense={dense}
-							// membersData={membersData}
-							// searchMembers={searchMembers}
-							anchorEl={anchorEl}
-							// handleMenuIconClick={handleMenuIconClick}
-							// handleMenuIconClose={handleMenuIconClose}
-							// generateMentorTypeHandle={generateMentorTypeHandle}
-						/>
-
-						<TablePagination
-							rowsPerPageOptions={[20, 40, 60]}
-							component="div"
-							count={4}
-							rowsPerPage={10}
-							page={1}
-							onPageChange={() => {}}
-							onRowsPerPageChange={() => {}}
-						/>
-					</TabContext>
-				</Box>
-			</Box>
-		</Box>
-	);
+        <Stack spacing={1} className={"accordionList"}>
+          {faqData.map((item, index) => (
+            <Box key={index} className={"accordionItem"}>
+              <Box className={"questionBox"} onClick={() => handleToggle(index)}>
+                <Typography className={"question"}>{item.question}</Typography>
+                <IconButton>
+                  {openIndex === index ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+                </IconButton>
+              </Box>
+              {openIndex === index && item.answer && (
+                <Typography className={"answer"}>{item.answer}</Typography>
+              )}
+            </Box>
+          ))}
+        </Stack>
+      </Container>
+    </Box>
+  );
 };
 
-export default withAdminLayout(FaqArticles);
+export default withLayoutBasic(FaqPage) ;

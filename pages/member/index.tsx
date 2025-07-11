@@ -23,6 +23,7 @@ import {
 } from "../../apollo/user/mutation";
 import { Messages } from "../../libs/config";
 import MemberProducts from "../../libs/components/member/MemberProducts";
+import HeroSectionBasic from "../../libs/components/member/HeroSectionBasic";
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -121,6 +122,7 @@ const MemberPage: NextPage = () => {
 	} else {
 		return (
 			<div id="member-page" style={{ position: "relative" }}>
+				<HeroSectionBasic />
 				<div className="container">
 					<Stack className={"member-page"}>
 						<Stack className={"back-frame"}>

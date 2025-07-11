@@ -3,7 +3,7 @@ import React from "react";
 
 const HeroSection = () => {
   return (
-    <Stack className="heroSection">
+    <Stack className="heroSectionCart">
       <Box className="heroContent">
         <Typography className="title">CART PAGE</Typography>
      

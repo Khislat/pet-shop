@@ -19,7 +19,7 @@ import {
 	sweetTopSmallSuccessAlert,
 } from "../../libs/sweetAlert";
 import MemberFollowings from "../../libs/components/member/MemberFollowings";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
 import {
 	LIKE_TARGET_MEMBER,
 	SUBSCRIBE,
@@ -28,11 +28,13 @@ import {
 import { Messages } from "../../libs/config";
 import AddProduct from "../../libs/components/mypage/AddProduct";
 import MyProducts from "../../libs/components/mypage/MyProducts";
+
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import HeroSectionBasic from "../../libs/components/mypage/HeroSectionBasic";
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
-		...(await serverSideTranslations(locale, ["common"])),
+		...(await serverSideTranslations(locale, ['common'])),
 	},
 });
 

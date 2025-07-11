@@ -13,11 +13,13 @@ import { userVar } from "../../../apollo/store";
 import { getJwtToken, updateUserInfo } from "../../auth";
 import Chat from "../Chat";
 
+
 const withLayoutMain = (Component: any) => {
 	return (props: any) => {
 		const device = useDeviceDetect();
 		const user = useReactiveVar(userVar);
-
+	
+	
 		/** LIFECYCLES **/
 		useEffect(() => {
 			const jwt = getJwtToken();
@@ -85,7 +87,7 @@ const withLayoutMain = (Component: any) => {
 						</Stack>
 
 						<Chat />
-						
+
 						<Stack id={"footer"}>
 							<Footer />
 						</Stack>
