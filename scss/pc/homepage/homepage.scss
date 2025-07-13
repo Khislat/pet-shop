@@ -8,7 +8,7 @@ $font: "Inter", sans-serif;
 		align-items: center;
 		position: relative;
 		width: 100%;
-		height: 700px;
+		height: 800px;
 		overflow: hidden;
 		margin-top: 140px;
 
@@ -17,7 +17,7 @@ $font: "Inter", sans-serif;
 			position: absolute;
 			bottom: 0;
 			width: 100%;
-			height: 260px;
+			height: auto;
 			z-index: 1;
 
 			svg {
@@ -31,213 +31,6 @@ $font: "Inter", sans-serif;
 			flex-direction: column;
 			justify-content: space-between;
 			margin-top: 70px;
-			margin-left: 108px;
-			.qualityBadge {
-				display: flex;
-				align-items: center;
-				gap: 15px;
-				margin-bottom: 35px;
-				margin-left: -30px;
-				.badgeIcon {
-					width: 70px;
-					height: 67px;
-				}
-				.badgeText {
-					color: #fe753b;
-					font-family: $font;
-					font-size: 16px;
-					font-weight: 600;
-					line-height: 16px;
-					text-transform: uppercase;
-					letter-spacing: 8px;
-				}
-			}
-			.heroContent {
-				width: 588px;
-				height: 137px;
-				.heroTitle {
-					font-family: Luckiest Guy, var(--default-font-family);
-					margin-bottom: 20px;
-					.discountPercent {
-						display: block;
-						color: #363636;
-						font-size: 80px;
-						font-weight: 800;
-						line-height: 96px;
-						text-transform: capitalize;
-					}
-					.discountDescription {
-						display: block;
-						color: #363636;
-						font-size: 60px;
-						font-weight: 800;
-						line-height: 80px;
-						text-transform: capitalize;
-					}
-				}
-				.heroDescription {
-					color: #585858;
-					font-family: Recursive, var(--default-font-family);
-					font-size: 16px;
-					font-weight: 400;
-					line-height: 30px;
-					margin-bottom: 39px;
-					max-width: 639px;
-				}
-				.heroActions {
-					display: flex;
-					align-items: center;
-					margin-bottom: 50px;
-					.shopButton {
-						display: flex;
-						align-items: center;
-						justify-content: space-between;
-						width: 190px;
-						height: 54px;
-						background: #fe753b;
-						border-radius: 50px;
-						border: none;
-						padding: 0 25px;
-						color: #ffffff;
-						font-family: $font;
-						font-size: 18px;
-						font-weight: 600;
-						cursor: pointer !important;
-						transition: background-color 0.3s ease;
-						&:hover {
-							background-color: #e56a34;
-						}
-						.buttonIcon {
-							width: 26px;
-							height: 26px;
-							background: url("/img/icons/homepage/buttonIcon.svg") no-repeat
-								center;
-							background-size: cover;
-							cursor: pointer;
-						}
-					}
-				}
-				.reviewsContainer {
-					display: flex;
-					align-items: center;
-
-					.reviewContainer {
-						display: flex;
-						align-items: center;
-						gap: 10px;
-						margin-left: 32px;
-					}
-
-					.circles {
-						display: flex;
-						position: relative;
-					}
-
-					.circle {
-						width: 48px;
-						height: 48px;
-						border-radius: 50%;
-						background-color: #c278c2;
-						border: 3px solid white;
-						position: relative;
-						overflow: hidden;
-						margin-left: -15px;
-
-						&:first-child {
-							margin-left: 0;
-						}
-					}
-
-					.avatar {
-						width: 100%;
-						height: 100%;
-						object-fit: cover;
-						border-radius: 50%;
-						display: block;
-					}
-
-					.highlighted {
-						background-color: #f89c1c;
-						display: flex;
-						justify-content: center;
-						align-items: center;
-
-						span {
-							color: white;
-							font-weight: 600;
-							font-size: 16px;
-						}
-					}
-
-					.text {
-						color: #000;
-						font-size: 14px;
-						font-weight: 500;
-					}
-				}
-			}
-			.hero-dog {
-				position: relative;
-				width: 100%;
-				height: 250px;
-				left: 100px;
-				.main-dog {
-					position: absolute;
-					right: 10%;
-					bottom: 0;
-					height: 500px;
-					width: 550px;
-					z-index: 2;
-				}
-			}
-
-			.pagination {
-				display: flex;
-				align-items: center;
-				gap: 15px;
-				width: 26px;
-				height: 22px;
-				color: var(--Color-3, #1d256b);
-				font-family: $font;
-				font-size: 15px;
-				font-style: normal;
-				font-weight: 600;
-				line-height: normal;
-				align-items: center;
-				.arrowRight {
-					transform: rotate(180deg);
-				}
-			}
-		}
-	}
-	.heroSection {
-		display: flex;
-		align-items: center;
-		position: relative;
-		width: 100%;
-		height: 700px;
-		overflow: hidden;
-
-		background-color: #eff9ff;
-		.wave {
-			position: absolute;
-			bottom: 0;
-			width: 100%;
-			height: 260px;
-			z-index: 1;
-
-			svg {
-				width: 100%;
-				display: block;
-			}
-		}
-
-		.container {
-			position: relative;
-			flex-direction: column;
-			justify-content: space-between;
-			margin-top: 70px;
-			margin-left: 108px;
 			.qualityBadge {
 				display: flex;
 				align-items: center;
@@ -1278,7 +1071,7 @@ $font: "Inter", sans-serif;
 
 		.teamCard {
 			text-align: center;
-			background: #EFF9FE;
+			background: #eff9fe;
 			padding: 30px;
 			border-radius: 20px;
 			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
@@ -1920,13 +1713,16 @@ $font: "Inter", sans-serif;
 	padding: 80px 0;
 	position: relative;
 
-	.companyLogo {
-		padding-left: 60px;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		width: 204px;
-		height: 63px;
-		gap: 80px;
+	.container {
+		position: relative;
+
+		.companyLogo {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			width: 204px;
+			height: 63px;
+			gap: 70px;
+		}
 	}
 }

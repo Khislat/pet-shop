@@ -27,12 +27,15 @@ import { GET_PRODUCTS } from "../../apollo/user/query";
 import { T } from "../../libs/types/common";
 import { useRouter } from "next/router";
 import { Message } from "../../libs/enums/common.enum";
-import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from "../../libs/sweetAlert";
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import {
+	sweetMixinErrorAlert,
+	sweetTopSmallSuccessAlert,
+} from "../../libs/sweetAlert";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
-		...(await serverSideTranslations(locale, ['common'])),
+		...(await serverSideTranslations(locale, ["common"])),
 	},
 });
 
@@ -41,8 +44,6 @@ interface ShopProps {
 }
 
 type CartItem = Product & { quantity: number };
-
-
 
 const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 	const router = useRouter();
@@ -57,7 +58,7 @@ const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 	const [openBrands, setOpenBrands] = useState<boolean>(true);
 	const [openPrice, setOpenPrice] = useState<boolean>(true);
 
-	const [selectedCategory,  setSelectedCategory] = useState<string | null>(null);
+	const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
 	const [searchFilter, setSearchFilter] = useState<ProductsInquiry>(
 		router?.query?.input
@@ -84,22 +85,22 @@ const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 
 	const productsPerPage = 16;
 
-		/** HANDLERS **/
-		const likeProductHandler = async (user: T, id: string) => {
-			try {
-				if (!id) return;
-				if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
-	
-				await likeTargetProduct({ variables: { input: id } });
-	
-				await getShopProductsRefetch({ input: initialInput });
-	
-				await sweetTopSmallSuccessAlert("succes", 800);
-			} catch (err: any) {
-				console.log("ERROR, likeProductHandler:", err.message);
-				sweetMixinErrorAlert(err.message).then();
-			}
-		};
+	/** HANDLERS **/
+	const likeProductHandler = async (user: T, id: string) => {
+		try {
+			if (!id) return;
+			if (!user._id) throw new Error(Message.NOT_AUTHENTICATED);
+
+			await likeTargetProduct({ variables: { input: id } });
+
+			await getShopProductsRefetch({ input: initialInput });
+
+			await sweetTopSmallSuccessAlert("succes", 800);
+		} catch (err: any) {
+			console.log("ERROR, likeProductHandler:", err.message);
+			sweetMixinErrorAlert(err.message).then();
+		}
+	};
 	// Mock data
 	// const categories: Category[] = [
 	// 	{ id: "dogs", name: "Dogs", icon: "🐕", color: "#A8DADC", count: 12 },
@@ -402,8 +403,6 @@ const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 		shopProducts,
 	]);
 
-
-	
 	const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 	const currentProducts = filteredProducts.slice(
 		(currentPage - 1) * productsPerPage,
@@ -424,7 +423,7 @@ const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 
 			{/* Main Content */}
 			<section className="main-content">
-				<div className="container">
+				<Stack className="container">
 					<div className="content-wrapper">
 						<div className="filter">
 							<Filter
@@ -437,7 +436,7 @@ const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 						</div>
 
 						{/* Main Products Area */}
-						<main className="products-area">
+						<Stack className="products-area">
 							{/* Products Header */}
 							<div className="products-header">
 								<div className="results-info">
@@ -507,9 +506,9 @@ const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 									)}
 								/>
 							</Stack>
-						</main>
+						</Stack>
 					</div>
-				</div>
+				</Stack>
 			</section>
 		</Stack>
 	);

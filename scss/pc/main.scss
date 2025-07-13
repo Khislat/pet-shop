@@ -21,7 +21,6 @@
 
 @import "/scss/pc/admin/admin.scss";
 
-
 @import "/scss/pc/cs/faq.scss";
 
 @import "/scss/variables.scss";
@@ -44,10 +43,10 @@
 
 		.container {
 			position: relative;
+			display: flex;
 			flex-direction: row;
-			justify-content: space-between;
 			align-items: center;
-			margin-left: 100px;
+			justify-content: space-between;
 			.socialIcons {
 				display: flex;
 				justify-content: space-between;
@@ -322,7 +321,7 @@
 						width: auto;
 						height: auto;
 						display: flex;
-						background: #F8F5F3;
+						background: #f8f5f3;
 						border-radius: 20px 20px 20px 0px;
 						color: black;
 					}

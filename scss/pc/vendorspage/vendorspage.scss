@@ -113,13 +113,13 @@
 				width: 200px;
 				height: 200px;
 				border-radius: 50%;
-				background: linear-gradient(135deg, #667eea 0%, #97c8e0 100%);
+				background: linear-gradient(135deg, #fde5e4 0%, #fde5e4 100%);
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				margin: 0 auto 20px auto;
 				padding: 4px;
-				box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+				box-shadow: 0 8px 20px#fde5e4;
 				transition: all 0.3s ease;
 				position: relative;
 				overflow: hidden;
@@ -235,8 +235,6 @@
 			}
 		}
 
-		
-
 		.buttonIcon {
 			width: 26px;
 			height: 26px;
@@ -244,174 +242,173 @@
 				no-repeat center;
 			background-size: cover;
 		}
-
-		.testimonialsWrapper {
-			.wrapper {
-				background-color: #fde5e4;
-				width: 1503px;
-				height: 762px;
+	}
+	.testimonialsWrapper {
+		.wrapper {
+			height: 762px;
+			width: 100vw;
+			background-color: #fde5e4;
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-top: 160px;
+			.container {
 				position: relative;
 				display: flex;
-				align-items: center;
+				flex-direction: column;
 				justify-content: center;
-				margin-top: 160px;
-				.container {
-					position: relative;
+				.ctaBanner {
+					background-color: #ff4646;
+					border-radius: 60px;
+					color: #fff;
+					max-width: 90%;
 					display: flex;
-					flex-direction: column;
-					justify-content: center;
-					.ctaBanner {
-						background-color: #ff4646;
-						border-radius: 60px;
-						color: #fff;
-						max-width: 90%;
-						display: flex;
-						justify-content: space-between;
-						align-items: center;
-						padding: 24px 40px;
-						margin-top: -250px;
-						margin-bottom: 160px;
-						font-family: "Fredoka", sans-serif;
+					justify-content: space-between;
+					align-items: center;
+					padding: 24px 40px;
+					margin-top: -250px;
+					margin-bottom: 160px;
+					font-family: "Fredoka", sans-serif;
 
-						.ctaText {
+					.ctaText {
+						color: #fff;
+
+						font-family: $font;
+						font-size: 28px;
+						font-style: normal;
+						font-weight: 700;
+						line-height: normal;
+					}
+
+					.ctaRight {
+						display: flex;
+						align-items: center;
+						gap: 20px;
+
+						.desc {
 							color: #fff;
 
-							font-family: $font;
-							font-size: 28px;
+							font-family: Recursive;
+							font-size: 30px;
 							font-style: normal;
 							font-weight: 700;
-							line-height: normal;
+							line-height: 40px;
 						}
 
-						.ctaRight {
-							display: flex;
-							align-items: center;
-							gap: 20px;
-
-							.desc {
-								color: #fff;
-
-								font-family: Recursive;
-								font-size: 30px;
-								font-style: normal;
-								font-weight: 700;
-								line-height: 40px;
-							}
-
-							.ctaButton {
-								background-color: white;
-								color: #ff4646;
-								font-weight: 600;
-								text-transform: uppercase;
-								padding: 10px 22px;
-								border-radius: 50px;
-								font-size: 14px;
-								&:hover {
-									background-color: #ffeaea;
-								}
+						.ctaButton {
+							background-color: white;
+							color: #ff4646;
+							font-weight: 600;
+							text-transform: uppercase;
+							padding: 10px 22px;
+							border-radius: 50px;
+							font-size: 14px;
+							&:hover {
+								background-color: #ffeaea;
 							}
 						}
 					}
-					.testimonialContent {
-						position: relative;
+				}
+				.testimonialContent {
+					position: relative;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					gap: 40px;
+					max-width: 1100px;
+
+					.faQuoteRight {
+						position: absolute;
 						display: flex;
-						align-items: center;
-						justify-content: center;
-						gap: 40px;
-						max-width: 1100px;
+						justify-content: space-between;
 
-						.faQuoteRight {
-							position: absolute;
+						margin-top: 280px;
+						margin-left: 850px;
+						.faQuote {
+							width: 127px;
+							height: 107px;
+						}
+						.bird {
+							width: 167px;
+							height: 137px;
+						}
+					}
+
+					.imageBox {
+						.imgPlaceholder {
+							background-color: #887dc0;
+							position: relative;
+
+							.client {
+								width: 387px;
+								height: 357px;
+								z-index: 2;
+							}
+						}
+					}
+
+					.textBox {
+						max-width: 600px;
+						text-align: left;
+
+						.heading {
+							color: #232121;
+
+							font-family: $font;
+							font-size: 32px;
+							font-style: normal;
+							font-weight: 800;
+							line-height: normal;
+							margin-bottom: 30px;
+						}
+						.stars {
+							margin-bottom: 20px;
+
+							.star {
+								color: #ffa726;
+								font-size: 24px;
+							}
+						}
+
+						.description {
+							color: #272727;
+
+							font-family: $font;
+							font-size: 16px;
+							font-style: normal;
+							font-weight: 500;
+							line-height: 30px;
+							margin-bottom: 20px;
+						}
+
+						.name {
+							font-weight: 700;
+							font-size: 14px;
+							color: #000;
+						}
+
+						.role {
+							font-size: 13px;
+							color: #555;
+							margin-bottom: 10px;
+						}
+
+						.dots {
 							display: flex;
-							justify-content: space-between;
+							gap: 6px;
+							margin-top: 10px;
 
-							margin-top: 280px;
-							margin-left: 850px;
-							.faQuote {
-								width: 127px;
-								height: 107px;
-							}
-							.bird {
-								width: 167px;
-								height: 137px;
-							}
-						}
+							span {
+								width: 8px;
+								height: 8px;
+								border-radius: 50%;
+								background-color: #555;
+								opacity: 0.3;
 
-						.imageBox {
-							.imgPlaceholder {
-								background-color: #887dc0;
-								position: relative;
-
-								.client {
-									width: 387px;
-									height: 357px;
-									z-index: 2;
-								}
-							}
-						}
-
-						.textBox {
-							max-width: 600px;
-							text-align: left;
-
-							.heading {
-								color: #232121;
-
-								font-family: $font;
-								font-size: 32px;
-								font-style: normal;
-								font-weight: 800;
-								line-height: normal;
-								margin-bottom: 30px;
-							}
-							.stars {
-								margin-bottom: 20px;
-
-								.star {
-									color: #ffa726;
-									font-size: 24px;
-								}
-							}
-
-							.description {
-								color: #272727;
-
-								font-family: $font;
-								font-size: 16px;
-								font-style: normal;
-								font-weight: 500;
-								line-height: 30px;
-								margin-bottom: 20px;
-							}
-
-							.name {
-								font-weight: 700;
-								font-size: 14px;
-								color: #000;
-							}
-
-							.role {
-								font-size: 13px;
-								color: #555;
-								margin-bottom: 10px;
-							}
-
-							.dots {
-								display: flex;
-								gap: 6px;
-								margin-top: 10px;
-
-								span {
-									width: 8px;
-									height: 8px;
-									border-radius: 50%;
-									background-color: #555;
-									opacity: 0.3;
-
-									&.activeDot {
-										background-color: #ff7e29;
-										opacity: 1;
-									}
+								&.activeDot {
+									background-color: #ff7e29;
+									opacity: 1;
 								}
 							}
 						}
