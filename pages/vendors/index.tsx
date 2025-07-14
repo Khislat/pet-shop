@@ -105,7 +105,7 @@ const VendorsSectionPage = ({
 	// };
 
 	if (device === "mobile") {
-		return <h1>PRODUCTS MOBILE</h1>;
+		return <h1 style={{marginTop: "20px", textAlign: "center"}}>VENDORS MOBILE</h1>;
 	} else {
 		return (
 			<Stack className={"teamSectionWrapper"}>

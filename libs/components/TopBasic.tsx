@@ -30,6 +30,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import useDeviceDetect from "../hooks/useDeviceDetect";
 import { CaretDown } from "phosphor-react";
+import MobileMenu from "./mobile/MobileMenu";
 
 export default function TopBasic() {
 	const device = useDeviceDetect();
@@ -140,75 +141,110 @@ export default function TopBasic() {
 		);
 		setCartCount(totalCount);
 	}, [cartItems]);
-	return (
-		<Stack className="topBasic">
-			<Stack className="container">
-				<Box className="logo">
-					<img src="/img/logo/BOWOW.svg" />
-				</Box>
-				<Box className="navigation">
-					<Link href="/">
-						{" "}
-						<div className="collor">{t("Home")}</div>
-					</Link>
-					<Link href="/shop">
-						{" "}
-						<div className="collor">{t("Shop")}</div>
-					</Link>
-					<Link href="/vendors">
-						{" "}
-						<div className="collor">{t("Vendors")}</div>
-					</Link>
-					{user?._id && (
-						<Link href={"/mypage"}>
-							<div className="collor">
-								{" "}
-								<div>{t("My Page")}</div>
-							</div>
+	if (device === "mobile") {
+		return (
+			<Stack className="topBasic">
+				<Stack className="container">
+					<Box className="logo">
+						<img src="/img/logo/BOWOW.svg" />
+					</Box>
+					<MobileMenu />
+				</Stack>
+			</Stack>
+		);
+	} else {
+		return (
+			<Stack className="topBasic">
+				<Stack className="container">
+					<Box className="logo">
+						<img src="/img/logo/BOWOW.svg" />
+					</Box>
+					<Box className="navigation">
+						<Link href="/">
+							{" "}
+							<div className="collor">{t("Home")}</div>
 						</Link>
-					)}
-					<Link href={"/cs"}>
-						<div className="collor"> {t("CS")} </div>
-					</Link>
-				</Box>
-				<Box className="headerActions">
-					{/* Language selector */}
-					<Button
-						sx={{ color: "white", marginRight: "15px" }}
-						disableRipple
-						className="btn-lang-text"
-						onClick={langClick}
-						endIcon={<CaretDown size={14} color="white" weight="bold" />}>
+						<Link href="/shop">
+							{" "}
+							<div className="collor">{t("Shop")}</div>
+						</Link>
+						<Link href="/vendors">
+							{" "}
+							<div className="collor">{t("Vendors")}</div>
+						</Link>
+						{user?._id && (
+							<Link href={"/mypage"}>
+								<div className="collor">
+									{" "}
+									<div>{t("My Page")}</div>
+								</div>
+							</Link>
+						)}
+						<Link href={"/cs"}>
+							<div className="collor"> {t("CS")} </div>
+						</Link>
+					</Box>
+					<Box className="headerActions">
+						{/* Language selector */}
+						<Button
+							sx={{ color: "white", marginRight: "15px" }}
+							disableRipple
+							className="btn-lang-text"
+							onClick={langClick}
+							endIcon={<CaretDown size={14} color="white" weight="bold" />}>
 							{lang === "en" && t("English")}
 							{lang === "kr" && t("한국어")}
 							{lang === "ru" && t("Русский")}
-					</Button>
-					<StyledMenu anchorEl={anchorEl2} open={drop} onClose={langClose}>
-						<MenuItem onClick={langChoice} id="en">
-							English
-						</MenuItem>
-						<MenuItem onClick={langChoice} id="kr">
-							한국어
-						</MenuItem>
-						<MenuItem onClick={langChoice} id="ru">
-						Русский
-						</MenuItem>
-					</StyledMenu>
+						</Button>
+						<StyledMenu anchorEl={anchorEl2} open={drop} onClose={langClose}>
+							<MenuItem onClick={langChoice} id="en">
+								English
+							</MenuItem>
+							<MenuItem onClick={langChoice} id="kr">
+								한국어
+							</MenuItem>
+							<MenuItem onClick={langChoice} id="ru">
+								Русский
+							</MenuItem>
+						</StyledMenu>
 
-					{/* Icons */}
-					<Stack
-						direction="row"
-						spacing={4}
-						alignItems="center"
-						className="headerIcons">
-						{/* Search */}
-						
+						{/* Icons */}
+						<Stack
+							direction="row"
+							spacing={4}
+							alignItems="center"
+							className="headerIcons">
+							{/* Search */}
 
-						{/* Cart with badge */}
-						<Link href="/cart">
+							{/* Cart with badge */}
+							<Link href="/cart">
+								<IconButton>
+									<Badge
+										badgeContent={cartCount}
+										sx={{
+											"& .MuiBadge-badge": {
+												backgroundColor: "#FF5722",
+												color: "white",
+												fontSize: 10,
+												width: "18px",
+												height: "18px",
+												borderRadius: "50%",
+												top: 2,
+												right: 2,
+											},
+										}}
+										overlap="circular">
+										<ShoppingBagOutlinedIcon
+											sx={{ width: "28px", height: "28px", color: "white" }}
+										/>
+									</Badge>
+								</IconButton>
+							</Link>
+
+							{/* Wishlist / Notifications */}
 							<IconButton>
 								<Badge
-									badgeContent={cartCount}
+									badgeContent={3}
 									sx={{
 										"& .MuiBadge-badge": {
 											backgroundColor: "#FF5722",
@@ -222,45 +258,21 @@ export default function TopBasic() {
 										},
 									}}
 									overlap="circular">
-									<ShoppingBagOutlinedIcon
+									<NotificationIcon
 										sx={{ width: "28px", height: "28px", color: "white" }}
 									/>
 								</Badge>
 							</IconButton>
-						</Link>
 
-						{/* Wishlist / Notifications */}
-						<IconButton>
-							<Badge
-								badgeContent={3}
-								sx={{
-									"& .MuiBadge-badge": {
-										backgroundColor: "#FF5722",
-										color: "white",
-										fontSize: 10,
-										width: "18px",
-										height: "18px",
-										borderRadius: "50%",
-										top: 2,
-										right: 2,
-									},
-								}}
-								overlap="circular">
-								<NotificationIcon
-									sx={{ width: "28px", height: "28px", color: "white" }}
-								/>
-							</Badge>
-						</IconButton>
-
-						{/* User account */}
-						<Link href="/account">
-							<IconButton>
-								<PersonOutlineIcon
-									sx={{ width: "28px", height: "28px", color: "white" }}
-								/>
-							</IconButton>
-						</Link>
-						<div className={"lan-box"}>
+							{/* User account */}
+							<Link href="/account">
+								<IconButton>
+									<PersonOutlineIcon
+										sx={{ width: "28px", height: "28px", color: "white" }}
+									/>
+								</IconButton>
+							</Link>
+							<div className={"lan-box"}>
 								<StyledMenu
 									anchorEl={anchorEl2}
 									open={drop}
@@ -290,9 +302,10 @@ export default function TopBasic() {
 									))}
 								</StyledMenu>
 							</div>
-					</Stack>
-				</Box>
+						</Stack>
+					</Box>
+				</Stack>
 			</Stack>
-		</Stack>
-	);
+		);
+	}
 }

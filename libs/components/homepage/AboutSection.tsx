@@ -12,11 +12,29 @@ const AboutSection = () => {
 		return (
 			<Stack className="aboutSection">
 				<Stack className="imagesContainer">
-					<div className="mainImage" />
+					<div className="mainImage">
+						<img
+							src="/img/homepage/aboutDog.jpg"
+							alt="dog"
+							className="main-dog"
+						/>
+					</div>
 
-					<div className="smallImage" />
+					<div className="smallImage">
+						<img
+							src="/img/homepage/aboutGirl.jpg"
+							alt="girl"
+							className="girl"
+						/>
+					</div>
 					<div className="batchLogo" />
-					<div className="borderedImage" />
+					<div className="borderedImage">
+						<img
+							src="/img/homepage/dogCat.png"
+							alt="cat-and-dog"
+							className="catDog"
+						/>
+					</div>
 				</Stack>
 				<Stack className="contentContainer">
 					<Box className="aboutHeader">

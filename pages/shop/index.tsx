@@ -32,6 +32,7 @@ import {
 	sweetTopSmallSuccessAlert,
 } from "../../libs/sweetAlert";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -47,6 +48,7 @@ type CartItem = Product & { quantity: number };
 
 const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 	const router = useRouter();
+	const device = useDeviceDetect();
 	const [shopProducts, setShopProducts] = useState<Product[]>([]);
 	const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
 	const [searchQuery, setSearchQuery] = useState<string>("");
@@ -408,110 +410,117 @@ const ShopPage = ({ initialInput = shopInput }: ShopProps) => {
 		(currentPage - 1) * productsPerPage,
 		currentPage * productsPerPage
 	);
-
-	return (
-		<Stack className="shop-page">
-			{/* Hero Section */}
-			<HeroSectionBasic />
-			<Stack className="category-wraper">
-				{/* Categories Section */}
-				<CategoriesSection
-					products={shopProducts}
-					onCategorySelect={(category) => setSelectedCategory(category)}
-				/>
-			</Stack>
-
-			{/* Main Content */}
-			<section className="main-content">
-				<Stack className="container">
-					<div className="content-wrapper">
-						<div className="filter">
-							<Filter
-								products={shopProducts}
-								onCategorySelect={(category) => setSelectedCategory(category)}
-								searchFilter={searchFilter}
-								setSearchFilter={setSearchFilter}
-								onFilteredProductsChange={setFilteredProducts}
-							/>
-						</div>
-
-						{/* Main Products Area */}
-						<Stack className="products-area">
-							{/* Products Header */}
-							<div className="products-header">
-								<div className="results-info">
-									<span>
-										Showing 1 -{" "}
-										{Math.min(productsPerPage, filteredProducts.length)} of{" "}
-										{filteredProducts.length} Results
-									</span>
-								</div>
-								<div className="sort-controls">
-									<span>Filter</span>
-									<FormControl size="small" className="sort-select">
-										<Select
-											value={sortBy}
-											onChange={(e) => setSortBy(e.target.value)}
-											displayEmpty>
-											<MenuItem value="default">Default Sorting</MenuItem>
-											<MenuItem value="price-low">Price: Low to High</MenuItem>
-											<MenuItem value="price-high">Price: High to Low</MenuItem>
-											<MenuItem value="rating">Highest Rated</MenuItem>
-											<MenuItem value="name">Name: A to Z</MenuItem>
-										</Select>
-									</FormControl>
-								</div>
-							</div>
-
-							{/* Products Grid */}
-							<div className="products-grid">
-								{filteredProducts.map((product) => (
-									<ShopCard
-										key={product._id}
-										product={product}
-										likeProductHandler={likeProductHandler}
-									/>
-								))}
-							</div>
-
-							{/* Empty State */}
-							{filteredProducts.length === 0 && (
-								<div className="empty-state">
-									<Typography variant="h6" color="textSecondary">
-										No products found matching your criteria
-									</Typography>
-								</div>
-							)}
-
-							{/* Pagination */}
-
-							<Stack className={"pagination-section"}>
-								<Pagination
-									renderItem={(item) => (
-										<PaginationItem
-											components={{
-												previous: ArrowBackIcon,
-												next: ArrowForwardIcon,
-											}}
-											{...item}
-											sx={{
-												color: "#3c5a6c",
-												borderColor: "#3c5a6c",
-												"&.Mui-selected": {
-													backgroundColor: "#3c5a6c",
-													color: "white",
-												},
-											}}
-										/>
-									)}
-								/>
-							</Stack>
-						</Stack>
-					</div>
+	if (device === "mobile") {
+		return <h1 style={{marginTop: "20px", textAlign: "center"}}>SHOP MOBILE</h1>;
+	} else {
+		return (
+			<Stack className="shop-page">
+				{/* Hero Section */}
+				<HeroSectionBasic />
+				<Stack className="category-wraper">
+					{/* Categories Section */}
+					<CategoriesSection
+						products={shopProducts}
+						onCategorySelect={(category) => setSelectedCategory(category)}
+					/>
 				</Stack>
-			</section>
-		</Stack>
-	);
+
+				{/* Main Content */}
+				<section className="main-content">
+					<Stack className="container">
+						<div className="content-wrapper">
+							<div className="filter">
+								<Filter
+									products={shopProducts}
+									onCategorySelect={(category) => setSelectedCategory(category)}
+									searchFilter={searchFilter}
+									setSearchFilter={setSearchFilter}
+									onFilteredProductsChange={setFilteredProducts}
+								/>
+							</div>
+
+							{/* Main Products Area */}
+							<Stack className="products-area">
+								{/* Products Header */}
+								<div className="products-header">
+									<div className="results-info">
+										<span>
+											Showing 1 -{" "}
+											{Math.min(productsPerPage, filteredProducts.length)} of{" "}
+											{filteredProducts.length} Results
+										</span>
+									</div>
+									<div className="sort-controls">
+										<span>Filter</span>
+										<FormControl size="small" className="sort-select">
+											<Select
+												value={sortBy}
+												onChange={(e) => setSortBy(e.target.value)}
+												displayEmpty>
+												<MenuItem value="default">Default Sorting</MenuItem>
+												<MenuItem value="price-low">
+													Price: Low to High
+												</MenuItem>
+												<MenuItem value="price-high">
+													Price: High to Low
+												</MenuItem>
+												<MenuItem value="rating">Highest Rated</MenuItem>
+												<MenuItem value="name">Name: A to Z</MenuItem>
+											</Select>
+										</FormControl>
+									</div>
+								</div>
+
+								{/* Products Grid */}
+								<div className="products-grid">
+									{filteredProducts.map((product) => (
+										<ShopCard
+											key={product._id}
+											product={product}
+											likeProductHandler={likeProductHandler}
+										/>
+									))}
+								</div>
+
+								{/* Empty State */}
+								{filteredProducts.length === 0 && (
+									<div className="empty-state">
+										<Typography variant="h6" color="textSecondary">
+											No products found matching your criteria
+										</Typography>
+									</div>
+								)}
+
+								{/* Pagination */}
+
+								<Stack className={"pagination-section"}>
+									<Pagination
+										renderItem={(item) => (
+											<PaginationItem
+												components={{
+													previous: ArrowBackIcon,
+													next: ArrowForwardIcon,
+												}}
+												{...item}
+												sx={{
+													color: "#3c5a6c",
+													borderColor: "#3c5a6c",
+													"&.Mui-selected": {
+														backgroundColor: "#3c5a6c",
+														color: "white",
+													},
+												}}
+											/>
+										)}
+									/>
+								</Stack>
+							</Stack>
+						</div>
+					</Stack>
+				</section>
+			</Stack>
+		);
+	}
 };
 
 const shopInput: ProductsInquiry = {

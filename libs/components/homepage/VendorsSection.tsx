@@ -73,88 +73,175 @@ const TopVendorsSection = ({ initialInput = vendorsInput }: TopVendorsProps) => 
 		}
 	};
 
-	return (
-		<Stack className="teamSection">
-			<Stack className="background">
-				<img
-					src="/img/banner/hero-wave.svg"
-					alt="wave"
-					className="wave2"
-					style={{ background: "#eff9ff" }}
-				/>
-				<Stack className="container">
-					<Stack className="sectionHeader">
-						<h2 className="sectionTitle">Our Top Brands</h2>
-						<div className="decorationIcon" />
-						<Divider className="topVendorDivider" />
-						<div className={"nav"}>
-							<IconButton>
-								<ArrowBackIosNew fontSize="small" className="swiper-prev" />
-							</IconButton>
-							<IconButton>
-								<ArrowForwardIos fontSize="small" className="swiper-next" />
-							</IconButton>
-						</div>
-					</Stack>
-
-					<Swiper
-						modules={[Navigation, Pagination]}
-						spaceBetween={26}
-						slidesPerView={"auto"}
-						navigation={{
-							nextEl: ".swiper-next",
-							prevEl: ".swiper-prev",
-						}}
-						pagination={{ clickable: true }}
-						className="teamSwiper">
-						{topVendors?.map((member) => {
-							return (
-								<SwiperSlide key={member._id} style={{ width: "300px" }}>
-									<Stack className="teamCard">
-										<div className="profileImageContainer">
-											<div className="profileImage">
-											<Link
-												href={{
-													pathname: "/member",
-													query: { memberId: member._id },
-												}}>
-												<img
-													src={`${NEXT_PUBLIC_APP_API_URL}/${member?.memberImage}`}
-													alt={member.memberNick}
-													className="clickableImage"
-												/>
-											</Link>
+	if(device === "mobile") {
+		return (
+			<Stack className="teamSection">
+				<Stack className="background">
+					<img
+						src="/img/banner/hero-wave.svg"
+						alt="wave"
+						className="wave2"
+						style={{ background: "#eff9ff" }}
+					/>
+					<Stack className="container">
+						<Stack className="sectionHeader">
+							<h2 className="sectionTitle">Our Top Brands</h2>
+							<div className="decorationIcon" />
+							<Divider className="topVendorDivider" />
+							<div className={"nav"}>
+								<IconButton>
+									<ArrowBackIosNew fontSize="small" className="swiper-prev" />
+								</IconButton>
+								<IconButton>
+									<ArrowForwardIos fontSize="small" className="swiper-next" />
+								</IconButton>
+							</div>
+						</Stack>
+	
+						<Swiper
+							modules={[Navigation, Pagination]}
+							spaceBetween={16}
+							slidesPerView={"auto"}
+							navigation={{
+								nextEl: ".swiper-next",
+								prevEl: ".swiper-prev",
+							}}
+							pagination={{ clickable: true }}
+							className="teamSwiper">
+							{topVendors?.map((member) => {
+								return (
+									<SwiperSlide key={member._id} style={{ width: "200px" }}>
+										<Stack className="teamCard">
+											<div className="profileImageContainer">
+												<div className="profileImage">
+												<Link
+													href={{
+														pathname: "/member",
+														query: { memberId: member._id },
+													}}>
+													<img
+														src={`${NEXT_PUBLIC_APP_API_URL}/${member?.memberImage}`}
+														alt={member.memberNick}
+														className="clickableImage"
+													/>
+												</Link>
+												</div>
 											</div>
-										</div>
-										<h3 className="memberName">{member.memberNick}</h3>
-										<p className="memberRole">
-											<CallIcon
-												fontSize="small"
-												sx={{
-													position: "relative",
-													top: "5px",
-													marginRight: "5px",
-													marginLeft: "-15px",
-												}}
-												color="action"
-											/>
-											{member.memberPhone}
-										</p>
-										<div className="social-icons">
-											<FacebookIcon color="action" />
-											<InstagramIcon color="action" />
-											<TwitterIcon color="action" />
-											<YouTubeIcon color="action" />
-										</div>
-									</Stack>
-								</SwiperSlide>
-							);
-						})}
-					</Swiper>
+											<h3 className="memberName">{member.memberNick}</h3>
+											<p className="memberRole">
+												<CallIcon
+													fontSize="small"
+													sx={{
+														position: "relative",
+														top: "5px",
+														marginRight: "5px",
+														marginLeft: "-15px",
+													}}
+													color="action"
+												/>
+												{member.memberPhone}
+											</p>
+											<div className="social-icons">
+												<FacebookIcon color="action" />
+												<InstagramIcon color="action" />
+												<TwitterIcon color="action" />
+												<YouTubeIcon color="action" />
+											</div>
+										</Stack>
+									</SwiperSlide>
+								);
+							})}
+						</Swiper>
+					</Stack>
 				</Stack>
 			</Stack>
-		</Stack>
-	);
+		);
+	}else {
+		return (
+			<Stack className="teamSection">
+				<Stack className="background">
+					<img
+						src="/img/banner/hero-wave.svg"
+						alt="wave"
+						className="wave2"
+						style={{ background: "#eff9ff" }}
+					/>
+					<Stack className="container">
+						<Stack className="sectionHeader">
+							<h2 className="sectionTitle">Our Top Brands</h2>
+							<div className="decorationIcon" />
+							<Divider className="topVendorDivider" />
+							<div className={"nav"}>
+								<IconButton>
+									<ArrowBackIosNew fontSize="small" className="swiper-prev" />
+								</IconButton>
+								<IconButton>
+									<ArrowForwardIos fontSize="small" className="swiper-next" />
+								</IconButton>
+							</div>
+						</Stack>
+	
+						<Swiper
+							modules={[Navigation, Pagination]}
+							spaceBetween={26}
+							slidesPerView={"auto"}
+							navigation={{
+								nextEl: ".swiper-next",
+								prevEl: ".swiper-prev",
+							}}
+							pagination={{ clickable: true }}
+							className="teamSwiper">
+							{topVendors?.map((member) => {
+								return (
+									<SwiperSlide key={member._id} style={{ width: "300px" }}>
+										<Stack className="teamCard">
+											<div className="profileImageContainer">
+												<div className="profileImage">
+												<Link
+													href={{
+														pathname: "/member",
+														query: { memberId: member._id },
+													}}>
+													<img
+														src={`${NEXT_PUBLIC_APP_API_URL}/${member?.memberImage}`}
+														alt={member.memberNick}
+														className="clickableImage"
+													/>
+												</Link>
+												</div>
+											</div>
+											<h3 className="memberName">{member.memberNick}</h3>
+											<p className="memberRole">
+												<CallIcon
+													fontSize="small"
+													sx={{
+														position: "relative",
+														top: "5px",
+														marginRight: "5px",
+														marginLeft: "-15px",
+													}}
+													color="action"
+												/>
+												{member.memberPhone}
+											</p>
+											<div className="social-icons">
+												<FacebookIcon color="action" />
+												<InstagramIcon color="action" />
+												<TwitterIcon color="action" />
+												<YouTubeIcon color="action" />
+											</div>
+										</Stack>
+									</SwiperSlide>
+								);
+							})}
+						</Swiper>
+					</Stack>
+				</Stack>
+			</Stack>
+		);
+	}
+
+
 };
 
 const vendorsInput: VendorsInquiry = {

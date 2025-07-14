@@ -45,7 +45,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 	};
 };
 
-
 const Home = ({ initialInput = productsInput }: ProductsProps) => {
 	const device = useDeviceDetect();
 	const [products, setProducts] = useState<Product[]>([]);
@@ -109,7 +108,7 @@ const Home = ({ initialInput = productsInput }: ProductsProps) => {
 				<TopVendorsSection />
 				<TestimonialsSection />
 				<CommunityBoards />
-				<LogoSection />
+
 				<AppPromoSection />
 			</Stack>
 		);

@@ -15,7 +15,7 @@ import Chat from "../Chat";
 const withLayoutBasic = (Component: any) => {
 	return (props: any) => {
 		const router = useRouter();
-		const { t, i18n } = useTranslation('common');
+		const { t, i18n } = useTranslation("common");
 		const device = useDeviceDetect();
 		const [authHeader, setAuthHeader] = useState<boolean>(false);
 		const user = useReactiveVar(userVar);
@@ -24,38 +24,81 @@ const withLayoutBasic = (Component: any) => {
 			const jwt = getJwtToken();
 			if (jwt) updateUserInfo(jwt);
 		}, []);
-		return (
-			<>
-				{" "}
-				<Head>
-					<title>Bowow | Pet Shop</title>
-					<meta
-						name="description"
-						content="Pet supplies for your furry friends"
-					/>
-					<meta name="viewport" content="width=device-width, initial-scale=1" />
-					<link rel="icon" href="/favicon.ico" />
-				</Head>
-				<Stack id="pc-wrap">
-					{/* <Stack className="topBar">
-						<TopBar />
-					</Stack> */}
 
-					<Stack id={"top"}>
-						<TopBasic />
-					</Stack>
-					<Stack id={"main"}>
-						<Component {...props} />
-					</Stack>
+		if (device === "mobile") {
+			return (
+				<>
+					{" "}
+					<Head>
+						<title>Bowow | Pet Shop</title>
+						<meta
+							name="description"
+							content="Pet supplies for your furry friends"
+						/>
+						<meta
+							name="viewport"
+							content="width=device-width, initial-scale=1"
+						/>
+						<link rel="icon" href="/favicon.ico" />
+					</Head>
+					<Stack id="mobile-wrap">
+						{/* <Stack className="topBar">
+							<TopBar />
+						</Stack> */}
 
-					<Chat />
+						<Stack id={"top"}>
+							<TopBasic />
+						</Stack>
 
-					<Stack id={"footer"}>
-						<Footer />
+						<Stack id={"main"}>
+							<Component {...props} />
+						</Stack>
+
+						{/* <Chat /> */}
+
+						<Stack id={"footer"}>
+							<Footer />
+						</Stack>
 					</Stack>
-				</Stack>
-			</>
-		);
+				</>
+			);
+		} else {
+			return (
+				<>
+					{" "}
+					<Head>
+						<title>Bowow | Pet Shop</title>
+						<meta
+							name="description"
+							content="Pet supplies for your furry friends"
+						/>
+						<meta
+							name="viewport"
+							content="width=device-width, initial-scale=1"
+						/>
+						<link rel="icon" href="/favicon.ico" />
+					</Head>
+					<Stack id="pc-wrap">
+						{/* <Stack className="topBar">
+							<TopBar />
+						</Stack> */}
+
+						<Stack id={"top"}>
+							<TopBasic />
+						</Stack>
+						<Stack id={"main"}>
+							<Component {...props} />
+						</Stack>
+
+						<Chat />
+
+						<Stack id={"footer"}>
+							<Footer />
+						</Stack>
+					</Stack>
+				</>
+			);
+		}
 	};
 };
 

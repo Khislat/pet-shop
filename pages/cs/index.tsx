@@ -4,6 +4,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import withLayoutBasic from "../../libs/components/layout/LayoutBasic";
 import HeroSectionBasic from "../../libs/components/admin/cs/HeroSectionBasic";
+import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 const faqData = [
 	{
 		question: "What kind of products do you offer?",
@@ -70,96 +71,108 @@ const payment = [
 	},
 ];
 const FaqPage = () => {
+	const device = useDeviceDetect();
 	const [openIndex, setOpenIndex] = useState<number | null>(2); // Only 3rd is open by default
 
 	const handleToggle = (index: number) => {
 		setOpenIndex(openIndex === index ? null : index);
 	};
-
-	return (
-		<Stack className={"faqPage"}>
-			<HeroSectionBasic />
-			<div className="container">
-				{" "}
-				<Typography className={"subtitle"}>
-					FREQUENTLY ASKED QUESTIONS
-				</Typography>
-				<Typography className={"faqTitle"}>
-					HAVE ANY QUESTION? FIND ANSWER HERE
-				</Typography>
-				<Typography className={"sectionTitle"}>SHOPPING INFORMATION</Typography>
-				<Stack spacing={1} className={"accordionList"}>
-					{faqData.map((item, index) => (
-						<Box key={index} className={"accordionItem"}>
-							<Box
-								className={"questionBox"}
-								onClick={() => handleToggle(index)}>
-								<Typography className={"question"}>{item.question}</Typography>
-								<IconButton>
-									{openIndex === index ? (
-										<ExpandLessIcon />
-									) : (
-										<ExpandMoreIcon />
-									)}
-								</IconButton>
+	if (device === "mobile") {
+		return (
+			<h1 style={{ marginTop: "20px", textAlign: "center" }}>CS PAGE MOBILE</h1>
+		);
+	} else {
+		return (
+			<Stack className={"faqPage"}>
+				<HeroSectionBasic />
+				<div className="container">
+					{" "}
+					<Typography className={"subtitle"}>
+						FREQUENTLY ASKED QUESTIONS
+					</Typography>
+					<Typography className={"faqTitle"}>
+						HAVE ANY QUESTION? FIND ANSWER HERE
+					</Typography>
+					<Typography className={"sectionTitle"}>
+						SHOPPING INFORMATION
+					</Typography>
+					<Stack spacing={1} className={"accordionList"}>
+						{faqData.map((item, index) => (
+							<Box key={index} className={"accordionItem"}>
+								<Box
+									className={"questionBox"}
+									onClick={() => handleToggle(index)}>
+									<Typography className={"question"}>
+										{item.question}
+									</Typography>
+									<IconButton>
+										{openIndex === index ? (
+											<ExpandLessIcon />
+										) : (
+											<ExpandMoreIcon />
+										)}
+									</IconButton>
+								</Box>
+								{openIndex === index && item.answer && (
+									<Typography className={"answer"}>{item.answer}</Typography>
+								)}
 							</Box>
-							{openIndex === index && item.answer && (
-								<Typography className={"answer"}>{item.answer}</Typography>
-							)}
-						</Box>
-					))}
-				</Stack>
-				<Typography className={"sectionTitlePayment"}>
-					SHOPPING INFORMATION
-				</Typography>
-				<Stack spacing={1} className={"accordionList"}>
-					{productAndService.map((item, index) => (
-						<Box key={index} className={"accordionItem"}>
-							<Box
-								className={"questionBox"}
-								onClick={() => handleToggle(index)}>
-								<Typography className={"question"}>{item.question}</Typography>
-								<IconButton>
-									{openIndex === index ? (
-										<ExpandLessIcon />
-									) : (
-										<ExpandMoreIcon />
-									)}
-								</IconButton>
+						))}
+					</Stack>
+					<Typography className={"sectionTitlePayment"}>
+						SHOPPING INFORMATION
+					</Typography>
+					<Stack spacing={1} className={"accordionList"}>
+						{productAndService.map((item, index) => (
+							<Box key={index} className={"accordionItem"}>
+								<Box
+									className={"questionBox"}
+									onClick={() => handleToggle(index)}>
+									<Typography className={"question"}>
+										{item.question}
+									</Typography>
+									<IconButton>
+										{openIndex === index ? (
+											<ExpandLessIcon />
+										) : (
+											<ExpandMoreIcon />
+										)}
+									</IconButton>
+								</Box>
+								{openIndex === index && item.answer && (
+									<Typography className={"answer"}>{item.answer}</Typography>
+								)}
 							</Box>
-							{openIndex === index && item.answer && (
-								<Typography className={"answer"}>{item.answer}</Typography>
-							)}
-						</Box>
-					))}
-				</Stack>
-				<Typography className={"sectionTitlePayment"}>
-					PAYMENT
-				</Typography>
-				<Stack spacing={1} className={"accordionList"}>
-					{payment.map((item, index) => (
-						<Box key={index} className={"accordionItem"}>
-							<Box
-								className={"questionBox"}
-								onClick={() => handleToggle(index)}>
-								<Typography className={"question"}>{item.question}</Typography>
-								<IconButton>
-									{openIndex === index ? (
-										<ExpandLessIcon />
-									) : (
-										<ExpandMoreIcon />
-									)}
-								</IconButton>
+						))}
+					</Stack>
+					<Typography className={"sectionTitlePayment"}>PAYMENT</Typography>
+					<Stack spacing={1} className={"accordionList"}>
+						{payment.map((item, index) => (
+							<Box key={index} className={"accordionItem"}>
+								<Box
+									className={"questionBox"}
+									onClick={() => handleToggle(index)}>
+									<Typography className={"question"}>
+										{item.question}
+									</Typography>
+									<IconButton>
+										{openIndex === index ? (
+											<ExpandLessIcon />
+										) : (
+											<ExpandMoreIcon />
+										)}
+									</IconButton>
+								</Box>
+								{openIndex === index && item.answer && (
+									<Typography className={"answer"}>{item.answer}</Typography>
+								)}
 							</Box>
-							{openIndex === index && item.answer && (
-								<Typography className={"answer"}>{item.answer}</Typography>
-							)}
-						</Box>
-					))}
-				</Stack>
-			</div>
-		</Stack>
-	);
+						))}
+					</Stack>
+				</div>
+			</Stack>
+		);
+	}
 };
 
 export default withLayoutBasic(FaqPage);

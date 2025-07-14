@@ -118,7 +118,7 @@ const MemberPage: NextPage = () => {
 	};
 
 	if (device === "mobile") {
-		return <>MEMBER PAGE MOBILE</>;
+		return <h1 style={{marginTop: "20px", textAlign: "center"}}>MEMBER PAGE MOBILE</h1>;
 	} else {
 		return (
 			<div id="member-page" style={{ position: "relative" }}>

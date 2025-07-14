@@ -28,6 +28,7 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import { CaretDown } from "phosphor-react";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import NavigationDrawer from "./mobile/MobileMenu";
 
 export default function Top() {
 	const device = useDeviceDetect();
@@ -146,6 +147,7 @@ export default function Top() {
 				<Box className="logo">
 					<img src="/img/logo/BOWOW.svg" />
 				</Box>
+				
 				<MobileMenu />
 			</Stack>
 		);
