@@ -13,6 +13,7 @@ import { Member } from "../types/member/member";
 import { Messages, NEXT_PUBLIC_APP_API_URL } from "../config";
 import { sweetErrorAlert } from "../sweetAlert";
 import { messagesVar } from "../../apollo/store";
+import useDeviceDetect from "../hooks/useDeviceDetect";
 
 const NewMessage = (type: any) => {
 	if (type === "right") {
@@ -65,6 +66,7 @@ const Chat = () => {
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
 	const socket = useReactiveVar(socketVar);
+	const device = useDeviceDetect();
 
 	/** LIFECYCLES **/
 	useEffect(() => {
@@ -134,85 +136,174 @@ const Chat = () => {
 			setMessageInput("");
 		}
 	};
-
-	return (
-		<Stack className="chatting">
-			{openButton ? (
-				<button className="chat-button" onClick={handleOpenChat}>
-					{open ? <CloseFullscreenIcon /> : <img src="/img/homepage/live-chat.png" className="liveChatimg" />}
-				</button>
-			) : null}
-			<Stack className={`chat-frame ${open ? "open" : ""}`}>
-				<Box className={"chat-top"} component={"div"}>
-					<div style={{ fontFamily: "Nunito" }}>Online Chat</div>
-					<RippleBadge
-						style={{ margin: "-18px 0 0 21px" }}
-						badgeContent={onlineUsers}
-					/>
-				</Box>
-				<Box
-					className={"chat-content"}
-					id="chat-content"
-					ref={chatContentRef}
-					component={"div"}>
-					<ScrollableFeed>
-						<Stack className={"chat-main"}>
-							<Box
-								flexDirection={"row"}
-								style={{ display: "flex" }}
-								sx={{ m: "10px 0px" }}
-								component={"div"}>
-								<div className={"welcome"}>Welcome to Live chat!</div>
-							</Box>
-							{messagesList.map((ele: MessagePayload) => {
-								const { text, memberData } = ele;
-								const memberImage = memberData?.memberImage
-									? `${NEXT_PUBLIC_APP_API_URL}/${memberData.memberImage}`
-									: `/img/profile/defaultUser.svg`;
-								console.log("memberData:", memberData);
-								return memberData?._id === user?._id ? (
-									<Box
-										component={"div"}
-										flexDirection={"row"}
-										style={{ display: "flex" }}
-										alignItems={"flex-end"}
-										justifyContent={"flex-end"}
-										sx={{ m: "10px 0px" }}>
-										<div className={"msg-right"}>{text}</div>
-									</Box>
-								) : (
-									<Box
-										flexDirection={"row"}
-										style={{ display: "flex" }}
-										sx={{ m: "10px 0px" }}
-										component={"div"}>
-										<Avatar alt={"roy"} src={memberImage} />
-										<div className={"msg-left"}>{text}</div>
-									</Box>
-								);
-							})}
-
-							<></>
-						</Stack>
-					</ScrollableFeed>
-				</Box>
-				<Box className={"chat-bott"} component={"div"}>
-					<input
-						type={"text"}
-						name={"message"}
-						className={"msg-input"}
-						placeholder={"Type message"}
-						value={messageInput}
-						onChange={getInputMessageHandler}
-						onKeyDown={getKeyHandler}
-					/>
-					<button className={"send-msg-btn"} onClick={onClickHandler}>
-						<SendIcon style={{ color: "#fff" }} />
+	if (device === "mobile") {
+		return (
+			<Stack className="chatting">
+				{openButton ? (
+					<button className="chat-button" onClick={handleOpenChat}>
+						{open ? (
+							<CloseFullscreenIcon />
+						) : (
+							<img src="/img/homepage/live-chat.png" className="liveChatimg" />
+						)}
 					</button>
-				</Box>
+				) : null}
+				<Stack className={`chat-frame ${open ? "open" : ""}`}>
+					<Box className={"chat-top"} component={"div"}>
+						<div style={{ fontFamily: "Nunito" }}>Online Chat</div>
+						<RippleBadge
+							style={{ margin: "-18px 0 0 21px" }}
+							badgeContent={onlineUsers}
+						/>
+					</Box>
+					<Box
+						className={"chat-content"}
+						id="chat-content"
+						ref={chatContentRef}
+						component={"div"}>
+						<ScrollableFeed>
+							<Stack className={"chat-main"}>
+								<Box
+									flexDirection={"row"}
+									style={{ display: "flex" }}
+									sx={{ m: "10px 0px" }}
+									component={"div"}>
+									<div className={"welcome"}>Welcome to Live chat!</div>
+								</Box>
+								{messagesList.map((ele: MessagePayload) => {
+									const { text, memberData } = ele;
+									const memberImage = memberData?.memberImage
+										? `${NEXT_PUBLIC_APP_API_URL}/${memberData.memberImage}`
+										: `/img/profile/defaultUser.svg`;
+									console.log("memberData:", memberData);
+									return memberData?._id === user?._id ? (
+										<Box
+											component={"div"}
+											flexDirection={"row"}
+											style={{ display: "flex" }}
+											alignItems={"flex-end"}
+											justifyContent={"flex-end"}
+											sx={{ m: "10px 0px" }}>
+											<div className={"msg-right"}>{text}</div>
+										</Box>
+									) : (
+										<Box
+											flexDirection={"row"}
+											style={{ display: "flex" }}
+											sx={{ m: "10px 0px" }}
+											component={"div"}>
+											<Avatar alt={"roy"} src={memberImage} />
+											<div className={"msg-left"}>{text}</div>
+										</Box>
+									);
+								})}
+
+								<></>
+							</Stack>
+						</ScrollableFeed>
+					</Box>
+					
+					<Box className={"chat-bott"} component={"div"}>
+						<input
+							type={"text"}
+							name={"message"}
+							className={"msg-input"}
+							placeholder={"Type message"}
+							value={messageInput}
+							onChange={getInputMessageHandler}
+							onKeyDown={getKeyHandler}
+						/>
+						<button className={"send-msg-btn"} onClick={onClickHandler}>
+							<SendIcon style={{ color: "#fff", width:"14px", }} />
+						</button>
+					</Box>
+				</Stack>
 			</Stack>
-		</Stack>
-	);
+		);
+	} else {
+		return (
+			<Stack className="chatting">
+				{openButton ? (
+					<button className="chat-button" onClick={handleOpenChat}>
+						{open ? (
+							<CloseFullscreenIcon />
+						) : (
+							<img src="/img/homepage/live-chat.png" className="liveChatimg" />
+						)}
+					</button>
+				) : null}
+				<Stack className={`chat-frame ${open ? "open" : ""}`}>
+					<Box className={"chat-top"} component={"div"}>
+						<div style={{ fontFamily: "Nunito" }}>Online Chat</div>
+						<RippleBadge
+							style={{ margin: "-18px 0 0 21px" }}
+							badgeContent={onlineUsers}
+						/>
+					</Box>
+					<Box
+						className={"chat-content"}
+						id="chat-content"
+						ref={chatContentRef}
+						component={"div"}>
+						<ScrollableFeed>
+							<Stack className={"chat-main"}>
+								<Box
+									flexDirection={"row"}
+									style={{ display: "flex" }}
+									sx={{ m: "10px 0px" }}
+									component={"div"}>
+									<div className={"welcome"}>Welcome to Live chat!</div>
+								</Box>
+								{messagesList.map((ele: MessagePayload) => {
+									const { text, memberData } = ele;
+									const memberImage = memberData?.memberImage
+										? `${NEXT_PUBLIC_APP_API_URL}/${memberData.memberImage}`
+										: `/img/profile/defaultUser.svg`;
+									console.log("memberData:", memberData);
+									return memberData?._id === user?._id ? (
+										<Box
+											component={"div"}
+											flexDirection={"row"}
+											style={{ display: "flex" }}
+											alignItems={"flex-end"}
+											justifyContent={"flex-end"}
+											sx={{ m: "10px 0px" }}>
+											<div className={"msg-right"}>{text}</div>
+										</Box>
+									) : (
+										<Box
+											flexDirection={"row"}
+											style={{ display: "flex" }}
+											sx={{ m: "10px 0px" }}
+											component={"div"}>
+											<Avatar alt={"roy"} src={memberImage} />
+											<div className={"msg-left"}>{text}</div>
+										</Box>
+									);
+								})}
+
+								<></>
+							</Stack>
+						</ScrollableFeed>
+					</Box>
+					<Box className={"chat-bott"} component={"div"}>
+						<input
+							type={"text"}
+							name={"message"}
+							className={"msg-input"}
+							placeholder={"Type message"}
+							value={messageInput}
+							onChange={getInputMessageHandler}
+							onKeyDown={getKeyHandler}
+						/>
+						<button className={"send-msg-btn"} onClick={onClickHandler}>
+							<SendIcon style={{ color: "#fff" }} />
+						</button>
+					</Box>
+				</Stack>
+			</Stack>
+		);
+	}
 };
 
 export default Chat;

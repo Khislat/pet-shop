@@ -180,6 +180,9 @@
 			.footer2 {
 				margin-top: 43.2px; // 54 * 0.8
 				font-family: $font;
+				display: inline-flex;
+				align-items: center;
+				gap: 160px;
 			}
 
 			.createLink {

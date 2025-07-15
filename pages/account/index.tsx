@@ -122,8 +122,8 @@ const AccountPage = () => {
 							}}
 							onChange={(e) => handleInput("nick", e.target.value)}
 							sx={{
-								width: "571.2px",
-								height: "56.938px",
+								width: "341.2px",
+								height: "46.938px",
 								borderRadius: "50px",
 								border: "1px solid black",
 								marginBottom: "18px",
@@ -154,8 +154,8 @@ const AccountPage = () => {
 								}}
 								onChange={(e) => handleInput("phone", e.target.value)}
 								sx={{
-									width: "571.2px",
-									height: "56.938px",
+									width: "341.2px",
+									height: "46.938px",
 									borderRadius: "50px",
 									border: "1px solid black",
 									"& .MuiOutlinedInput-root": {
@@ -188,8 +188,8 @@ const AccountPage = () => {
 							}}
 							onChange={(e) => handleInput("password", e.target.value)}
 							sx={{
-								width: "571.2px",
-								height: "56.938px",
+								width: "341.2px",
+								height: "46.938px",
 								borderRadius: "50px",
 								border: "1px solid black",
 								"& .MuiOutlinedInput-root": {
@@ -295,9 +295,9 @@ const AccountPage = () => {
 						</Typography>
 					</Stack>
 
-					<Stack className="leftBox">
+					{/* <Stack className="leftBox">
 						<img src="/img/account/account1.jpg" className="leftImg" />
-					</Stack>
+					</Stack> */}
 				</Stack>
 			</Stack>
 		);
