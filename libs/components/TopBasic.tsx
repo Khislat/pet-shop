@@ -31,6 +31,8 @@ import { useRouter } from "next/router";
 import useDeviceDetect from "../hooks/useDeviceDetect";
 import { CaretDown } from "phosphor-react";
 import MobileMenu from "./mobile/MobileMenu";
+import NotificationMenu from "./NotificationMenu";
+import NotificationMenuBasic from "./NotificationMenuBasic";
 
 export default function TopBasic() {
 	const device = useDeviceDetect();
@@ -241,28 +243,8 @@ export default function TopBasic() {
 								</IconButton>
 							</Link>
 
-							{/* Wishlist / Notifications */}
-							<IconButton>
-								<Badge
-									badgeContent={3}
-									sx={{
-										"& .MuiBadge-badge": {
-											backgroundColor: "#FF5722",
-											color: "white",
-											fontSize: 10,
-											width: "18px",
-											height: "18px",
-											borderRadius: "50%",
-											top: 2,
-											right: 2,
-										},
-									}}
-									overlap="circular">
-									<NotificationIcon
-										sx={{ width: "28px", height: "28px", color: "white" }}
-									/>
-								</Badge>
-							</IconButton>
+				
+							<NotificationMenuBasic />
 
 							{/* User account */}
 							<Link href="/account">

@@ -26,6 +26,7 @@ import { userVar } from "../../../apollo/store";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import { CaretDown } from "phosphor-react";
+import NotificationMenu from "../NotificationMenu";
 
 const MobileMenu: React.FC = () => {
 	const [open, setOpen] = useState(false);
@@ -156,7 +157,7 @@ const MobileMenu: React.FC = () => {
 							</IconButton>
 						</Link>
 
-						<IconButton>
+						{/* <IconButton>
 							<Badge
 								badgeContent={3}
 								overlap="circular"
@@ -172,7 +173,8 @@ const MobileMenu: React.FC = () => {
 								}}>
 								<NotificationsNoneIcon sx={{ color: "#1C2A67" }} />
 							</Badge>
-						</IconButton>
+						</IconButton> */}
+						<NotificationMenu />
 
 						<Link href="/account">
 							<IconButton>
