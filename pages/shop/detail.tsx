@@ -40,6 +40,7 @@ import { CommentGroup } from "../../libs/enums/comment.enum";
 import { userVar } from "../../apollo/store";
 import { CREATE_COMMENT } from "../../apollo/user/mutation";
 import HeroSectionBasicDetail from "../../libs/components/shoppage/HeroSectionBasicDetail";
+import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 
 interface DetailProps {
 	initialInput: CommentsInquiry;
@@ -48,6 +49,7 @@ interface DetailProps {
 const ProductDetailPage = ({
 	initialInput = productDetailPage,
 }: DetailProps) => {
+	const device = useDeviceDetect();
 	const router = useRouter();
 	const [activeTab, setActiveTab] = React.useState(0);
 	const [productId, setProductId] = useState<string | null>(null);
@@ -206,145 +208,154 @@ const ProductDetailPage = ({
 			setIsAdding(false);
 		}
 	};
-
-	return (
-		<Stack className={"productDetailSection"}>
-			<HeroSectionBasicDetail />
-			<Stack className="container">
-				<Stack className="productDetailWrapper">
-					<Box className={"gallerySection"}>
-						<Stack className="thumbnailStack">
-							{product?.productImages?.map((img: string, idx: number) => (
-								<Box
-									key={idx}
-									className="thumb"
-									onClick={() => setSlideImage(img)}>
-									<img
-										src={`${process.env.NEXT_PUBLIC_APP_API_URL}/${img}`}
-										alt={`thumb-${idx}`}
-										width={120}
-										height={120}
-										style={{
-											objectFit: "cover",
-											border:
-												`${process.env.NEXT_PUBLIC_APP_API_URL}/${img}` ===
-												`${process.env.NEXT_PUBLIC_APP_API_URL}/${slideImage}`
-													? "2px solid #000"
-													: "1px solid #ccc",
-											borderRadius: "8px",
-											cursor: "pointer",
-										}}
-									/>
-								</Box>
-							))}
-						</Stack>
-
-						<Box className="mainImage">
-							{product?.productImages?.length > 0 && (
-								<img
-									src={`${process.env.NEXT_PUBLIC_APP_API_URL}/${
-										slideImage || product.productImages[0]
-									}`}
-									alt={product?.productTitle}
-									width={400}
-									height={400}
-									style={{
-										objectFit: "cover",
-										width: "100%",
-										height: "100%",
-										borderRadius: "20px",
-									}}
-								/>
-							)}
-						</Box>
-					</Box>
-
-					<Box className={"infoSection"}>
-						<Typography className={"discountTag"}>Save 38%</Typography>
-						<Typography className={"title"}>{product?.productTitle}</Typography>
-						<Box className="reviews">
-							<div className={"stars"}>
-								{"★★★★★".split("").map((star, idx) => (
-									<span key={idx} className={"star"}>
-										{star}
-									</span>
-								))}
-							</div>
-
-							<Typography className={"reviews"}>
-								24 Reviews &nbsp; | &nbsp; Sku :KD-566498 &nbsp; | &nbsp;{" "}
-							</Typography>
-
-							<span className={"inStock"}>IN STOCK</span>
-						</Box>
-
-						<Stack direction="row" spacing={2} alignItems="center">
-							<Typography className={"price"}>
-								{product?.productPrice}
-							</Typography>
-							<Typography className={"originalPrice"}>$69.00</Typography>
-						</Stack>
-
-						<Typography className={"desc"}>{product?.productDesc}</Typography>
-
-						<Box mt={3}>
-							<Typography className={"label"}>Size : 2KG</Typography>
-							<Stack direction="row" spacing={2} mt={1}>
-								{["500gm", "1Kg", "2Kg", "5Kg", "7Kg"].map((size, i) => (
-									<Button
-										key={i}
-										className={`${"sizeBtn"} ${
-											size === "2Kg" ? "selected" : ""
-										}`}>
-										{size}
-									</Button>
+	if (device === "mobile") {
+		return (
+			<h1 style={{ marginTop: "20px", textAlign: "center" }}>
+				DETAIL PAGE MOBILE
+			</h1>
+		);
+	} else {
+		return (
+			<Stack className={"productDetailSection"}>
+				<HeroSectionBasicDetail />
+				<Stack className="container">
+					<Stack className="productDetailWrapper">
+						<Box className={"gallerySection"}>
+							<Stack className="thumbnailStack">
+								{product?.productImages?.map((img: string, idx: number) => (
+									<Box
+										key={idx}
+										className="thumb"
+										onClick={() => setSlideImage(img)}>
+										<img
+											src={`${process.env.NEXT_PUBLIC_APP_API_URL}/${img}`}
+											alt={`thumb-${idx}`}
+											width={120}
+											height={120}
+											style={{
+												objectFit: "cover",
+												border:
+													`${process.env.NEXT_PUBLIC_APP_API_URL}/${img}` ===
+													`${process.env.NEXT_PUBLIC_APP_API_URL}/${slideImage}`
+														? "2px solid #000"
+														: "1px solid #ccc",
+												borderRadius: "8px",
+												cursor: "pointer",
+											}}
+										/>
+									</Box>
 								))}
 							</Stack>
+
+							<Box className="mainImage">
+								{product?.productImages?.length > 0 && (
+									<img
+										src={`${process.env.NEXT_PUBLIC_APP_API_URL}/${
+											slideImage || product.productImages[0]
+										}`}
+										alt={product?.productTitle}
+										width={400}
+										height={400}
+										style={{
+											objectFit: "cover",
+											width: "100%",
+											height: "100%",
+											borderRadius: "20px",
+										}}
+									/>
+								)}
+							</Box>
 						</Box>
 
-						<Typography className={"stockWarning"}>
-							Hurry! Only <span>24 Items</span> Left In Stock.
-						</Typography>
+						<Box className={"infoSection"}>
+							<Typography className={"discountTag"}>Save 38%</Typography>
+							<Typography className={"title"}>
+								{product?.productTitle}
+							</Typography>
+							<Box className="reviews">
+								<div className={"stars"}>
+									{"★★★★★".split("").map((star, idx) => (
+										<span key={idx} className={"star"}>
+											{star}
+										</span>
+									))}
+								</div>
 
-						<Stack className={"actionSection"}>
-							<Box className={"qtyBox"}>
-								<Button>
-									<RemoveIcon />
-								</Button>
-								<Typography className={"qty"}>3</Typography>
-								<Button>
-									<AddIcon />
-								</Button>
+								<Typography className={"reviews"}>
+									24 Reviews &nbsp; | &nbsp; Sku :KD-566498 &nbsp; | &nbsp;{" "}
+								</Typography>
+
+								<span className={"inStock"}>IN STOCK</span>
 							</Box>
-							<Button className={"addToCart"} onClick={handleAddToCart}>
-								Add to Cart
-							</Button>
-							<IconButton className={"iconBtn"}>
-								<FullscreenIcon />
-							</IconButton>
-							<IconButton className={"iconBtn"}>
-								<FavoriteBorderIcon />
-							</IconButton>
-						</Stack>
 
-						<Button className={"buyNow"}>Buy Now</Button>
+							<Stack direction="row" spacing={2} alignItems="center">
+								<Typography className={"price"}>
+									{product?.productPrice}
+								</Typography>
+								<Typography className={"originalPrice"}>$69.00</Typography>
+							</Stack>
+
+							<Typography className={"desc"}>{product?.productDesc}</Typography>
+
+							<Box mt={3}>
+								<Typography className={"label"}>Size : 2KG</Typography>
+								<Stack direction="row" spacing={2} mt={1}>
+									{["500gm", "1Kg", "2Kg", "5Kg", "7Kg"].map((size, i) => (
+										<Button
+											key={i}
+											className={`${"sizeBtn"} ${
+												size === "2Kg" ? "selected" : ""
+											}`}>
+											{size}
+										</Button>
+									))}
+								</Stack>
+							</Box>
+
+							<Typography className={"stockWarning"}>
+								Hurry! Only <span>24 Items</span> Left In Stock.
+							</Typography>
+
+							<Stack className={"actionSection"}>
+								<Box className={"qtyBox"}>
+									<Button>
+										<RemoveIcon />
+									</Button>
+									<Typography className={"qty"}>3</Typography>
+									<Button>
+										<AddIcon />
+									</Button>
+								</Box>
+								<Button className={"addToCart"} onClick={handleAddToCart}>
+									Add to Cart
+								</Button>
+								<IconButton className={"iconBtn"}>
+									<FullscreenIcon />
+								</IconButton>
+								<IconButton className={"iconBtn"}>
+									<FavoriteBorderIcon />
+								</IconButton>
+							</Stack>
+
+							<Button className={"buyNow"}>Buy Now</Button>
+						</Box>
+					</Stack>
+
+					<Box className="productTabsWrapper">
+						<ProductTabs
+							comments={productComments}
+							commentTotal={commentTotal}
+							insertCommentData={insertCommentData}
+							setInsertCommentData={setInsertCommentData}
+							createCommentHandler={createCommentHandler}
+							commentInquiry={commentInquiry}
+							commentPaginationChangeHandler={commentPaginationChangeHandler}
+						/>
 					</Box>
 				</Stack>
-
-				<Box className="productTabsWrapper">
-					<ProductTabs
-						comments={productComments}
-						commentTotal={commentTotal}
-						insertCommentData={insertCommentData}
-						setInsertCommentData={setInsertCommentData}
-						createCommentHandler={createCommentHandler}
-						commentInquiry={commentInquiry}
-						commentPaginationChangeHandler={commentPaginationChangeHandler}
-					/>
-				</Box>
 			</Stack>
-		</Stack>
-	);
+		);
+	}
 };
 
 const productDetailPage: CommentsInquiry = {

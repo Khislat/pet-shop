@@ -721,7 +721,7 @@ $font: "Inter", sans-serif;
 		.productCard {
 			background: #fff;
 			border-radius: 12px;
-			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+			// box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 			padding: 16px;
 			position: relative;
 			display: flex;
@@ -735,7 +735,7 @@ $font: "Inter", sans-serif;
 
 			&:hover {
 				transform: translateY(-6px);
-				box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+				// box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 			}
 
 			.discountBadge {
@@ -768,8 +768,8 @@ $font: "Inter", sans-serif;
 			}
 
 			.productImage {
-				width: 180px;
-				height: 180px;
+				width: 240px;
+				height: 240px;
 				object-fit: cover;
 				border-radius: 8px;
 				margin-bottom: 12px;
@@ -815,7 +815,8 @@ $font: "Inter", sans-serif;
 			}
 
 			.addToCartButton {
-				background: #3c3c3c;
+				position: relative;
+				background: #fe9d6d;
 				color: white;
 				border: none;
 				border-radius: 100px;

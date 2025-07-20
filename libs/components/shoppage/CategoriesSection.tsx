@@ -11,15 +11,15 @@ type CategoryProps = {
 const categories = [
 	{ name: "Dogs", key: "DOGS", imageSrc: "/img/homepage/aboutDog.jpg" },
 	{ name: "Cats", key: "CATS", imageSrc: "/img/homepage/cat.webp" },
-	{ name: "Birds", key: "BIRDS", imageSrc: "/img/homepage/parrot.webp" },
-	{ name: "Fun Toys", key: "FUN_TOYS", imageSrc: "/img/homepage/toy.jpg" },
+	{ name: "Birds", key: "BIRDS", imageSrc: "/img/homepage/birds2.jpg" },
+	{ name: "Fun Toys", key: "FUN_TOYS", imageSrc: "/img/homepage/toys.jpg" },
 	{
 		name: "Accessories",
 		key: "ACCESSORIES",
-		imageSrc: "/img/homepage/catbowl.jpg",
+		imageSrc: "/img/homepage/bowl2.jpg",
 	},
-	{ name: "Clothings", key: "Clothings", imageClass: "collarImage" },
-	// { name: "Accessories", key: "ACCESSORIES", imageClass: "collarImage" },
+	{ name: "Furniture", key: "FURNITURES", imageSrc: "/img/homepage/furniture.jpg" },
+
 ];
 
 const CategoriesSection = ({ products, onCategorySelect }: CategoryProps) => {
