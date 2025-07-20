@@ -1666,6 +1666,14 @@ $font: "Inter", sans-serif;
 			background-size: cover;
 			border-radius: 50%;
 		}
+		.appPromoImg {
+			position: relative;
+			right: 340px;
+			bottom: 250px;
+			height: 800px;
+			width: 1050px;
+			z-index: 2;
+		}
 
 		.rightContent {
 			flex: 1;

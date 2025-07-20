@@ -9,10 +9,16 @@ const AppPromoSection = () => {
 		return (
 			<section className={"appPromoSection"}>
 				<div className={"container"}>
-					<div className={"leftContent"}>
-						<div className={"circleOuter"}>
-							<div className={"circleMiddle"}>
-								<div className={"circleInner"} />
+					<div className="leftContent">
+						<div className="circleOuter">
+							<div className="circleMiddle">
+								<div className="circleInner">
+									<img
+										src="/img/homepage/appPromo4.png"
+										alt="dog"
+										className="appPromoImg"
+									/>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -41,7 +47,14 @@ const AppPromoSection = () => {
 					<div className={"leftContent"}>
 						<div className={"circleOuter"}>
 							<div className={"circleMiddle"}>
-								<div className={"circleInner"} />
+								<div className={"circleInner"}>
+									{" "}
+									<img
+										src="/img/homepage/appPromo4.png"
+										alt="dog"
+										className="appPromoImg"
+									/>
+								</div>
 							</div>
 						</div>
 					</div>
