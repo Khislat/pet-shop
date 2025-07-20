@@ -76,6 +76,10 @@ const ProductDetailPage = ({
 		commentRefId: "",
 	});
 	const user = useReactiveVar(userVar);
+	const sizes = ["500gm", "1Kg", "2Kg", "5Kg", "7Kg"];
+	const [selectedSize, setSelectedSize] = useState("2Kg");
+	const [qty, setQty] = useState(1); // boshlang'ich qiymat 1
+
 	/** APOLLO REQUESTS **/
 	const [createComment] = useMutation(CREATE_COMMENT);
 
@@ -191,23 +195,29 @@ const ProductDetailPage = ({
 		}
 	}, [id]);
 
+	const increaseQty = () => {
+		setQty((prev) => prev + 1);
+	};
+
+	const decreaseQty = () => {
+		setQty((prev) => (prev > 1 ? prev - 1 : 1));
+	};
+
 	const handleAddToCart = async () => {
 		setIsAdding(true);
-
+	
 		try {
-			addToCart(product);
-
-			// Success feedback (optional)
-			// toast.success('Product added to cart!');
+			addToCart(product, qty); // endi qty ni ham yuboramiz
+	
 			sweetTopSmallSuccessAlert("Product added to cart!");
 		} catch (error) {
 			console.error("Error adding to cart:", error);
-			// toast.error('Failed to add product to cart');
 			sweetErrorAlert("Failed to add product to cart");
 		} finally {
 			setIsAdding(false);
 		}
 	};
+
 	if (device === "mobile") {
 		return (
 			<h1 style={{ marginTop: "20px", textAlign: "center" }}>
@@ -290,7 +300,7 @@ const ProductDetailPage = ({
 
 							<Stack direction="row" spacing={2} alignItems="center">
 								<Typography className={"price"}>
-									{product?.productPrice}
+									${product?.productPrice}
 								</Typography>
 								<Typography className={"originalPrice"}>$69.00</Typography>
 							</Stack>
@@ -301,11 +311,7 @@ const ProductDetailPage = ({
 								<Typography className={"label"}>Size : 2KG</Typography>
 								<Stack direction="row" spacing={2} mt={1}>
 									{["500gm", "1Kg", "2Kg", "5Kg", "7Kg"].map((size, i) => (
-										<Button
-											key={i}
-											className={`${"sizeBtn"} ${
-												size === "2Kg" ? "selected" : ""
-											}`}>
+										<Button key={i} className={`${"sizeBtn"} `}>
 											{size}
 										</Button>
 									))}
@@ -318,20 +324,23 @@ const ProductDetailPage = ({
 
 							<Stack className={"actionSection"}>
 								<Box className={"qtyBox"}>
-									<Button>
+									<Button onClick={decreaseQty}>
 										<RemoveIcon />
 									</Button>
-									<Typography className={"qty"}>3</Typography>
-									<Button>
+									<Typography className={"qty"}>{qty}</Typography>
+									<Button onClick={increaseQty}>
 										<AddIcon />
 									</Button>
 								</Box>
+
 								<Button className={"addToCart"} onClick={handleAddToCart}>
 									Add to Cart
 								</Button>
+
 								<IconButton className={"iconBtn"}>
 									<FullscreenIcon />
 								</IconButton>
+
 								<IconButton className={"iconBtn"}>
 									<FavoriteBorderIcon />
 								</IconButton>

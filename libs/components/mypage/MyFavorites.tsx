@@ -42,9 +42,6 @@ const MyFavorites = () => {
 		},
 	});
 
-
-	console.log("GET_FAVORITES DATA:", getFavoritesData);
-
 	/** HANDLERS **/
 	const paginationHandler = (e: T, value: number) => {
 		setSearchFavorites({ ...searchFavorites, page: value });
@@ -95,7 +92,7 @@ const MyFavorites = () => {
 						</div>
 					)}
 				</Stack>
-				{myFavorites?.length ? (
+				{myFavorites.length !== 0 && (
 					<Stack className="pagination-config">
 						<Stack className="pagination-box">
 							<Pagination
@@ -108,11 +105,12 @@ const MyFavorites = () => {
 						</Stack>
 						<Stack className="total-result">
 							<Typography>
-								Total {myFavorites.length} favorite product{total > 1 ? "ies" : "y"}
+								Total {myFavorites.length} my favorite product
+								{myFavorites.length > 1 ? "ies" : "y"}
 							</Typography>
 						</Stack>
 					</Stack>
-				) : null}
+				)}
 			</div>
 		);
 	}
