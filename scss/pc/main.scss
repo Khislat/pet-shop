@@ -1,0 +1,655 @@
+@import "/scss/pc/homepage/homepage";
+@import "/scss/pc/shoppage/shoppage";
+@import "/scss/pc/shoppage/detail.scss";
+@import "/scss/pc/vendorspage/vendorspage";
+@import "/scss/pc/accountpage/accountpage";
+@import "/scss/pc/cart/cart";
+
+@import "/scss/pc/mypage/mypage.scss";
+@import "/scss/pc/mypage/addNewProperty.scss";
+@import "/scss/pc/mypage/myProperties.scss";
+@import "/scss/pc/mypage/myFavorites.scss";
+@import "/scss/pc/mypage/mySaved.scss";
+@import "/scss/pc/mypage/myProfile.scss";
+@import "/scss/pc/mypage/myArticles.scss";
+@import "/scss/pc/mypage/writeArticle.scss";
+
+@import "/scss/pc/member/memberPage.scss";
+@import "/scss/pc/member/memberFollows.scss";
+@import "/scss/pc/member/memberArticles.scss";
+@import "/scss/pc/member/memberProducts.scss";
+
+@import "/scss/pc/admin/admin.scss";
+
+@import "/scss/pc/cs/faq.scss";
+
+@import "/scss/variables.scss";
+@import "/scss/reset.scss";
+/* HEADER */
+#pc-wrap {
+	.topBar {
+		position: fixed;
+		z-index: 99;
+		top: 0;
+		width: 100%;
+		backdrop-filter: blur(6px); // 👈 orqa fonni blur qilish uchun
+		padding: 2px 0;
+		background-color: #5d5e6146;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		height: 50px;
+		background-color: #5b7c8d;
+
+		.container {
+			position: relative;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			.socialIcons {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				position: relative;
+				color: white;
+				width: 169.735px;
+				height: 14.771px;
+				gap: 20px;
+			}
+			.announcement {
+				color: #fff;
+				font-family: $font;
+				font-size: 14px;
+				font-style: normal;
+				font-weight: 500;
+				line-height: normal;
+			}
+			.contactInfo {
+				position: relative;
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				.contactNumber {
+					color: #fff;
+					font-family: $font;
+					font-size: 14px;
+					font-style: normal;
+					font-weight: 600;
+					line-height: normal;
+				}
+				.contactEmail {
+					color: #fff;
+					font-family: $font;
+					font-size: 14px;
+					font-style: normal;
+					font-weight: 600;
+					line-height: normal;
+				}
+				span {
+					color: #fff;
+					font-family: $font;
+					font-size: 14px;
+					font-style: normal;
+					font-weight: 500;
+					line-height: normal;
+				}
+			}
+		}
+	}
+	.top {
+		position: fixed;
+		z-index: 99;
+		top: 50px;
+		width: 100%;
+
+		padding: 2px 0;
+		background-color: #eff9fe;
+
+		.container {
+			position: relative;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			.logo {
+				margin-top: 10px;
+				width: 210px;
+				height: 85.643px;
+			}
+			.navigation {
+				margin-top: 10px;
+				position: relative;
+				display: flex;
+				justify-content: space-between;
+				color: var(--Color-3, #1d256b);
+				font-family: $font;
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 600;
+				line-height: 30px; /* 187.5% */
+				gap: 40px;
+			}
+			.headerActions {
+				display: flex;
+				align-items: center;
+				flex-direction: row;
+				justify-content: space-between;
+				margin-top: 10px;
+				gap: 10px;
+				.languageCurrency {
+					display: flex;
+					position: relative;
+					flex-direction: row;
+					align-items: center;
+				}
+				.headerIcons {
+					gap: -30px;
+				}
+			}
+			.lan-box {
+				margin-left: 28px;
+				display: flex;
+				align-items: center;
+				.notification-icon {
+					color: white;
+				}
+				.btn-lang {
+					border-radius: 4px;
+					img {
+						width: 24px;
+						height: 17px;
+						border-radius: 2px;
+					}
+				}
+				.img-flag {
+					width: 24px;
+					height: 17px;
+					border-radius: 2px;
+					margin-right: 8px;
+				}
+			}
+			.btn-lang-text {
+				background: transparent;
+				color: black; // yoki siz istagan rang
+				font-size: 16px;
+				font-weight: 500;
+				text-transform: none;
+				display: flex;
+				align-items: center;
+				gap: 4px;
+				padding: 0;
+				min-width: unset;
+
+				&:hover {
+					background-color: transparent;
+				}
+			}
+		}
+	}
+	.topBasic {
+		position: fixed;
+		z-index: 99;
+		top: 0;
+		width: 100%;
+		backdrop-filter: blur(6px); // 👈 orqa fonni blur qilish uchun
+		padding: 10px 0;
+		background-color: #5d5e6146;
+
+		.container {
+			position: relative;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+
+			.logo {
+				margin-top: 10px;
+				width: 210px;
+				height: 85.643px;
+			}
+			.navigation {
+				margin-top: 10px;
+				position: relative;
+				display: flex;
+				justify-content: space-between;
+				color: red;
+				font-family: $font;
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 600;
+				line-height: 30px; /* 187.5% */
+				gap: 40px;
+				.collor {
+					color: white;
+				}
+			}
+			.headerActions {
+				display: flex;
+				align-items: center;
+				flex-direction: row;
+				justify-content: space-between;
+				margin-top: 10px;
+				gap: 10px;
+				.languageCurrency {
+					display: flex;
+					position: relative;
+					flex-direction: row;
+					align-items: center;
+				}
+				.headerIcons {
+					gap: -30px;
+				}
+			}
+		}
+	}
+
+	.chatting {
+		.liveChatimg {
+			width: 70px;
+			height: 70px;
+			margin-right: 10px;
+		}
+		.chat-button {
+			border: none;
+			position: fixed;
+			bottom: 90px;
+			right: 50px;
+			height: 50px;
+			width: 50px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 50%;
+			height: 50px;
+			background: #fff;
+			box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.2);
+			transition: transform 0.3s;
+			z-index: 999;
+			&:hover {
+				cursor: pointer;
+				transform: scale(1.1);
+				background-color: #fff;
+			}
+		}
+		.chat-frame {
+			position: fixed;
+			right: -380px;
+			transition: right 0.7s ease-in-out;
+			width: 380px;
+			height: 500px;
+			display: flex;
+			border-radius: 34px;
+			flex-direction: column;
+			background-image: url("/img/banner/chatwalper13.jpg");
+			background-size: cover; // Rasm divga moslashadi
+			background-position: center; // Rasm markazda turadi
+			background-repeat: no-repeat; // Takrorlanmaydi
+			box-shadow: 0px 0px 15px 0px rgba(50, 50, 50, 0.3);
+			z-index: 100;
+			bottom: 150px;
+			transition: right 0.7s ease-in-out;
+			&.open {
+				right: 10px;
+			}
+			.chat-top {
+				width: 100%;
+				height: 103px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-bottom: 1px solid rgba(205, 205, 205, 0.83);
+				font-size: 30px;
+				line-height: 54px;
+				color: #000000;
+			}
+			.chat-content {
+				position: relative;
+				padding: 17px;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				overflow: auto;
+				.chat-main {
+					position: relative;
+					width: 100%;
+					display: flex;
+					flex-direction: column;
+					.welcome {
+						margin-left: 10px;
+						padding: 9px;
+						width: auto;
+						height: auto;
+						display: flex;
+						background: #f8f5f3;
+						border-radius: 20px 20px 20px 0px;
+						color: black;
+					}
+					.msg-left {
+						margin-left: 10px;
+						padding: 9px;
+						width: auto;
+						height: auto;
+						display: flex;
+						background: #fff;
+						border-radius: 10px 10px 10px 10px;
+						color: black;
+					}
+				}
+			}
+			.chat-bott {
+				width: 100%;
+				height: 103px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-top: 1px solid rgba(205, 205, 205, 0.83);
+				.msg-input {
+					padding: 20px;
+					width: 276px;
+					height: 50px;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					background: #fff;
+					border-radius: 28px;
+					border: none;
+					outline-color: #257677;
+					font-family: "Poppins";
+					font-style: normal;
+					font-weight: 400;
+					font-size: 16px;
+					line-height: 24px;
+				}
+				.send-msg-btn {
+					margin-left: 14px;
+					width: 50px;
+					height: 50px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					border-radius: 50%;
+					background: #fee501;
+					border: none;
+				}
+			}
+			.msg-right {
+				padding: 9px;
+				width: auto;
+				height: auto;
+				display: flex;
+				background: #fee501;
+				margin-right: 5px;
+				border-radius: 10px 10px 10px 10px;
+			}
+		}
+	}
+
+	.footer {
+		padding: 80px 0 30px;
+		background-color: #ffffff;
+		.container {
+			position: relative;
+
+			.footerTop {
+				display: grid;
+				grid-template-columns: 1.5fr 1fr 0.8fr 0.8fr 1.5fr;
+				gap: 30px;
+				position: relative;
+				margin-bottom: 60px;
+			}
+
+			.footerColumn {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.logo {
+				width: 210px;
+				height: 85px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/bb5ac461-cba8-4de8-a568-a301f7d4a07b.png)
+					no-repeat center;
+				background-size: cover;
+				margin-bottom: 25px;
+			}
+
+			.companyDescription {
+				color: #363636;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 14px;
+				font-weight: 400;
+				line-height: 28px;
+				margin-bottom: 20px;
+				max-width: 328px;
+			}
+
+			.socialIcons {
+				width: 194px;
+				height: 32px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/4788eb89-ff5e-42d9-8eb0-e57748117a4d.png)
+					no-repeat center;
+				background-size: cover;
+			}
+
+			.columnTitle {
+				margin-top: 35px;
+				color: #3c3c3c;
+				font-family: Luckiest Guy, var(--default-font-family);
+				font-size: 25px;
+				font-weight: 400;
+				line-height: 16px;
+				margin-bottom: 40px;
+			}
+
+			.contactItem {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				margin-bottom: 15px;
+			}
+
+			.locationIcon,
+			.phoneIcon,
+			.emailIcon,
+			.webIcon {
+				width: 28px;
+				height: 26px;
+			}
+
+			.locationIcon {
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/3a361be9-4628-4e13-a156-581aa4a8e39c.png)
+					no-repeat center;
+				background-size: cover;
+			}
+
+			.phoneIcon {
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/85fa59ee-d7c3-498d-94d3-79ddfc884d6a.png)
+					no-repeat center;
+				background-size: cover;
+			}
+
+			.emailIcon {
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/4e7cb339-a616-4e1b-8bc3-38f4d6bda8d8.png)
+					no-repeat center;
+				background-size: cover;
+			}
+
+			.webIcon {
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/f200883e-d1d5-4e26-bde6-e94703d97d16.png)
+					no-repeat center;
+				background-size: cover;
+			}
+
+			.contactText {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 16.8px;
+			}
+
+			.footerLinks {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			.footerLinks li {
+				margin-bottom: 15px;
+			}
+
+			.footerLinks a {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 13px;
+				text-decoration: none;
+				transition: color 0.3s ease;
+			}
+
+			.footerLinks a:hover {
+				color: #fe753b;
+			}
+
+			.newsletterText {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 25px;
+				margin-bottom: 20px;
+				max-width: 400px;
+			}
+
+			.newsletterForm {
+				display: flex;
+				margin-bottom: 15px;
+			}
+
+			.emailInput {
+				width: 288px;
+				height: 50px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/e153b434-a9cc-416e-88a2-57f1b9e97b68.png)
+					no-repeat center;
+				background-size: cover;
+				border: none;
+				padding: 0 28px;
+				color: #b0b0b0;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 12px;
+				font-weight: 400;
+			}
+
+			.submitButton {
+				width: 161px;
+				height: 50px;
+				background: #fe753b;
+				border: none;
+				border-radius: 0 30px 30px 0;
+				color: #ffffff;
+				font-family: Luckiest Guy, var(--default-font-family);
+				font-size: 12px;
+				font-weight: 400;
+				line-height: 9px;
+				text-transform: capitalize;
+				letter-spacing: 1.2px;
+				cursor: pointer;
+			}
+
+			.discountText {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 30px;
+				text-transform: capitalize;
+			}
+
+			.divider {
+				width: 100%;
+				height: 1px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/c1B2VF86sG.png)
+					no-repeat center;
+				background-size: cover;
+				margin-bottom: 25px;
+			}
+
+
+			.footerBottom {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-direction: row;
+			}
+
+			.copyright {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 16px;
+				font-weight: 500;
+				line-height: 19px;
+			}
+
+			.socialIconsRow {
+				display: flex;
+				gap: 10px;
+				width: 473px;
+				height: 30px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/9a886193-b9f4-40c8-a2ca-52bc1ba20cdc.png)
+					no-repeat center;
+				background-size: contain;
+			}
+
+			.termsLinks {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 16px;
+				font-weight: 500;
+				line-height: 19px;
+			}
+
+			@media (max-width: 1200px) {
+				.footerTop {
+					grid-template-columns: repeat(3, 1fr);
+				}
+
+				.dogImage {
+					display: none;
+				}
+			}
+
+			@media (max-width: 992px) {
+				.footerTop {
+					grid-template-columns: repeat(2, 1fr);
+				}
+			}
+
+			@media (max-width: 768px) {
+				.footerTop {
+					grid-template-columns: 1fr;
+				}
+
+				.newsletterForm {
+					flex-direction: column;
+				}
+
+				.emailInput,
+				.submitButton {
+					width: 100%;
+				}
+
+				.submitButton {
+					border-radius: 30px;
+					margin-top: 10px;
+				}
+
+				.footerBottom {
+					flex-direction: column;
+					gap: 20px;
+					text-align: center;
+				}
+			}
+		}
+	}
+}

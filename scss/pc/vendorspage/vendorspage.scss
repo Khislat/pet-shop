@@ -1,0 +1,421 @@
+#pc-wrap {
+	$light-blue: #b8d4e3;
+	$light-gray: #f8f9fa;
+	// TeamSection.module.scss
+	.teamSectionWrapper {
+		min-height: auto;
+		background-color: $light-gray;
+		position: relative;
+		text-align: center;
+		.heroSectionVendors {
+			width: 100%;
+			height: 660px;
+			position: relative;
+			background-image: url("/img/homepage/heroBasic.jpeg");
+			background-size: cover;
+			background-position: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			margin-bottom: 120px;
+
+			.heroContent {
+				z-index: 2;
+				color: white;
+				text-align: center;
+
+				.title {
+					font-size: 42px;
+					font-weight: 700;
+					text-transform: uppercase;
+					font-family: "Poppins", sans-serif;
+				}
+
+				.breadcrumb {
+					font-size: 16px;
+					margin-top: 10px;
+					font-weight: 300;
+				}
+			}
+
+			.wave {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				height: 300px;
+				z-index: 1;
+
+				svg {
+					width: 100%;
+					display: block;
+				}
+			}
+		}
+		.container {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			.sectionHeader {
+				text-align: center;
+				margin-bottom: 40px;
+				position: relative;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: center;
+				margin-top: 500px;
+			}
+			.titleBox {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: center;
+				.sectionTitle {
+					color: #3c3c3c;
+					font-family: Luckiest Guy, var(--default-font-family);
+					font-size: 40px;
+					font-weight: 800;
+					line-height: 60px;
+					text-transform: capitalize;
+					margin-bottom: 100px;
+					margin-left: 50px;
+					margin-top: 60px;
+				}
+				.decorationIcon {
+					width: 102px;
+					height: 76px;
+					background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/7arTLANpZZ.png)
+						no-repeat center;
+					background-size: contain;
+					margin: 0 auto;
+					margin-top: -70px;
+					margin-left: -33px;
+				}
+			}
+
+			.teamGrid {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 20px;
+			}
+
+			.teamCard {
+				text-align: center;
+				background: white;
+				padding: 30px;
+				border-radius: 20px;
+				box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+				transition: transform 0.3s ease, box-shadow 0.3s ease;
+			}
+			.profileImageContainer {
+				width: 200px;
+				height: 200px;
+				border-radius: 50%;
+				background: linear-gradient(135deg, #fde5e4 0%, #fde5e4 100%);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin: 0 auto 20px auto;
+				padding: 4px;
+				box-shadow: 0 8px 20px#fde5e4;
+				transition: all 0.3s ease;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.profileImageContainer:hover {
+				transform: scale(1.05);
+				box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+			}
+
+			.profileImageContainer::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(
+					45deg,
+					rgba(255, 255, 255, 0.1) 0%,
+					transparent 50%,
+					rgba(255, 255, 255, 0.1) 100%
+				);
+				border-radius: 50%;
+				pointer-events: none;
+			}
+
+			.profileImage {
+				width: calc(100% - 8px);
+				height: calc(100% - 8px);
+				border-radius: 50%;
+				overflow: hidden;
+				position: relative;
+				background: #f0f0f0;
+				border: 2px solid white;
+			}
+
+			.profileImage img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: 50%;
+				display: block;
+				transition: transform 0.3s ease;
+			}
+
+			.profileImage img:hover {
+				transform: scale(1.1);
+			}
+
+			.memberName {
+				font-size: 24px;
+				font-weight: 600;
+				color: #333;
+				margin-bottom: 10px;
+			}
+
+			.memberRole {
+				color: #666;
+				font-size: 16px;
+				margin-bottom: 15px;
+			}
+			.social-icons {
+				display: flex;
+				justify-content: center;
+				gap: 15px;
+				cursor: pointer;
+			}
+			.social-link {
+				width: 40px;
+				height: 40px;
+				background: #f0f0f0;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #666;
+				text-decoration: none;
+				transition: all 0.3s ease;
+			}
+
+			.social-link:hover {
+				background: #667eea;
+				color: white;
+				transform: translateY(-2px);
+			}
+		}
+		.viewAllContainer {
+			display: flex;
+			justify-content: center;
+			margin-top: 80px;
+		}
+
+		.viewAllButton {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			width: 220px;
+			height: 54px;
+			background: #fe753b;
+			border-radius: 50px;
+			border: none;
+			padding: 0 38px;
+			color: #ffffff;
+			font-family: Recursive, var(--default-font-family);
+			font-size: 18px;
+			font-weight: 600;
+			line-height: 19px;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+			.viewAllButton:hover {
+				background-color: #e56a34;
+			}
+		}
+
+		.buttonIcon {
+			width: 26px;
+			height: 26px;
+			background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/bbdf1d3a-4cfa-4c56-ad77-150630b2e46f.png)
+				no-repeat center;
+			background-size: cover;
+		}
+	}
+	.testimonialsWrapper {
+		.wrapper {
+			height: 762px;
+			width: 100vw;
+			background-color: #fde5e4;
+			position: relative;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-top: 160px;
+			.container {
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				.ctaBanner {
+					background-color: #ff4646;
+					border-radius: 60px;
+					color: #fff;
+					max-width: 90%;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					padding: 24px 40px;
+					margin-top: -250px;
+					margin-bottom: 160px;
+					font-family: "Fredoka", sans-serif;
+
+					.ctaText {
+						color: #fff;
+
+						font-family: $font;
+						font-size: 28px;
+						font-style: normal;
+						font-weight: 700;
+						line-height: normal;
+					}
+
+					.ctaRight {
+						display: flex;
+						align-items: center;
+						gap: 20px;
+
+						.desc {
+							color: #fff;
+
+							font-family: Recursive;
+							font-size: 30px;
+							font-style: normal;
+							font-weight: 700;
+							line-height: 40px;
+						}
+
+						.ctaButton {
+							background-color: white;
+							color: #ff4646;
+							font-weight: 600;
+							text-transform: uppercase;
+							padding: 10px 22px;
+							border-radius: 50px;
+							font-size: 14px;
+							&:hover {
+								background-color: #ffeaea;
+							}
+						}
+					}
+				}
+				.testimonialContent {
+					position: relative;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					gap: 40px;
+					max-width: 1100px;
+
+					.faQuoteRight {
+						position: absolute;
+						display: flex;
+						justify-content: space-between;
+
+						margin-top: 280px;
+						margin-left: 850px;
+						.faQuote {
+							width: 127px;
+							height: 107px;
+						}
+						.bird {
+							width: 167px;
+							height: 137px;
+						}
+					}
+
+					.imageBox {
+						.imgPlaceholder {
+							background-color: #887dc0;
+							position: relative;
+
+							.client {
+								width: 387px;
+								height: 357px;
+								z-index: 2;
+							}
+						}
+					}
+
+					.textBox {
+						max-width: 600px;
+						text-align: left;
+
+						.heading {
+							color: #232121;
+
+							font-family: $font;
+							font-size: 32px;
+							font-style: normal;
+							font-weight: 800;
+							line-height: normal;
+							margin-bottom: 30px;
+						}
+						.stars {
+							margin-bottom: 20px;
+
+							.star {
+								color: #ffa726;
+								font-size: 24px;
+							}
+						}
+
+						.description {
+							color: #272727;
+
+							font-family: $font;
+							font-size: 16px;
+							font-style: normal;
+							font-weight: 500;
+							line-height: 30px;
+							margin-bottom: 20px;
+						}
+
+						.name {
+							font-weight: 700;
+							font-size: 14px;
+							color: #000;
+						}
+
+						.role {
+							font-size: 13px;
+							color: #555;
+							margin-bottom: 10px;
+						}
+
+						.dots {
+							display: flex;
+							gap: 6px;
+							margin-top: 10px;
+
+							span {
+								width: 8px;
+								height: 8px;
+								border-radius: 50%;
+								background-color: #555;
+								opacity: 0.3;
+
+								&.activeDot {
+									background-color: #ff7e29;
+									opacity: 1;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

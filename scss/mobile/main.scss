@@ -1,0 +1,2421 @@
+@import "/scss/variables.scss";
+@import "/scss/reset.scss";
+
+#mobile-wrap {
+	$light-gray: #f8f9fa;
+	.topBar {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		height: 50px;
+		background-color: #5b7c8d;
+		position: fixed;
+		z-index: 99;
+		width: 100%;
+
+		.container {
+			position: relative;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+
+			.announcement {
+				color: #fff;
+				font-family: $font;
+				font-size: 14px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: normal;
+				margin-left: 10px;
+				max-width: 100%;
+			}
+		}
+	}
+	.top {
+		
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		position: fixed;
+
+		z-index: 99;
+		top: 50px;
+		width: auto;
+		width: 100%;
+		padding: 2px 10px;
+		background-color: #eff9fe;
+
+		.logo {
+			margin-top: 10px;
+			width: 210px;
+			height: 85.643px;
+		}
+		.navigation {
+			margin-top: 10px;
+			position: relative;
+			display: flex;
+			justify-content: space-between;
+			color: var(--Color-3, #1d256b);
+			font-family: $font;
+			font-size: 16px;
+			font-style: normal;
+			font-weight: 600;
+			line-height: 30px; /* 187.5% */
+			gap: 40px;
+		}
+		.headerActions {
+			display: flex;
+			align-items: center;
+			flex-direction: row;
+			justify-content: space-between;
+			margin-top: 10px;
+			gap: 10px;
+			.languageCurrency {
+				display: flex;
+				position: relative;
+				flex-direction: row;
+				align-items: center;
+			}
+			.headerIcons {
+				gap: -30px;
+			}
+		}
+	}
+	.heroSection {
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		width: 100%;
+		height: 1000px;
+		padding: 20px;
+		background-color: #eff9ff;
+		overflow: hidden;
+		margin-top: 140px;
+
+		.wave {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: auto;
+			z-index: 1;
+
+			svg {
+				width: 100%;
+				display: block;
+			}
+		}
+
+		.container {
+			position: relative;
+			flex-direction: column;
+			justify-content: space-between;
+			margin-top: 70px;
+			.qualityBadge {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				margin-bottom: 15px;
+				margin-top: 70px;
+				// margin-left: -30px;
+				.badgeIcon {
+					width: 30px;
+					height: 37px;
+				}
+				.badgeText {
+					color: #fe753b;
+					font-family: $font;
+					font-size: 15px;
+					font-weight: 600;
+					line-height: 16px;
+					text-transform: uppercase;
+					letter-spacing: 8px;
+				}
+			}
+			.heroContent {
+				width: 100%;
+				height: 137px;
+				.heroTitle {
+					font-family: Luckiest Guy, var(--default-font-family);
+					margin-bottom: 20px;
+					.discountPercent {
+						display: block;
+						color: #363636;
+						font-size: 45px;
+						font-weight: 800;
+						line-height: 76px;
+						text-transform: capitalize;
+					}
+					.discountDescription {
+						display: block;
+						color: #363636;
+						font-size: 40px;
+						font-weight: 800;
+						line-height: 56px;
+						text-transform: capitalize;
+					}
+				}
+				.heroDescription {
+					color: #585858;
+					font-family: Recursive, var(--default-font-family);
+					font-size: 16px;
+					font-weight: 400;
+					line-height: 30px;
+					margin-bottom: 39px;
+					max-width: 639px;
+				}
+				.heroActions {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					margin-bottom: 50px;
+					.shopButton {
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						width: 160px;
+						height: 34px;
+						background: #fe753b;
+						border-radius: 50px;
+						border: none;
+						padding: 0 25px;
+						color: #ffffff;
+						font-family: $font;
+						font-size: 14px;
+						font-weight: 600;
+						cursor: pointer !important;
+						transition: background-color 0.3s ease;
+						&:hover {
+							background-color: #e56a34;
+						}
+						.buttonIcon {
+							width: 18px;
+							height: 18px;
+							background: url("/img/icons/homepage/buttonIcon.svg") no-repeat
+								center;
+							background-size: cover;
+							cursor: pointer;
+						}
+					}
+				}
+				.reviewsContainer {
+					display: flex;
+					align-items: center;
+
+					.reviewContainer {
+						display: flex;
+						align-items: center;
+						gap: 10px;
+						margin-left: 28px;
+					}
+
+					.circles {
+						display: flex;
+						position: relative;
+					}
+
+					.circle {
+						width: 38px;
+						height: 38px;
+						border-radius: 50%;
+						background-color: #c278c2;
+						border: 3px solid white;
+						position: relative;
+						overflow: hidden;
+						margin-left: -15px;
+
+						&:first-child {
+							margin-left: 0;
+						}
+					}
+
+					.avatar {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+						border-radius: 50%;
+						display: block;
+					}
+
+					.highlighted {
+						background-color: #f89c1c;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+
+						span {
+							color: white;
+							font-weight: 600;
+							font-size: 16px;
+						}
+					}
+
+					.text {
+						color: #000;
+						font-size: 14px;
+						font-weight: 500;
+					}
+				}
+			}
+			.hero-dog {
+				position: relative;
+				align-items: center;
+				width: 100%;
+				height: 250px;
+				margin-top: 40px;
+				.main-dog {
+					position: absolute;
+					bottom: 0;
+					height: 300px;
+					width: 350px;
+					z-index: 2;
+					right: 18px;
+				}
+			}
+
+			.pagination {
+				display: flex;
+				align-items: center;
+				gap: 15px;
+				width: 26px;
+				height: 22px;
+				color: var(--Color-3, #1d256b);
+				font-family: $font;
+				font-size: 15px;
+				font-style: normal;
+				font-weight: 600;
+				line-height: normal;
+				align-items: center;
+				.arrowRight {
+					transform: rotate(180deg);
+				}
+			}
+		}
+	}
+
+	.aboutSection {
+		display: flex;
+		align-items: center;
+		background: url("/img/banner/Pattern.png");
+		background-repeat: repeat;
+		background-size: auto; // yoki fixed size: 80px 80px;
+		background-position: top center;
+		padding: 20px;
+
+		.imagesContainer {
+			flex: 1;
+			position: relative;
+			min-height: 400px;
+			left: -190px;
+			.mainImage {
+				position: absolute;
+				width: 220px;
+				height: 216px;
+				background: #c682c0;
+				border-radius: 20px;
+				overflow: hidden;
+				.main-dog {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+					filter: brightness(0.9);
+				}
+			}
+			.smallImage {
+				position: absolute;
+				width: 117px;
+				height: 115px;
+				top: 8px;
+				left: 255px;
+				background: #c682c0;
+				border-radius: 20px;
+				overflow: hidden;
+				.girl {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+					filter: brightness(0.9);
+				}
+			}
+			.borderedImage {
+				position: absolute;
+				width: 220px;
+				height: 216px;
+				top: 159px;
+				left: 170px;
+				background: #c682c0;
+				border: 10px solid #ffffff;
+				border-radius: 20px;
+				border-width: 5px;
+				overflow: hidden;
+				.catDog {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+					filter: brightness(0.9);
+					object-position: 65% center;
+				}
+			}
+		}
+		.contentContainer {
+			display: flex;
+			justify-content: space-between;
+			flex-direction: column;
+			margin-top: 45px;
+			margin-left: 520px;
+			order: 1;
+			margin: 0;
+			padding: 20px;
+
+			.aboutHeader {
+				display: flex;
+				gap: 10px;
+
+				margin-left: 10px;
+				.aboutTitle {
+					color: #fe753b;
+					font-family: Recursive, var(--default-font-family);
+					font-size: 18px;
+					font-weight: 700;
+					line-height: 24px;
+					line-height: normal;
+				}
+				.aboutIcon {
+					width: 30px;
+					height: 35px;
+					background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/c9ecc4a9-3c3c-4c44-8742-d24c7e59a057.png)
+						no-repeat center;
+					background-size: cover;
+				}
+			}
+			.treatsTitle {
+				color: #363636;
+				font-family: "Luckiest Guy";
+				font-size: 32px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 45px;
+				margin-top: 20px;
+				text-align: center;
+			}
+			.aboutDescription {
+				color: #363636;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 14px;
+				font-weight: 400;
+				line-height: 22x;
+				margin-top: 10px;
+				text-align: center;
+			}
+			.servicesContainer {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				gap: 32px;
+				margin-top: 20px;
+				.serviceItem {
+					display: flex;
+					justify-content: space-between;
+					flex-direction: column;
+					align-items: center;
+					width: auto;
+
+					.serviceIcon1 {
+						background: url("/img/icons/homepage/Aboutus1.svg") no-repeat center;
+						background-size: cover;
+						width: 60px;
+						height: 60px;
+					}
+					.serviceIcon2 {
+						background: url("/img/icons/homepage/Aboutus2.svg") no-repeat center;
+						background-size: cover;
+						width: 60px;
+						height: 60px;
+					}
+					.serviceIcon3 {
+						background: url("/img/icons/homepage/Aboutus3.svg") no-repeat center;
+						background-size: cover;
+						width: 60px;
+						height: 60px;
+					}
+					.serviceTitle {
+						margin-top: 10px;
+						color: #000000;
+						font-family: Recursive, var(--default-font-family);
+						font-size: 16px;
+						font-weight: 600;
+						line-height: 24px;
+						text-align: center;
+					}
+				}
+			}
+			.knowMoreButton {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				width: 160px;
+				height: 34px;
+				background: #fe753b;
+				border-radius: 50px;
+				border: none;
+				padding: 0 21px;
+				color: #ffffff;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 14px;
+				font-weight: 600;
+				text-transform: uppercase;
+				margin-top: -40px;
+				cursor: pointer;
+				transition: background-color 0.3s ease;
+				margin: 20px auto;
+				.knowMoreButton:hover {
+					background-color: #e56a34;
+				}
+				.buttonIcon {
+					width: 18px;
+					height: 18px;
+					background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/9d842807-ad19-4012-bee3-a70a24b153ca.png)
+						no-repeat center;
+					background-size: cover;
+				}
+			}
+			.contactInfo {
+				margin-top: 20px;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				gap: 16px;
+
+				.contactItem {
+					display: flex;
+					align-items: center;
+					gap: 10px;
+					flex-direction: row;
+					.contactIcon1,
+					.contactIcon2 {
+						width: 36px;
+						height: 36px;
+					}
+					.contactIcon1 {
+						background: url("/img/icons/homepage/phone.png") no-repeat center;
+						background-size: contain;
+					}
+					.contactIcon2 {
+						background: url("/img/icons/homepage/email.png") no-repeat center;
+						background-size: contain;
+					}
+					.contactLabel {
+						color: #555555;
+						font-family: Recursive, var(--default-font-family);
+						font-size: 10px;
+						font-weight: 400;
+						line-height: 14px;
+						margin-bottom: 5px;
+					}
+					.contactValue {
+						color: #000000;
+						font-family: Recursive, var(--default-font-family);
+						font-size: 10px;
+						font-weight: 700;
+						line-height: 16.8px;
+					}
+				}
+			}
+		}
+	}
+	.categoriesSection {
+		position: relative;
+		overflow: hidden;
+
+		.background {
+			background-color: #eff9ff;
+			position: relative;
+			padding: 80px 0;
+			overflow: hidden;
+			.wave1 {
+				position: absolute;
+				width: 100%;
+				height: 100px;
+				top: 0;
+				left: 0;
+				transform: rotate(180deg);
+				background-color: #eff9ff;
+			}
+
+			.wave2 {
+				position: absolute;
+				width: 100%;
+				height: 100px;
+				bottom: 0;
+				left: 0;
+				background-color: #eff9ff;
+			}
+		}
+
+		.container {
+			width: 100%;
+		}
+
+		.sectionHeader {
+			display: flex;
+			text-align: center;
+			margin-bottom: 40px;
+			position: relative;
+			align-items: center;
+			justify-content: center;
+			flex-direction: row;
+
+			.sectionTitle {
+				color: #3c3c3c;
+				font-family: Luckiest Guy, var(--default-font-family);
+				font-size: 26px;
+				font-weight: 800;
+				line-height: 24px;
+				text-transform: capitalize;
+				margin-left: 20px;
+			}
+
+			.decorationIcon {
+				position: relative;
+				width: 60.621px;
+				height: 46.016px;
+				background: url("/img/icons/homepage/petFoot.svg") no-repeat center;
+				background-size: contain;
+				margin-top: -20px;
+				left: -20px;
+			}
+		}
+
+		.categoriesContainer {
+			display: flex;
+			justify-content: center;
+			flex-direction: row;
+			align-items: flex-start;
+			gap: 40px;
+			flex-wrap: wrap;
+			margin-bottom: 30px;
+		}
+
+		.categoryItem {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			cursor: pointer;
+			transition: transform 0.3s ease;
+
+			&:hover {
+				transform: scale(1.05);
+			}
+
+			.categoryImage {
+				width: 80px;
+				height: 80px;
+				border-radius: 50%;
+				background-color: #a1cee3;
+				box-shadow: 0 0 0 3px #41c0f0 inset;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				overflow: hidden;
+
+				// Ichidagi rasm to‘g‘ridan-to‘g‘ri bu class ichida bo‘lmasa kerak
+				// SCSS ichida img stylingni tashqariga chiqaring
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+					filter: brightness(0.9);
+				}
+			}
+
+			.imageCircle {
+				width: 80px;
+				height: 80px;
+				background-color: #a1cee3;
+				border-radius: 50%;
+				box-shadow: 0 0 0 3px #41c0f0 inset;
+				overflow: hidden;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: center;
+					filter: brightness(0.9);
+				}
+			}
+
+			.categoryName {
+				margin-top: 12px;
+				font-size: 17px;
+				color: #222;
+				font-weight: 500;
+				font-family: $font;
+
+				// If it's the active one (like "Cats" in your screenshot)
+				.categoryItem:nth-child(2) & {
+					color: #ffa726;
+				}
+			}
+		}
+	}
+
+	.productsSection {
+		padding: 20px;
+		.container {
+			display: flex;
+			flex-direction: column;
+
+			.sectionHeader {
+				display: flex;
+				text-align: center;
+				margin-bottom: 40px;
+				position: relative;
+				align-items: center;
+				justify-content: center;
+				flex-direction: row;
+				.sectionTitle {
+					color: #3c3c3c;
+					font-family: Luckiest Guy, var(--default-font-family);
+					font-size: 26px;
+					font-weight: 800;
+					line-height: 24px;
+					text-transform: capitalize;
+					margin-left: 20px;
+				}
+				.categoryIcon {
+					position: relative;
+					width: 60.621px;
+					height: 46.016px;
+					background: url("/img/icons/homepage/petFoot.svg") no-repeat center;
+					background-size: contain;
+					margin-top: 50px;
+					left: -20px;
+				}
+			}
+			.productsGrid {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 24px; // yoki sizdagi spacing
+				justify-content: center; // yoki space-between
+			}
+
+			.categoryFilters {
+				display: flex;
+				gap: 15px;
+				justify-content: flex-end;
+				top: -20px;
+			}
+
+			.filterButton,
+			.filterButtonActive {
+				height: 41px;
+				border-radius: 24px;
+				padding: 0 20px;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 11px;
+				text-transform: capitalize;
+				border: none;
+				cursor: pointer;
+				transition: all 0.3s ease;
+			}
+
+			.filterButton {
+				background: #bbdff2;
+				color: #000000;
+			}
+
+			.filterButtonActive {
+				background: #fe753b;
+				color: #ffffff;
+			}
+
+			.filterButton:hover {
+				background: #a5d1e9;
+			}
+
+			.productsGrid {
+				display: flex;
+				grid-template-columns: repeat(5, 1fr);
+				gap: 20px;
+				margin-bottom: 40px;
+			}
+
+			.viewAllContainer {
+				display: flex;
+				justify-content: center;
+				margin-top: 20px;
+			}
+
+			.viewAllButton {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				width: 250px;
+				height: 40px;
+				background: #fe753b;
+				border-radius: 50px;
+				border: none;
+				padding: 0 38px;
+				color: #ffffff;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 14px;
+				font-weight: 600;
+				line-height: 19px;
+				cursor: pointer;
+				transition: background-color 0.3s ease;
+			}
+
+			.viewAllButton:hover {
+				background-color: #e56a34;
+			}
+
+			.buttonIcon {
+				width: 16px;
+				height: 16px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/bbdf1d3a-4cfa-4c56-ad77-150630b2e46f.png)
+					no-repeat center;
+				background-size: cover;
+			}
+			.productCard {
+				background: #fff;
+				border-radius: 12px;
+				// box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+				padding: 16px;
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				transition: all 0.3s ease;
+				cursor: pointer;
+				width: 100%;
+				max-width: 180px;
+				margin: 0 auto;
+
+				&:hover {
+					transform: translateY(-6px);
+					// box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+				}
+
+				.discountBadge {
+					position: absolute;
+					top: 12px;
+					left: 12px;
+					background: #ffa028;
+					color: white;
+					font-size: 12px;
+					font-weight: 600;
+					padding: 4px 10px;
+					border-radius: 30px;
+					z-index: 1;
+					box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+				}
+
+				.wishlistIcon {
+					position: absolute;
+					top: 12px;
+					right: 12px;
+					background: #ffffff;
+					box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+					border-radius: 50%;
+					padding: 4px;
+					transition: background-color 0.3s ease;
+
+					&:hover {
+						background-color: #ffecec;
+					}
+				}
+
+				.productImage {
+					width: 160px;
+					height: 180px;
+					object-fit: cover;
+					border-radius: 8px;
+					margin-bottom: 12px;
+				}
+
+				.productRating {
+					height: 16px;
+					width: 100px;
+					margin: 4px 0;
+					background: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/kbRpkuBeff.png")
+						no-repeat center;
+					background-size: contain;
+				}
+
+				.productName {
+					font-size: 16px;
+					font-weight: 600;
+					color: #333;
+					text-align: center;
+					margin-top: 6px;
+					margin-bottom: 8px;
+				}
+
+				.productPrice {
+					display: flex;
+					gap: 8px;
+					align-items: center;
+					justify-content: center;
+					margin-bottom: 16px;
+
+					.currentPrice {
+						font-size: 16px;
+						font-weight: 700;
+						color: #2d2d2d;
+					}
+
+					.oldPrice {
+						font-size: 14px;
+						font-weight: 500;
+						color: #b5b5b5;
+						text-decoration: line-through;
+					}
+				}
+
+				.addToCartButton {
+					background: #fe9d6d;
+					color: white;
+					border: none;
+					border-radius: 100px;
+					padding: 6px 10px;
+					font-size: 14px;
+					font-weight: 600;
+					transition: background 0.3s;
+					width: 100%;
+					text-align: center;
+
+					&:hover {
+						background: #fe9d6d;
+					}
+				}
+			}
+		}
+	}
+	.featuresSection {
+		position: relative;
+		overflow: hidden;
+		.background {
+			background-color: #eff9ff;
+			position: relative;
+			padding: 60px 0;
+			overflow: hidden;
+			.wave1 {
+				position: absolute;
+				width: 100%;
+				height: 80px;
+				top: 0;
+				left: 0;
+				transform: rotate(180deg);
+				background-color: #eff9ff;
+			}
+		}
+		.container {
+			// max-width: 1520px;
+			// margin: 0 auto;
+			// padding: 0 20px;
+			.featureBox {
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+				align-items: center;
+				background: #ffdd5e;
+				border-radius: 20px;
+				padding: 14px;
+				display: flex;
+				position: relative;
+			}
+
+			.leftContent {
+				flex: 1;
+				max-width: 510px;
+				margin-right: 6px;
+			}
+
+			.sectionTitle {
+				color: #3c3c3c;
+				font-family: Luckiest Guy, var(--default-font-family);
+				font-size: 11px;
+				font-weight: 600;
+				line-height: 10px;
+				text-transform: capitalize;
+				margin-bottom: 8px;
+			}
+
+			.description {
+				color: #363636;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 8px;
+				font-weight: 400;
+				line-height: 8px;
+			}
+
+			.divider {
+				position: relative;
+				width: 0.2px;
+				height: 90px;
+				left: -20px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/ri6MZsKuGc.png)
+					no-repeat center;
+				background-size: cover;
+				margin: 1px;
+			}
+
+			.featuresGrid {
+				flex: 1;
+				display: grid;
+				align-items: center;
+				grid-template-columns: repeat(2, 1fr);
+				grid-template-rows: repeat(2, 1fr);
+				gap: 4px;
+			}
+
+			.featureItem {
+				display: flex;
+				align-items: flex-start;
+				gap: 8px;
+			}
+
+			.featureIcon1,
+			.featureIcon2,
+			.featureIcon3,
+			.featureIcon4 {
+				width: 20px;
+				height: 20px;
+				border-radius: 50%;
+				flex-shrink: 0;
+			}
+
+			.featureIcon1 {
+				margin-top: 12px;
+				background: url("/img/icons/homepage/featureIcon1.svg") no-repeat center;
+				background-size: contain;
+				z-index: 2;
+			}
+			.featureElipse {
+				position: absolute;
+				margin-left: -10px;
+				margin-top: 10px;
+				z-index: 1;
+				width: 20px;
+				height: 20px;
+			}
+
+			.featureIcon2 {
+				background: url("/img/icons/homepage/featureIcon2.svg") no-repeat center;
+				background-size: contain;
+				z-index: 2;
+				margin-top: 11px;
+			}
+
+			.featureIcon3 {
+				position: relative;
+				background: url("/img/icons/homepage/featureIcon3.svg") no-repeat center;
+				background-size: contain;
+				z-index: 2;
+				margin-top: 11px;
+			}
+
+			.featureIcon4 {
+				margin-top: 12px;
+				background: url("/img/icons/homepage/featureIcon4.svg") no-repeat center;
+				background-size: contain;
+				z-index: 2;
+			}
+
+			.featureContent {
+				flex: 1;
+			}
+
+			.featureTitle {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 8px;
+				font-weight: 700;
+				line-height: 8px;
+				margin-bottom: 8px;
+				margin-top: 8px;
+			}
+
+			.featureDescription {
+				color: #494949;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 6px;
+				font-weight: 400;
+				line-height: 8px;
+			}
+		}
+	}
+
+	.teamSection {
+		.background {
+			background-color: #eff9ff;
+			position: relative;
+			padding: 20px 0;
+			overflow: hidden;
+
+			.wave2 {
+				position: absolute;
+				width: 100%;
+				height: 50px;
+				bottom: 0;
+				left: 0;
+				background-color: #eff9ff;
+			}
+		}
+		.container {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			padding: 20px;
+			.sectionHeader {
+				text-align: center;
+				margin-bottom: 10px;
+				position: relative;
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
+			}
+
+			.nav {
+				position: relative;
+				display: flex;
+				gap: 0.5rem;
+				left: 10px;
+				margin-bottom: 25px;
+			}
+			.teamSwiper {
+				width: 100%;
+				padding-bottom: 50px;
+
+				.swiper-button-prev,
+				.swiper-button-next {
+					color: #000;
+				}
+
+				.swiper-pagination-bullet-active {
+					background: #000;
+				}
+			}
+
+			.sectionTitle {
+				color: #3c3c3c;
+				font-family: Luckiest Guy, var(--default-font-family);
+				font-size: 26px;
+				font-weight: 800;
+				line-height: 60px;
+				text-transform: capitalize;
+				margin-bottom: 30px;
+				margin-left: 5px;
+			}
+			.decorationIcon {
+				width: 60.621px;
+				height: 46.016px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/7arTLANpZZ.png)
+					no-repeat center;
+				background-size: contain;
+				margin: 0 auto;
+				margin-top: -50px;
+				margin-left: -20px;
+			}
+			.topVendorDivider {
+				position: relative;
+				margin-left: 20px;
+				width: 20px;
+				height: 3px;
+				background: #a8a8a8;
+				margin-bottom: 25px;
+			}
+
+			.teamGrid {
+				display: grid;
+				grid-template-columns: repeat(5, 2fr);
+				gap: 40px;
+			}
+
+			.teamCard {
+				text-align: center;
+				background: #eff9fe;
+				padding: 20px;
+				border-radius: 20px;
+				box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+				transition: transform 0.3s ease, box-shadow 0.3s ease;
+			}
+			.profileImageContainer {
+				width: 110px;
+				height: 110px;
+				border-radius: 50%;
+				background: linear-gradient(135deg, #1a1e2e 0%, #97c8e0 100%);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin: 0 auto 20px auto;
+				padding: 4px;
+				box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+				transition: all 0.3s ease;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.profileImageContainer:hover {
+				transform: scale(1.05);
+				box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+			}
+
+			.profileImageContainer::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: linear-gradient(
+					45deg,
+					rgba(255, 255, 255, 0.1) 0%,
+					transparent 50%,
+					rgba(255, 255, 255, 0.1) 100%
+				);
+				border-radius: 50%;
+				pointer-events: none;
+			}
+
+			.profileImage {
+				width: calc(100% - 8px);
+				height: calc(100% - 8px);
+				border-radius: 50%;
+				overflow: hidden;
+				position: relative;
+				background: #f0f0f0;
+				border: 2px solid white;
+			}
+
+			.profileImage img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: 50%;
+				display: block;
+				transition: transform 0.3s ease;
+			}
+
+			.profileImage img:hover {
+				transform: scale(1.1);
+			}
+
+			.memberName {
+				font-size: 18px;
+				font-weight: 600;
+				color: #333;
+				margin-bottom: 10px;
+			}
+
+			.memberRole {
+				color: #666;
+				font-size: 14px;
+				margin-bottom: 15px;
+			}
+			.social-icons {
+				display: flex;
+				justify-content: center;
+				gap: 15px;
+				cursor: pointer;
+			}
+			.social-link {
+				width: 10px;
+				height: 10px;
+				background: #f0f0f0;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				color: #666;
+				text-decoration: none;
+				transition: all 0.3s ease;
+			}
+
+			.social-link:hover {
+				background: #667eea;
+				color: white;
+				transform: translateY(-2px);
+			}
+		}
+	}
+	.testimonialsSection {
+		padding: 20px;
+		.container {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+
+			padding: 0 20px;
+			.sectionHeader {
+				margin-bottom: 10px;
+				position: relative;
+			}
+
+			.sectionTitle {
+				color: #3c3c3c;
+				font-family: Luckiest Guy, var(--default-font-family);
+				font-size: 26px;
+				font-weight: 800;
+				line-height: 60px;
+				text-transform: capitalize;
+				margin-bottom: 30px;
+			}
+
+			.decorationIcon {
+				position: absolute;
+				width: 60.621px;
+				height: 46.016px;
+				top: 0px;
+				left: 220px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/059d1a03-8d76-493f-8840-24bff2940e51.png)
+					no-repeat center;
+				background-size: contain;
+			}
+
+			.testimonialLayout {
+				display: flex;
+				gap: 10px;
+				margin-bottom: 40px;
+			}
+
+			.leftImage {
+				width: 142px;
+				height: 83px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/baf68c01-196b-4ffd-b808-13b6ec7073b7.png)
+					no-repeat center;
+				background-size: cover;
+				position: relative;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					opacity: 0.9;
+				}
+			}
+
+			.quoteIcon {
+				width: 32px;
+				height: 26px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/ef8dc109-7a30-44e0-8c41-8974d07c91c8.png)
+					no-repeat center;
+				background-size: cover;
+				position: absolute;
+				top: 12px;
+				left: 12px;
+			}
+
+			.testimonialContent {
+				width: 207px;
+				height: 83px;
+				flex: 1;
+				background: #ffdd5e;
+				padding: 10px;
+				display: flex;
+				flex-direction: column;
+			}
+
+			.testimonialText {
+				color: #313131;
+				font-family: $font;
+				font-size: 6px;
+				font-style: normal;
+				font-weight: 500;
+				line-height: 10px;
+				text-transform: capitalize;
+			}
+
+			.testimonialAuthor {
+				display: flex;
+				align-items: center;
+			}
+
+			.authorName {
+				color: #262626;
+				font-family: Luckiest Guy, var(--default-font-family);
+				font-size: 8px;
+				font-weight: 400;
+				line-height: 2.598px;
+			}
+
+			.authorRole {
+				color: #000000;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 8px;
+				font-weight: 600;
+				line-height: 2.598px;
+			}
+
+			.rightImages {
+				width: 293px;
+				height: 243px;
+				display: flex;
+				gap: 10px;
+			}
+
+			.singleImage {
+				width: 142px;
+				height: 243px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/1a01bc8a-a8a3-4c1c-8432-511a425566b1.png)
+					no-repeat center;
+				background-size: cover;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					opacity: 0.9;
+				}
+			}
+
+			.moreImages {
+				width: 142px;
+				height: 243px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/313fdf68-d1e7-4ed4-aecb-5d7782147fa8.png)
+					no-repeat center;
+				background-size: cover;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					opacity: 0.9;
+				}
+			}
+
+			.moreCount {
+				color: #ffffff;
+				font-family: Luckiest Guy, var(--default-font-family);
+				font-size: 48px;
+				font-weight: 400;
+				line-height: 48px;
+			}
+
+			.pagination {
+				width: 83px;
+				height: 10px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/27fe6cfe-132e-4146-b994-da2d684e8343.png)
+					no-repeat center;
+				background-size: cover;
+				margin: 0 auto;
+			}
+		}
+	}
+	.blogSection {
+		padding: 20px;
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+
+			padding: 0 20px;
+
+			.sectionHeader {
+				position: relative;
+				// text-align: center;
+				margin-bottom: 10px;
+			}
+
+			.sectionTitle {
+				color: #3c3c3c;
+				font-family: Luckiest Guy, var(--default-font-family);
+				font-size: 26px;
+				font-weight: 800;
+				line-height: 60px;
+				text-transform: capitalize;
+				margin-bottom: 10px;
+			}
+
+			.decorationIcon {
+				position: absolute;
+				width: 60.621px;
+				height: 46.016px;
+				top: 0px;
+				left: 220px;
+				background: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/ioFdQ23zvD.png")
+					no-repeat center;
+				background-size: contain;
+			}
+
+			.sectionDescription {
+				color: #000;
+				font-family: "Recursive", var(--default-font-family);
+				font-size: 12px;
+				font-weight: 400;
+				line-height: 19px;
+				text-align: center;
+				max-width: 600px;
+				margin: 0 auto 20px;
+			}
+
+			.blogGrid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 30px;
+			}
+
+			.blogCard {
+				display: flex;
+				flex-direction: column;
+				padding: 20px;
+			}
+
+			.blogImage {
+				width: 100%;
+				height: 200px;
+				background-size: cover;
+				background-position: center;
+				position: relative;
+				margin-bottom: 20px;
+				border-radius: 15px;
+			}
+
+			.dateTag {
+				position: absolute;
+				top: 18px;
+				left: 18px;
+				width: 61px;
+				height: 15px;
+
+				background: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/dmEo1VZ1zD.png")
+					no-repeat center;
+				background-size: cover;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				span {
+					color: #fff;
+					font-family: "Recursive", var(--default-font-family);
+					font-size: 10px;
+					font-weight: 500;
+					line-height: 14px;
+				}
+			}
+
+			.blogContent {
+				display: flex;
+				flex-direction: column;
+				position: relative;
+			}
+
+			.blogTitle {
+				color: #3d3d3d;
+
+				font-family: $font;
+				font-size: 18px;
+				font-style: normal;
+				font-weight: 600;
+				line-height: normal;
+				margin-bottom: 10px;
+
+				&:nth-child(1) {
+					color: #3d3d3d;
+				}
+
+				&:nth-child(2),
+				&:nth-child(3) {
+					color: #3c3c3c;
+				}
+			}
+
+			.blogExcerpt {
+				color: #4e4e4e;
+				font-family: $font;
+				font-size: 14px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 19px;
+				margin-bottom: 16px;
+			}
+
+			.blogFooter {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
+
+			.readMore {
+				position: relative;
+
+				.readMoreText,
+				.readMoreActive {
+					font-family: "Luckiest Guy", var(--default-font-family);
+					font-size: 14px;
+					font-weight: 400;
+					line-height: 11px;
+					margin-bottom: 15px;
+					display: block;
+					color: #363636;
+				}
+
+				.readMoreActive {
+					color: #fe753b;
+				}
+
+				.readMoreLine,
+				.readMoreLineActive {
+					height: 1px;
+					background-repeat: no-repeat;
+					background-position: center;
+					background-size: cover;
+				}
+
+				.readMoreLine {
+					width: 80px;
+					background-image: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/uiMKk6ZRmH.png");
+				}
+
+				.readMoreLineActive {
+					width: 101px;
+					background-image: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/ffWhtWtL7h.png");
+				}
+			}
+
+			.reviewsContainer {
+				position: absolute;
+				display: flex;
+				align-items: center;
+				gap: 30px;
+				right: 10px;
+				top: 90px;
+			}
+
+			.reviewAvatars {
+				display: flex;
+
+				.reviewAvatar1,
+				.reviewAvatar2,
+				.reviewAvatar3 {
+					width: 20px;
+					height: 20px;
+					border-radius: 50%;
+					background-repeat: no-repeat;
+					background-position: center;
+					background-size: cover;
+					margin-right: -8px;
+				}
+
+				.reviewAvatar1 {
+					background-image: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/PDNjKNvyoZ.png");
+					z-index: 3;
+				}
+
+				.reviewAvatar2 {
+					background-image: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/fDSmxEme2u.png");
+					z-index: 2;
+				}
+
+				.reviewAvatar3 {
+					background-image: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/M1eNjHO6xG.png");
+					z-index: 1;
+				}
+			}
+			.reviewContainer {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				margin-left: 32px;
+				margin-top: -28px;
+			}
+
+			.circles {
+				display: flex;
+				position: relative;
+			}
+
+			.circle {
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				background-color: #c278c2;
+				border: 3px solid white;
+				position: relative;
+				overflow: hidden;
+				margin-left: -15px;
+
+				&:first-child {
+					margin-left: 0;
+				}
+			}
+
+			.avatar {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: 50%;
+				display: block;
+			}
+
+			.reviewCount {
+				margin-left: -20px;
+				color: #000;
+				font-family: $font;
+				font-size: 10px;
+				font-style: normal;
+				font-weight: 500;
+				line-height: normal;
+				align-items: center;
+				margin-top: -30px;
+			}
+
+			// Responsive
+			@media (max-width: 992px) {
+				.blogGrid {
+					grid-template-columns: repeat(2, 1fr);
+				}
+			}
+
+			@media (max-width: 768px) {
+				.blogGrid {
+					grid-template-columns: 1fr;
+				}
+
+				.decorationIcon {
+					display: none;
+				}
+			}
+		}
+	}
+	.appPromoSection {
+		background: #d0e7ff;
+
+		padding: 20px 0;
+		.container {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+			gap: 20px;
+			padding: 20px;
+			.leftContent {
+				flex: 1;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.circleOuter {
+				width: 287px;
+				height: 287px;
+				background: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/NeQG44UB3y.png")
+					no-repeat center;
+				background-size: cover;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.circleMiddle {
+				width: 237px;
+				height: 237px;
+				background: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/x8pOfVCw9u.png")
+					no-repeat center;
+				background-size: cover;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.circleInner {
+				width: 176px;
+				height: 176px;
+				background: url("https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/TOnZPyadPa.png")
+					no-repeat center;
+				background-size: cover;
+				border-radius: 50%;
+				position: relative;
+				overflow: visible; // kerak bo‘lsa tashqariga chiqish uchun
+
+				.appPromoImg {
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					max-width: 430px;
+					height: 370px;
+					z-index: 2;
+					pointer-events: none; // agar interaktiv bo‘lmasin desangiz
+				}
+			}
+
+			.rightContent {
+				flex: 1;
+				max-width: 652px;
+			}
+
+			.sectionTitle {
+				color: #3c3c3c;
+				font-family: Luckiest Guy, var(--default-font-family);
+				font-size: 26px;
+				font-weight: 400;
+				line-height: 32px;
+				text-transform: capitalize;
+				margin-bottom: 20px;
+				text-align: center;
+			}
+
+			.appTitle {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 22px;
+				font-weight: 600;
+				line-height: 26px;
+				margin-bottom: 20px;
+				text-align: center;
+			}
+
+			.appDescription {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 12px;
+				font-weight: 400;
+				line-height: 26px;
+				margin-bottom: 20px;
+				text-align: center;
+			}
+
+			.appStoreButtons {
+				position: relative;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				left: 70px;
+				width: 247px;
+				height: 35px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/15d29f1e-1ce4-403d-8e2a-a2684e9199b6.png)
+					no-repeat center;
+				background-size: cover;
+			}
+		}
+	}
+	.footer {
+		padding: 20px;
+		background-color: #ffffff;
+		.container {
+			position: relative;
+			padding: 20px;
+			.footerTop {
+				display: grid;
+				// grid-template-columns: 1.5fr 1fr 0.8fr 0.8fr 1.5fr;
+				gap: 30px;
+				position: relative;
+			}
+
+			.footerColumn {
+				display: flex;
+				flex-direction: column;
+			}
+			.footerColumnBox {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+			}
+			.dividerColumn {
+				width: 350px;
+				height: 1px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/c1B2VF86sG.png)
+					no-repeat center;
+				background-size: cover;
+			}
+
+			.logo {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				width: 260px;
+				height: 105px;
+				margin-left: 30px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/bb5ac461-cba8-4de8-a568-a301f7d4a07b.png)
+					no-repeat center;
+				background-size: cover;
+				margin-bottom: 25px;
+			}
+
+			.companyDescription {
+				color: #363636;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 12px;
+				font-weight: 400;
+				line-height: 26px;
+				margin-bottom: 20px;
+				max-width: 328px;
+				text-align: center;
+			}
+
+			.socialIcons {
+				position: relative;
+				display: flex;
+				margin-left: 70px;
+				width: 194px;
+				height: 32px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/4788eb89-ff5e-42d9-8eb0-e57748117a4d.png)
+					no-repeat center;
+				background-size: cover;
+			}
+
+			.columnTitle {
+				color: #3c3c3c;
+				font-family: Luckiest Guy, var(--default-font-family);
+				font-size: 18px;
+				font-weight: 600;
+				line-height: 16px;
+				margin-bottom: 30px;
+			}
+
+			.contactItem {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+				margin-bottom: 15px;
+			}
+
+			.locationIcon,
+			.phoneIcon,
+			.emailIcon,
+			.webIcon {
+				width: 22px;
+				height: 20px;
+			}
+
+			.locationIcon {
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/3a361be9-4628-4e13-a156-581aa4a8e39c.png)
+					no-repeat center;
+				background-size: cover;
+			}
+
+			.phoneIcon {
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/85fa59ee-d7c3-498d-94d3-79ddfc884d6a.png)
+					no-repeat center;
+				background-size: cover;
+			}
+
+			.emailIcon {
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/4e7cb339-a616-4e1b-8bc3-38f4d6bda8d8.png)
+					no-repeat center;
+				background-size: cover;
+			}
+
+			.webIcon {
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/f200883e-d1d5-4e26-bde6-e94703d97d16.png)
+					no-repeat center;
+				background-size: cover;
+			}
+
+			.contactText {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 12px;
+				font-weight: 500;
+				line-height: 16.8px;
+			}
+
+			.footerLinks {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			.footerLinks li {
+				margin-bottom: 15px;
+			}
+
+			.footerLinks a {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 12px;
+				font-weight: 500;
+				line-height: 20px;
+				text-decoration: none;
+				transition: color 0.3s ease;
+			}
+
+			.footerLinks a:hover {
+				color: #fe753b;
+			}
+
+			.newsletterText {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 12px;
+				font-weight: 500;
+				line-height: 25px;
+				margin-bottom: 20px;
+				max-width: 400px;
+			}
+
+			.newsletterForm {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				margin-bottom: 15px;
+
+				.emailInput {
+					width: 191px;
+					height: 40px;
+					background-color: #f5f4f4;
+					border-radius: 30px 0 0 30px;
+					border: none;
+					padding: 0 20px;
+					color: #b0b0b0;
+					font-family: Recursive, var(--default-font-family);
+					font-size: 12px;
+					font-weight: 400;
+					outline: none;
+				}
+
+				.submitButton {
+					width: 161px;
+					height: 40px;
+					background: #fe753b;
+					border: none;
+					border-radius: 0 30px 30px 0;
+					color: #ffffff;
+					font-family: Luckiest Guy, var(--default-font-family);
+					font-size: 12px;
+					font-weight: 400;
+					line-height: 1.2;
+					text-transform: capitalize;
+					letter-spacing: 1.2px;
+					cursor: pointer;
+				}
+			}
+
+			.discountText {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 14px;
+				font-weight: 500;
+				line-height: 30px;
+				text-transform: capitalize;
+			}
+
+			.dividerBottom {
+				width: 350px;
+				height: 1px;
+				background: url(https://codia-f2c.s3.us-west-1.amazonaws.com/image/2025-05-17/c1B2VF86sG.png)
+					no-repeat center;
+				background-size: cover;
+			}
+
+			.footerBottom {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-direction: row;
+			}
+
+			.copyright {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 8px;
+				font-weight: 600;
+				line-height: 19px;
+			}
+
+			.termsLinks {
+				color: #3c3c3c;
+				font-family: Recursive, var(--default-font-family);
+				font-size: 8px;
+				font-weight: 600;
+				line-height: 19px;
+			}
+		}
+	}
+
+	.chatting {
+		.liveChatimg {
+			width: 50px;
+			height: 50px;
+			margin-right: 4px;
+			margin-top: 4px;
+		}
+		.chat-button {
+			border: none;
+			position: fixed;
+			bottom: 180px;
+			right: 50px;
+			height: 50px;
+			width: 40px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 50%;
+			height: 40px;
+			background: #fff;
+			box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.2);
+			transition: transform 0.3s;
+			z-index: 999;
+			&:hover {
+				cursor: pointer;
+				transform: scale(1.1);
+				background-color: #fff;
+			}
+		}
+		.chat-frame {
+			position: fixed;
+			right: -380px;
+			transition: right 0.7s ease-in-out;
+			width: 200px;
+			height: 300px;
+			
+			display: flex;
+			border-radius: 34px;
+			flex-direction: column;
+			background-image: url("/img/banner/chatwalper13.jpg");
+			background-size: cover; // Rasm divga moslashadi
+			background-position: center; // Rasm markazda turadi
+			background-repeat: no-repeat; // Takrorlanmaydi
+			box-shadow: 0px 0px 15px 0px rgba(50, 50, 50, 0.3);
+			z-index: 100;
+			bottom: 230px;
+			transition: right 0.7s ease-in-out;
+			&.open {
+				right: 10px;
+			}
+			.chat-top {
+				width: 100%;
+				height: 50px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-bottom: 1px solid rgba(205, 205, 205, 0.83);
+				font-size: 20px;
+				line-height: 54px;
+				color: #000000;
+			}
+			.chat-content {
+				position: relative;
+				padding: 17px;
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				overflow: auto;
+				.chat-main {
+					position: relative;
+					width: 100%;
+					display: flex;
+					flex-direction: column;
+					.welcome {
+						padding: 9px;
+						width: auto;
+						height: auto;
+						display: flex;
+						background: #f8f5f3;
+						border-radius: 20px 20px 20px 0px;
+						color: black;
+						font-size: 8px;
+					}
+					.msg-left {
+						padding: 9px;
+						width: auto;
+						height: auto;
+						display: flex;
+						background: #fff;
+						color: black;
+						border-radius: 10px 10px 10px 10px;
+						font-size: 8px;
+					}
+				}
+			}
+			.chat-bott {
+				width: 100%;
+				height: 103px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-top: 1px solid rgba(205, 205, 205, 0.83);
+				.msg-input {
+					padding: 14px;
+					width: 136px;
+					height: 10px;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					background: #fff;
+					border-radius: 28px;
+					border: none;
+					outline-color: #257677;
+					font-family: "Poppins";
+					font-style: normal;
+					font-weight: 400;
+					font-size: 10px;
+					line-height: 14px;
+				}
+				.send-msg-btn {
+					margin-left: 14px;
+					width: 30px;
+					height: 30px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					border-radius: 50%;
+					background: #fee501;
+					border: none;
+				}
+			}
+			.msg-right {
+				padding: 9px;
+				width: auto;
+				height: auto;
+				display: flex;
+				background: #fee501;
+				border-radius: 10px 10px 10px 10px;
+				font-size: 8px;
+				margin-bottom: -12px;
+			}
+		}
+	}
+
+	.topBasic {
+		display: flex;
+		position: relative;
+		justify-content: space-between;
+
+		width: 100%;
+		backdrop-filter: blur(6px);
+		padding: 2px 10px;
+		background-color: #5d5e6146;
+
+		.container {
+			position: relative;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+
+			.logo {
+				margin-top: 10px;
+				width: 210px;
+				height: 85.643px;
+			}
+			.navigation {
+				margin-top: 10px;
+				position: relative;
+				display: flex;
+				justify-content: space-between;
+				color: red;
+				font-family: $font;
+				font-size: 16px;
+				font-style: normal;
+				font-weight: 600;
+				line-height: 30px; /* 187.5% */
+				gap: 40px;
+				.collor {
+					color: white;
+				}
+			}
+			.headerActions {
+				display: flex;
+				align-items: center;
+				flex-direction: row;
+				justify-content: space-between;
+				margin-top: 10px;
+				gap: 10px;
+
+				.languageCurrency {
+					display: flex;
+					position: relative;
+					flex-direction: row;
+					align-items: center;
+				}
+				.headerIcons {
+					gap: -30px;
+				}
+			}
+		}
+	}
+
+	.loginSection {
+		background-color: $light-gray;
+		padding: 20px;
+		.container {
+			position: relative;
+			display: flex;
+			flex-direction: row;
+			padding: 20px;
+			// gap: 20px;
+			.rightBox {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				// margin-left: 60px;
+				width: 692.8px; // 866 * 0.8
+				height: 861.6px; // 1077 * 0.8
+
+				.loginTitle {
+					color: #1d256b;
+					font-family: $font;
+					font-size: 26px; // 50 * 0.8
+					font-style: normal;
+					font-weight: 800;
+					line-height: normal;
+					text-transform: capitalize;
+					margin-bottom: 40px; // 50 * 0.8
+				}
+				.socialBtn {
+					width: 341.2px;
+					height: 46.938px;
+					border-radius: 40px; // 50 * 0.8
+					border: 1px solid black;
+					margin-bottom: 25.2px; // 44 * 0.8
+					.socialTitle {
+						color: #0c0c0c;
+						font-family: $font;
+						font-size: 13.6px; // 22 * 0.8
+						font-style: normal;
+						font-weight: 400;
+						line-height: normal;
+						text-transform: capitalize;
+					}
+				}
+				.socialBtnFacebook {
+					width: 341.2px;
+					height: 46.938px;
+					border-radius: 40px;
+					border: 1px solid black;
+					.socialTitle {
+						color: #0c0c0c;
+						font-family: $font;
+						font-size: 13.6px;
+						font-style: normal;
+						font-weight: 400;
+						line-height: normal;
+						text-transform: capitalize;
+					}
+				}
+				.textField {
+					width: 271.2px;
+					height: 36.938px;
+					border-radius: 40px;
+					border: 1px solid black;
+				}
+			}
+
+			.rightPane {
+				flex: 1;
+				background-color: #fce8e8;
+				border-top-right-radius: 24px; // 30 * 0.8
+				border-bottom-right-radius: 24px;
+				width: 692.8px;
+				height: 861.6px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.divider {
+				width: 341.2px; // 704 * 0.8
+				color: #aaa;
+				font-size: 16px; // 20 * 0.8
+				margin-bottom: 35.2px; // 44 * 0.8
+			}
+
+			.options {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-direction: row;
+			}
+			.type-option {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-direction: row;
+				.text {
+					font-size: 15px;
+					letter-spacing: 0.001px;
+				}
+
+				.typeGroup {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					gap: 8px;
+				}
+			}
+			.rememberInfo {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-direction: row;
+				gap: 100px;
+			}
+
+			.forgot {
+				cursor: pointer;
+				color: #777;
+				font-size: 0.7rem; // 0.875 * 0.8
+			}
+
+			.loginBtn {
+				background-color: #d7a184;
+				color: white;
+				font-weight: bold;
+				border-radius: 20px; // 25 * 0.8
+
+				width: 341.2px;
+				height: 46.938px;
+				border-radius: 40px;
+				border: 1px solid #fde4e5;
+				margin-top: 22.4px; // 28 * 0.8
+				margin-bottom: 35.2px;
+				font-size: 24px;
+			}
+
+			.footer2 {
+				margin-top: 43.2px; // 54 * 0.8
+				font-family: $font;
+				display: inline-flex;
+				align-items: center;
+				gap: 20px;
+			}
+
+			.createLink {
+				color: #007aff;
+				text-decoration: none;
+				font-weight: 800;
+				font-size: 16px;
+			}
+
+			.leftBox {
+				margin-top: 78px; // 110 * 0.8
+
+				img {
+					background-color: #97c8e0;
+					border-radius: 64px;
+					width: 447.2px;
+					height: 701.6px;
+					object-fit: cover; // rasm to'liq joylashadi
+					box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15); // yumshoq soya
+				}
+			}
+		}
+	}
+}

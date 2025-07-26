@@ -1,0 +1,27 @@
+import { CommentGroup, CommentStatus } from "../../enums/comment.enum";
+
+import { Member } from "../member/member";
+import { MeLiked, TotalCounter } from "../product/product";
+
+export interface Comment {
+	_id: string;
+	commentStatus: CommentStatus;
+	commentGroup: CommentGroup;
+	commentContent: string;
+	commentRefId: string;
+	memberId: string;
+	createdAt: Date;
+	updatedAt: Date;
+	/** from aggregation **/
+	meLiked?: MeLiked[];
+	memberData?: Member;
+	writer?: {
+		_id: string;
+		name: string;
+	};
+}
+
+export interface Comments {
+	list: Comment[];
+	metaCounter: TotalCounter[];
+}

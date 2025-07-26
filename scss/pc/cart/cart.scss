@@ -1,0 +1,280 @@
+#pc-wrap {
+	$light-gray: #f8f9fa;
+	.shippingPage {
+		min-height: auto;
+		background-color: $light-gray;
+
+    .heroSectionCart {
+			width: 100%;
+			height: 660px;
+			position: relative;
+			background-image: url("/img/homepage/heroBasic.jpeg");
+			background-size: cover;
+			background-position: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+
+			.heroContent {
+				z-index: 2;
+				color: white;
+				text-align: center;
+
+				.title {
+					font-size: 42px;
+					font-weight: 700;
+					text-transform: uppercase;
+					font-family: "Poppins", sans-serif;
+				}
+
+				.breadcrumb {
+					font-size: 16px;
+					margin-top: 10px;
+					font-weight: 300;
+				}
+			}
+
+			.wave {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				height: 300px;
+				z-index: 1;
+
+				svg {
+					width: 100%;
+					display: block;
+				}
+			}
+		}
+    
+  
+    .container {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      margin-bottom: 100px;
+      .pageTitle {
+        color: #1d256b;
+        font-family: $font;
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: 80px; /* 177.778% */
+      }
+      .cartSection {
+        flex: 3;
+      }
+    
+      .cartHeader {
+        display: flex;
+        justify-content: space-between;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #000;
+        .cartHeaderType {
+          font-family: $font;
+          font-size: 25px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          text-transform: capitalize;
+        }
+      }
+      .cartDevider {
+        position: relative;
+        width: 980px;
+        height: 1.5px;
+        background: #000;
+      }
+    
+      .cartItem {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 20px 0;
+      }
+    
+      .imageBox {
+        width: 100px;
+        height: 100px;
+        background-color: #f1f1f1;
+      }
+    
+      .productInfo {
+        flex: 2;
+      }
+    
+      .subtitle {
+        font-size: 12px;
+        color: gray;
+        text-transform: uppercase;
+      }
+    
+      .title {
+        font-size: 16px;
+        font-weight: bold;
+      }
+    
+      .desc {
+        font-size: 12px;
+        color: #555;
+      }
+    
+      .quantityBox {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    
+      .price {
+        font-weight: bold;
+        font-size: 16px;
+        width: 80px;
+      }
+    
+      .footerOptions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+      }
+    
+      .giftWrap {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        .giftWrapCheck {
+          margin-left: -15px;
+        }
+      }
+    
+      .actionBtns {
+        display: flex;
+        gap: 12px;
+      }
+    
+      .returnBtn {
+        background-color: #1d256b !important;
+        color: white;
+        text-transform: none;
+        display: inline-flex;
+        padding: 14px 28px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+    
+      .emptyCart {
+        text-transform: none;
+        display: inline-flex;
+        padding: 14px 28px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid #000;
+      }
+    
+      .summary {
+        position: relative;
+        flex: 1;
+        left: 80px;
+        margin-top: 40px; // 100px → 80px
+      }
+    
+      .estimateTitle {
+        color: #1d256b;
+        font-family: $font;
+        font-size: 24px; // 30px → 24px
+        font-style: normal;
+        font-weight: 800;
+        line-height: 24px; // 30px → 24px
+        text-transform: capitalize;
+        margin-bottom: 67.2px; // 84px → 67.2px
+      }
+    
+      .textFieldName {
+        color: #000;
+        font-family: $font;
+        font-size: 14.4px; // 18px → 14.4px
+        font-style: normal;
+        font-weight: 400;
+        line-height: 10.4px; // 13px → 10.4px
+        text-transform: capitalize;
+        margin-bottom: 16px; // 20px → 16px
+      }
+    
+      .textFieldCustom {
+        width: 264.8px; // 331px → 264.8px
+        height: 43.2px; // 54px → 43.2px
+        margin-bottom: 16px;
+    
+        .MuiOutlinedInput-root {
+          border-radius: 50px;
+          height: 100%;
+        }
+    
+        .MuiOutlinedInput-notchedOutline {
+          border: 1px solid black;
+        }
+      }
+    
+      .calculateBtn {
+        background-color: #1d256b !important;
+        color: white;
+        width: 264.8px;
+        height: 43.2px;
+        margin-bottom: 16px;
+        border-radius: 50px;
+        border: 1px solid black;
+      }
+    
+      .summaryInfo {
+        display: flex;
+        flex-direction: column;
+        margin-top: 16px;
+    
+        .subtotal {
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          gap: 140px; // 200px → 160px
+          margin-bottom: 22.4px; // 28px → 22.4px
+        }
+      }
+    
+      .taxNote {
+        color: #686257;
+        font-family: $font;
+        font-size: 9.6px; // 12px → 9.6px
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-transform: capitalize;
+        margin-bottom: 19.2px; // 24px → 19.2px
+      }
+    
+      .horizontalDivider {
+        position: relative;
+        width: 1px;
+        height: 544.4px; // 848px → 678.4px
+        background: #000;
+        left: 50px; // 50px → 40px
+      }
+    
+      .checkoutBtn {
+        background-color: #1d256b !important;
+        color: white;
+        width: 264.8px;
+        height: 43.2px;
+        margin-bottom: 16px;
+        border-radius: 50px;
+        border: 1px solid black;
+      }
+    }
+	}
+
+	
+
+	
+}

@@ -1,0 +1,26 @@
+<svg width="75" height="76" viewBox="0 0 75 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 132512">
+<path id="Line 108" d="M30.4351 27.986L36.3191 33.87" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Line 109" d="M38.673 24.455L45.734 31.516" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Line 110" d="M31.6121 17.3939L35.1431 20.9249" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Line 111" d="M39.85 13.8639L48.088 22.1019" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Line 112" d="M50.441 12.6869L57.502 19.7479" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Line 113" d="M43.38 5.62598L46.911 9.15698" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="Group 132511">
+<g id="Clip path group">
+<mask id="mask0_5_151" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-1" y="0" width="76" height="76">
+<g id="clip-path-4">
+<path id="Rectangle 41820" d="M74.999 0.585938H-0.000976562V75.5859H74.999V0.585938Z" fill="white"/>
+</g>
+</mask>
+<g mask="url(#mask0_5_151)">
+<g id="Group 132510">
+<path id="Line 114" d="M53.9719 4.44897L59.8559 10.333" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Path 144136" d="M64.5639 7.93091C68.0949 11.5099 64.0119 24.0099 56.4159 31.6059C48.8389 39.1839 36.3199 43.2849 32.7889 39.7539" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Path 144137" d="M27.354 33.071C26.6682 35.9733 26.755 39.0047 27.606 41.863L6.43197 58.027C4.55662 59.4947 3.0829 61.4129 2.14787 63.6031C1.21283 65.7933 0.846858 68.1844 1.08397 70.554C1.19658 71.6927 1.69999 72.7573 2.50866 73.5669C3.31733 74.3765 4.38138 74.8811 5.51997 74.995C7.88967 75.232 10.2808 74.8658 12.471 73.9306C14.6612 72.9954 16.5793 71.5215 18.047 69.646L34.185 48.446C41.57 50.946 53 46.751 62.278 37.473C73.513 26.235 77.318 11.829 70.781 5.29496C68.051 2.56496 63.948 1.63896 59.281 2.30496" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

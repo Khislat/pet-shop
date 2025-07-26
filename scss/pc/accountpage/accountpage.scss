@@ -1,0 +1,209 @@
+#pc-wrap {
+	$light-gray: #f8f9fa;
+	.loginSection {
+		background-color: $light-gray;
+		.heroSectionAccount {
+			width: 100%;
+			height: 660px;
+			position: relative;
+			background-image: url("/img/homepage/heroBasic.jpeg");
+			background-size: cover;
+			background-position: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+
+			.heroContent {
+				z-index: 2;
+				color: white;
+				text-align: center;
+
+				.title {
+					font-size: 42px;
+					font-weight: 700;
+					text-transform: uppercase;
+					font-family: "Poppins", sans-serif;
+				}
+
+				.breadcrumb {
+					font-size: 16px;
+					margin-top: 10px;
+					font-weight: 300;
+				}
+			}
+
+			.wave {
+				position: absolute;
+				bottom: 0;
+				width: 100%;
+				height: 300px;
+				z-index: 1;
+
+				svg {
+					width: 100%;
+					display: block;
+				}
+			}
+		}
+
+		.container {
+			position: relative;
+			display: flex;
+			flex-direction: row;
+			gap: 20px;
+			.rightBox {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				margin-left: 60px;
+				width: 692.8px; // 866 * 0.8
+				height: 861.6px; // 1077 * 0.8
+
+				.loginTitle {
+					color: #1d256b;
+					font-family: $font;
+					font-size: 40px; // 50 * 0.8
+					font-style: normal;
+					font-weight: 800;
+					line-height: normal;
+					text-transform: capitalize;
+					margin-bottom: 40px; // 50 * 0.8
+				}
+				.socialBtn {
+					width: 571.2px; // 714 * 0.8
+					height: 56.938px; // 71.173 * 0.8
+					border-radius: 40px; // 50 * 0.8
+					border: 1px solid black;
+					margin-bottom: 35.2px; // 44 * 0.8
+					.socialTitle {
+						color: #0c0c0c;
+						font-family: $font;
+						font-size: 17.6px; // 22 * 0.8
+						font-style: normal;
+						font-weight: 400;
+						line-height: normal;
+						text-transform: capitalize;
+					}
+				}
+				.socialBtnFacebook {
+					width: 571.2px;
+					height: 56.938px;
+					border-radius: 40px;
+					border: 1px solid black;
+					.socialTitle {
+						color: #0c0c0c;
+						font-family: $font;
+						font-size: 17.6px;
+						font-style: normal;
+						font-weight: 400;
+						line-height: normal;
+						text-transform: capitalize;
+					}
+				}
+				.textField {
+					width: 571.2px;
+					height: 56.938px;
+					border-radius: 40px;
+					border: 1px solid black;
+				}
+			}
+
+			.rightPane {
+				flex: 1;
+				background-color: #fce8e8;
+				border-top-right-radius: 24px; // 30 * 0.8
+				border-bottom-right-radius: 24px;
+				width: 692.8px;
+				height: 861.6px;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.divider {
+				width: 563.2px; // 704 * 0.8
+				color: #aaa;
+				font-size: 16px; // 20 * 0.8
+				margin-bottom: 35.2px; // 44 * 0.8
+			}
+
+			.options {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-direction: row;
+			}
+			.type-option {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-direction: row;
+				gap: 200px;
+				.typeGroup {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					gap: 10px;
+				}
+			}
+			.rememberInfo {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				flex-direction: row;
+				gap: 300px;
+			}
+
+			.forgot {
+				cursor: pointer;
+				color: #777;
+				font-size: 0.7rem; // 0.875 * 0.8
+			}
+
+			.loginBtn {
+				background-color: #d7a184;
+				color: white;
+				font-weight: bold;
+				border-radius: 20px; // 25 * 0.8
+
+				width: 571.2px;
+				height: 56.938px;
+				border-radius: 40px;
+				border: 1px solid #fde4e5;
+				margin-top: 22.4px; // 28 * 0.8
+				margin-bottom: 35.2px;
+				font-size: 24px;
+			}
+
+			.footer2 {
+				margin-top: 43.2px; // 54 * 0.8
+				font-family: $font;
+				display: inline-flex;
+				align-items: center;
+				gap: 160px;
+			}
+
+			.createLink {
+				color: #007aff;
+				text-decoration: none;
+				font-weight: 800;
+				font-size: 24px;
+			}
+
+			.leftBox {
+				margin-top: 78px; // 110 * 0.8
+
+				img {
+					background-color: #97c8e0;
+					border-radius: 64px;
+					width: 447.2px;
+					height: 701.6px;
+					object-fit: cover; // rasm to'liq joylashadi
+					box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15); // yumshoq soya
+				}
+			}
+		}
+	}
+}
