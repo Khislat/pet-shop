@@ -107,9 +107,6 @@ const ProductCard = ({
 				<span className={"currentPrice"}>
 					${product.productPrice.toFixed(2)}
 				</span>
-				{product.productPrice && (
-					<span className={"oldPrice"}>${product.productPrice.toFixed(2)}</span>
-				)}
 			</div>
 
 			<button className={"addToCartButton"} onClick={handleAddToCart}>

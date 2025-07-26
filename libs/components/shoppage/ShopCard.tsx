@@ -58,7 +58,6 @@ const ShopCard = ({
 		}
 	};
 
-
 	return (
 		<div className="card">
 			{product.productPrice && (
@@ -76,16 +75,16 @@ const ShopCard = ({
 						</Typography>
 
 						<IconButton
-									color={"default"}
-									onClick={() => likeProductHandler(user, product?._id)}>
-									{myFavorites ? (
-										<FavoriteIcon color="primary" />
-									) : product?.meLiked && product?.meLiked[0]?.myFavorite ? (
-										<FavoriteIcon color="primary" />
-									) : (
-										<FavoriteBorderIcon />
-									)}
-								</IconButton>
+							color={"default"}
+							onClick={() => likeProductHandler(user, product?._id)}>
+							{myFavorites ? (
+								<FavoriteIcon color="primary" />
+							) : product?.meLiked && product?.meLiked[0]?.myFavorite ? (
+								<FavoriteIcon color="primary" />
+							) : (
+								<FavoriteBorderIcon />
+							)}
+						</IconButton>
 
 						<Typography className="view-cnt">
 							{product?.productLikes}
@@ -117,16 +116,14 @@ const ShopCard = ({
 				ADD TO CART
 			</Button>
 
-			<div className="stars">
-				{"★".repeat(product.productRank)} {"☆".repeat(5 - product.productRank)}
+			<div className="stars" >
+				{"★".repeat(Math.max(0, Math.min(product.productRank, 5)))}
+				{"☆".repeat(Math.max(0, 5 - product.productRank))}
 			</div>
 
 			<h3 className="title">{product.productTitle}</h3>
 			<div className="price">
 				<span className="newPrice">${product.productPrice.toFixed(2)}</span>
-				{product.productPrice && (
-					<span className="oldPrice">${product.productPrice.toFixed(2)}</span>
-				)}
 			</div>
 		</div>
 	);

@@ -41,6 +41,8 @@ import { userVar } from "../../apollo/store";
 import { CREATE_COMMENT } from "../../apollo/user/mutation";
 import HeroSectionBasicDetail from "../../libs/components/shoppage/HeroSectionBasicDetail";
 import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
+import { Comment } from "../../libs/types/comment/comment";
+
 
 interface DetailProps {
 	initialInput: CommentsInquiry;
@@ -205,10 +207,10 @@ const ProductDetailPage = ({
 
 	const handleAddToCart = async () => {
 		setIsAdding(true);
-	
+
 		try {
 			addToCart(product, qty); // endi qty ni ham yuboramiz
-	
+
 			sweetTopSmallSuccessAlert("Product added to cart!");
 		} catch (error) {
 			console.error("Error adding to cart:", error);
@@ -302,7 +304,6 @@ const ProductDetailPage = ({
 								<Typography className={"price"}>
 									${product?.productPrice}
 								</Typography>
-								<Typography className={"originalPrice"}>$69.00</Typography>
 							</Stack>
 
 							<Typography className={"desc"}>{product?.productDesc}</Typography>

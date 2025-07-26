@@ -1,4 +1,8 @@
-/** @type {import('next').NextConfig} */
+import { i18n } from "./next-i18next.config";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const nextConfig = {
 	reactStrictMode: true,
 	env: {
@@ -6,11 +10,7 @@ const nextConfig = {
 		NEXT_PUBLIC_API_GRAPHQL_URL: process.env.NEXT_PUBLIC_API_GRAPHQL_URL,
 		NEXT_PUBLIC_API_WS: process.env.NEXT_PUBLIC_API_WS,
 	},
+	i18n,
 };
 
-const { i18n } = require('./next-i18next.config');
-nextConfig.i18n = i18n;
-
-
-module.exports = nextConfig;
-
+export default nextConfig;

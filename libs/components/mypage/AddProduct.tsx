@@ -54,14 +54,17 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 			productPrice: getProductData?.getProduct
 				? getProductData?.getProduct?.productPrice
 				: 0,
+			productOldPrice: getProductData?.getProduct
+				? getProductData?.getProduct?.productOldPrice
+				: 0,
 			productCategory: getProductData?.getProduct
 				? getProductData?.getProduct?.productCategory
 				: "",
 
-				productDesc: getProductData?.getProduct
+			productDesc: getProductData?.getProduct
 				? getProductData?.getProduct?.productDesc
 				: "",
-				productImages: getProductData?.getProduct
+			productImages: getProductData?.getProduct
 				? getProductData?.getProduct?.productImages
 				: [],
 		});
@@ -132,6 +135,7 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 		if (
 			insertProductData?.productTitle === "" ||
 			insertProductData?.productPrice === 0 || // @ts-ignore
+			insertProductData?.productOldPrice === 0 || // @ts-ignore
 			insertProductData?.productCategory === "" || // @ts-ignore
 			insertProductData?.productDesc === "" ||
 			insertProductData?.productImages.length === 0
@@ -237,6 +241,7 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 										}
 									/>
 								</Stack>
+
 								<Stack className="price-year-after-price">
 									<Typography className="title">Select Type</Typography>
 									<select
@@ -249,7 +254,7 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 											// @ts-ignore
 											setInsertProductData({
 												...insertProductData,
-												productCategory: value as ProductCategory
+												productCategory: value as ProductCategory,
 											})
 										}>
 										<>
@@ -427,6 +432,7 @@ AddProduct.defaultProps = {
 	initialValues: {
 		productTitle: "",
 		productPrice: 0,
+		productOldPrice: 0,
 		productCategory: "",
 		productDesc: "",
 		productImages: [],

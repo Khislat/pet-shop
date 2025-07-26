@@ -41,7 +41,6 @@ const ProductItem = ({ product }: ProductItemProps) => {
 				<Box className={"prices"}>
 					{" "}
 					<Typography className={"price"}>$ {product.productPrice}</Typography>
-					<Typography className={"price"}>$ {product.productPrice}</Typography>
 				</Box>
 
 				<Button className={"button"} onClick={handleAddToCart}>
