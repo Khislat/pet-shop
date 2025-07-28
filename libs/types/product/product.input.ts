@@ -10,7 +10,6 @@ export interface ProductInput {
 	productWeight: ProductWeight;
 	productTitle: string;
 	productPrice: number;
-	productOldPrice: number;
 	productImages: string[];
 	productDesc?: string;
 	memberId?: string;
