@@ -54,9 +54,7 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 			productPrice: getProductData?.getProduct
 				? getProductData?.getProduct?.productPrice
 				: 0,
-			productOldPrice: getProductData?.getProduct
-				? getProductData?.getProduct?.productOldPrice
-				: 0,
+
 			productCategory: getProductData?.getProduct
 				? getProductData?.getProduct?.productCategory
 				: "",
@@ -135,7 +133,6 @@ const AddProduct = ({ initialValues, ...props }: any) => {
 		if (
 			insertProductData?.productTitle === "" ||
 			insertProductData?.productPrice === 0 || // @ts-ignore
-			insertProductData?.productOldPrice === 0 || // @ts-ignore
 			insertProductData?.productCategory === "" || // @ts-ignore
 			insertProductData?.productDesc === "" ||
 			insertProductData?.productImages.length === 0
@@ -432,7 +429,6 @@ AddProduct.defaultProps = {
 	initialValues: {
 		productTitle: "",
 		productPrice: 0,
-		productOldPrice: 0,
 		productCategory: "",
 		productDesc: "",
 		productImages: [],
