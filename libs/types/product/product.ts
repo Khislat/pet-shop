@@ -22,7 +22,6 @@ export interface Product {
 	productWeight: ProductWeight;
 	productTitle: string;
 	productPrice: number;
-	productOldPrice: number;
 	productViews: number;
 	productLikes: number;
 	productComments: number;
