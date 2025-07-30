@@ -38,8 +38,10 @@ const ProductsSection = ({
 		}
 		setItemsToShow(initialItemsToShow); // category o‘zgarganda ko‘rsatiladigan productlar soni qayta 4 ga tushsin
 	}, [activeCategory, products]);
-
-	const handleShowMore = () => setItemsToShow(filteredProducts.length);
+	
+	const handleShowMore = () => {
+		setItemsToShow((prev) => Math.min(prev + 4, 12)); // Har bosganda 4tadan ko‘payadi, maksimal 12tagacha
+	};
 	const handleShowLess = () => setItemsToShow(initialItemsToShow);
 
 	const displayedProducts = filteredProducts.slice(0, itemsToShow);

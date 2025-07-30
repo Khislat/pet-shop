@@ -16,7 +16,7 @@ import LogoSection from "../libs/components/homepage/CompaniesLogoSection";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { VendorsInquiry } from "../libs/types/member/member.input";
 import TopVendorsSection from "../libs/components/homepage/VendorsSection";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "../libs/types/product/product";
 import { useMutation, useQuery } from "@apollo/client";
 import { LIKE_TARGET_PRODUCT } from "../apollo/user/mutation";
@@ -85,6 +85,9 @@ const Home = ({ initialInput = productsInput }: ProductsProps) => {
 		}
 	};
 
+	useEffect(() => {
+		setSelectedCategory("DOGS"); // yoki istalgan default kategoriya
+	}, []);
 	if (device === "mobile") {
 		return (
 			<Stack className={"home-page"}>
@@ -144,7 +147,7 @@ const Home = ({ initialInput = productsInput }: ProductsProps) => {
 
 const productsInput: ProductsInquiry = {
 	page: 1,
-	limit: 8,
+	limit: 100,
 	sort: "createdAt",
 	search: {},
 };
