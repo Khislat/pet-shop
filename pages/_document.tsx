@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript } from 'next/document';
+import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
 	return (
@@ -8,13 +8,16 @@ export default function Document() {
 				<link rel="icon" type="image/png" href="/img/logo/BOWOW.png" />
 
 				{/* SEO */}
-				<meta name="keyword" content={'nestar, nestar.uz, devex mern, mern nestjs fullstack'} />
 				<meta
-					name={'description'}
+					name="keyword"
+					content={"nestar, nestar.uz, devex mern, mern nestjs fullstack"}
+				/>
+				<meta
+					name={"description"}
 					content={
-						'Buy and sell properties anywhere anytime in South Korea. Best Properties at Best prices on nestar.uz | ' +
-						'Покупайте и продавайте недвижимость в любой точке Южной Кореи в любое время. Лучшая недвижимость по лучшим ценам на nestar.uz | ' +
-						'대한민국 언제 어디서나 부동산을 사고팔 수 있습니다. Nestar.uz에서 최적의 가격으로 최고의 부동산을 만나보세요'
+						"Shop the best pet food, toys, and accessories for your furry friends at any time, anywhere in South Korea — only on bowow.uz | " +
+						"Покупайте лучший корм, игрушки и аксессуары для домашних животных в любое время и в любом месте Южной Кореи — только на bowow.uz | " +
+						"언제 어디서나 최고의 반려동물 사료, 장난감, 액세서리를 bowow.uz에서 만나보세요."
 					}
 				/>
 			</Head>

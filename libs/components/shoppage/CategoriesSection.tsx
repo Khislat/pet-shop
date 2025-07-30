@@ -36,7 +36,7 @@ const CategoriesSection = ({ products, onCategorySelect }: CategoryProps) => {
 						const categoryProducts = products.filter(
 							(product) => category.key === product.productCategory
 						);
-						console.log("product", products);
+				
 
 						return (
 							<Stack
