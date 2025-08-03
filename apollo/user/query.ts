@@ -622,3 +622,19 @@ export const GET_COMMENTS = gql`
 		}
 	}
 `;
+
+/**************************
+ *         BLOG           *
+ *************************/
+
+export const GET_BOARD_ARTICLE_BY_ID = gql`
+	query GET_BOARD_ARTICLE_BY_ID($articleId: ID!) {
+		getBoardArticle(articleId: $articleId) {
+			_id
+			articleTitle
+			articleContent
+			articleImage
+			createdAt
+		}
+	}
+`;
