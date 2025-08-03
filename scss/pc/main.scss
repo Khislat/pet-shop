@@ -4,6 +4,7 @@
 @import "/scss/pc/vendorspage/vendorspage";
 @import "/scss/pc/accountpage/accountpage";
 @import "/scss/pc/cart/cart";
+@import "/scss/pc/blog/blogpage";
 
 @import "/scss/pc/mypage/mypage.scss";
 @import "/scss/pc/mypage/addNewProperty.scss";
@@ -574,7 +575,6 @@
 				background-size: cover;
 				margin-bottom: 25px;
 			}
-
 
 			.footerBottom {
 				display: flex;

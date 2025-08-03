@@ -43,7 +43,6 @@ import HeroSectionBasicDetail from "../../libs/components/shoppage/HeroSectionBa
 import useDeviceDetect from "../../libs/hooks/useDeviceDetect";
 import { Comment } from "../../libs/types/comment/comment";
 
-
 interface DetailProps {
 	initialInput: CommentsInquiry;
 }
@@ -190,7 +189,6 @@ const ProductDetailPage = ({
 		}
 	};
 
-	console.log("productId", productId);
 	useEffect(() => {
 		if (id && typeof id === "string") {
 			setProductId(id);
