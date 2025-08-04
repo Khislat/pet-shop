@@ -6,9 +6,9 @@ services:
     restart: always
     image: node:20.10.0
     ports:
-      - 4007:4001
+      - 2000:8000
     environment:
-      - PORT=4001
+      - PORT=8000
 
     volumes:
       - ./:/usr/src/petshop-next
@@ -23,6 +23,14 @@ services:
 networks:
   client-network:
     driver: bridge
-# petshop-next:   localhost:3000 => container:4000
-# petshop-api:    localhost:3001 => container:4008
-# petshop-batch:  localhost:3002 => container:4009
+
+
+# petshop-next:   localhost:2000 => container:8000
+# petshop-api:    localhost:5001 => container:6007
+# petshop-batch:  localhost:5002 => container:6008
+
+# docker compose up -d
+# docker compose stop
+# docker compose start
+# docker compose restart
+# docker compose stop && docker compose rm -f

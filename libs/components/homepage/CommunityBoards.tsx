@@ -38,11 +38,7 @@ const CommunityBoards = () => {
 			<div
 				className={"blogImage"}
 				style={{
-					backgroundImage: `url(${
-						article.articleImage?.startsWith("http")
-							? article.articleImage
-							: `${NEXT_PUBLIC_APP_API_URL}/${article.articleImage}`
-					})`,
+					backgroundImage: `url(${NEXT_PUBLIC_APP_API_URL}/${article.articleImage})`,
 				}}>
 				<div className={"dateTag"}>
 					<span>
