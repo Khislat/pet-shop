@@ -90,7 +90,7 @@ function createIsomorphicLink() {
 
 		/* WEBSOCKET SUBSCRIPTION LINK */
 		const wsLink = new WebSocketLink({
-			uri: process.env.NEXT_PUBLIC_API_WS ?? "ws://127.0.0.1:4005/graphql",
+			uri: process.env.NEXT_PUBLIC_API_WS ?? "ws://127.0.0.1:5001/graphql",
 			options: {
 				reconnect: false,
 				timeout: 30000,
