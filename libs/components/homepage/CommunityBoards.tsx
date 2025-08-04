@@ -50,15 +50,15 @@ const CommunityBoards = () => {
 			<div className={"blogContent"}>
 				<h3 className={device === "mobile" ? "blogTitle" : "blogTitle"}>
 					{device === "mobile"
-						? article.articleTitle
+						? article.articleTitle.slice(0, 30) + "..."
 						: article.articleTitle.length > 15
 						? article.articleTitle.slice(0, 30) + "..."
-						: article.articleTitle}
+						: article.articleTitle.length > 40}
 				</h3>
 				<p className={device === "mobile" ? "blogExcerpt" : "blogExcerpt"}>
 					{device === "mobile"
-						? article.articleContent
-						: article.articleContent.length > 40
+						? article.articleContent.slice(0, 50) + "..."
+						: article.articleContent.length > 100
 						? article.articleContent.slice(0, 60) + "..."
 						: article.articleContent}
 				</p>
